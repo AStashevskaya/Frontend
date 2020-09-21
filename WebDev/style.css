@@ -58,9 +58,7 @@ img {
 }
 
 .bg-image-wrapper {
-  background-image: url(assets/bg-image-wrapper.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url(assets/bg-image-wrapper.png) 50%/cover no-repeat;
   height: 100vh;
   width: 100%;
   position: relative;
@@ -338,9 +336,7 @@ header .active-nav-link::after {
 
 .signUp {
   height: 600px;
-  background-image: url(assets/bg-4.png);
-  background-repeat: no-repeat;
-  background-size: cover;
+  background: url(assets/bg-4.png) 50%/cover no-repeat;
   padding-top: 200px;
   padding-left: 597px;
 }
