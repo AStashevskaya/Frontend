@@ -109,7 +109,7 @@ header .active-nav-link::after {
   content: url(assets/underline.png);
   position: absolute;
   left: 0;
-  bottom: -5px;
+  bottom: -8px;
 }
 
 .main-screen-content {
@@ -189,12 +189,12 @@ header .active-nav-link::after {
 
 .social-link {
   display: block;
+  opacity: 0.8;
   padding-right: 30px;
 }
 
 .social-link:hover {
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
+  opacity: 1;
 }
 
 .rappresent {
@@ -216,13 +216,8 @@ header .active-nav-link::after {
 .rappresent .container .content-block h2 {
   font-weight: bold;
   font-size: 24px;
+  width: 368px;
   line-height: 28px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: end;
-      -ms-flex-align: end;
-          align-items: flex-end;
   letter-spacing: 1px;
   text-transform: uppercase;
   color: #373737;
@@ -332,6 +327,10 @@ header .active-nav-link::after {
 
 .arrow-left {
   margin-right: 14px;
+}
+
+.arrow-left:hover, .arrow-right:hover {
+  opacity: 0.8;
 }
 
 .signUp {
@@ -551,12 +550,12 @@ footer .container ul {
 }
 
 footer .container a {
+  opacity: 0.8;
   display: block;
 }
 
-footer .container ul > li > a:hover {
-  -webkit-transform: scale(1.05);
-          transform: scale(1.05);
+footer .container a:hover {
+  opacity: 1;
 }
 
 footer .container p {
@@ -570,6 +569,7 @@ footer .container p {
   font-size: 14px;
   line-height: 140%;
   color: #FFFFFF;
+  opacity: 0.8;
   display: inline-block;
 }
 

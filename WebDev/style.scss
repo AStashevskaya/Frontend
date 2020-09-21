@@ -82,7 +82,7 @@
       content: url(assets/underline.png);
       position: absolute;
       left: 0;
-      bottom: -5px;
+      bottom: -8px;
     }
   }
   .main-screen-content{
@@ -138,10 +138,11 @@ align-self: center;
   }
   .social-link{
     display: block;
+    opacity: 0.8;
     padding-right: 30px;
   }
   .social-link:hover{
-    transform: scale(1.2);
+    opacity: 1;
   }
   .rappresent{
     padding: 120px 269px 140px 269px;
@@ -154,9 +155,8 @@ align-self: center;
         h2{
           font-weight: bold;
           font-size: 24px;
+          width: 368px;
           line-height: 28px;
-          display: flex;
-          align-items: flex-end;
           letter-spacing: 1px;
           text-transform: uppercase;
           color: #373737;
@@ -237,6 +237,9 @@ color: #373737;
 }
 .arrow-left{
   margin-right: 14px; 
+}
+.arrow-left:hover, .arrow-right:hover{
+opacity: 0.8;
 }
 
 .signUp{
@@ -343,12 +346,11 @@ position: relative;
   position: absolute;
   right: 0;
   top: 0;
-  // margin-top: -32px;
-  // margin-left: 109px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
+
 .btn-store-play{
   margin-left: 30px;
  //padding: 18px;
@@ -368,10 +370,11 @@ footer{
       display: flex;
     }
     a{
+    opacity: 0.8;
       display: block;
     }
-    ul>li>a:hover{
-      transform: scale(1.05);
+    a:hover{
+    opacity: 1;
     }
     p{
       font-size: 14px;
@@ -386,11 +389,9 @@ color: #818181;
 font-size: 14px;
 line-height: 140%;
 color: #FFFFFF;
+opacity: 0.8;
 display: inline-block;
 }
-// .footer-link-last{
-//   padding: 0;
-// }
 .footer-link::after{
   content: url(assets/mnu-items-divider.svg);
   padding:0 20px;
