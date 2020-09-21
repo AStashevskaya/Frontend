@@ -329,6 +329,10 @@ header .active-nav-link::after {
   margin-right: 14px;
 }
 
+.arrow-left:hover, .arrow-right:hover {
+  opacity: 0.8;
+}
+
 .signUp {
   height: 600px;
   background: url(assets/bg-4.png) 50%/cover no-repeat;

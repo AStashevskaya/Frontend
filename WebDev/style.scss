@@ -238,6 +238,9 @@ color: #373737;
 .arrow-left{
   margin-right: 14px; 
 }
+.arrow-left:hover, .arrow-right:hover{
+opacity: 0.8;
+}
 
 .signUp{
   height: 600px;
