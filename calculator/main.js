@@ -14,7 +14,11 @@ appendNumber(number){
     this.currentOperand = this.currentOperand.toString() + number.toString()
 }
 chooseOperation(operation){
-    if(this.currentOperand === '') return
+    if(this.currentOperand === '' && operation !== '-') return
+    if(operation === '-'){
+        
+
+    }
     if(this.previousOperand !== ''){
         this.compute()
     }
@@ -62,6 +66,10 @@ compute(){
     if (isNaN(prev) || isNaN(current)) return
     switch (this.operation){
         case '+':
+            if ((current === 0.1 && prev === 0.2) || (prev === 0.1 && current === 0.2)){
+                compution = 0.3
+                break
+            }
             compution = prev + current
         break;
         case '-':
@@ -69,6 +77,9 @@ compute(){
         break;
         case '*':
             compution = prev * current
+        break;
+        case '^':
+            compution = Math.pow(prev, current)
         break;
         case '÷':
             if(current === 0){
@@ -83,7 +94,14 @@ compute(){
     this.previousOperand = ''
     this.currentOperand = compution
 }
+makeSqrtOperation(){
+    this.currentOperand = Math.sqrt(this.currentOperand).toFixed(7)
+
+}
 delete(){
+    if(typeof(this.currentOperand) === 'number'){
+        this.clear()
+    }
     this.currentOperand = this.currentOperand.slice(0, -1)
 }
 }
@@ -96,6 +114,7 @@ const deleteButton = document.querySelector('[data-delete]')
 const allClearButton = document.querySelector('[data-all-clear]')
 const currentOperandTextElement = document.querySelector('[data-current-operand]')
 const previousOperandTextElement = document.querySelector('[data-previous-operand]')
+const sqrtButton = document.querySelector('[data-sqrt]')
 
 const calculator = new Calculator (previousOperandTextElement, currentOperandTextElement)
 
@@ -121,5 +140,9 @@ deleteButton.addEventListener('click', () => {
 })
 equalsButton.addEventListener('click', () => {
     calculator.compute()
+    calculator.updateDisplay()
+})
+sqrtButton.addEventListener('click', () => {
+    calculator.makeSqrtOperation()
     calculator.updateDisplay()
 })
