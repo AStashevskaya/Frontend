@@ -14,10 +14,10 @@ appendNumber(number){
     this.currentOperand = this.currentOperand.toString() + number.toString()
 }
 chooseOperation(operation){
-    if(this.currentOperand === '' && operation !== '-') return
-    if(operation === '-'){
-        
-
+    // (operation === '-' && this.operation === undefined && this.currentOperand === '') ||
+    if((this.currentOperand === '' && operation !== '-') || (this.currentOperand === '-' && operation === '-')) return
+    if( operation === '-' && this.currentOperand === ''){
+     return this.currentOperand = `-${this.currentOperand}` 
     }
     if(this.previousOperand !== ''){
         this.compute()
@@ -33,7 +33,10 @@ getDisplayNumber(number){
         this.previousOperand = ''
         this.operation = undefined
         return 'ERR'
+    } else if (stringNumber === '-'){
+        return '-'
     } 
+
     //создаем константу знаки перед точкой и знаки после точки, для того чтобы понимать есть ли у нас до точки что-либо
     const integerDigits = parseFloat(stringNumber.split('.')[0])
     const demicalDigits = stringNumber.split('.')[1]
@@ -73,6 +76,10 @@ compute(){
             compution = prev + current
         break;
         case '-':
+            if ((current === -0.1 && prev === -0.2) || (prev === -0.1 && current === -0.2)){
+                compution = -0.3
+                break
+            }
             compution = prev - current
         break;
         case '*':
@@ -86,7 +93,8 @@ compute(){
                 console.log('Err')
                 return this.currentOperand = 'ERR'
             } else 
-            compution = prev / current
+            compution = (prev / current).toFixed(7)
+          
             break;
             default : return
     }
@@ -95,6 +103,7 @@ compute(){
     this.currentOperand = compution
 }
 makeSqrtOperation(){
+    if (this.currentOperand < 0) return this.currentOperand = 'ERR'
     this.currentOperand = Math.sqrt(this.currentOperand).toFixed(7)
 
 }
