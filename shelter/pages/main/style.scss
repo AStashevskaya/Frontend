@@ -90,7 +90,7 @@ header, main, footer{
             padding: 1.5rem 0px 0px 4.5rem;
             width: 207px;
             height: 52px;
-            @include fontHeader(1.8rem, 130%, 0.06em);
+            @include fontHeader(1.8rem, 130%, 0.108rem);
             background: $color-primary;
             border-radius: 100px;
             color: $color-dark-3xl;
@@ -123,7 +123,7 @@ header, main, footer{
       flex-basis: 50%;
       @include colomnFlex(space-between);
       h2{
-        @include fontHeader(3.5rem, 130%, 0.06em);
+        @include fontHeader(3.5rem, 130%, 0.21rem);
         color: $color-dark-l;
         margin-bottom: 2.08%;
       }
@@ -140,7 +140,7 @@ header, main, footer{
     padding: 80px 0 100px;
     &__heading{
       h2{
-        @include fontHeader(3.5rem, 130%, 0.06em);
+        @include fontHeader(3.5rem, 130%, 0.21rem);
         text-align: center;
         color:  $color-dark-l;
       }
@@ -179,7 +179,7 @@ header, main, footer{
       display: flex;
       justify-content: center;
       a{
-        @include fontHeader(1.7rem, 130%, 6%);
+        @include fontHeader(1.7rem, 130%, 0.102rem);
         text-align: center;
         display: block;
         color:  $color-dark-3xl;
@@ -203,16 +203,96 @@ header, main, footer{
 
 // }
 span{
-  @include fonttext(2rem, 2.3rem, 0.06em);
+  @include fonttext(2rem, 2.3rem, 0.12rem);
   color:   $color-dark-l;
 }
 a{
 display: block;
 padding: 15px 45px;
 border: 2px solid $color-primary;
-@include fontHeader(1.7rem, 130%, 0.06em);
+@include fontHeader(1.7rem, 130%, 0.102rem);
 border-radius: 100px;
 color: $color-dark-3xl;
 }
+}
+.help{
+  padding: 6.7% 0 8.3% ;
+  background-color: $color-light-xl;
+  &__heading{
+    margin-bottom: 5%;
+    h2{ 
+     @include fontHeader (3.5rem, 4.55rem, 0.21rem);
+    color: $color-dark-l;
+    text-align: center;
+    }
+  }
+
+  &__content{
+    padding: 0 7.25%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    :nth-child(even){
+      padding: 0 10% 5% 10%;
+    }
+  }
+  &__content-block{
+    display: flex;
+    flex-direction: column;
+    gap: 10%;
+    
+    align-items: center;
+    img{
+      margin-bottom: 30px;
+    }
+  
+    h3{
+      @include fontHeader(2rem, 2.3rem, 0.06em);
+      color: $color-dark-l;
+      width: max-content;
+    }
+  }
+}
+.donation{
+  padding: 6.7% 0 8.3% ;
+  background-color: $color-light-l;
+  &__content-wrapper{
+    padding: 0 11.83%;
+    display: flex;
+  }
+  &__img{
+    padding: 1%;
+  }
+  .content{
+    @include colomnFlex(space-between);
+    padding-left: 2.5%;
+    &__title{
+      @include fontHeader (3.5rem, 4.55rem, 0.21rem);
+      color: $color-dark-l;
+    }
+    &__subtitle{
+      @include fontHeader (1.5rem, 1.65rem, 0.09rem);
+      color: $color-dark-l;
+    }
+    &__card{
+    width: 349px;
+    height: 43px;
+    background-color: $color-primary;
+    padding: 1rem 0 0 1.5rem;
+    border-radius: 9px;
+    span{
+      margin-left: 1.5rem;
+      @include fontHeader(2rem, 2.3rem, 0.12rem);
+      color: $color-dark-l;
+    }
+    }
+    &__paragraph{
+      @include fonttext(1.2rem, 1.8rem);
+      font-style: italic;
+      color: $color-dark-m;
+
+    }}
+  
+
 }
 

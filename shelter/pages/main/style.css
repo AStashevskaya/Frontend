@@ -212,7 +212,7 @@ header {
   font-style: normal;
   font-size: 1.8rem;
   line-height: 130%;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.108rem;
   background: #F1CDB3;
   border-radius: 100px;
   color: #292929;
@@ -270,7 +270,7 @@ header {
   font-style: normal;
   font-size: 3.5rem;
   line-height: 130%;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.21rem;
   color: #545454;
   margin-bottom: 2.08%;
 }
@@ -297,7 +297,7 @@ header {
   font-style: normal;
   font-size: 3.5rem;
   line-height: 130%;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.21rem;
   text-align: center;
   color: #545454;
 }
@@ -367,7 +367,7 @@ header {
   font-style: normal;
   font-size: 1.7rem;
   line-height: 130%;
-  letter-spacing: 6%;
+  letter-spacing: 0.102rem;
   text-align: center;
   display: block;
   color: #292929;
@@ -402,7 +402,7 @@ header {
   font-style: normal;
   font-size: 2rem;
   line-height: 2.3rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.12rem;
   color: #545454;
 }
 
@@ -415,7 +415,154 @@ header {
   font-style: normal;
   font-size: 1.7rem;
   line-height: 130%;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.102rem;
   border-radius: 100px;
   color: #292929;
+}
+
+.help {
+  padding: 6.7% 0 8.3%;
+  background-color: #FFFFFF;
+}
+
+.help__heading {
+  margin-bottom: 5%;
+}
+
+.help__heading h2 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3.5rem;
+  line-height: 4.55rem;
+  letter-spacing: 0.21rem;
+  color: #545454;
+  text-align: center;
+}
+
+.help__content {
+  padding: 0 7.25%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: baseline;
+      -ms-flex-align: baseline;
+          align-items: baseline;
+}
+
+.help__content :nth-child(even) {
+  padding: 0 10% 5% 10%;
+}
+
+.help__content-block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  gap: 10%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.help__content-block img {
+  margin-bottom: 30px;
+}
+
+.help__content-block h3 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2rem;
+  line-height: 2.3rem;
+  letter-spacing: 0.06em;
+  color: #545454;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.donation {
+  padding: 6.7% 0 8.3%;
+  background-color: #F6F6F6;
+}
+
+.donation__content-wrapper {
+  padding: 0 11.83%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.donation__img {
+  padding: 1%;
+}
+
+.donation .content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-left: 2.5%;
+}
+
+.donation .content__title {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 3.5rem;
+  line-height: 4.55rem;
+  letter-spacing: 0.21rem;
+  color: #545454;
+}
+
+.donation .content__subtitle {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.5rem;
+  line-height: 1.65rem;
+  letter-spacing: 0.09rem;
+  color: #545454;
+}
+
+.donation .content__card {
+  width: 349px;
+  height: 43px;
+  background-color: #F1CDB3;
+  padding: 1rem 0 0 1.5rem;
+  border-radius: 9px;
+}
+
+.donation .content__card span {
+  margin-left: 1.5rem;
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 2rem;
+  line-height: 2.3rem;
+  letter-spacing: 0.12rem;
+  color: #545454;
+}
+
+.donation .content__paragraph {
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 1.2rem;
+  line-height: 1.8rem;
+  letter-spacing: normal;
+  font-style: italic;
+  color: #B2B2B2;
 }
