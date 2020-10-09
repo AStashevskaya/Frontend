@@ -84,6 +84,18 @@ header, main, footer {
           justify-content: space-between;
 }
 
+@media (max-width: 1279px) {
+  .header__wrapper {
+    padding: 3rem 3rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .header__wrapper {
+    padding: 3rem 1rem;
+  }
+}
+
 .header__nav {
   height: 100%;
   display: -webkit-box;
@@ -92,6 +104,12 @@ header, main, footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+}
+
+@media (max-width: 767px) {
+  .header__nav {
+    display: none;
+  }
 }
 
 .header__nav-link {
@@ -127,6 +145,11 @@ header, main, footer {
   background-color: #F1CDB3;
 }
 
+.header__logo {
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
 .header__logo h1 {
   font-family: Georgia, serif;
   font-weight: 400;
@@ -154,8 +177,16 @@ header, main, footer {
   padding: 80px 0 100px;
 }
 
-.pets__heading {
-  margin-bottom: 5%;
+@media (max-width: 1279px) {
+  .pets {
+    padding: 80px 1rem;
+  }
+}
+
+@media (max-width: 767px) {
+  .pets {
+    padding: 4.2rem 1rem;
+  }
 }
 
 .pets__heading h2 {
@@ -169,31 +200,43 @@ header, main, footer {
   color: #545454;
 }
 
+@media (max-width: 767px) {
+  .pets__heading h2 {
+    font-family: Georgia, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.5rem;
+    line-height: 3.25rem;
+    letter-spacing: 0.21rem;
+  }
+}
+
 .pets__content {
   display: -ms-grid;
   display: grid;
   -ms-grid-columns: auto auto auto auto;
       grid-template-columns: auto auto auto auto;
   grid-gap: 30px 3.33%;
+  padding: 6rem 0;
   width: 100%;
 }
 
-@media (max-width: 1199px) {
+@media (max-width: 1279px) {
   .pets__content {
-    padding: 0 8%;
-    -ms-grid-columns: 270px 270px 270px;
-        grid-template-columns: 270px 270px 270px;
+    padding: 3rem 9.2rem 4rem;
+    -ms-grid-columns: 270px 270px;
+        grid-template-columns: 270px 270px;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .pets__content {
-    padding: 0 8%;
-    -ms-grid-columns: auto auto;
-        grid-template-columns: auto auto;
+    padding: 4.2rem 8%;
+    -ms-grid-columns: auto;
+        grid-template-columns: auto;
   }
 }
 
@@ -207,7 +250,6 @@ header, main, footer {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  padding-top: 5%;
 }
 
 .pet-card {
@@ -290,6 +332,12 @@ header, main, footer {
           justify-content: space-between;
 }
 
+@media (max-width: 767px) {
+  .pagination__wrapper {
+    width: 300px;
+  }
+}
+
 .pagination__link {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -336,9 +384,18 @@ header, main, footer {
 }
 
 .footer__background {
-  background: url(../../assets/images/footer-background.svg) no-repeat;
-  background-size: cover;
+  background: url(../../assets/images/noise_transparent.png), linear-gradient(108deg, #513d2f 0%, #1a1a1c 71%, #1a1a1c 100%);
+  background-repeat: repeat;
   padding-top: 3.33%;
+}
+
+@media (max-width: 1279px) {
+  .footer__background {
+    padding: 3rem 3rem 0;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
 }
 
 .footer__content {
@@ -354,9 +411,8 @@ header, main, footer {
       flex-wrap: wrap;
 }
 
-@media (max-width: 885px) {
+@media (max-width: 1279px) {
   .footer__content {
-    padding: 0 8%;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
@@ -382,13 +438,13 @@ header, main, footer {
       flex-shrink: 0;
 }
 
-@media (max-width: 885px) {
+@media (max-width: 1279px) {
   .footer__content .contacts {
-    margin-right: 7%;
+    margin-right: 6rem;
   }
 }
 
-@media (max-width: 760px) {
+@media (max-width: 767px) {
   .footer__content .contacts {
     margin-right: 0;
   }
@@ -418,6 +474,18 @@ header, main, footer {
   color: #FFFFFF;
   margin-bottom: 43px;
   padding-top: 4%;
+}
+
+@media (max-width: 767px) {
+  .footer__content-title {
+    font-family: Georgia, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.5rem;
+    line-height: 3.25rem;
+    letter-spacing: 0.21rem;
+    text-align: center;
+  }
 }
 
 .footer__content-list > li {

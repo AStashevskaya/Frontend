@@ -14,35 +14,67 @@ header, main, footer{
       max-width: 1200px;
       margin: 0 auto;
       height: 100%;
+      @media (max-width: 1279px){
+        padding: 0 3rem;
+      }
   }
   header{
     position: absolute;
     top: 0;
     width: 100%;
 }
-.header_wrapper{
-    z-index: 100;
-    padding: 6rem 0;
-    height: 18rem;
-    display: flex;
-    justify-content: space-between;
-}
+
 .header_nav{
   height: 100%;
   display: flex;
   align-items: center;
 }
 .header{
-    &_nav-link{
+  &__wrapper{
+    z-index: 100;
+    padding: 6rem 0;
+    height: 18rem;
+    display: flex;
+    justify-content: space-between;
+    @media (max-width: 1279px){
+      padding-top: 3rem;
+      padding-bottom: 6rem;
+      height: 15rem;
+    }
+  }
+  &__nav{
+    height: 100%;
+    display: flex;
+    align-items: center;
+    @media (max-width: 767px){
+      display: none;
+    }}
+  
+    &__nav-link{
       display: inline-block;
       padding-left: 3.6rem;
       @include fonttext(1.5rem, 160%);
       color:  $color-dark-s;
+      opacity: .8;
+      &:hover{
+        opacity: 1;
+        }
     }
-    .active-link{
+    &__nav-link_active{
+      opacity: 1;
       color: $color-light-s;
+      position: relative;
+      &::after{
+        content: '';
+        position: absolute; 
+        top: 98%; 
+        left: 35px;
+        width: 77%;
+        height: 3px;
+        background-color: $color-primary;
+      }   
     }
-    &_logo{
+    &__logo{
       h1{
       @include fontHeader(3.2rem, 107%, 0.06em);
       color: $color-primary;
@@ -60,15 +92,22 @@ header, main, footer{
   .start-screen{
     height: 100%;
     &__background{
-      background-image: url(../../assets/images/start-screen-gradient-background.png);
-      background-repeat: no-repeat;
-      background-size: cover;
+      background:url(../../assets/images/noise_transparent.png), linear-gradient(108deg, rgba(81,61,47,1) 0%, rgba(26,26,28,1) 71%, rgba(26,26,28,1) 100%) ;
+      background-repeat: repeat;
       height: 100%;
       padding-top: 18rem;
+      @media (max-width: 1279px){
+        padding-top: 15rem;
+      }
     }
       &_content{
           display: flex;
           height: 100%;
+          @media (max-width: 1024px){
+            padding-left: 20%;
+            display: block;
+          }
+
       }
       &_text-content{
          @include colomnFlex(flex-start);
@@ -76,8 +115,14 @@ header, main, footer{
           max-width: 42%;
           margin-top: 163px;
           padding-right: 4.2rem;
+          @media (max-width: 1024px){
+            padding-right: 0;
+            margin-top: 0;
+            max-width: 81.5%;
+            margin-bottom: 13%;
+          }
           h2{
-            max-width: 310px;
+            width: 310px;
             @include fontHeader(4.4rem, 130%);
             color: $color-light-xl;
             margin-bottom: 4.2rem;
@@ -106,6 +151,11 @@ header, main, footer{
           img{
           width: 100%;
           height: 100%;
+          object-fit: contain;
+          }
+          @media (max-width: 1024px){
+            max-width: 80.3%;
+            max-height: 77%;
           }
       }
   }
@@ -115,13 +165,25 @@ header, main, footer{
     &__wrapper{
       padding:0  14.6%;
       display: flex;
+      @media (max-width: 1279px){
+      flex-direction: column-reverse;
+      padding-left: 19%;
+      padding-right: 19%;
+      align-items: center;
+      }
     }
     &__img{
       padding-right: 10%;
       flex-basis: 45.5%;
       img{
         width: 100%;
+        object-fit: contain;
       }
+      @media (max-width: 1279px){
+        padding-right: 0;
+        width: 68.5%;
+        margin-top: 8rem;
+        }
 
     }
     &__content{
@@ -161,10 +223,13 @@ header, main, footer{
       // margin: 60px 53px;
       // margin: 5% 4.4%;
       // width: 82.5%;
-      margin: 5% 4%;
+      margin: 5% 4.3%;
       width: 89.5%;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-between;   
+      @media (max-width: 1279px){
+        margin: 8.5% 1.8%;
+        }
     }
     &__arrow{
       display: flex;
@@ -203,32 +268,46 @@ header, main, footer{
       }
     }
   }
-.pet-card{
- width: 27.5%;
- //width: 330px;
-  height: 435px;
-  padding: 30px 40px;
-  background-color: $color-light-s;
-  border-radius: 9px;
-  
-  text-align: center;
-  @include colomnFlex(space-between);
-// img{
-
-// }
-span{
-  @include fonttext(2rem, 2.3rem, 0.12rem);
-  color:   $color-dark-l;
-}
-a{
-display: block;
-padding: 15px 45px;
-border: 2px solid $color-primary;
-@include fontHeader(1.7rem, 104%, 0.1rem);
-border-radius: 100px;
-color: $color-dark-3xl;
-}
-}
+  .pet-card{
+    width: 270px;
+    // width: 27.5%;
+    //width: 330px;
+     height: 435px;
+     background-color: $color-light-s;
+     border-radius: 9px;
+     align-items: center;
+     @include colomnFlex(flex-end);
+     cursor: pointer;
+     &:hover{
+      .pet-card__text{
+        background-color: $color-light-xl;
+      }
+     }
+   &__text{
+     padding: 30px 40px;
+     width: 100%;
+     text-align: center;
+     span{
+     @include fonttext(2rem, 2.3rem, 0.1rem);
+     color:   $color-dark-l;
+   }
+   a{
+  width: 190px;
+  height: 52px;
+  @include centerFlex();
+   margin-top: 30px;
+   border: 2px solid $color-primary;
+   @include fontHeader(1.7rem, 104%, 0.1rem);
+   border-radius: 100px;
+   color: $color-dark-3xl;
+       
+   &:hover{
+    border: 2px solid $color-primary-light;
+    background-color: $color-primary-light;
+        }
+   }
+   }
+   }
 .help{
   padding: 6.7% 0 3.5% ;
   background-color: $color-light-xl;
@@ -251,8 +330,17 @@ color: $color-dark-3xl;
     }
     :nth-child(6){
       padding: 0 12.5% 5% 7.5%;
+      @media (max-width: 1279px){
+        padding: 0;
+        
+          }
 
     }
+    @media (max-width: 1279px){
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+      }
   }
   &__content-block{
     display: flex;
@@ -315,8 +403,8 @@ color: $color-dark-3xl;
 }
 .footer{
   &__background{
-    background: url(../../assets/images/footer-background.svg) no-repeat;
-    background-size: cover;
+    background:url(../../assets/images/noise_transparent.png), linear-gradient(108deg, rgba(81,61,47,1) 0%, rgba(26,26,28,1) 71%, rgba(26,26,28,1) 100%) ;
+    background-repeat: repeat;
     padding-top: 3.33%;
   }
   &__content{
