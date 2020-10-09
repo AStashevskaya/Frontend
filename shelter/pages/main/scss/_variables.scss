@@ -13,6 +13,16 @@
     flex-direction: column;
     justify-content: $j-c;
   }
+  @mixin centerFlex(){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @mixin roundLink($sz: 52px){
+    width: $sz;
+    height: $sz;
+    border-radius: 50%;
+  }
   $color-light-xl: #FFFFFF;
   $color-light-l: #F6F6F6;
   $color-light-s: #FAFAFA;
@@ -45,6 +55,18 @@
     }
     line-height: $lh;
     letter-spacing: $ls;
+  }
+  @mixin activeLink {
+    border: solid 0.2rem $color-primary;
+    color: $color-dark-3xl;
+    &:hover{
+      background-color:  $color-primary-light;
+      border: solid 0.2rem $color-primary-light;
+  }
+  }
+  @mixin inactiveLink {
+    border: solid 0.2rem $color-dark-s;
+    color: $color-dark-s;
   }
   
   

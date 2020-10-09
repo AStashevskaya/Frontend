@@ -96,6 +96,9 @@ header, main, footer{
             background: $color-primary;
             border-radius: 100px;
             color: $color-dark-3xl;
+            &:hover{
+              background-color:  $color-primary-light;
+            }
           }
       }
       &_img{
@@ -173,13 +176,12 @@ header, main, footer{
         right: 0;
       }
       .arrow-link_active{
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 52px;
-        height: 52px;
-        border-radius: 50%;
-        border: solid 0.2rem $color-primary
+        @include centerFlex();
+        @include roundLink();
+        @include inactiveLink;
+      }
+      .arrow-link_disabled{
+        @include inactiveLink;
       }
     }
     &__link{
@@ -195,6 +197,9 @@ header, main, footer{
         height: 52px;
         background: $color-primary;
         border-radius: 100px;
+        &:hover{
+          background-color:  $color-primary-light;
+        }
       }
     }
   }
