@@ -8,9 +8,9 @@
     font-style: normal;
     font-weight: normal;
   }
-  @mixin colomnFlex($j-c: center){
+  @mixin colomnFlex($j-c: center, $dir: column){
     display: flex;
-    flex-direction: column;
+    flex-direction: $dir;
     justify-content: $j-c;
   }
   @mixin centerFlex(){
@@ -68,7 +68,9 @@
     border: solid 0.2rem $color-dark-s;
     color: $color-dark-s;
   }
-  
+  @mixin hide{
+    display: none;
+  }
   
   
   
