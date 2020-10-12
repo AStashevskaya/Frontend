@@ -32,6 +32,20 @@ header, main, footer{
   display: flex;
   align-items: center;
 }
+.burger-btn{
+  display: none;
+  @media(max-width: 767px){
+    display: block;
+    padding-right: 42px;
+  padding-top: 13.5px;
+  }
+  .span1, .span2, .span3{
+    width: 29px;
+    height: 3.5px;
+    background-color: $color-primary;
+    margin: 6px 0;
+  }
+}
 .header{
   &__wrapper{
     z-index: 100;

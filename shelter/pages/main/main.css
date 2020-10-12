@@ -101,6 +101,25 @@ header {
           align-items: center;
 }
 
+.burger-btn {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .burger-btn {
+    display: block;
+    padding-right: 42px;
+    padding-top: 13.5px;
+  }
+}
+
+.burger-btn .span1, .burger-btn .span2, .burger-btn .span3 {
+  width: 29px;
+  height: 3.5px;
+  background-color: #F1CDB3;
+  margin: 6px 0;
+}
+
 .header__wrapper {
   z-index: 100;
   padding: 6rem 0;

@@ -172,6 +172,25 @@ header, main, footer {
   padding-left: 4px;
 }
 
+.burger-btn {
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .burger-btn {
+    display: block;
+    padding-right: 44px;
+    padding-top: 13.5px;
+  }
+}
+
+.burger-btn .span1, .burger-btn .span2, .burger-btn .span3 {
+  width: 29px;
+  height: 3.5px;
+  background-color: #000;
+  margin: 6px 0;
+}
+
 .pets {
   background: #F6F6F6;
   padding: 80px 0 100px;
