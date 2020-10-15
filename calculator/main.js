@@ -2,12 +2,14 @@ class Calculator{
 constructor(previousOperandTextElement, currentOperandTextElement){
     this.previousOperandTextElement = previousOperandTextElement
     this.currentOperandTextElement = currentOperandTextElement
+    this.isCompution = false
     this.clear()
 }
 clear(){
     this.previousOperand = ''
     this.currentOperand = ''
     this.operation = undefined
+    this.isCompution = false
 }
 appendNumber(number){
     if(number === '.' && this.currentOperand.includes('.')) return
@@ -69,31 +71,83 @@ compute(){
     if (isNaN(prev) || isNaN(current)) return
     switch (this.operation){
         case '+':
-            if ((current === 0.1 && prev === 0.2) || (prev === 0.1 && current === 0.2)){
-                compution = 0.3
+            if(Math.abs(current) === 0.1 || Math.abs(prev) === 0.1){
+            if (Math.abs(current) === 0.1 && prev !== 0.1){
+                if(Number.isInteger(prev)){
+                    compution = prev + current 
+                } else{
+                let arr = prev.toString().split('.')
+                let fixLength = arr[1].length
+                compution = current + prev
+                Number.isInteger(compution) ? compution : compution = compution.toFixed(fixLength)
+                }
                 break
+            } else {
+                if(Number.isInteger(prev)){
+                    compution = prev + current 
+                } else{
+                let arr = current.toString().split('.')
+                let fixLength = arr[1].length
+                compution = current + prev
+                Number.isInteger(compution) ? compution : compution = compution.toFixed(fixLength)
+                }
+                break
+            } 
             }
             compution = prev + current
         break;
         case '-':
-            if ((current === -0.1 && prev === -0.2) || (prev === -0.1 && current === -0.2)){
-                compution = -0.3
-                break
-            }
+            if(Math.abs(current) === 0.1 || Math.abs(prev) === 0.1){
+                if (Math.abs(current) === 0.1 && prev !== 0.1){
+                    if(Number.isInteger(prev)){
+                        compution = prev - current 
+                    } else{
+                    let arr = prev.toString().split('.')
+                    let fixLength = arr[1].length
+                    compution = current - prev
+                    Number.isInteger(compution) ? compution : compution = compution.toFixed(fixLength)
+                    }
+                    break
+                } else {
+                    if(Number.isInteger(prev)){
+                        compution = prev - current 
+                    } else{
+                    let arr = current.toString().split('.')
+                    let fixLength = arr[1].length
+                    compution = current - prev
+                    Number.isInteger(compution) ? compution : compution = compution.toFixed(fixLength)
+                    }
+                    break
+                } 
+                }
             compution = prev - current
         break;
         case '*':
-            compution = prev * current
+            let float
+            if(prev === 0.1 || prev === 0.3 || prev === 0.4 || prev === 0.2){
+                float = prev * 10
+                compution = float * current / 10
+                break
+            } else if (current === 0.1 || current === 0.2 || current === 0.3 || current === 0.4){
+                float = current * 10
+                compution = float * prev / 10
+                break
+            }
+            compution = prev * current 
         break;
         case '^':
             compution = Math.pow(prev, current)
+            Number.isInteger(compution) ? compution : c0mpution = compution.toFixed(7)
         break;
         case '÷':
             if(current === 0){
                 console.log('Err')
                 return this.currentOperand = 'ERR'
             } else 
-            compution = (prev / current).toFixed(7)
+            compution = (prev / current)
+            if (!Number.isInteger(compution)){
+                compution.toFixed(7)
+            }
           
             break;
             default : return
@@ -101,10 +155,14 @@ compute(){
     this.operation = undefined
     this.previousOperand = ''
     this.currentOperand = compution
+    this.isCompution = true
 }
 makeSqrtOperation(){
     if (this.currentOperand < 0) return this.currentOperand = 'ERR'
-    this.currentOperand = Math.sqrt(this.currentOperand).toFixed(7)
+    this.currentOperand = Math.sqrt(this.currentOperand)
+    if (!Number.isInteger(this.currentOperand)){
+       this.currentOperand = this.currentOperand.toFixed(15)
+    }
 
 }
 delete(){
@@ -129,6 +187,9 @@ const calculator = new Calculator (previousOperandTextElement, currentOperandTex
 
 numberButtons.forEach(button => {
     button.addEventListener('click', () => {
+        if(calculator.isCompution){
+            calculator.clear()
+        }
         calculator.appendNumber(button.innerHTML)
         calculator.updateDisplay()
     })
