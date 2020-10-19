@@ -384,17 +384,20 @@ header, main, footer{
      align-items: center;
      @include colomnFlex(flex-end);
      cursor: pointer;
+     &:nth-child(1n + 4){
+        @include hide;
+     }
      &:hover{
       .pet-card__text{
         background-color: $color-light-xl;
       }
      }
-     &:last-child{
+     &:nth-child(1n + 3){
        @media (max-width: 1035px){
           @include hide;
        } 
      }
-     &:nth-child(2){
+     &:nth-child(1n + 2){
       @media (max-width: 767px){
         @include hide;
      } 

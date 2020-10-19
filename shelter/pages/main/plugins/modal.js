@@ -7,23 +7,8 @@ modal.insertAdjacentHTML('afterbegin', `
         <div class="modal__header">
             <div class="modal__close-btn" data-close="true"><span data-close="true">&times;</span></div>
         </div>
-        <div class="modal__content-background">
-              <div class="modal__content">
-          <div class="modal__img"><img src="../../assets/images/Jennifer.png" alt="pet"></div>
-          <div class="modal__text-content">
-              <div class="text-content">
-                  <h2 class="text-content__title">Jenefer</h2>
-                  <h3 class="text-content__subtitle">Dog -labrador</h3>
-                  <p class="text-content__paragraph">Jennifer is a sweet 2 months old Labrador that is patiently waiting to find a new forever home. This girl really enjoys being able to go outside to run and play, but won't hesitate to play up a storm in the house if she has all of her favorite toys.</p>
-                  <ul class="text-content__list">
-                      <li><strong>Age:</strong> 2 years</li>
-                      <li><strong>Inoculations:</strong>none</li>
-                      <li><strong>Diseases:</strong>none</li>
-                      <li><strong>Parasites:</strong>none</li>
-                  </ul>
-              </div>
-          </div>
-      </div>
+        <div class="modal__content-background" data-content>
+     
         </div>
     </div>
 </div>
@@ -64,8 +49,8 @@ $.modal = function (options){
         $modal.remove()
         isDestroyed = true
         },
-        setContent(){
-
+        setContent(html){
+            $modal.querySelector('[data-content]').innerHTML = html
         }
     })
 }
