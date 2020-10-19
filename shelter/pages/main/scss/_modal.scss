@@ -1,0 +1,188 @@
+.modal{
+    &__overlay,  &__window{
+        opacity: 0;
+        z-index:  -1;
+    }
+    &.open   &__overlay,  &__window{
+        opacity: 1;
+        z-index: 1000;
+    }
+    &.open   &__overlay{
+        background-color: rgba($color: $color-dark-3xl, $alpha: 0.6);
+    }
+    &.open   &__window{
+        transform: translateY(10%);
+    }
+    &.hide  &__overlay,  &__window{
+        opacity: 1;
+        z-index: 1000;
+    }
+    &.hide   &__overlay{
+        background-color: rgba($color: $color-dark-3xl, $alpha: 0);
+    }
+    &.hide   &__window{
+        transform: translateY(-800px);
+    }
+
+    &__overlay{
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba($color: $color-dark-3xl, $alpha: 0);
+        transition: background-color .3s ease-in;
+    }
+    &__window{
+        margin: 0 auto;
+        transform: translateY(-800px);
+        transition: transform .3s ease-in;
+        width: 1004px;
+        padding-left: 52px;
+        @media (max-width: 1279px){
+            width: 735px;        
+            // padding-left: 52px;
+        }
+        @media (max-width: 767px){
+            width: 320px;
+            padding-left: 40px;
+            // 
+          }
+    }
+    &__header{
+        display: flex;
+        justify-content:flex-end;
+        padding-right: 10px;
+    }
+    &__close-btn{
+        @include roundLink;
+        @include centerFlex;
+        @include activeLink;  
+        cursor: pointer;
+        span{
+         font-size: 22px;
+        }
+    }
+    &__content-background{
+        padding-right: 52px;
+        background: transparent;
+        @media (max-width: 767px){
+            padding-right: 40px;
+        }
+    }
+    &__content{
+        box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+        display: flex;
+        background-color: $color-light-s;
+     
+        padding-top: 50px;
+        @media (max-width: 1279px){
+       padding-top: 16px;
+       border-radius: 6px;
+            }
+            @media (max-width: 767px){
+                padding-top: 12px;
+            }
+    }
+    &__img{
+        flex-basis: 59%;
+        padding-left: 87px;
+        padding-top: 15px;
+        @media (max-width: 1279px){
+            flex-basis: 73%;
+            padding-left: 58px;
+            padding-top: 32px;
+        }
+        @media (max-width: 767px){
+        display: none;
+            }
+    }
+    img{
+        object-fit: contain;
+        width: 82%;
+        @media (max-width: 1279px){
+            width: 84%;
+        }
+    }
+
+    
+    // &__text-content{
+
+    // }
+    }
+.text-content{
+    color: #000;
+    max-width: 358px;
+    padding-bottom: 88px; 
+    @media (max-width: 1279px){
+        padding-bottom: 36px;
+        max-width: 364px;
+    }
+    @media (max-width: 767px){
+        padding-bottom: 11px;
+    }
+    &__title{
+        @include fontHeader(3.5rem, 4.55rem, 0.21rem);
+        margin-bottom: 10px;
+        @media (max-width: 1279px){
+        line-height: normal;
+        margin-bottom: 9px;
+        }
+        @media (max-width: 767px){
+            text-align: center;
+            margin-bottom: 12px;
+        }
+    }
+    &__subtitle{
+        @include fontHeader(2rem, 2.3rem, 0.125rem);
+        margin-bottom: 40px;
+        @media (max-width: 1279px){
+            @include fontHeader(2rem, 2.3rem, 0.12rem);
+            margin-bottom: 20px;
+            }
+            @media (max-width: 767px){
+                margin-bottom: 21px;
+                text-align: center;
+            }
+    }
+    &__paragraph{
+        @include fontHeader(1.5rem, 1.755rem, 0.1rem);
+        margin-bottom: 40px;
+        @media (max-width: 1279px){
+            @include fontHeader(1.5rem, 1.5rem, 0.0084rem);
+            margin-bottom: 18px;
+            }
+            @media (max-width: 767px){
+                margin-bottom: 21px;
+                padding-left: 4%;
+                letter-spacing: 0.009rem;
+            }
+    }
+    &__list{
+        @media (max-width: 767px){
+      padding-left: 5%;
+        }
+      
+        li{
+            @include fontHeader(1.5rem, 1.9rem, 0.15rem);
+            position: relative;
+            padding-left: 13px;
+            margin-bottom: 10px;
+            @media (max-width: 1279px){
+                margin-bottom: 4.5px;
+                }
+        }
+        li:last-child{
+            margin-bottom: 0;
+        }
+        li::before{
+           content: '';
+           margin-left: -13px;
+           background-color: $color-primary;
+           @include roundLink(4px);
+           margin-top: 7px;
+           position: absolute;
+        }
+        
+    }
+}
