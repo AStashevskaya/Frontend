@@ -2,6 +2,7 @@
 @import 'scss/_reset';
 @import 'scss/_variables';
 @import 'scss/_modal';
+@import 'scss/_burgerMenu';
 body{
   @include fontA();
 }
@@ -67,7 +68,6 @@ header, main, footer{
     @media (max-width: 767px){
       display: none;
     }}
-  
     &__nav-link{
       display: inline-block;
       padding-left: 3.6rem;
@@ -378,6 +378,7 @@ header, main, footer{
     width: 270px;
     // width: 27.5%;
     //width: 330px;
+    // animation: fadeIn 7s easy;
      height: 435px;
      background-color: $color-light-s;
      border-radius: 9px;
@@ -745,3 +746,75 @@ header, main, footer{
         }}
   }
 }
+  .nav_open{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    background-color: rgba($color: $color-dark-3xl, $alpha: 0.6);
+    }
+  .burger-logo__wrapper{
+  background-color: transparent;
+    &_open{
+    padding: 30px 10px 0 10px;
+    width: 320px;
+    background-color:$color-dark-3xl;
+    display: flex;
+    }
+   
+  }
+   .burger-logo_open{
+    padding-right: 35px;
+    h2{
+      @include fontHeader(3.2rem, 3.52rem, 0.1rem);
+      color: $color-primary;
+    }
+    p{
+      color: $color-light-xl;
+      @include fonttext(1.3rem, 1.5rem, 0.1rem)
+    }
+
+   }
+   .burger-btn_open{
+    transform: rotate(90deg);
+    padding-top: 0;
+    padding-right: 0;
+    .span1, .span2, .span3{
+      background-color: $color-primary;
+    }
+   }
+   .header__nav_open{
+    background-color:$color-dark-3xl;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 320px;
+    align-items: center;
+   }
+   .header__nav-link_open{
+    @include fonttext(3rem, 4.12rem);
+    color: $color-light-s;
+    padding-bottom: 45px;
+    padding-left: 0;
+   }
+.header__nav-link_open_active{
+  &:after{
+    content: '';
+    position: absolute;
+    top: 46%;
+    left: 0px;
+    width: 100%;
+    height: 3px;
+    background-color: #F1CDB3;
+  }
+}
+
+.fadeOut{
+  animation: fadeOut 7s easy;
+  }

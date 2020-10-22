@@ -18,7 +18,7 @@ return modal
 }
 
 $.modal = function (options){
- const ANIMATION_SPEED = 300 
+ const ANIMATION_SPEED = 3000 
    // $modal - node element 
  $modal = _createModal(options)  
  let closing = false
