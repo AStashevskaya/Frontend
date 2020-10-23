@@ -2,52 +2,41 @@
 class Catalog {
     constructor(){
         this.pets = []
-        this.container = '.pets__content'
-        // this.petsContainer = '.pets__content'
+       this.container = '.active'
+       this.newContainer = '.new-slide'
         this.init()
     }
     init(){
       if(this.pets.length === 0){
-        petsList.forEach(el => {
+        pets.forEach(el => {
             this.pets.push(new Pet (el))
         })
-      }
-        this.shuffle()
-        this.render()
+      }      
+      this.shuffle()
+      this.render()
     }
     render(){
-        let html = ''
-        this.pets.forEach(el => 
-            html += el.render()
-            )
-        document.querySelector(this.container).innerHTML = html    
+     let html =  this.pets.reduce((accum, el) => accum+=el.render(), '')
+     document.querySelector(this.container).innerHTML = html
+    }
+    renderNewSlide(){
+      this.shuffle()
+      let html =  this.pets.reduce((accum, el) => accum+=el.render(), '')
+      document.querySelector(this.newContainer).innerHTML = html
     }
     shuffle(){
       this.pets.sort(() => Math.random() - 0.5);
     }
 }
 
-//  async function getJson(url){
-//     const response = await fetch(url)
-//     const data =  await response.json()
-//     return data
-//     // .then(data =>{
-//     //  let arr = data.json() 
-//     //  return arr
-//     // } )
-//     // .then(console.log(dt))
-//     // .catch(console.log('error'))
-// }
-// const catalog = new Catalog
-// getJson(URL)
 const catalog = new Catalog 
 
+let isChanging = false
 document.addEventListener('click', (event) => {
   // let isChanging  = true
 const targetDS = event.target.dataset
 const parentTagetDS = event.target.parentNode.dataset
         if(parentTagetDS.info || targetDS.info){
-          // console.log(event.target.dataset, event.target.parentNode.dataset)
         event.preventDefault()
         let name = targetDS.name || parentTagetDS.name 
         const pet = catalog.pets.find( el => el.name === name)
@@ -68,21 +57,49 @@ const parentTagetDS = event.target.parentNode.dataset
         </div>
         </div>`)
         modal.open()
-    } else if (targetDS.sliderarrow || parentTagetDS.sliderarrow ){
-      // if (isChanging) return
-      event.preventDefault()
-      // const pets = document.querySelectorAll('.pet-card')
-      // const FADE_ANIMATION_SPEED = 7000
-        catalog.init()
-      // pets.forEach(el => el.classList.add('fadeOut'))
-      // setTimeout(()=>{
-      // }, FADE_ANIMATION_SPEED)
+    } else if (targetDS.sliderarrowleft || parentTagetDS.sliderarrowleft || targetDS.sliderarrowright || parentTagetDS.sliderarrowright){
+    //  event.preventDefault()
+     // if (isChanging) return
+      const ANIMATION_SPEED = 500
+      const petsSliderContainer  = document.querySelector('.pets__content')
+      const slide = document.querySelector('.active')
+      if(targetDS.sliderarrowleft || parentTagetDS.sliderarrowleft ){
+        event.preventDefault()
+        if (isChanging) return
+        isChanging = true
+        const newSlide = document.createElement('div')
+        petsSliderContainer.appendChild(newSlide)
+        newSlide.classList.add('new-slide', 'pets__content-slide','putRight')
+        catalog.renderNewSlide() 
+        newSlide.classList.add('slideInRight')
+        slide.classList.add('slideOutLeft')
+        setTimeout(() => {
+          slide.remove()
+          newSlide.classList.remove('slideInRight', 'new-slide', 'putRight' )
+          newSlide.classList.add('active')
+          isChanging = false
+        }, ANIMATION_SPEED)
+      }
+      else {
+       event.preventDefault()
+       if (isChanging) return
+       isChanging = true
+        const newSlide = document.createElement('div')
+        petsSliderContainer.appendChild(newSlide)
+        newSlide.classList.add('new-slide', 'pets__content-slide','putLeft')
+        catalog.renderNewSlide() 
+        newSlide.classList.add('slideInLeft')
+        slide.classList.add('slideOutRight')
+        setTimeout(() => {
+          slide.remove()
+          newSlide.classList.remove('slideInLeft', 'new-slide', 'putLeft' )
+          newSlide.classList.add('active')
+          isChanging = false
+        }, ANIMATION_SPEED)
+    }
     }
 })
 
-////////////////////// Burger menu ///////////////
-
-  
 
 
 

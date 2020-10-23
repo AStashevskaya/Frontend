@@ -19,7 +19,7 @@ header, main, footer{
       @media (max-width: 1279px){
         padding: 0 3rem;
       }
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         padding: 0 1rem;
       } 
   }
@@ -36,10 +36,11 @@ header, main, footer{
 }
 .burger-btn{
   display: none;
-  @media(max-width: 767px){
+  @media(max-width: 768px){
     display: block;
     padding-right: 42px;
   padding-top: 13.5px;
+  padding-bottom: 15px;
   }
   .span1, .span2, .span3{
     width: 29px;
@@ -65,7 +66,7 @@ header, main, footer{
     height: 100%;
     display: flex;
     align-items: center;
-    @media (max-width: 767px){
+    @media (max-width: 768px){
       display: none;
     }}
     &__nav-link{
@@ -125,7 +126,7 @@ header, main, footer{
             padding-left: 17.5%;
             display: block;
           }
-          @media (max-width: 767px){
+          @media (max-width: 768px){
             padding-left: 1.5%;
           }
       }
@@ -141,7 +142,7 @@ header, main, footer{
             max-width: 79.5%;
             margin-bottom: 18%;
           }
-          @media (max-width: 767px){
+          @media (max-width: 768px){
             max-width: 100%;
             margin-bottom: 36%;
           }
@@ -150,7 +151,7 @@ header, main, footer{
             @include fontHeader(4.4rem, 130%);
             color: $color-light-xl;
             margin-bottom: 4.2rem;
-            @media (max-width: 767px){
+            @media (max-width: 768px){
               @include fontHeader(2.5rem, 3.25rem, 0.15rem);
               padding-left: 11%;
               width: 88%;
@@ -161,7 +162,7 @@ header, main, footer{
             @include fonttext(1.5rem, 160%);
             color: $color-dark-s;
             margin-bottom: 4.2rem;
-            @media (max-width: 767px){
+            @media (max-width: 768px){
               text-align: center;
             }
           }
@@ -203,7 +204,7 @@ header, main, footer{
   .about{ 
     padding: 80px 0 100px;
     background-color: $color-light-xl;
-    @media (max-width: 767px){
+    @media (max-width: 768px){
       padding: 40px 15px 40px;
        } 
     &__wrapper{
@@ -215,7 +216,7 @@ header, main, footer{
       padding-right: 20%;
       align-items: center;
       }
-      @media (max-width: 767px){
+      @media (max-width: 768px){
      padding: 0;
       } 
     }
@@ -226,7 +227,7 @@ header, main, footer{
         margin-top: 13%;
         padding-right: 0;
         }
-        @media (max-width: 767px){
+        @media (max-width: 768px){
         margin-top: 6%;
         padding-right: 0;
         max-width: 97%;
@@ -254,7 +255,7 @@ header, main, footer{
         @media (max-width: 1279px){
           margin-bottom: 6%;
           }
-          @media (max-width: 767px){
+          @media (max-width: 768px){
             @include fontHeader(2.5rem, 3.25rem, 0.15rem);
             padding-left: 0;
             max-width: 100%;
@@ -269,7 +270,7 @@ header, main, footer{
         @media (max-width: 1279px){
           margin-bottom: 6%;
           }
-          @media (max-width: 767px){
+          @media (max-width: 768px){
             text-align: justify;
             margin-bottom: 8%;
           } 
@@ -280,7 +281,7 @@ header, main, footer{
   .pets{
     background:  $color-light-l;
     padding: 80px 0 100px;
-    @media (max-width: 767px){
+    @media (max-width: 768px){
       padding: 45px 0 40px;
        } 
     &__heading{
@@ -288,7 +289,7 @@ header, main, footer{
         @include fontHeader(3.5rem, 130%, 0.21rem);
         text-align: center;
         color:  $color-dark-l;
-        @media (max-width: 767px){
+        @media (max-width: 768px){
           @include fontHeader(2.5rem, 3.25rem, 0.15rem);
           padding-left: 0;
           max-width: 100%;
@@ -300,7 +301,7 @@ header, main, footer{
     &__content-wrapper{
       display: flex;
       width: 100%;
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         flex-wrap: wrap;
         justify-content: space-evenly;
         } 
@@ -311,35 +312,54 @@ header, main, footer{
       // width: 82.5%;
       margin: 5% 4.3%;
       width: 89.5%;
-      display: flex;
-      justify-content: space-between;   
+      height: 435px;
+      // display: flex;
+      // justify-content: space-between;
+      overflow: hidden;   
+      ///slider styles
+      position: relative;
       @media (max-width: 1279px){
          margin: 8.5% 1.8%;
         
         }  
       @media (max-width: 1035px){
-        justify-content: space-around;   
+        // justify-content: space-around;   
         margin: 8.4% -2%;
        } 
-       @media (max-width: 767px){
+       @media (max-width: 768px){
        justify-self: center;
        order: 1;
        flex-basis: 100%;
        margin:4.2% -0 6%;
      } 
     }
+    &__content-slide{
+      position: absolute;
+      display: flex;
+      justify-content: space-between;
+      transition: transform .5s easy !important;
+      will-change: transform;
+      animation-duration: .5s;
+      width: 100%;
+      @media (max-width: 1035px){
+         justify-content: space-around;   
+        // margin: 8.4% -2%;
+       }
+    }
+    
     &__arrow{
       display: flex;
       align-items: center;
+      z-index: 3;
       &.left{
         justify-self: flex-start;
-        @media (max-width: 767px){
+        @media (max-width: 768px){
           order: 2;
         } 
       }
       &.right{
         right: 0;
-        @media (max-width: 767px){
+        @media (max-width: 768px){
           order: 3;
         } 
       }
@@ -369,7 +389,7 @@ header, main, footer{
           background-color:  $color-primary-light;
         }
       }
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         margin-top: 14%;
       } 
     }
@@ -437,7 +457,7 @@ header, main, footer{
   @media (max-width: 1279px){
     padding: 10.7% 0 10.5% ;
     }  
-    @media (max-width: 767px){
+    @media (max-width: 768px){
      padding: 13.8% 0 14%;
     } 
   &__heading{
@@ -452,7 +472,7 @@ header, main, footer{
     @media (max-width: 1279px){
       line-height: 4.45rem;
       } 
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         @include fontHeader(2.5rem, 3.25rem, 0.15rem);
         padding-left: 0;
         max-width: 100%;
@@ -469,7 +489,7 @@ header, main, footer{
     align-items: baseline;
     :nth-child(even){
       padding: 0 11.5% 5% 11.6%;
-      @media (max-width: 767px){
+      @media (max-width: 768px){
      padding: 0;
        }}
     :nth-child(6){
@@ -483,7 +503,7 @@ header, main, footer{
     grid-gap: 37px 25px;
     padding: 0 3.3%;
     }
-    @media (max-width: 767px){
+    @media (max-width: 768px){
       grid-auto-columns: 130px;
       grid-auto-rows: 87px;
       grid-template-columns: auto auto;
@@ -497,13 +517,13 @@ header, main, footer{
       display: flex;
       flex-direction: column;
       align-items: center;// &:nth-child(6)
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         height: 87px;
         width: 130px;
         justify-items: center;
       }
       &:nth-child(5){
-        @media (max-width: 767px){
+        @media (max-width: 768px){
           img{
             margin-bottom: 24px;
             width: 17%;
@@ -520,7 +540,7 @@ header, main, footer{
       // }
       img{
         margin-bottom: 30px;
-        @media (max-width: 767px){
+        @media (max-width: 768px){
           margin-bottom: 23px;
           width: 38%;
          } 
@@ -530,7 +550,7 @@ header, main, footer{
         @include fontHeader(2rem, 2.3rem, 0.06em);
         color: $color-dark-l;
         width: max-content; 
-        @media (max-width: 767px){
+        @media (max-width: 768px){
         @include fontHeader(1.5rem, 1.65rem, 0.06em);
        } 
       }
@@ -546,7 +566,7 @@ header, main, footer{
   @media (max-width: 1279px){
     padding: 10.7% 0 12.7%;
     }  
-    @media (max-width: 767px){
+    @media (max-width: 768px){
       padding: 13% 0 11.7%;
     }
   &__content-wrapper{
@@ -555,7 +575,7 @@ header, main, footer{
     @media (max-width: 1279px){
     @include colomnFlex(center, column-reverse)
     }  
-    @media (max-width: 767px){
+    @media (max-width: 768px){
       padding: 0 3.4%;
     }
   }
@@ -565,7 +585,7 @@ header, main, footer{
       padding: 0;
       padding-left: 3%;
       } 
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         width: 100%;
         text-align: center;
         img{
@@ -586,7 +606,7 @@ header, main, footer{
       align-self: center;
       margin-bottom: 6rem;
       }  
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         width: 100%;
         margin-bottom: 15.5%;
       }
@@ -597,7 +617,7 @@ header, main, footer{
       @media (max-width: 1279px){
        margin-bottom: 2rem;
         }  
-        @media (max-width: 767px){
+        @media (max-width: 768px){
           @include fontHeader(2.5rem, 3.25rem, 0.15rem);
           max-width: 75%;
           text-align: center;
@@ -610,7 +630,7 @@ header, main, footer{
       @media (max-width: 1279px){
         margin-bottom: 2rem;
          } 
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         @include fontHeader (1.5rem, 2.4rem);
         text-align: center;
       }
@@ -624,7 +644,7 @@ header, main, footer{
     @media (max-width: 1279px){
       margin-bottom: 2rem;
        } 
-       @media (max-width: 767px){
+       @media (max-width: 768px){
         width: 281px;
       } 
     a {
@@ -632,7 +652,7 @@ header, main, footer{
       @include fontHeader(2rem, normal, 0.1rem);
       color: $color-dark-l;
       cursor: pointer;
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         @include fontHeader(1.5rem, 2.65rem, 0.1rem);
       } 
     }
@@ -641,7 +661,7 @@ header, main, footer{
       @include fonttext(1.2rem, 1.9rem);// was 1.8rem
       font-style: italic;
       color: $color-dark-m;
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         line-height: 1.8rem;
         text-align: justify;
       } 
@@ -657,7 +677,7 @@ header, main, footer{
       padding: 3rem 3rem 0;
       justify-content: center;
     }
-    @media (max-width: 767px){
+    @media (max-width: 768px){
       padding: 3rem 0 0;
       justify-content: center;
     }
@@ -681,7 +701,7 @@ header, main, footer{
      @media (max-width: 1279px){
      margin-right: 5rem;
         }
-    @media (max-width: 767px){
+    @media (max-width: 768px){
           margin-right: 0;
         }
     }
@@ -694,7 +714,7 @@ header, main, footer{
       }
       ul > li{
         padding-bottom: 36px;
-        @media(max-width: 767px){
+        @media(max-width: 768px){
           padding-bottom: 47px;
            justify-content: end;
            &:last-child{
@@ -722,7 +742,7 @@ header, main, footer{
   &__content-list > li{
     padding-bottom: 45px;
     display: flex;
-    @media (max-width: 767px){
+    @media (max-width: 768px){
      justify-content: space-around;
      padding-bottom: 42px;
     }
@@ -736,73 +756,73 @@ header, main, footer{
     @media (max-width: 1279px){
       margin-top: 1.5rem;
        } 
-       @media (max-width: 767px){
+       @media (max-width: 768px){
    text-align: center;
    margin-top: 0;
        }
        img{
-        @media (max-width: 767px){
+        @media (max-width: 768px){
          width: 86%;
         }}
   }
 }
-  .nav_open{
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    background-color: rgba($color: $color-dark-3xl, $alpha: 0.6);
-    }
-  .burger-logo__wrapper{
-  background-color: transparent;
-    &_open{
-    padding: 30px 10px 0 10px;
-    width: 320px;
-    background-color:$color-dark-3xl;
-    display: flex;
-    }
+  // .nav_open{
+  //   width: 100%;
+  //   height: 100vh;
+  //   position: fixed;
+  //   top: 0;
+  //   bottom: 0;
+  //   left: 0;
+  //   right: 0;
+  //   display: flex;
+  //   flex-direction: column;
+  //   align-items: flex-end;
+  //   background-color: rgba($color: $color-dark-3xl, $alpha: 0.6);
+  //   }
+  // .burger-logo__wrapper{
+  // background-color: transparent;
+  //   &_open{
+  //   padding: 30px 10px 0 10px;
+  //   width: 320px;
+  //   background-color:$color-dark-3xl;
+  //   display: flex;
+  //   }
    
-  }
-   .burger-logo_open{
-    padding-right: 35px;
-    h2{
-      @include fontHeader(3.2rem, 3.52rem, 0.1rem);
-      color: $color-primary;
-    }
-    p{
-      color: $color-light-xl;
-      @include fonttext(1.3rem, 1.5rem, 0.1rem)
-    }
+  // }
+  //  .burger-logo_open{
+  //   padding-right: 35px;
+  //   h2{
+  //     @include fontHeader(3.2rem, 3.52rem, 0.1rem);
+  //     color: $color-primary;
+  //   }
+  //   p{
+  //     color: $color-light-xl;
+  //     @include fonttext(1.3rem, 1.5rem, 0.1rem)
+  //   }
 
-   }
-   .burger-btn_open{
-    transform: rotate(90deg);
-    padding-top: 0;
-    padding-right: 0;
-    .span1, .span2, .span3{
-      background-color: $color-primary;
-    }
-   }
-   .header__nav_open{
-    background-color:$color-dark-3xl;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 320px;
-    align-items: center;
-   }
-   .header__nav-link_open{
-    @include fonttext(3rem, 4.12rem);
-    color: $color-light-s;
-    padding-bottom: 45px;
-    padding-left: 0;
-   }
+  //  }
+  //  .burger-btn_open{
+  //   transform: rotate(90deg);
+  //   padding-top: 0;
+  //   padding-right: 0;
+  //   .span1, .span2, .span3{
+  //     background-color: $color-primary;
+  //   }
+  //  }
+  //  .header__nav_open{
+  //   background-color:$color-dark-3xl;
+  //   display: flex;
+  //   flex-direction: column;
+  //   justify-content: center;
+  //   width: 320px;
+  //   align-items: center;
+  //  }
+  //  .header__nav-link_open{
+  //   @include fonttext(3rem, 4.12rem);
+  //   color: $color-light-s;
+  //   padding-bottom: 45px;
+  //   padding-left: 0;
+  //  }
 .header__nav-link_open_active{
   &:after{
     content: '';
@@ -815,6 +835,3 @@ header, main, footer{
   }
 }
 
-.fadeOut{
-  animation: fadeOut 7s easy;
-  }

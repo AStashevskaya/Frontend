@@ -32,6 +32,13 @@
         bottom: 0;
         background-color: rgba($color: $color-dark-3xl, $alpha: 0);
         transition: background-color .3s ease-in;
+        cursor: pointer;
+        &:hover{
+            .modal__close-btn{
+                background-color:  $color-primary-light;
+                border: solid 0.2rem $color-primary-light;
+            }
+        }
     }
     &__window{
         margin: 0 auto;
@@ -39,6 +46,12 @@
         transition: transform .3s ease-in;
         width: 1004px;
         padding-left: 52px;
+        &:hover{
+            .modal__close-btn{
+                background-color: transparent;
+                border: solid 0.2rem $color-primary;
+            }
+        }
         @media (max-width: 1279px){
             width: 735px;        
             // padding-left: 52px;
@@ -53,6 +66,48 @@
         display: flex;
         justify-content:flex-end;
         padding-right: 10px;
+        cursor: pointer;
+        &:hover{
+            .modal__close-btn{
+                background-color:  $color-primary-light;
+                border: solid 0.2rem $color-primary-light;
+            }
+        }
+    }
+ 
+    &__content-background{
+        padding-right: 52px;
+        background: transparent;
+        cursor: pointer;
+        &:hover{
+            .modal__close-btn{
+                background-color:  $color-primary-light;
+                border: solid 0.2rem $color-primary-light;
+            }
+        }
+        @media (max-width: 767px){
+            padding-right: 40px;
+        }
+    }
+    &__content{
+        box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
+        display: flex;
+        background-color: $color-light-s;
+        padding-top: 50px;
+        cursor: default;
+        &:hover{
+            .modal__close-btn{
+                background-color: transparent;
+                border: solid 0.2rem $color-primary;
+            }
+        }
+        @media (max-width: 1279px){
+       padding-top: 16px;
+       border-radius: 6px;
+            }
+            @media (max-width: 767px){
+                padding-top: 12px;
+            }
     }
     &__close-btn{
         @include roundLink;
@@ -62,27 +117,6 @@
         span{
          font-size: 22px;
         }
-    }
-    &__content-background{
-        padding-right: 52px;
-        background: transparent;
-        @media (max-width: 767px){
-            padding-right: 40px;
-        }
-    }
-    &__content{
-        box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
-        display: flex;
-        background-color: $color-light-s;
-     
-        padding-top: 50px;
-        @media (max-width: 1279px){
-       padding-top: 16px;
-       border-radius: 6px;
-            }
-            @media (max-width: 767px){
-                padding-top: 12px;
-            }
     }
     &__img{
         flex-basis: 59%;
@@ -106,9 +140,12 @@
     }
 
     
-    // &__text-content{
+    &__text-content{
+        @media (max-width: 767px){
+            width: 100%;
+        } 
 
-    // }
+    }
     }
 .text-content{
     color: #000;

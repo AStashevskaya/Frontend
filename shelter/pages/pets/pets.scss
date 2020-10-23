@@ -17,6 +17,14 @@ body{
         height: 100%;
      
     }
+    header{
+      position: fixed;
+      top: 0;
+      background-color: $color-light-xl;
+    }
+    main{
+      margin-top: 12rem;
+    }
  
   .header{
     &__wrapper{
@@ -27,7 +35,7 @@ body{
       @media (max-width: 1279px){
         padding: 3rem 3rem;
       }
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         padding: 3rem 1rem;
       }
     }
@@ -35,7 +43,7 @@ body{
       height: 100%;
       display: flex;
       align-items: center;
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         display: none;
       }
     }
@@ -70,20 +78,28 @@ body{
       &__logo{   
     flex-shrink: 0;
         h1{
-        @include fontHeader(3.2rem, 107%, 0.06em);
-        color: $color-dark-l;
-        padding-bottom: 1rem;
+           a{
+           @include fontHeader(3.2rem, 107%, 0.06em);
+            color: $color-dark-l;
+            } 
+          padding-bottom: 1rem;   
+         }
+      h1:hover{
+        cursor: pointer;
       }
       p{
-        @include fonttext(1.3rem, 1.95rem, 0.126rem);
+        a{
+           @include fonttext(1.3rem, 1.95rem, 0.126rem);
         color: $color-dark-xl;
-        padding-left: 4px;
+        }  
+         padding-left: 4px;
       }}
   }
   .burger-btn{
     display: none;
-    @media(max-width: 767px){
+    @media(max-width: 768px){
       display: block;
+      padding-bottom: 15px;
       padding-right: 44px;
     padding-top: 13.5px;
     cursor: pointer;
@@ -101,7 +117,7 @@ body{
     @media (max-width: 1279px){
       padding: 80px 1rem;
     }
-    @media (max-width: 767px){
+    @media (max-width: 768px){
       padding: 4.2rem 1rem;
     }
     &__heading{
@@ -109,7 +125,7 @@ body{
         @include fontHeader(3.5rem, 130%, 0.21rem);
         text-align: center;
         color:  $color-dark-l;
-        @media (max-width: 767px){
+        @media (max-width: 768px){
           @include fontHeader(2.5rem, 3.25rem, 0.15rem);
         }
       }
@@ -129,7 +145,7 @@ body{
         grid-template-columns: 270px 270px;
         justify-content: space-evenly;
       }
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         padding: 4.2rem 8%;
         grid-template-columns: auto 
       }
@@ -153,7 +169,7 @@ body{
            display: none;
          }
        }
-       @media (max-width: 767px){
+       @media (max-width: 768px){
         &:nth-child(1n + 4){
           display: none;
         }
@@ -193,7 +209,7 @@ body{
       width: 340px;
       display: flex;
       justify-content: space-between;
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         width: 300px;
       }
     }
@@ -228,7 +244,7 @@ body{
         padding: 3rem 3rem 0;
         justify-content: center;
       }
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         padding: 3rem 0 0;
         justify-content: center;
       }
@@ -252,7 +268,7 @@ body{
        @media (max-width: 1279px){
        margin-right: 5rem;
           }
-      @media (max-width: 767px){
+      @media (max-width: 768px){
             margin-right: 0;
           }
       }
@@ -265,7 +281,7 @@ body{
         }
         ul > li{
           padding-bottom: 36px;
-          @media(max-width: 767px){
+          @media(max-width: 768px){
             padding-bottom: 47px;
              justify-content: end;
              &:last-child{
@@ -284,7 +300,7 @@ body{
       line-height: 4.6rem;
       padding-top: 0;
          } 
-      @media (max-width: 767px){
+      @media (max-width: 768px){
         @include fontHeader(2.5rem, 3.25rem, 0.21rem);
         text-align: center;
       }
@@ -293,7 +309,7 @@ body{
     &__content-list > li{
       padding-bottom: 45px;
       display: flex;
-      @media (max-width: 767px){
+      @media (max-width: 768px){
        justify-content: space-around;
        padding-bottom: 42px;
       }
@@ -307,12 +323,12 @@ body{
       @media (max-width: 1279px){
         margin-top: 1.5rem;
          } 
-         @media (max-width: 767px){
+         @media (max-width: 768px){
      text-align: center;
      margin-top: 0;
          }
          img{
-          @media (max-width: 767px){
+          @media (max-width: 768px){
            width: 86%;
           }}
     }

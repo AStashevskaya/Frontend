@@ -1,34 +1,38 @@
 
 let width = document.documentElement.clientWidth
+console.log(fullpetsList)
 class PetsCatalog {
     constructor(width){
         this.pets = []
         this.container = '.pets-container__content'
-        this.pageWidth = width
+        this.pageWidth = this._getPageWidth()
         this.content = []
         this._getPets()
         //this.init()
     }
     _getPets(){
-        petsList.forEach(el => {
+        fullpetsList.forEach(el => {
             this.pets.push(new Pet (el))
-        })   
-         return this.pets.length === 48 ? this.init() : this._getPets()  
-      
+        }) 
+        this.init()  
+    }
+    _getPageWidth(){
+        return document.documentElement.clientWidth
     }
 
     init(){
+        this._getPageWidth()
         let n = this.getPetsCardsNumber()
         let k = +document.querySelector('.pagination__link_state').innerText
         this.content = this.pets.slice((k - 1)*n, k*n)
-        this.shuffle()
         this.render()
     }
     getPetsCardsNumber(){
+        this.pageWidth = this._getPageWidth()
         let n
-    if( this.pageWidth >= 1280){
+    if(  this.pageWidth >= 1280){
         n = 8
-     } else if (this.pageWidth >= 768 && this.pageWidth < 1280){
+     } else if ( this.pageWidth >= 768 &&  this.pageWidth < 1280){
         n = 6
      } else {
         n = 3
@@ -115,18 +119,44 @@ document.addEventListener('click', (event) => {
                         petsCatalog.init()
                     }   
         }
-        let cards = document.querySelectorAll('.pet-card')
-        if(cards.length === 8){
+        let currentWidth = document.documentElement.clientWidth
+        if(currentWidth >= 1280){
+            // petsCatalog.init()
             makeTemplate(6)
-        } else if (cards.length === 6){
+        } else if ( currentWidth >= 768 && currentWidth < 1280){
+            // petsCatalog.init()
             makeTemplate(8)
-        } else if (cards.length === 3){
+        } else if (currentWidth < 768){
+            // petsCatalog.init()
             makeTemplate(16)
         }
-    }
+    } else if (parentTagetDS.info || targetDS.info){
+        // console.log(event.target.dataset, event.target.parentNode.dataset)
+      event.preventDefault()
+      let name = targetDS.name || parentTagetDS.name 
+      const pet = petsCatalog.pets.find( el => el.name === name)
+      modal.setContent(`<div class="modal__content">
+      <div class="modal__img"><img src="${pet.img}" alt="pet ${pet.name}"></div>
+      <div class="modal__text-content">
+          <div class="text-content">
+              <h2 class="text-content__title">${pet.name}</h2>
+              <h3 class="text-content__subtitle">${pet.type} - ${pet.breed}</h3>
+              <p class="text-content__paragraph">${pet.description}</p>
+              <ul class="text-content__list">
+                  <li><strong>Age: </strong>${pet.age}</li>
+                  <li><strong>Inoculations: </strong>${pet.age}</li>
+                  <li><strong>Diseases: </strong>${pet.diseases}</li>
+                  <li><strong>Parasites: </strong>${pet.parasites}</li>
+              </ul>
+          </div>
+      </div>
+      </div>`)
+      modal.open()
+  }
 })
 function changeSize(){
     width = document.documentElement.clientWidth
     petsCatalog.pageWidth = width
     petsCatalog.init()
 }
+addEventListener('resize', changeSize())

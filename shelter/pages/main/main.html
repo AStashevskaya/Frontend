@@ -37,23 +37,27 @@
                     <ul class="header__nav">
                         <li><a href="#" class="header__nav-link 
                             header__nav-link_active
-                       ">About the shelter</a></li>
+                       ">About the shelter
+                    </a></li>
                         <li><a href="../pets/pets.html" class="header__nav-link 
-                           ">Our pets</a></li>
-                        <li><a href="#" class="header__nav-link
-                           ">Help the shelter</a></li>
-                        <li><a href="#" class="header__nav-link
-                           ">Contacts</a></li>
+                           ">Our pets
+                        </a></li>
+                        <li><a href="#" class="header__nav-link" data-disabled="true">
+                            Help the shelter
+                        </a></li>
+                        <li><a href="#" class="header__nav-link" data-disabled="true">
+                            Contacts
+                        </a></li>
                     </ul>
                 </nav>
             </div>    
             <div class="hamburger">
-                <div class="hamburger__overlay">
+                <div class="hamburger__overlay" data-burgerclose="true">
                     <div class="hamburger__menu">
                         <div class="burger-logo__wrapper ">
                             <div class="burger-logo ">
-                                <h2>Cozy House</h2>
-                                <p>Shelter for pets in Boston</p>
+                                <h2><a href="#"  data-disabled="true">Cozy House</a></h2>
+                                <p><a href="#" data-disabled="true" >Shelter for pets in Boston</a></p>
                             </div>
                                <div class="burger-btn_inside" data-burgerclose="true">
                             <div class="span1"></div>
@@ -66,9 +70,8 @@
                            ">About the shelter</a></li>
                             <li><a href="../pets/pets.html" class="hamburger__nav-link">Our pets</a></li>
                             <li><a href="#" class="hamburger__nav-link
-                               ">Help the shelter</a></li>
-                            <li><a href="#" class="hamburger__nav-link
-                               ">Contacts</a></li>
+                               " data-disabled="true">Help the shelter</a></li>
+                            <li><a href="#" class="hamburger__nav-link" data-disabled="true">Contacts</a></li>
                         </ul>
                     </div>
                 </div>
@@ -95,7 +98,7 @@
       <section class="about">
               <div class="wrapper"> 
                   <div class="about__wrapper">
-                    <div class="about__img"><img src="../../assets/images/about-pets.png" alt=""></div>
+                    <div class="about__img"><img src="../../assets/images/about-pets.png" alt="dog"></div>
               <div class="about__content">
                   <h2>About the shelter “Cozy House”</h2>
                   <p>Currently we have 121 dogs and 342 cats on our hands and statistics show that only 20% of them will find a family. The others will continue to live with us and will be waiting for a lucky chance to become dearly loved.</p>
@@ -109,11 +112,14 @@
           <div class="wrapper">
               <div class="pets__heading"><h2>Our friends who <br> are looking for a house</h2></div>
               <div class="pets__content-wrapper">
-                  <div class="pets__arrow left"><a href="#" class="arrow-link_active" data-sliderArrow="true"><img src="../../assets/icons/Arrow-left.svg" alt="arrow-left"></a></div>
+                  <div class="pets__arrow left"><a href="#" class="arrow-link_active" data-sliderarrowleft="true"><img src="../../assets/icons/Arrow-left.svg" alt="arrow-left"></a></div>
                   <div class="pets__content">
+                      <div class="pets__content-slide active">
+
+                      </div>
               </div>
               <div class="pets__arrow right">
-                <a href="#" class="arrow-link_active" data-sliderArrow="true"><img src="../../assets/icons/Arrow-right.svg" alt="arrow-right"></a>
+                <a href="#" class="arrow-link_active" data-sliderarrowright="true"><img src="../../assets/icons/Arrow-right.svg" alt="arrow-right"></a>
               </div>
               </div>
               <div class="pets__link">

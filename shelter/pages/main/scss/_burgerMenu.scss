@@ -8,6 +8,11 @@
     z-index: 1000;
 }
    &.open   &__overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
    background-color: rgba($color: $color-dark-3xl, $alpha: 0.6); 
 }
 &.open   &__menu{
@@ -19,17 +24,17 @@
 }
 &.hide   &__overlay{
   background-color: rgba($color: $color-dark-3xl, $alpha: 0);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }
 &.hide   &__menu{
   right: -330px;
 }
 
      &__overlay{
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
       display: flex;
       align-items: flex-end;
       background-color: rgba($color: $color-dark-3xl, $alpha: 0);
@@ -62,6 +67,11 @@
       &:hover{
         opacity: 1;
         }
+        &:nth-child(1n + 2){
+          &:hover{
+            opacity: 0.8;
+            }
+        }
 
      }
      &__nav-link_active{
@@ -80,7 +90,9 @@
     }
    }
    .burger-btn_inside{
-    transform: rotate(90deg);
+    //  animation: rotate .3s easy;
+    transform: rotate(0deg);
+    transition: transform .3s ease-in;
     padding-top: 0;
     padding-right: 0;
     cursor: pointer;
@@ -93,18 +105,30 @@
    }
    .burger-logo{
     padding-right: 35px;
-    h2{
+    h2{ 
+      a{
       @include fontHeader(3.2rem, 3.52rem, 0.1rem);
       color: $color-primary;
+      }
+      
     }
     p{
+      a{
       color: $color-light-xl;
       @include fonttext(1.3rem, 1.5rem, 0.1rem)
+      }
     }
-
    }
    .burger-logo__wrapper{
       padding: 30px 10px 0 10px;
       width: 320px;
       display: flex;  
     }
+    .open{
+      .burger-btn_inside{
+        transform: rotate(90deg);
+    }}
+    .hide{
+      .burger-btn_inside{
+        transform: rotate(-90deg);
+    }}
