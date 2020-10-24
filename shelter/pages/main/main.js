@@ -19,9 +19,20 @@ class Catalog {
      let html =  this.pets.reduce((accum, el) => accum+=el.render(), '')
      document.querySelector(this.container).innerHTML = html
     }
-    renderNewSlide(){
-      this.shuffle()
-      let html =  this.pets.reduce((accum, el) => accum+=el.render(), '')
+    renderNewSlide(counter){
+      // this.shuffle()
+      let html = ''
+      if(counter % 2){
+      for(let i = 0; i< 3; i++){
+        this.shuffle()
+        html += this.pets[i].render()
+      } 
+      } else {
+        for(let i = 3; i< 6; i++){
+          html += this.pets[i].render()
+        } 
+      }
+      // let html =  this.pets.reduce((accum, el) => accum+=el.render(), '')
       document.querySelector(this.newContainer).innerHTML = html
     }
     shuffle(){
@@ -30,8 +41,10 @@ class Catalog {
 }
 
 const catalog = new Catalog 
-
+// isChanging предотваразет нажате на стрелку пока анимация не закончилась
+//counter  необходим для хождения по массивуб чтобы каждые три карточки не повторялись
 let isChanging = false
+let counter = null
 document.addEventListener('click', (event) => {
   // let isChanging  = true
 const targetDS = event.target.dataset
@@ -63,6 +76,7 @@ const parentTagetDS = event.target.parentNode.dataset
       const ANIMATION_SPEED = 500
       const petsSliderContainer  = document.querySelector('.pets__content')
       const slide = document.querySelector('.active')
+
       if(targetDS.sliderarrowleft || parentTagetDS.sliderarrowleft ){
         event.preventDefault()
         if (isChanging) return
@@ -70,7 +84,8 @@ const parentTagetDS = event.target.parentNode.dataset
         const newSlide = document.createElement('div')
         petsSliderContainer.appendChild(newSlide)
         newSlide.classList.add('new-slide', 'pets__content-slide','putRight')
-        catalog.renderNewSlide() 
+        counter++
+        catalog.renderNewSlide(counter) 
         newSlide.classList.add('slideInRight')
         slide.classList.add('slideOutLeft')
         setTimeout(() => {
@@ -87,7 +102,8 @@ const parentTagetDS = event.target.parentNode.dataset
         const newSlide = document.createElement('div')
         petsSliderContainer.appendChild(newSlide)
         newSlide.classList.add('new-slide', 'pets__content-slide','putLeft')
-        catalog.renderNewSlide() 
+        counter++
+        catalog.renderNewSlide(counter) 
         newSlide.classList.add('slideInLeft')
         slide.classList.add('slideOutRight')
         setTimeout(() => {
