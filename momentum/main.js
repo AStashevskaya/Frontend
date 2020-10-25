@@ -21,14 +21,14 @@ function showTime(){
 //смотрим в локал сторэдж есть ли там какий-то данные по поводу нэйма или фокуса, если есть записываем их, если нет - дефолтные значения
 function showName(){
     if(localStorage.getItem('name') === null){
-        name.textContent = '[Enter your name, plz]'
+        name.textContent = '[Enter your name]'
     } else {
         name.textContent = localStorage.getItem('name')
     }
 }
 function showFocus (){
     if(localStorage.getItem('focus') === null){
-        focus.textContent = '[Enter your focus for today, plz]'
+        focus.textContent = '[Enter your focus for today]'
     } else {
         focus.textContent= localStorage.getItem('focus')
     }
@@ -105,7 +105,8 @@ function makeBackground(n){
     const body = document.querySelector('body')
     if(n){
         const src = `${imgUrl}${images[(hours + n) % images.length]}`    
-        body.style.backgroundImage = `url(${src})`  
+        body.style.backgroundImage = `url(assets/images/overlay.png), url(${src})`  
+        // body.style.transition = 'background-image 1s ease-in-out'
     }else{
     const src = `${imgUrl}${images[hours]}`    
     body.style.backgroundImage = `url(${src})`
@@ -123,7 +124,7 @@ btn.addEventListener('click', () =>{
  makeBackground(n)
  setTimeout(()=>{
      disabled = false
- }, 1000)
+ }, 500)
 })
 
 function showDay(){
@@ -206,31 +207,7 @@ let quatesList = []
          quoteAuthor.innerText = arr[index].author    
     }
  
-    // async function fetchQuates(url){
-    //     try{
-    //         const response = await fetch(url)
-    //         const data = await response.json()
-    //         console.log(data)
-    //         quatesList  = data.splice(0, 100)
-    //         showQuates(quatesList)
-         
-    //     } catch {
-    //         console.error()
-    //     }
-    // }
-    // async function fetchQuates(url){
-    //     try{
-    //         const response = await fetch(url)
-    //         const data = await response.json()
-    //         console.log(data)
-    //         quatesList  = data.splice(0, 100)
-    //         showQuates(quatesList)
-         
-    //     } catch {
-    //         console.error()
-    //     }
-   // }
-// fetchQuates (blaquatesUrl)
+    
 function getJson(url){
     return fetch(url)
             .then(data => data.json())
