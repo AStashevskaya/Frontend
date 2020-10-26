@@ -67,6 +67,7 @@
   @mixin inactiveLink {
     border: solid 0.2rem $color-dark-s;
     color: $color-dark-s;
+    cursor: default;
   }
   @mixin hide{
     display: none;
@@ -128,3 +129,10 @@
     0% {  transform: rotate(0);}
     100% { transform: rotate(90deg);}
   }
+  .disabled:hover{
+    opacity: .8 !important;
+    cursor: default;
+    } 
+    .antiscroll{
+      overflow: hidden;
+    }

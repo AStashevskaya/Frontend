@@ -19,7 +19,7 @@ header, main, footer{
       @media (max-width: 1279px){
         padding: 0 3rem;
       }
-      @media (max-width: 768px){
+      @media (max-width: 767px){
         padding: 0 1rem;
       } 
   }
@@ -36,7 +36,7 @@ header, main, footer{
 }
 .burger-btn{
   display: none;
-  @media(max-width: 768px){
+  @media(max-width: 767px){
     display: block;
     padding-right: 42px;
   padding-top: 13.5px;
@@ -66,7 +66,7 @@ header, main, footer{
     height: 100%;
     display: flex;
     align-items: center;
-    @media (max-width: 768px){
+    @media (max-width: 767px){
       display: none;
     }}
     &__nav-link{
@@ -80,7 +80,7 @@ header, main, footer{
         }
     }
     &__nav-link_active{
-      opacity: 1;
+      opacity: .8;
       color: $color-light-s;
       position: relative;
       &::after{
@@ -126,7 +126,7 @@ header, main, footer{
             padding-left: 17.5%;
             display: block;
           }
-          @media (max-width: 768px){
+          @media (max-width: 767px){
             padding-left: 1.5%;
           }
       }
@@ -142,16 +142,16 @@ header, main, footer{
             max-width: 79.5%;
             margin-bottom: 18%;
           }
-          @media (max-width: 768px){
+          @media (max-width: 767px){
             max-width: 100%;
-            margin-bottom: 36%;
+            margin-bottom: 105px;
           }
           h2{
             width: 310px;
             @include fontHeader(4.4rem, 130%);
             color: $color-light-xl;
             margin-bottom: 4.2rem;
-            @media (max-width: 768px){
+            @media (max-width: 767px){
               @include fontHeader(2.5rem, 3.25rem, 0.15rem);
               padding-left: 11%;
               width: 88%;
@@ -162,7 +162,7 @@ header, main, footer{
             @include fonttext(1.5rem, 160%);
             color: $color-dark-s;
             margin-bottom: 4.2rem;
-            @media (max-width: 768px){
+            @media (max-width: 767px){
               text-align: center;
             }
           }
@@ -204,7 +204,7 @@ header, main, footer{
   .about{ 
     padding: 80px 0 100px;
     background-color: $color-light-xl;
-    @media (max-width: 768px){
+    @media (max-width: 767px){
       padding: 40px 15px 40px;
        } 
     &__wrapper{
@@ -216,7 +216,7 @@ header, main, footer{
       padding-right: 20%;
       align-items: center;
       }
-      @media (max-width: 768px){
+      @media (max-width: 767px){
      padding: 0;
       } 
     }
@@ -227,7 +227,7 @@ header, main, footer{
         margin-top: 13%;
         padding-right: 0;
         }
-        @media (max-width: 768px){
+        @media (max-width: 767px){
         margin-top: 6%;
         padding-right: 0;
         max-width: 97%;
@@ -255,7 +255,7 @@ header, main, footer{
         @media (max-width: 1279px){
           margin-bottom: 6%;
           }
-          @media (max-width: 768px){
+          @media (max-width: 767px){
             @include fontHeader(2.5rem, 3.25rem, 0.15rem);
             padding-left: 0;
             max-width: 100%;
@@ -270,7 +270,7 @@ header, main, footer{
         @media (max-width: 1279px){
           margin-bottom: 6%;
           }
-          @media (max-width: 768px){
+          @media (max-width: 767px){
             text-align: justify;
             margin-bottom: 8%;
           } 
@@ -281,7 +281,7 @@ header, main, footer{
   .pets{
     background:  $color-light-l;
     padding: 80px 0 100px;
-    @media (max-width: 768px){
+    @media (max-width: 767px){
       padding: 45px 0 40px;
        } 
     &__heading{
@@ -289,7 +289,7 @@ header, main, footer{
         @include fontHeader(3.5rem, 130%, 0.21rem);
         text-align: center;
         color:  $color-dark-l;
-        @media (max-width: 768px){
+        @media (max-width: 767px){
           @include fontHeader(2.5rem, 3.25rem, 0.15rem);
           padding-left: 0;
           max-width: 100%;
@@ -301,7 +301,7 @@ header, main, footer{
     &__content-wrapper{
       display: flex;
       width: 100%;
-      @media (max-width: 768px){
+      @media (max-width: 767px){
         flex-wrap: wrap;
         justify-content: space-evenly;
         } 
@@ -326,7 +326,7 @@ header, main, footer{
         // justify-content: space-around;   
         margin: 8.4% -2%;
        } 
-       @media (max-width: 768px){
+       @media (max-width: 767px){
        justify-self: center;
        order: 1;
        flex-basis: 100%;
@@ -353,13 +353,13 @@ header, main, footer{
       z-index: 3;
       &.left{
         justify-self: flex-start;
-        @media (max-width: 768px){
+        @media (max-width: 767px){
           order: 2;
         } 
       }
       &.right{
         right: 0;
-        @media (max-width: 768px){
+        @media (max-width: 767px){
           order: 3;
         } 
       }
@@ -389,7 +389,7 @@ header, main, footer{
           background-color:  $color-primary-light;
         }
       }
-      @media (max-width: 768px){
+      @media (max-width: 767px){
         margin-top: 14%;
       } 
     }
@@ -398,7 +398,7 @@ header, main, footer{
     width: 270px;
     // width: 27.5%;
     //width: 330px;
-    // animation: fadeIn 7s easy;
+
      height: 435px;
      background-color: $color-light-s;
      border-radius: 9px;
@@ -409,6 +409,7 @@ header, main, footer{
         @include hide;
      }
      &:hover{
+      box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.04);
       .pet-card__text{
         background-color: $color-light-xl;
       }
@@ -457,7 +458,7 @@ header, main, footer{
   @media (max-width: 1279px){
     padding: 10.7% 0 10.5% ;
     }  
-    @media (max-width: 768px){
+    @media (max-width: 767px){
      padding: 13.8% 0 14%;
     } 
   &__heading{
@@ -472,7 +473,7 @@ header, main, footer{
     @media (max-width: 1279px){
       line-height: 4.45rem;
       } 
-      @media (max-width: 768px){
+      @media (max-width: 767px){
         @include fontHeader(2.5rem, 3.25rem, 0.15rem);
         padding-left: 0;
         max-width: 100%;
@@ -489,7 +490,7 @@ header, main, footer{
     align-items: baseline;
     :nth-child(even){
       padding: 0 11.5% 5% 11.6%;
-      @media (max-width: 768px){
+      @media (max-width: 767px){
      padding: 0;
        }}
     :nth-child(6){
@@ -503,7 +504,7 @@ header, main, footer{
     grid-gap: 37px 25px;
     padding: 0 3.3%;
     }
-    @media (max-width: 768px){
+    @media (max-width: 767px){
       grid-auto-columns: 130px;
       grid-auto-rows: 87px;
       grid-template-columns: auto auto;
@@ -517,20 +518,20 @@ header, main, footer{
       display: flex;
       flex-direction: column;
       align-items: center;// &:nth-child(6)
-      @media (max-width: 768px){
+      @media (max-width: 767px){
         height: 87px;
         width: 130px;
         justify-items: center;
       }
-      &:nth-child(5){
-        @media (max-width: 768px){
-          img{
-            margin-bottom: 24px;
-            width: 17%;
-          }
-          padding-top: 8px;
-         } 
-      }
+      // &:nth-child(5){
+      //   @media (max-width: 767px){
+      //     img{
+      //       margin-bottom: 24px;
+      //       width: 17%;
+      //     }
+      //     padding-top: 8px;
+      //    } 
+      // }
       // &:nth-child(7){
       //   @media (max-width: 767px){
       //     img{
@@ -540,7 +541,7 @@ header, main, footer{
       // }
       img{
         margin-bottom: 30px;
-        @media (max-width: 768px){
+        @media (max-width: 767px){
           margin-bottom: 23px;
           width: 38%;
          } 
@@ -550,7 +551,7 @@ header, main, footer{
         @include fontHeader(2rem, 2.3rem, 0.06em);
         color: $color-dark-l;
         width: max-content; 
-        @media (max-width: 768px){
+        @media (max-width: 767px){
         @include fontHeader(1.5rem, 1.65rem, 0.06em);
        } 
       }
@@ -566,7 +567,7 @@ header, main, footer{
   @media (max-width: 1279px){
     padding: 10.7% 0 12.7%;
     }  
-    @media (max-width: 768px){
+    @media (max-width: 767px){
       padding: 13% 0 11.7%;
     }
   &__content-wrapper{
@@ -575,7 +576,7 @@ header, main, footer{
     @media (max-width: 1279px){
     @include colomnFlex(center, column-reverse)
     }  
-    @media (max-width: 768px){
+    @media (max-width: 767px){
       padding: 0 3.4%;
     }
   }
@@ -585,7 +586,7 @@ header, main, footer{
       padding: 0;
       padding-left: 3%;
       } 
-      @media (max-width: 768px){
+      @media (max-width: 767px){
         width: 100%;
         text-align: center;
         img{
@@ -606,7 +607,7 @@ header, main, footer{
       align-self: center;
       margin-bottom: 6rem;
       }  
-      @media (max-width: 768px){
+      @media (max-width: 767px){
         width: 100%;
         margin-bottom: 15.5%;
       }
@@ -617,7 +618,7 @@ header, main, footer{
       @media (max-width: 1279px){
        margin-bottom: 2rem;
         }  
-        @media (max-width: 768px){
+        @media (max-width: 767px){
           @include fontHeader(2.5rem, 3.25rem, 0.15rem);
           max-width: 75%;
           text-align: center;
@@ -630,7 +631,7 @@ header, main, footer{
       @media (max-width: 1279px){
         margin-bottom: 2rem;
          } 
-      @media (max-width: 768px){
+      @media (max-width: 767px){
         @include fontHeader (1.5rem, 2.4rem);
         text-align: center;
       }
@@ -641,10 +642,14 @@ header, main, footer{
     background-color: $color-primary;
     padding: 1rem 0 0 1.5rem;
     border-radius: 9px;
+    cursor: pointer;
+    &:hover{
+      background-color: $color-primary-light;
+    }
     @media (max-width: 1279px){
       margin-bottom: 2rem;
        } 
-       @media (max-width: 768px){
+       @media (max-width: 767px){
         width: 281px;
       } 
     a {
@@ -652,7 +657,7 @@ header, main, footer{
       @include fontHeader(2rem, normal, 0.1rem);
       color: $color-dark-l;
       cursor: pointer;
-      @media (max-width: 768px){
+      @media (max-width: 767px){
         @include fontHeader(1.5rem, 2.65rem, 0.1rem);
       } 
     }
@@ -661,7 +666,7 @@ header, main, footer{
       @include fonttext(1.2rem, 1.9rem);// was 1.8rem
       font-style: italic;
       color: $color-dark-m;
-      @media (max-width: 768px){
+      @media (max-width: 767px){
         line-height: 1.8rem;
         text-align: justify;
       } 
@@ -677,7 +682,7 @@ header, main, footer{
       padding: 3rem 3rem 0;
       justify-content: center;
     }
-    @media (max-width: 768px){
+    @media (max-width: 767px){
       padding: 3rem 0 0;
       justify-content: center;
     }
@@ -701,7 +706,11 @@ header, main, footer{
      @media (max-width: 1279px){
      margin-right: 5rem;
         }
-    @media (max-width: 768px){
+        @media (max-width: 780px){
+          margin-right: 2rem;
+        }
+
+    @media (max-width: 767px){
           margin-right: 0;
         }
     }
@@ -710,14 +719,15 @@ header, main, footer{
      width: 302px;
      flex-shrink: 0;
       h3{
-        margin-bottom: 35px;
+        margin-bottom: 32px;
       }
       ul > li{
         padding-bottom: 36px;
-        @media(max-width: 768px){
+        @media(max-width: 767px){
           padding-bottom: 47px;
            justify-content: end;
            &:last-child{
+            justify-content: flex-start;
             padding-bottom: 37px;
           }
         }
@@ -742,7 +752,11 @@ header, main, footer{
   &__content-list > li{
     padding-bottom: 45px;
     display: flex;
-    @media (max-width: 768px){
+    align-items: flex-end;
+    &:last-child{
+      align-items: center;
+    }
+    @media (max-width: 767px){
      justify-content: space-around;
      padding-bottom: 42px;
     }
@@ -756,12 +770,12 @@ header, main, footer{
     @media (max-width: 1279px){
       margin-top: 1.5rem;
        } 
-       @media (max-width: 768px){
+       @media (max-width: 767px){
    text-align: center;
    margin-top: 0;
        }
        img{
-        @media (max-width: 768px){
+        @media (max-width: 767px){
          width: 86%;
         }}
   }

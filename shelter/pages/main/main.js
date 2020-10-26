@@ -1,10 +1,10 @@
 
 class Catalog {
     constructor(){
-        this.pets = []
-       this.container = '.active'
-       this.newContainer = '.new-slide'
-        this.init()
+      this.pets = []
+      this.container = '.active'
+      this.newContainer = '.new-slide'
+      this.init()
     }
     init(){
       if(this.pets.length === 0){
@@ -23,8 +23,8 @@ class Catalog {
       // this.shuffle()
       let html = ''
       if(counter % 2){
-      for(let i = 0; i< 3; i++){
         this.shuffle()
+      for(let i = 0; i< 3; i++){
         html += this.pets[i].render()
       } 
       } else {
