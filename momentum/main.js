@@ -69,7 +69,7 @@ function getTime (){
     if (hours >=6 && hours < 12 ){
     return 'morning'
     } else if (hours >= 12 &&  hours < 18){
-        return 'day'
+        return 'afternoon'
     } else if (hours >=18 && hours < 24){
         return 'evening'
     } else return 'night'
@@ -93,7 +93,7 @@ function getImagesForPeriod(period){
 function generateArrayOfImg(){
     getImagesForPeriod('night')
     getImagesForPeriod('morning')
-    getImagesForPeriod('day')
+    getImagesForPeriod('afternoon')
     getImagesForPeriod('evening')  
 }
 const imgUrl = 'assets/images/'
@@ -124,7 +124,7 @@ btn.addEventListener('click', () =>{
  makeBackground(n)
  setTimeout(()=>{
      disabled = false
- }, 500)
+ }, 2000)
 })
 
 function showDay(){
