@@ -38,6 +38,8 @@ header, main, footer{
   display: none;
   @media(max-width: 767px){
     display: block;
+    transform: rotate(0deg);
+    transition: transform .3s ease-in;
     padding-right: 42px;
   padding-top: 13.5px;
   padding-bottom: 15px;
@@ -378,7 +380,7 @@ header, main, footer{
       a{
         @include fontHeader(1.7rem, 133%, 0.07rem);
         text-align: center;
-        display: block;
+        @include centerFlex;
         color:  $color-dark-3xl;
         padding: 1.5rem  4.5rem;
         width: 261px;
