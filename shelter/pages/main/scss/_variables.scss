@@ -67,10 +67,72 @@
   @mixin inactiveLink {
     border: solid 0.2rem $color-dark-s;
     color: $color-dark-s;
+    cursor: default;
   }
   @mixin hide{
     display: none;
   }
+  .hidden{
+    display: none;
+  }
+
+   @keyframes animateInLeft {
+    0% {  transform: translateX(-100%);}
+    100% { transform: translateX(0%);}
+  }
+  @keyframes animateInRight {
+    0% {  transform: translateX(100%);}
+    100% { transform: translateX(0%);}
+  }
+  @keyframes animateOutLeft {
+    0% {  transform: translateX(0%);}
+    100% { transform: translateX(-100%);}
+  }
+  @keyframes animateOutRight {
+    0% {  transform: translateX(0%);}
+    100% { transform: translateX(100%);}
+  }
+  .slideInLeft{
+    animation-name: animateInLeft;
+    z-index: 100;
+  }
+  .slideInRight{
+    animation-name: animateInRight;
+    z-index: 100;
+  }
+  .slideOutRight{
+    animation-name: animateOutRight;
+    transform: translateX(100%);
+   z-index: 100;
+  }
+  .slideOutLeft{
+    animation-name: animateOutLeft;
+   transform: translateX(-100%);
+    z-index: 100;
+  }
+  .putRight{
+    // animation-name: animateOutRight;
+     transform: translateX(100%);
+   //  z-index: 100;
+   }
+   .putLeft{
+    // animation-name: animateOutLeft;
+    transform: translateX(-100%);
+   //  z-index: 100;
+   }
+  .active{
+    z-index: 1000;
+  }
+
   
-  
-  
+  @keyframes rotate {
+    0% {  transform: rotate(0);}
+    100% { transform: rotate(90deg);}
+  }
+  .disabled:hover{
+    opacity: .8 !important;
+    cursor: default;
+    } 
+    .antiscroll{
+      overflow: hidden;
+    }
