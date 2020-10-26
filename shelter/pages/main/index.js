@@ -153,20 +153,23 @@ document.addEventListener('click', (event) => {
     let closing = false
     if(event.target.dataset.burgeropen || event.target.parentNode.dataset.burgeropen){
          !closing && burgerMenu.classList.add('open')
-         document.body.classList.add('antiscroll')
-        //  document.body.style.height = '100vh'
-        //  document.body.style.overflow = 'hidden'
+        //  document.body.classList.add('antiscroll')
+         document.body.style.height = '100vh'
+         document.body.style.overflow = 'hidden'
+         document.querySelector('.burger-btn').style.transform = 'rotate(90deg)'
+
     } else if(event.target.dataset.burgerclose || event.target.parentNode.dataset.burgerclose){
         const ANIMATION_SPEED = 300
         closing = true
         burgerMenu.classList.remove('open')
         burgerMenu.classList.add('hide')
+        document.querySelector('.burger-btn').style.transform = 'rotate(0deg)'
         setTimeout(()=> {
             burgerMenu.classList.remove('hide')
             closing = false
-            document.body.classList.remove('antiscroll')
-            // document.body.style.height = '100%'
-            // document.body.style.overflow = 'scroll'
+            // document.body.classList.remove('antiscroll')
+            document.body.style.height = '100%'
+            document.body.style.overflow = 'scroll'
         }, ANIMATION_SPEED)
     } else if (event.target.dataset.disabled){
       event.preventDefault()

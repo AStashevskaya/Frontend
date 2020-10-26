@@ -82,7 +82,7 @@
    }
    .burger-btn_inside{
     //  animation: rotate .3s easy;
-    transform: rotate(0deg);
+    transform: rotate(90deg);
     transition: transform .3s ease-in;
     padding-top: 0;
     padding-right: 0;
@@ -115,10 +115,10 @@
       width: 320px;
       display: flex;  
     }
-    .open{
-      .burger-btn_inside{
-        transform: rotate(90deg);
-    }}
+    // .open{
+    //   .burger-btn_inside{
+    //     transform: rotate(90deg);
+    // }}
     .hide{
       .burger-btn_inside{
         transform: rotate(-90deg);

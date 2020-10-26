@@ -11,7 +11,7 @@
         background-color: rgba($color: $color-dark-3xl, $alpha: 0.6);
     }
     &.open   &__window{
-        transform: translateY(calc(10%));
+        transform: translateY(15%);
     }
     &.hide  &__overlay,  &__window{
         opacity: 1;
