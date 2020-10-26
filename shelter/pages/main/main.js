@@ -61,10 +61,10 @@ const parentTagetDS = event.target.parentNode.dataset
                 <h3 class="text-content__subtitle">${pet.type} - ${pet.breed}</h3>
                 <p class="text-content__paragraph">${pet.description}</p>
                 <ul class="text-content__list">
-                    <li><strong>Age:</strong>${pet.age}</li>
-                    <li><strong>Inoculations:</strong>${pet.age}</li>
-                    <li><strong>Diseases:</strong>${pet.diseases}</li>
-                    <li><strong>Parasites:</strong>${pet.parasites}</li>
+                    <li><strong>Age:</strong> ${pet.age}</li>
+                    <li><strong>Inoculations:</strong> ${pet.age}</li>
+                    <li><strong>Diseases:</strong> ${pet.diseases}</li>
+                    <li><strong>Parasites:</strong> ${pet.parasites}</li>
                 </ul>
             </div>
         </div>
