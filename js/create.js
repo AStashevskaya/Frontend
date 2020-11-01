@@ -16,7 +16,6 @@ function create (el, classNames, children, parent, ...attr){
     if(parent){
         parent.appendChild(element)
     }
-    /// передача аттрибутов для элемента, путем деструктуризациипроходим по каждому элементу массива
     if(attr.length){
         attr.forEach(([attrName, attrValue]) => {
             // для атрибуттов, которые идут без знака =
