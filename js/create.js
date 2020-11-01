@@ -1,10 +1,10 @@
-export function create (el, classNames, children, parent, ...attr){
+function create (el, classNames, children, parent, ...attr){
     let element = null
     if(el){
        element = document.createElement(el)
     }
     if (classNames){
-      element.classlist.add(...classNames.split(' '))
+      element.classList.add(...classNames.split(' ')) 
     } 
     if (children && Array.isArray(children)){
         children.forEach(child => child && element.appendChild(child))    
