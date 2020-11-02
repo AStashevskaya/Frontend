@@ -48,7 +48,8 @@ class Keyboard{
     }
     prehandler = (e) =>{
         console.log(e)
-        const code = e.target.parentNode.dataset.code
+        const parent = e.target.parentNode
+        const code = e.target.parentNode.dataset.code || parent.parentNode.dataset.code
         this.handlerEvent({code, type: e.type})
     }
     handlerEvent = (e) => {
@@ -80,11 +81,9 @@ class Keyboard{
             } 
             // flag sound 
             if(code === 'AltRight' && !this.soundKey){
-                this.soundKey = true
-                keyObj.letter.textContent = 'Sound Off'   
+                this.soundKey = true 
             } else if (code === 'AltRight' && this.soundKey){
                 this.soundKey = false
-                keyObj.letter.textContent = 'Sound On'   
                 keyObj.wrap.classList.remove('active')
             }
             // flag speach
@@ -149,12 +148,7 @@ class Keyboard{
             } else {
                 button.sub.innerHTML = ''
             }
-            if(button.small === 'Sound On' && this.soundKey){
-                button.letter.innerHTML = 'Sound Off' 
-            } else{
-                 button.letter.innerHTML = button.small
-            }
-           
+        button.letter.innerHTML = button.small    
         })
         this.changeUpperCase()
     }
@@ -256,7 +250,7 @@ class Keyboard{
         if(arrComands.find(el => el === keyObj.code)){
             fnButtonsMethods[keyObj.code]()
         } else {
-            if(!smbl || smbl.match(/Alt|Ctrl|Caps|En|Ru|Shift|Sound|mikr|Микр/)) return
+            if(!smbl || smbl.match(/Alt|Ctrl|Caps|En|Ru|Shift|Sound|mikr|Микр|span/)) return
             this.output.value = `${left +=smbl +=right}` 
             cursorPosition +=1
         }

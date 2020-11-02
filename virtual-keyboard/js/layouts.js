@@ -67,17 +67,23 @@ const language = {
           code: 'Equal',
         },
         {
-          small: 'Backspace',
+          small: `<span class="material-icons">
+          backspace
+          </span>`,
           shift: null,
           code: 'Backspace',
         },
         {
-          small: 'Delete',
+          small: `<span class="material-icons hidden-icons">
+          close
+          </span><span class="hidden-letters">Delete</span>`,
           shift: null,
           code: 'Delete',
         },
         {
-          small: 'Ru',
+          small: `<span class="material-icons">
+          language
+          </span><br><span class="hidden-letters">Ru</span>`,
           shift: null,
           code: 'Tab',
         },
@@ -142,12 +148,16 @@ const language = {
           code: 'BracketRight',
         },
         {
-          small: 'Enter',
+          small: `<span class="material-icons hidden-icons">
+          keyboard_return
+          </span><span class="hidden-letters">Enter</span>`,
           shift: null,
           code: 'Enter',
         },
         {
-          small: 'CapsLock',
+          small: `<span class="material-icons hidden-icons">
+          keyboard_capslock
+          </span><span class="hidden-letters">CapsLock</span>`,
           shift: null,
           code: 'CapsLock',
         },
@@ -292,7 +302,9 @@ const language = {
           code: 'Space',
         },
         {
-          small: 'Sound On',
+          small: `<span class="material-icons">
+          volume_mute
+          </span>`,
           shift: null,
           code: 'AltRight',
         },
@@ -322,14 +334,18 @@ const language = {
           code: 'ArrowRight',
         },
         {
-          small: 'mikr',
+          small: `<span class="material-icons">
+          mic
+          </span>`,
           shift: null,
           code: 'MetaLeft',
         },
       ],
       ru:  [
         {
-          small: 'CapsLock',
+          small: `<span class="material-icons hidden-icons">
+          keyboard_capslock
+          </span><span class="hidden-letters">CapsLock</span>`,
           shift: null,
           code: 'CapsLock',
         },
@@ -399,17 +415,23 @@ const language = {
           code: 'Equal',
         },
         {
-          small: 'Backspace',
+          small: `<span class="material-icons">
+          backspace
+          </span>`,
           shift: null,
           code: 'Backspace',
         },
         {
-          small: 'Delete',
+          small:  `<span class="material-icons hidden-icons">
+          close
+          </span><span class="hidden-letters">Delete</span>`,
           shift: null,
           code: 'Delete',
         },
         {
-          small: 'En',
+          small: `<span class="material-icons">
+          language
+          </span><br><span class="hidden-letters">En</span>`,
           shift: null,
           code: 'Tab',
         },
@@ -474,7 +496,9 @@ const language = {
           code: 'BracketRight',
         },
         {
-          small: 'Enter',
+          small:  `<span class="material-icons hidden-icons">
+          keyboard_return
+          </span><span class="hidden-letters">Enter</span>`,
           shift: null,
           code: 'Enter',
         },
@@ -619,7 +643,9 @@ const language = {
           code: 'Space',
         },
         {
-          small: 'Sound On',
+          small: `<span class="material-icons">
+          volume_mute
+          </span>`,
           shift: null,
           code: 'AltRight',
         },
@@ -649,7 +675,9 @@ const language = {
           code: 'ArrowRight',
         },
         {
-          small: 'Микр',
+          small: `<span class="material-icons">
+          mic
+          </span>`,
           shift: null,
           code: 'MetaLeft',
         },
