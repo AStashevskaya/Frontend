@@ -1,5 +1,14 @@
 const main = create('main', '', create('button', 'btn', 'click Here', null, ['on', true]))
+// create ('audio', '', null, null, ['src', '../sounds/backspace.wav'], ['code', "Backspace"]),
+// create ('audio', '', null, null, ['src', '../sounds/enter.mp3'], ['code', "Enter"]),
+// create ('audio', '', null, null, ['src', '../sounds/english.mp3'], ['code', "en"]),
+// create ('audio', '', null, null, ['src', '../sounds/russian.mp3'], ['code', "ru"]),
+// create ('audio', '', null, null, ['src', '../sounds/shift.mp3'], ['code', "ShiftRight"]),
+// create ('audio', '', null, null, ['src', '../sounds/shift.mp3'], ['code', "ShiftLeft"]),
+// create ('audio', '', null, null, ['src', '../sounds/CapsLock.mp3'], ['code', "CapsLock"]),
+// create ('audio', '', null, null, ['src', '../sounds/space.wav'], ['code', "Space"]),
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
+const recognition = new SpeechRecognition()
 class Keyboard{
     constructor(rowsOrder){
         this.rowsOrder = rowsOrder 
@@ -253,9 +262,7 @@ class Keyboard{
         }
         this.output.setSelectionRange(cursorPosition, cursorPosition)
     }
-    soundRecognation(on = true){
-
-        const recognition = new SpeechRecognition()
+    soundRecognation(on){
         recognition.interimResults = true;
         recognition.lang = this.container.dataset.language === 'ru' ? 'ru-RU' : 'en-US'
         recognition.addEventListener('result', e => {
@@ -264,14 +271,14 @@ class Keyboard{
               .map(result => result.transcript)
               .join('')
               console.log(transcript)
-              this.output.value = transcript
+            this.output.value = transcript
             })
             if(on){
-            recognition.addEventListener('end', recognition.start);
-              recognition.start();   
+            recognition.addEventListener('end', recognition.start)
+              recognition.start()   
             } else{
-            recognition.removeEventListener('end', recognition.start);
-            recognition.stop();    
+            recognition.removeEventListener('end', recognition.start)
+            recognition.stop()  
             }  
     }
     
