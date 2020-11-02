@@ -24,7 +24,7 @@ function create (el, classNames, children, parent, ...attr){
             element.setAttribute(attrName, '')
         }
         // для аттрибутов, которые соответствуют аттрибутам в списке
-        if(attrName.match(/value|id|placeholder|row|col|autocorrect|spellcheck/)){
+        if(attrName.match(/value|id|placeholder|row|col|autocorrect|spellcheck|src/)){
             element.setAttribute(attrName, attrValue)
         } else {
             element.dataset[attrName] = attrValue //для дата аттрибутов
