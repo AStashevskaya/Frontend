@@ -1,4 +1,5 @@
-const main = create('main', '', create('button', 'btn', 'click Here', null, ['on', true]));
+const main = create('main', '', create('button', 'btn', 'click Here', null, ['on', true]))
+window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 class Keyboard{
     constructor(rowsOrder){
         this.rowsOrder = rowsOrder 
@@ -59,6 +60,7 @@ class Keyboard{
                 this.shiftKey = true
                 this.changeUpperCase()
             } 
+            // flag Caps
             if(code === 'CapsLock' && !this.capsKey ){
                 this.capsKey = true
                 this.changeUpperCase()
@@ -66,13 +68,25 @@ class Keyboard{
                 this.capsKey = false
                 keyObj.wrap.classList.remove('active')
                 this.changeUpperCase()
-            }  
+            } 
+            // flag sound 
             if(code === 'AltRight' && !this.soundKey){
                 this.soundKey = true
                 keyObj.letter.textContent = 'Sound Off'   
             } else if (code === 'AltRight' && this.soundKey){
                 this.soundKey = false
                 keyObj.letter.textContent = 'Sound On'   
+                keyObj.wrap.classList.remove('active')
+            }
+            // flag speach
+            if (code === 'MetaLeft' && !this.speachKey){
+                this.speachKey = true
+                this.output.dataset.spellcheck = true
+                this.soundRecognation(this.speachKey)
+            } else if (code === 'MetaLeft' && this.speachKey){
+                this.speachKey = false
+                this.output.dataset.spellcheck = false
+                this.soundRecognation(this.speachKey)
                 keyObj.wrap.classList.remove('active')
             }
             if(this.soundKey){
@@ -82,7 +96,6 @@ class Keyboard{
                 audio.currentTime = 0
                 audio.play()
             }
-    
                if (!this.capsKey) {
                 this.printToOutput(keyObj, this.shiftKey ? keyObj.shift : keyObj.small);
               } else if (this.capsKey) {
@@ -98,7 +111,7 @@ class Keyboard{
             if (code.match(/Shift/) && this.ctrlKey) this.switchLanguage()
         }
         }else if (type === 'keyup' || type === 'mouseup'){
-            if(code === 'CapsLock' || code === 'AltRight') return
+            if(code === 'CapsLock' || code === 'AltRight' || code === 'MetaLeft') return
             keyObj.wrap.classList.remove('active')
             if (code.match(/Control/)) this.ctrlKey = false
             if (code.match(/Shift/)){
@@ -234,10 +247,32 @@ class Keyboard{
         if(arrComands.find(el => el === keyObj.code)){
             fnButtonsMethods[keyObj.code]()
         } else {
-            if(!smbl || smbl.match(/Alt|Ctrl|Caps|En|Ru|Shift|Sound/)) return
+            if(!smbl || smbl.match(/Alt|Ctrl|Caps|En|Ru|Shift|Sound|mikr|Микр/)) return
             this.output.value = `${left +=smbl +=right}` 
             cursorPosition +=1
         }
-        this.output.setSelectionRange(cursorPosition, cursorPosition);
+        this.output.setSelectionRange(cursorPosition, cursorPosition)
     }
+    soundRecognation(on = true){
+
+        const recognition = new SpeechRecognition()
+        recognition.interimResults = true;
+        recognition.lang = this.container.dataset.language === 'ru' ? 'ru-RU' : 'en-US'
+        recognition.addEventListener('result', e => {
+            const transcript = Array.from(e.results)
+              .map(result => result[0])
+              .map(result => result.transcript)
+              .join('')
+              console.log(transcript)
+              this.output.value = transcript
+            })
+            if(on){
+            recognition.addEventListener('end', recognition.start);
+              recognition.start();   
+            } else{
+            recognition.removeEventListener('end', recognition.start);
+            recognition.stop();    
+            }  
+    }
+    
 }

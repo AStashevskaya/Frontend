@@ -4,7 +4,7 @@ class Key {
         this.small = small
         this.shift =  shift
         this.code = code
-        this.isFnKey = Boolean(small.match(/Ctrl|arr|Alt|Shift|Tab|Back|Del|Enter|Caps|En|Ru|MetaLeft|Sound/));
+        this.isFnKey = Boolean(small.match(/Ctrl|arr|Alt|Shift|Tab|Back|Del|Enter|Caps|En|Ru|MetaLeft|Sound|mikr|Микр/));
         // this.isFnKey = this.small.length > 1 ? true : false
 
 //мы создаем саб - это то что например на цифрах сверху, то есть то что у нас будет отражаться при замене клавиши на шифт
