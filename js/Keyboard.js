@@ -67,21 +67,6 @@ class Keyboard{
                 keyObj.wrap.classList.remove('active')
                 this.changeUpperCase()
             }  
-            if(code === 'AltRight' && !this.soundKey){
-                this.soundKey = true
-                keyObj.letter.textContent = 'Sound Off'   
-            } else if (code === 'AltRight' && this.soundKey){
-                this.soundKey = false
-                keyObj.letter.textContent = 'Sound On'   
-                keyObj.wrap.classList.remove('active')
-            }
-            if(this.soundKey){
-                const audios = Array.from(document.querySelectorAll('audio'))
-                let audio = audios.find(el => el.dataset.code === code) ||  audios.find(el => el.dataset.code === this.container.dataset.language)
-                if(!audio)return
-                audio.currentTime = 0
-                audio.play()
-            }
     
                if (!this.capsKey) {
                 this.printToOutput(keyObj, this.shiftKey ? keyObj.shift : keyObj.small);
@@ -98,7 +83,7 @@ class Keyboard{
             if (code.match(/Shift/) && this.ctrlKey) this.switchLanguage()
         }
         }else if (type === 'keyup' || type === 'mouseup'){
-            if(code === 'CapsLock' || code === 'AltRight') return
+            if(code === 'CapsLock') return
             keyObj.wrap.classList.remove('active')
             if (code.match(/Control/)) this.ctrlKey = false
             if (code.match(/Shift/)){
@@ -127,12 +112,7 @@ class Keyboard{
             } else {
                 button.sub.innerHTML = ''
             }
-            if(button.small === 'Sound On' && this.soundKey){
-                button.letter.innerHTML = 'Sound Off' 
-            } else{
-                 button.letter.innerHTML = button.small
-            }
-           
+            button.letter.innerHTML = button.small
         })
         this.changeUpperCase()
     }

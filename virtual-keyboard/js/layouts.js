@@ -292,7 +292,7 @@ const language = {
           code: 'Space',
         },
         {
-          small: 'Alt',
+          small: 'Sound On',
           shift: null,
           code: 'AltRight',
         },
@@ -619,7 +619,7 @@ const language = {
           code: 'Space',
         },
         {
-          small: 'Alt',
+          small: 'Sound On',
           shift: null,
           code: 'AltRight',
         },
