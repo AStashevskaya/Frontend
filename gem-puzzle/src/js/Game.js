@@ -23,7 +23,7 @@ class Game {
         this.init()
     }
     init(){
-        let game  = new GameField(this.image)
+        let game  = new GameField()
             // const stateButton = create('button', 'state-btn', 'play', this.container),
             //   settings = create('a', 'settings-btn', 'settings', this.container),
             //   time = create('div', 'time', `Time: ${this.count}`, this.container),
@@ -33,9 +33,11 @@ class Game {
               settings = create('a', 'settings-btn', 'settings'),
               time = create('div', 'time', `Time: ${this.count}`),
               moves = create('div', 'move', `Moves: ${game.moves}`)
+         
               this.container.appendChild(stateButton)
               this.container.appendChild(resetButton)
               this.container.appendChild(settings)
+              this.formRender()
               this.container.appendChild(time)
               this.container.appendChild(moves)
 
@@ -54,6 +56,20 @@ class Game {
               resetButton.addEventListener('click', () => {
               game.reset()
               })  
+    }
+    formRender(){
+      const form = create('form', 'form')
+      form.innerHTML = `
+      <label for="size">
+          <input type="radio" name="size" id="input" value="3"> 3 X 3
+      </label>
+      <label for="size">
+          <input type="radio" name="size" id="input" value="4" checked> 4 X 4
+      </label>
+      <label for="size">
+          <input type="radio" name="size" id="input" value="6"> 6 X 6
+      </label>`
+      this.container.appendChild(form)
     }
     tick =() => {  
         this.count++

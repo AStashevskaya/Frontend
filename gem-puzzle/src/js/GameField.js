@@ -16,28 +16,28 @@ export default class GameField{
         this.count = 0
         this.moves = 0
         this.q = 4
+        this.prevQ = null
         this.init()
     }
  
     init(){
         main.appendChild(this.container)
-        for(let i = 0; i < 15; i++){
-            const left = i % 4
-            const top = (i - left)/ 4
-            const ind = i+1 
-            const image = this.image
-            this.correctTemplate.push(new FieldCell({left, top, ind, image}))
-        }
-        console.log(this.correctTemplate)
-        // this.correctTemplate.push(new EmptyCell(this.q, this.image))
-        // const left = i % 4
-        // const top = (i - left)/ 4
-        // const ind = i+1 
-        // const image = this.image
-        this.correctTemplate.push(new EmptyCell({left: this.q-1 , top: this.q - 1, ind: '', image: this.image}))
-        this.correctTemplate.forEach(el => el.getPos())
+        this.makeCorrectTemplate()
         console.log(this.correctTemplate)
         this.shuffle()
+    }
+    makeCorrectTemplate(){
+        this.container.style.backgroundImage = `url(assets/images/${this.image})`
+        for(let i = 0; i < Math.pow(this.q, 2) - 1; i++){
+            const left = i % this.q
+            const top = (i - left)/ this.q
+            const ind = i+1 
+            const image = this.image
+            const q = this.q
+            this.correctTemplate.push(new FieldCell({left, top, ind, image, q}))
+        }
+        this.correctTemplate.push(new EmptyCell({left: this.q-1 , top: this.q - 1, ind: '', image: this.image, q: this.q}))
+        this.correctTemplate.forEach(el => el.getPos())
     }
     render(){
         this.buttons.forEach(obj => {
@@ -50,21 +50,24 @@ export default class GameField{
         let arr = [...this.correctTemplate]
         let empty =  arr.pop()
         this.buttons = []
-        const numbers = [...Array(15).keys()]
+        const numbers = [...Array(Math.pow(this.q, 2) - 1).keys()]
         .sort(() => Math.random() - 0.5)
         .map(el => el + 1)
-        for(let i = 0; i < 15; i++){
-            const left = i % 4
-            const top = (i - left)/ 4
+        for(let i = 0; i < Math.pow(this.q, 2) - 1; i++){
+            const left = i % this.q
+            const top = (i - left)/ this.q
             const ind = numbers[i]
             const image = this.image
+            const q = this.q
             const correctBtn = this.correctTemplate.find(el => el.ind === ind)
-            const field = new FieldCell({left, top, ind, image})
+            const field = new FieldCell({left, top, ind, image, q})
             const obj = Object.create(field)
             obj.bgPosX = correctBtn.bgPosX
             obj.bgPosY = correctBtn.bgPosY
             this.buttons.push(obj)
         }
+        empty = new EmptyCell({left: this.q-1 , top: this.q - 1, ind: '', image: this.image, q: this.q})
+        empty.getPos()
         this.buttons.push(empty)
         console.log(this.buttons)
         this.render()
@@ -76,6 +79,9 @@ export default class GameField{
       }
       reset(){
           this.image = this._getImage(images)
+          this.prevQ = this.q
+          this.q = this._checkSize()
+          if(this.q !== this.prevQ)  this.makeCorrectTemplate()
           const children = [...this.container.children]
           children.forEach(el => {
               el.addEventListener('click' , this.moveButton)
@@ -86,6 +92,7 @@ export default class GameField{
           this.moves = 0  
           document.querySelector('.move').innerHTML = `Moves: ${this.moves}`
           part.count = 0
+          console.log(this.q)
       }
     moveButton = (e) => {
        if(part.state === 'pause') return
@@ -125,4 +132,7 @@ export default class GameField{
         emptyObj.container.style.opacity = '1'
         alert('вы победили')
     }  
+    _checkSize(){
+      return +document.querySelector('input[name=size]:checked').value
+    }
 }
