@@ -17,20 +17,20 @@ export default function create (el, classNames, children, parent, ...attr){
         // parent.appendChild(element)
     }
     /////
-    if(attr.length){
-        let arr = Array.from(attr)
-        arr.forEach(([attrName, attrValue]) => {
-            // для атрибуттов, которые идут без знака =
-        if(attrValue === ''){
-            element.setAttribute(attrName, '')
-        }
-        // для аттрибутов, которые соответствуют аттрибутам в списке
-        if(attrName.match(/value|id|type|row|col|name|src/)){
-            element.setAttribute(attrName, attrValue)
-        } else {
-            element.dataset[attrName] = attrValue //для дата аттрибутов
-        }
-        })
-    }
+    // if(attr.length){
+    //     let arr = Array.from(attr)
+    //     arr.forEach(([attrName, attrValue]) => {
+    //         // для атрибуттов, которые идут без знака =
+    //     if(attrValue === ''){
+    //         element.setAttribute(attrName, '')
+    //     }
+    //     // для аттрибутов, которые соответствуют аттрибутам в списке
+    //     if(attrName.match(/value|id|type|row|col|name|src/)){
+    //         element.setAttribute(attrName, attrValue)
+    //     } else {
+    //         element.dataset[attrName] = attrValue //для дата аттрибутов
+    //     }
+    //     })
+    // }
     return element
 }

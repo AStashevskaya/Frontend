@@ -13,6 +13,7 @@ export default class GameField{
         this.image = this._getImage(images)
         this.correctTemplate = []
         this.container = create('div', 'gamefield')
+        this.overlay = create('span', 'overlay')
         this.count = 0
         this.moves = 0
         this.q = 4
@@ -22,12 +23,14 @@ export default class GameField{
  
     init(){
         main.appendChild(this.container)
+        this.container.appendChild(this.overlay)
         this.makeCorrectTemplate()
         console.log(this.correctTemplate)
-        this.shuffle()
+        // this.shuffle()
+        this.render(this.correctTemplate)
     }
     makeCorrectTemplate(){
-        this.container.style.backgroundImage = `url(assets/images/${this.image})`
+        // this.container.style.backgroundImage = `url(assets/images/${this.image})`
         for(let i = 0; i < Math.pow(this.q, 2) - 1; i++){
             const left = i % this.q
             const top = (i - left)/ this.q
@@ -39,8 +42,8 @@ export default class GameField{
         this.correctTemplate.push(new EmptyCell({left: this.q-1 , top: this.q - 1, ind: '', image: this.image, q: this.q}))
         this.correctTemplate.forEach(el => el.getPos())
     }
-    render(){
-        this.buttons.forEach(obj => {
+    render(arr){
+        arr.forEach(obj => {
         const el = obj.render()
         el.addEventListener('click' , this.moveButton)
         this.container.appendChild(el)
@@ -70,7 +73,7 @@ export default class GameField{
         empty.getPos()
         this.buttons.push(empty)
         console.log(this.buttons)
-        this.render()
+        this.render(this.buttons)
     }
     _getImage(arr){
         const ind = Math.floor(Math.random()*arr.length)
@@ -84,8 +87,11 @@ export default class GameField{
           if(this.q !== this.prevQ)  this.makeCorrectTemplate()
           const children = [...this.container.children]
           children.forEach(el => {
-              el.addEventListener('click' , this.moveButton)
-              this.container.removeChild(el)})
+              if(el.classList.length < 2){
+              el.removeEventListener('click' , this.moveButton)
+              this.container.removeChild(el)
+              }
+             })
           setTimeout(() => {
             this.shuffle()
           }, 0)
@@ -121,7 +127,6 @@ export default class GameField{
             const ind = i+1
             const correctObj = this.correctTemplate.find(el => el.ind === ind)
             const currentObj = this.buttons.find(el => el.ind === ind)
-            console.log(correctObj, currentObj )
             if(correctObj.left !== currentObj.left) return
             if(correctObj.top !== currentObj.top) return
         }   
