@@ -20,7 +20,6 @@ class Catalog {
      document.querySelector(this.container).innerHTML = html
     }
     renderNewSlide(counter){
-      // this.shuffle()
       let html = ''
       if(counter % 2){
         this.shuffle()

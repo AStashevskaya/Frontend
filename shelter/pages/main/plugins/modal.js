@@ -27,7 +27,6 @@ $.modal = function (options){
     open(){
         if (isDestroyed) return
        !closing && $modal.classList.add('open')
-    //    document.body.classList.add('antiscroll')
        document.body.style.height = '100vh'
        document.body.style.overflow = 'hidden'
     },
@@ -38,7 +37,6 @@ $.modal = function (options){
         setTimeout(() =>{
             $modal.classList.remove('hide')
             closing = false
-            // document.body.classList.remove('antiscroll')
             document.body.style.height = '100%'
            document.body.style.overflow = 'auto'
         }, ANIMATION_SPEED )
