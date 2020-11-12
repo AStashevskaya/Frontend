@@ -27,9 +27,9 @@ $.modal = function (options){
     open(){
         if (isDestroyed) return
        !closing && $modal.classList.add('open')
-       document.body.classList.add('antiscroll')
-    //    document.body.style.height = '100vh'
-    //    document.body.style.overflow = 'hidden'
+    //    document.body.classList.add('antiscroll')
+       document.body.style.height = '100vh'
+       document.body.style.overflow = 'hidden'
     },
     close(){
         closing = true
@@ -38,9 +38,9 @@ $.modal = function (options){
         setTimeout(() =>{
             $modal.classList.remove('hide')
             closing = false
-            document.body.classList.remove('antiscroll')
-        //     document.body.style.height = '100%'
-        //    document.body.style.overflow = 'auto'
+            // document.body.classList.remove('antiscroll')
+            document.body.style.height = '100%'
+           document.body.style.overflow = 'auto'
         }, ANIMATION_SPEED )
     }
  }
