@@ -45,7 +45,7 @@ export default class GameField{
     render(arr){
         arr.forEach(obj => {
         const el = obj.render()
-        el.addEventListener('click' , this.moveButton)
+        el.addEventListener('click' , this.moveButton.bind(this))
         this.container.appendChild(el)
         }) 
     }
@@ -88,7 +88,7 @@ export default class GameField{
           const children = [...this.container.children]
           children.forEach(el => {
               if(el.classList.length < 2){
-              el.removeEventListener('click' , this.moveButton)
+              el.removeEventListener('click' , this.moveButton.bind(this))
               this.container.removeChild(el)
               }
              })
@@ -100,7 +100,7 @@ export default class GameField{
           part.count = 0
           console.log(this.q)
       }
-    moveButton = (e) => {
+    moveButton(e){
        if(part.state === 'pause') return
         this.moves++
         document.querySelector('.move').innerHTML = `Moves: ${this.moves}`

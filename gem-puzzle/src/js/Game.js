@@ -2,6 +2,7 @@ import create  from './utils/create'
 // import cell from './FieldCell'
 // import GameField from './GameField'
 // import main from './script'
+import {part} from './script'
 import GameField from './GameField'
 // import {images} from './layouts/images'
 
@@ -37,16 +38,18 @@ class Game {
         this.parent.appendChild(this.settings)
         this.parent.appendChild(this.bestScore)
         this.parent.appendChild(this.savedGames)
-        this.children = [...this.parent.children]
+        const childs = this.parent.children
+        this.children = Array.from(childs)
+        // this.children = [...this.parent.children]
        this.stateButton = create('span', 'state-btn', 'Pause')
-    const time = create('div', 'time', `Time: ${this.count}`),
+       const time = create('div', 'time', `Time: ${this.count}`),
          moves = create('div', 'move', `Moves: ${this.game.moves}`)
         this.container.appendChild(this.stateButton)
               this.container.appendChild(time)
               this.container.appendChild(moves)
-              document.addEventListener('click', this.handleEvent)
+              document.addEventListener('click', this.handleEvent.bind(this))         
     }
-    handleEvent = (e) => {
+    handleEvent(e){
         const target = e.target
         if(target.innerText === 'Resume' || target.innerText === 'Pause'){
             console.log(target)
@@ -60,7 +63,7 @@ class Game {
                 target.innerText = 'Resume'
               } else {
                 this.state = 'playing'
-                this.progressIdentifier = setInterval(this.tick, 1000)
+                this.progressIdentifier = setInterval(this.tick.bind(this), 1000)
                 this.children.forEach(el => {
                     if(el.classList.length < 2){
                         el.classList.add('hidden')
@@ -149,7 +152,7 @@ class Game {
         <span class="menu-text_big" id="back" data-link="back" >Go back</span>
         `
     }
-    tick =() => {  
+    tick (){  
         this.count++
         let sec = this.count >= 60 ? this.count % 60 : this.count
         let min = Math.floor(this.count / 60)
@@ -165,6 +168,63 @@ class Game {
     // }
 
 }
+
+// document.addEventListener('click', this.handleEvent.bind(part))     
+// handleEvent = (e) => {
+//     const target = e.target
+//     if(target.innerText === 'Resume' || target.innerText === 'Pause'){
+//         console.log(target)
+//         if(target.innerText === 'Pause' && this.state === 'start')return
+//         if(target.innerText === 'Pause' && this.state === 'playing'){
+//             this.state = 'pause'
+//             this.menuList.classList.remove('hidden')
+//             this.game.overlay.classList.remove('hidden')
+//             // this.progressIdentifier = setInterval(this.tick, 1000)
+//             clearInterval(this.progressIdentifier)
+//             target.innerText = 'Resume'
+//           } else {
+//             this.state = 'playing'
+//             this.progressIdentifier = setInterval(this.tick, 1000)
+//             this.children.forEach(el => {
+//                 if(el.classList.length < 2){
+//                     el.classList.add('hidden')
+//                 }
+//             })
+//             // this.menuList.classList.add('hidden')
+//             this.game.overlay.classList.add('hidden')
+//             target.innerText = 'Pause'
+//           }
+//     }
+//     if(target.dataset.link){
+//         if(target.dataset.link === "newGame"){
+//            this.state = 'playing'
+//           if (this.stateButton.innerText === 'Resume'){
+//             this.stateButton.innerText = 'Pause'  
+//            }
+//            this.menuList.classList.add('hidden')
+//            this.game.overlay.classList.add('hidden')
+//            this.progressIdentifier = setInterval(this.tick, 1000)
+//            this.game.reset()
+//         } else if (target.dataset.link === "settings"){
+//             this.menuList.classList.add('hidden')
+//             this.settings.classList.remove('hidden')
+//         } else if (target.dataset.link === "bestScores"){
+//             this.menuList.classList.add('hidden')
+//             this.bestScore.classList.remove('hidden')
+//         } else if (target.dataset.link === "back"){
+//             this.children.forEach(el =>{
+//                 if(el.classList.length < 2){
+//                     el.classList.add('hidden')
+//                 }
+//             })
+//             this.menuList.classList.remove('hidden')
+//         }else if (target.dataset.link === "loadGame"){
+//             return
+//         }else if (target.dataset.link === "saveGame"){
+//             return
+//         }
+//     }
+// }
 // const part = new Game()
 export  { main }
 export default Game

@@ -1,36 +1,14 @@
-export default function create (el, classNames, children, parent, ...attr){
+export default function create (el, className, children){
     let element = null
     if(el){
        element = window.document.createElement(el)
+    //    element = document.createElement(el)
     }
-    if (classNames){
-        element.classList.add(...classNames.split(' ')) 
+    if (className){
+        element.classList.add(className) 
     } 
-    if (children && Array.isArray(children)){
-        children.forEach(child => child && element.appendChild(child))    
-    } else if (children && typeof(children) === 'object'){
-        element.appendChild(children)
-    } else if (children && typeof(children) === 'string'){
+    if (children){
         element.innerHTML = children
     }
-    if(parent){
-        // parent.appendChild(element)
-    }
-    /////
-    // if(attr.length){
-    //     let arr = Array.from(attr)
-    //     arr.forEach(([attrName, attrValue]) => {
-    //         // для атрибуттов, которые идут без знака =
-    //     if(attrValue === ''){
-    //         element.setAttribute(attrName, '')
-    //     }
-    //     // для аттрибутов, которые соответствуют аттрибутам в списке
-    //     if(attrName.match(/value|id|type|row|col|name|src/)){
-    //         element.setAttribute(attrName, attrValue)
-    //     } else {
-    //         element.dataset[attrName] = attrValue //для дата аттрибутов
-    //     }
-    //     })
-    // }
     return element
 }
