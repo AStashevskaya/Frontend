@@ -13,8 +13,10 @@ import create from './utils/create'
     getPos (){
         let WIDTH = 400
         this.size = WIDTH / this.q
-        this.bgPosX = `${WIDTH  - this.left*this.size}px`
-        this.bgPosY = `${WIDTH  - this.top*this.size}px`
+        this.bgPosX = `${-this.left*this.size}px`
+        this.bgPosY = `${-this.top*this.size}px`
+        // this.bgPosX = `${WIDTH  - this.left*this.size}px`
+        // this.bgPosY = `${WIDTH  - this.top*this.size}px`
         // return { bgPosX , bgPosY}
     }
     render(){ 
@@ -22,7 +24,8 @@ import create from './utils/create'
         this.size = WIDTH / this.q
         this.container = create('div', 'fieldcell', `${this.ind}`)
         this.container.style.backgroundImage = `url(assets/images/${this.image})`
-        this.container.style.backgroundSize = `${WIDTH}px ${WIDTH}px`
+        this.container.style.backgroundSize = `${WIDTH}px`
+        // this.container.style.backgroundSize = `${WIDTH}px ${WIDTH}px`
         this.container.style.width = `${100 /this.q}%`
         this.container.style.height = `${100 /this.q}%`
         this.container.style.top = `${this.top*this.size}px`

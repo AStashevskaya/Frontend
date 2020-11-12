@@ -1,4 +1,5 @@
 import create  from './utils/create'
+import addZero from './utils/zero'
 // import cell from './FieldCell'
 // import GameField from './GameField'
 // import main from './script'
@@ -20,8 +21,6 @@ class Game {
         this.bestScore = create('div', 'best-score')
         this.savedGames = create('div', 'saved-games')
         this.parent = create('div', 'parent')
-        // this.template = this._getTemplate()
-        // this.size = this._getSize()
         this.count = 0
         this.progressIdentifier = null
         this.init()
@@ -58,7 +57,6 @@ class Game {
                 this.state = 'pause'
                 this.menuList.classList.remove('hidden')
                 this.game.overlay.classList.remove('hidden')
-                // this.progressIdentifier = setInterval(this.tick, 1000)
                 clearInterval(this.progressIdentifier)
                 target.innerText = 'Resume'
               } else {
@@ -82,7 +80,7 @@ class Game {
                }
                this.menuList.classList.add('hidden')
                this.game.overlay.classList.add('hidden')
-               this.progressIdentifier = setInterval(this.tick, 1000)
+               this.progressIdentifier = setInterval(this.tick.bind(this), 1000)
                this.game.reset()
             } else if (target.dataset.link === "settings"){
                 this.menuList.classList.add('hidden')
@@ -152,79 +150,18 @@ class Game {
         <span class="menu-text_big" id="back" data-link="back" >Go back</span>
         `
     }
-    tick (){  
+    tick(){  
         this.count++
         let sec = this.count >= 60 ? this.count % 60 : this.count
         let min = Math.floor(this.count / 60)
-        document.querySelector('.time').innerHTML =  `Time: ${this.addZero(min)}: ${this.addZero(sec)}`
+        document.querySelector('.time').innerHTML =  `Time: ${addZero(min)}: ${addZero(sec)}`
        }
-    addZero(n){
-     return   n < 10 ? `0${n}` : `${n}`
-    }
-    // _getImage(arr){
-    //   const ind = Math.floor(Math.random()*arr.length)
-    //   // this.image = arr[ind]
-    //   return arr[ind]
-    // }
 
+    //    checkWindowSize(){
+    //     this.windowWidth = 
+    //    }
 }
 
-// document.addEventListener('click', this.handleEvent.bind(part))     
-// handleEvent = (e) => {
-//     const target = e.target
-//     if(target.innerText === 'Resume' || target.innerText === 'Pause'){
-//         console.log(target)
-//         if(target.innerText === 'Pause' && this.state === 'start')return
-//         if(target.innerText === 'Pause' && this.state === 'playing'){
-//             this.state = 'pause'
-//             this.menuList.classList.remove('hidden')
-//             this.game.overlay.classList.remove('hidden')
-//             // this.progressIdentifier = setInterval(this.tick, 1000)
-//             clearInterval(this.progressIdentifier)
-//             target.innerText = 'Resume'
-//           } else {
-//             this.state = 'playing'
-//             this.progressIdentifier = setInterval(this.tick, 1000)
-//             this.children.forEach(el => {
-//                 if(el.classList.length < 2){
-//                     el.classList.add('hidden')
-//                 }
-//             })
-//             // this.menuList.classList.add('hidden')
-//             this.game.overlay.classList.add('hidden')
-//             target.innerText = 'Pause'
-//           }
-//     }
-//     if(target.dataset.link){
-//         if(target.dataset.link === "newGame"){
-//            this.state = 'playing'
-//           if (this.stateButton.innerText === 'Resume'){
-//             this.stateButton.innerText = 'Pause'  
-//            }
-//            this.menuList.classList.add('hidden')
-//            this.game.overlay.classList.add('hidden')
-//            this.progressIdentifier = setInterval(this.tick, 1000)
-//            this.game.reset()
-//         } else if (target.dataset.link === "settings"){
-//             this.menuList.classList.add('hidden')
-//             this.settings.classList.remove('hidden')
-//         } else if (target.dataset.link === "bestScores"){
-//             this.menuList.classList.add('hidden')
-//             this.bestScore.classList.remove('hidden')
-//         } else if (target.dataset.link === "back"){
-//             this.children.forEach(el =>{
-//                 if(el.classList.length < 2){
-//                     el.classList.add('hidden')
-//                 }
-//             })
-//             this.menuList.classList.remove('hidden')
-//         }else if (target.dataset.link === "loadGame"){
-//             return
-//         }else if (target.dataset.link === "saveGame"){
-//             return
-//         }
-//     }
-// }
 // const part = new Game()
 export  { main }
 export default Game

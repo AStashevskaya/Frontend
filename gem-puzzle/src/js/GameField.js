@@ -8,7 +8,8 @@ import {images} from './layouts/images'
 // main = require('./Game')
 
 export default class GameField{
-    constructor(){
+    constructor(width){
+        this.width = width
         this.buttons = []
         this.image = this._getImage(images)
         this.correctTemplate = []
