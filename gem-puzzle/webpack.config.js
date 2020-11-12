@@ -1,19 +1,28 @@
-const webpack = require('webpack')
+// const webpack = require('webpack')
 const path = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 module.exports = (env, options) => {
-    const isProduction = options.mode === 'production'
+    const isProd = options.mode === 'production'
 
     const config = {
-        mode: isProduction ? 'production' : 'development',
+        mode: isProd ? 'production' : 'development',
         entry: ['./src/index.js'],
         output: {
             path: path.resolve(__dirname, './dist'),
             filename: '[name].bundle.js',
         },
+        optimization: {
+            splitChunks: {
+                chunks: 'all'
+            }
+        },
+        // resolve: {
+        //     extensions: ['.js']
+        //   },
         module: {
             rules: [
                 // JavaScript
@@ -48,9 +57,16 @@ module.exports = (env, options) => {
                 template: path.resolve(__dirname, './src/index.html'), 
                 filename: 'index.html',
             }), 
+            new CopyPlugin({
+                patterns: [
+                  { from: './src/assets/images', 
+                    to: 'assets/images' 
+                },
+                ],
+            }),
             new MiniCssExtractPlugin({
                 // filename: 'main.[chunkhash].css'
-                filename: 'style.css'
+                filename: isProd ?  '[name].[contenthash].css' : '[name].css' 
             })
         ],
         
