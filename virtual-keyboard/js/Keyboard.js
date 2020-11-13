@@ -266,6 +266,5 @@ class Keyboard{
             recognition.removeEventListener('end', recognition.start)
             recognition.stop()  
             }  
-    }
-    
+    } 
 }
