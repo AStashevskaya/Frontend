@@ -83,7 +83,7 @@ const language = {
         {
           small: `<span class="material-icons">
           language
-          </span><br><span class="hidden-letters">Ru</span>`,
+          </span><br><span class="hidden-letters">En</span>`,
           shift: null,
           code: 'Tab',
         },
@@ -431,7 +431,7 @@ const language = {
         {
           small: `<span class="material-icons">
           language
-          </span><br><span class="hidden-letters">En</span>`,
+          </span><br><span class="hidden-letters">Ru</span>`,
           shift: null,
           code: 'Tab',
         },
