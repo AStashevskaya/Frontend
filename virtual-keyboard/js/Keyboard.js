@@ -1,12 +1,4 @@
 const main = create('main', '', create('button', 'btn', 'click Here', null, ['on', true]))
-// create ('audio', '', null, null, ['src', '../sounds/backspace.wav'], ['code', "Backspace"]),
-// create ('audio', '', null, null, ['src', '../sounds/enter.mp3'], ['code', "Enter"]),
-// create ('audio', '', null, null, ['src', '../sounds/english.mp3'], ['code', "en"]),
-// create ('audio', '', null, null, ['src', '../sounds/russian.mp3'], ['code', "ru"]),
-// create ('audio', '', null, null, ['src', '../sounds/shift.mp3'], ['code', "ShiftRight"]),
-// create ('audio', '', null, null, ['src', '../sounds/shift.mp3'], ['code', "ShiftLeft"]),
-// create ('audio', '', null, null, ['src', '../sounds/CapsLock.mp3'], ['code', "CapsLock"]),
-// create ('audio', '', null, null, ['src', '../sounds/space.wav'], ['code', "Space"]),
 window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition
 const recognition = new SpeechRecognition()
 class Keyboard{

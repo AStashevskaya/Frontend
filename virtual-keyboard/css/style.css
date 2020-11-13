@@ -152,6 +152,9 @@ transform: translateY(0);
   [data-code="Space"] {
     width: 420px;
   }
+  [data-code="Space"] > .letter {
+  height: 100%;
+  }
   
   [data-code="AltLeft"],
   [data-code="AltRight"] {
