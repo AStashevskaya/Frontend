@@ -63,8 +63,6 @@ updateDisplay(){
 }
 compute(){
     let compution
-   // if (this.previousOperand === '' && this.currentOperand === '') return
-  //  if (this.previousOperand === '' && this.currentOperand !== '') return this.currentOperand
     const prev = parseFloat(this.previousOperand)
     const current = parseFloat(this.currentOperand)
     // check if operands are numbers
