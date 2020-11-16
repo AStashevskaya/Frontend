@@ -61,7 +61,10 @@ module.exports = (env, options) => {
                 patterns: [
                   { from: './src/assets/images', 
                     to: 'assets/images' 
-                },
+                 },
+                 { from: './src/assets/sounds', 
+                   to: 'assets/sounds' 
+                 },
                 ],
             }),
             new MiniCssExtractPlugin({

@@ -46,6 +46,7 @@ class Game {
         this.parent.appendChild(this.settings)
         this.parent.appendChild(this.bestScore)
         this.parent.appendChild(this.savedGames)
+        this.generateBestScores()
         const childs = this.parent.children
         this.children = Array.from(childs)
         // this.children = [...this.parent.children]
@@ -112,7 +113,7 @@ class Game {
             }else if (target.dataset.link === "saveGame"){
                 this.saveGame()
             }
-        }  else if (target.dataset.sound){
+        }   else if (target.dataset.sound === "off" || target.dataset.sound === "on"){
             let soundCheck = document.getElementById('sound')
             if(this.sound === 'off'){
                 target.dataset.sound = 'on'
@@ -123,6 +124,13 @@ class Game {
                 this.sound = 'off'
                 target.dataset.sound = 'off'
             }
+        } else if (target.dataset.close){
+            this.game.modal.close()
+        } else if (target.dataset.reset){
+            this.count = 0
+            this.progressIdentifier = setInterval(this.tick.bind(this), 1000)
+            this.game.reset()
+            this.game.modal.close()
         }
     }
     menuRender(){
@@ -182,41 +190,41 @@ class Game {
     }
     tick(){  
         this.count++
-        let sec = this.count >= 60 ? this.count % 60 : this.count
-        let min = Math.floor(this.count / 60)
-        document.querySelector('.time').innerHTML =  `Time: ${this.addZero(min)}: ${this.addZero(sec)}`
+        this.sec = this.count >= 60 ? this.count % 60 : this.count
+        this.min = Math.floor(this.count / 60)
+        document.querySelector('.time').innerHTML =  `Time: ${this.addZero(this.min)}: ${this.addZero(this.sec)}`
        }
        addZero(n){
         return   n < 10 ? `0${n}` : `${n}`
        }
        saveGame(){
-           let session = {}
-           session.count = this.count
-           session.moves = this.game.moves
-           session.template =  this.game.currentTemplate
-           session.image = this.game.image
-           session.size = this.game.q
-           const jsonObj = JSON.stringify(session)
-           localStorage.setItem('game', jsonObj)
+        let session = {}
+        session.count = this.count
+        session.moves = this.game.moves
+        session.template =  this.game.currentTemplate
+        session.image = this.game.image
+        session.size = this.game.q
+        const jsonObj = JSON.stringify(session)
+        localStorage.setItem('game', jsonObj)
+        const loadedGameText =  document.querySelector('.load_game')
+        loadedGameText.innerText = `Your game is saved!`
+        this.menuList.classList.add('hidden')
+        this.savedGames.classList.remove('hidden')
+    }
+    getGame(){
+        let loadedGame = localStorage.getItem('game')
+        if(!loadedGame){
            const loadedGameText =  document.querySelector('.load_game')
-           loadedGameText.innerText = `Your game is saved!`
+           loadedGameText.innerText = `You have no saved games yet`
            this.menuList.classList.add('hidden')
            this.savedGames.classList.remove('hidden')
-       }
-       getGame(){
-           let loadedGame = localStorage.getItem('game')
-           if(!loadedGame){
-              const loadedGameText =  document.querySelector('.load_game')
-              loadedGameText.innerText = `You have no saved games yet`
-              this.menuList.classList.add('hidden')
-              this.savedGames.classList.remove('hidden')
-           }
-           loadedGame = JSON.parse(loadedGame)
-           this.game.loadGame(loadedGame)
-           this.count = loadedGame.count
-           this.tick()
-           console.log(loadedGame)
-       }
+        }
+        loadedGame = JSON.parse(loadedGame)
+        this.game.loadGame(loadedGame)
+        this.count = loadedGame.count
+        this.tick()
+        console.log(loadedGame)
+    }
        playSound(){
            let audio = create('audio')
            audio.setAttribute('src', './assets/sounds/english.mp3')
@@ -224,6 +232,20 @@ class Game {
            audio.play()
            audio = undefined
        }
+       generateBestScores(){
+        let bestScores = localStorage.getItem('bestScores')
+        const bestScoresContainer =  document.querySelector('.best-score_list')
+        if(!bestScores) return
+        bestScores = JSON.parse(bestScores)
+        bestScores = bestScores.sort((a, b) =>  a.moves - b.moves)
+        console.log(bestScores)
+        let html = '<li class="best-score_link menu-text_small"><span>№</span><span>Moves</span><span>Time</span></li>'
+        if(bestScores.length > 10){
+            bestScores = bestScores.slice(0, 10)
+        }
+        bestScores.forEach((el, ind) => html += `<li class="best-score_link menu-text_small"><span>${ind+1}.</span><span>${el.moves}</span><span> ${this.addZero(Math.floor(el.count / 60))}: ${this.addZero(el.count % 60)}</span></li>`)   
+        bestScoresContainer.innerHTML =  html  
+    }
 }
 
 // const part = new Game()
