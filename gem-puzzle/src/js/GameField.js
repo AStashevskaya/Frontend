@@ -70,9 +70,10 @@ export default class GameField{
         let arr = [...this.correctTemplate]
         let empty =  arr.pop()
         this.buttons = []
-        const numbers = [...Array(Math.pow(this.q, 2) - 1).keys()]
-        .sort(() => Math.random() - 0.5)
-        .map(el => el + 1)
+        let numbers = this.sortArray()
+        // const numbers = [...Array(Math.pow(this.q, 2) - 1).keys()]
+        // .sort(() => Math.random() - 0.5)
+        // .map(el => el + 1)
         for(let i = 0; i < Math.pow(this.q, 2) - 1; i++){
             const left = i % this.q
             const top = (i - left)/ this.q
@@ -89,6 +90,34 @@ export default class GameField{
         this.buttons.push(empty)
         console.log(this.buttons)
         this.render(this.buttons)
+    }
+    checkSolving(arr){
+        let count = this.q
+        // if (this.q % 2 === 0){
+        //     count = this.q
+        // } else {
+        //     count = 0 
+        // }
+        for(let i = 0; i< arr.length; i++){
+            for (let j = i+1; j< arr.length; j++){
+                if( arr[i] >  arr[j]){
+                    count ++
+                }     
+            }
+        }  
+        console.log(count)
+        if(count % 2 === 0) return true
+        return false
+    }
+    sortArray(){
+        let numbers = []
+        numbers = [...Array(Math.pow(this.q, 2) - 1).keys()]
+        .sort(() => Math.random() - 0.5)
+        .map(el => el + 1)
+       if(!this.checkSolving(numbers)){
+        this.sortArray()
+       } 
+       return numbers
     }
     _getImage(arr){
         const ind = Math.floor(Math.random()*arr.length)
@@ -119,10 +148,10 @@ export default class GameField{
        if(this.settings.state === 'pause') return
        this.currentTemplate = []
         const number = e.target.innerHTML
-        const obj = this.buttons.find(el => el.ind == number)
+        const clickedObj = this.buttons.find(el => el.ind == number)
         const emptyObj = this.buttons.find(el => el.ind === '')
-        if(!obj || !emptyObj) return
-        let {left, top} = obj
+        if(!clickedObj || !emptyObj) return
+        let {left, top} = clickedObj
         const emptyLeft = emptyObj.left
         const emptyTop = emptyObj.top
         let sum = Math.abs(left - emptyLeft) + Math.abs(top - emptyTop)
@@ -130,10 +159,15 @@ export default class GameField{
         this.moves++
         document.querySelector('.move').innerHTML = `Moves: ${this.moves}`
         Object.assign(emptyObj, {left, top})
-        obj.left = emptyLeft
-        obj.top = emptyTop
-        obj.container.style.top = `${obj.top*obj.size}px`
-        obj.container.style.left = `${obj.left*obj.size}px`
+        if(left !== emptyLeft){
+            this.animate('left', clickedObj, left, emptyLeft)
+            clickedObj.container.style.top = `${clickedObj.top*clickedObj.size}px`
+        } else {
+            this.animate('top', clickedObj, top, emptyTop)
+            clickedObj.container.style.left = `${clickedObj.left*clickedObj.size}px`
+        }
+        clickedObj.left = emptyLeft
+        clickedObj.top = emptyTop
         emptyObj.container.style.top = `${emptyObj.top*emptyObj.size}px`    
         emptyObj.container.style.left = `${emptyObj.left*emptyObj.size}px`  
         this.buttons.forEach(el => {
@@ -141,6 +175,26 @@ export default class GameField{
            this.currentTemplate.push({left, top, ind, bgPosY, bgPosX})
         })
         this.checkTemplate()  
+    }
+    animate(position, obj, currPos, destination){
+        const animationDuration = 300
+        const frameRate = 10
+        let step = frameRate * Math.abs((destination - currPos)) / animationDuration
+        let id = setInterval(() => {
+            if(currPos < destination){
+                currPos = Math.min(destination, currPos + step)
+                if( currPos >= destination ){
+                    clearInterval(id)
+                }
+            } else if (currPos > destination){
+                currPos = Math.max(destination, currPos - step)
+                if( currPos <= destination ){
+                    clearInterval(id)
+                }
+            }
+            obj.container.style[position] = `${currPos*obj.size}px`
+        }, frameRate);
+
     }
     checkTemplate(){
         for(let i = 0; i < this.buttons.length - 1; i++){
@@ -155,8 +209,10 @@ export default class GameField{
     ifWin(){
         const emptyObj = this.buttons.find(el => el.ind === '')
         emptyObj.container.style.opacity = '1'
+        document.querySelectorAll('.fieldcell').forEach(el => el.innerText = '')
         const game = {}
         game.moves = this.moves
+        game.size = this.q
         game.count = this.settings.count
         this.bestScores.push(game)
         const bestJson = JSON.stringify(this.bestScores)

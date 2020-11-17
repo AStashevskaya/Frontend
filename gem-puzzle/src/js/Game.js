@@ -23,7 +23,6 @@ class Game {
         this.parent = create('div', 'parent')
         this.count = 0
         this.progressIdentifier = null
-        console.log(this.width)
         this.init()
     }
     _getWidth(){
@@ -223,7 +222,6 @@ class Game {
         this.game.loadGame(loadedGame)
         this.count = loadedGame.count
         this.tick()
-        console.log(loadedGame)
     }
        playSound(){
            let audio = create('audio')
@@ -238,12 +236,11 @@ class Game {
         if(!bestScores) return
         bestScores = JSON.parse(bestScores)
         bestScores = bestScores.sort((a, b) =>  a.moves - b.moves)
-        console.log(bestScores)
-        let html = '<li class="best-score_link menu-text_small"><span>№</span><span>Moves</span><span>Time</span></li>'
+        let html = '<li class="best-score_link menu-text_small"><span>№</span><span>Size</span><span>Moves</span><span>Time</span></li>'
         if(bestScores.length > 10){
             bestScores = bestScores.slice(0, 10)
         }
-        bestScores.forEach((el, ind) => html += `<li class="best-score_link menu-text_small"><span>${ind+1}.</span><span>${el.moves}</span><span> ${this.addZero(Math.floor(el.count / 60))}: ${this.addZero(el.count % 60)}</span></li>`)   
+        bestScores.forEach((el, ind) => html += `<li class="best-score_link menu-text_small"><span>${ind+1}.</span><span>${el.size}x${el.size}</span><span>${el.moves}</span><span> ${this.addZero(Math.floor(el.count / 60))}: ${this.addZero(el.count % 60)}</span></li>`)  
         bestScoresContainer.innerHTML =  html  
     }
 }

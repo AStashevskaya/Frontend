@@ -23,7 +23,6 @@ export default class Modal{
             </div>
         </div>`
         this.layout.appendChild( this.modalWrapper)
-        console.log(this.modalWrapper)
     }
     open(){
         !this.closing && this.modal.classList.add('open')
