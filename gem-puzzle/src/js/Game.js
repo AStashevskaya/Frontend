@@ -63,7 +63,6 @@ class Game {
         }
         const target = e.target
         if(target.innerText === 'Resume' || target.innerText === 'Pause'){
-            console.log(target)
             if(target.innerText === 'Pause' && this.state === 'start')return
             if(target.innerText === 'Pause' && this.state === 'playing'){
                 this.state = 'pause'
@@ -217,11 +216,12 @@ class Game {
            loadedGameText.innerText = `You have no saved games yet`
            this.menuList.classList.add('hidden')
            this.savedGames.classList.remove('hidden')
-        }
-        loadedGame = JSON.parse(loadedGame)
+        } else {
+                 loadedGame = JSON.parse(loadedGame)
         this.game.loadGame(loadedGame)
         this.count = loadedGame.count
-        this.tick()
+        this.tick() 
+        }
     }
        playSound(){
            let audio = create('audio')

@@ -47,6 +47,7 @@ export default class GameField{
         this.correctTemplate.forEach(el => el.getPos())
     }
     loadGame(options){
+        if(!options) return
         const {size, image, moves, template} = options
         this.q = size 
         this.image = image
@@ -88,7 +89,6 @@ export default class GameField{
         empty = new FieldCell(this, Object.assign({},{left: this.q-1 , top: this.q - 1, ind: ''}))
         empty.getPos()
         this.buttons.push(empty)
-        console.log(this.buttons)
         this.render(this.buttons)
     }
     checkSolving(arr){
@@ -105,7 +105,6 @@ export default class GameField{
                 }     
             }
         }  
-        console.log(count)
         if(count % 2 === 0) return true
         return false
     }
