@@ -63,6 +63,13 @@ export default class GameField{
     render(arr){
         arr.forEach(obj => {
         const el = obj.render()
+        if(el.textContent){
+            el.draggable = true
+            el.addEventListener('dragstart' , this.getButton.bind(this))
+        } else {
+            el.addEventListener('dragover' , this.overButton.bind(this))
+            el.addEventListener('drop' , this.putButton.bind(this))
+        }
         el.addEventListener('click' , this.moveButton.bind(this))
         this.container.appendChild(el)
         }) 
@@ -72,9 +79,6 @@ export default class GameField{
         let empty =  arr.pop()
         this.buttons = []
         let numbers = this.sortArray()
-        // const numbers = [...Array(Math.pow(this.q, 2) - 1).keys()]
-        // .sort(() => Math.random() - 0.5)
-        // .map(el => el + 1)
         for(let i = 0; i < Math.pow(this.q, 2) - 1; i++){
             const left = i % this.q
             const top = (i - left)/ this.q
@@ -93,11 +97,6 @@ export default class GameField{
     }
     checkSolving(arr){
         let count = this.q
-        // if (this.q % 2 === 0){
-        //     count = this.q
-        // } else {
-        //     count = 0 
-        // }
         for(let i = 0; i< arr.length; i++){
             for (let j = i+1; j< arr.length; j++){
                 if( arr[i] >  arr[j]){
@@ -129,13 +128,6 @@ export default class GameField{
           this.q = this._checkSize()
           if(this.q !== this.prevQ)  this.makeCorrectTemplate()
           this.deleteCells()
-        //   const children = [...this.container.children]
-        //   children.forEach(el => {
-        //       if(el.classList.length < 2){
-        //       el.removeEventListener('click' , this.moveButton.bind(this))
-        //       this.container.removeChild(el)
-        //       }
-        //      })
           setTimeout(() => {
             this.shuffle()
           }, 0)
@@ -195,6 +187,38 @@ export default class GameField{
         }, frameRate);
 
     }
+    getButton(e){
+        if(this.settings.state === 'pause') return
+        const number = e.target.innerHTML
+        this.clickedObj = this.buttons.find(el => el.ind == number)
+    }
+    putButton(e){
+       this.currentTemplate = []
+        const emptyObj = this.buttons.find(el => el.ind === '')
+        if(!this.clickedObj || !emptyObj) return
+        let {left, top} = this.clickedObj
+        const emptyLeft = emptyObj.left
+        const emptyTop = emptyObj.top
+        let sum = Math.abs(left - emptyLeft) + Math.abs(top - emptyTop)
+        if(sum !== 1) return
+        this.moves++
+        document.querySelector('.move').innerHTML = `Moves: ${this.moves}`
+        Object.assign(emptyObj, {left, top})
+        this.clickedObj.left = emptyLeft
+        this.clickedObj.top = emptyTop
+        this.clickedObj.container.style.top = `${this.clickedObj.top*this.clickedObj.size}px`
+        this.clickedObj.container.style.left = `${this.clickedObj.left*this.clickedObj.size}px`
+        emptyObj.container.style.top = `${emptyObj.top*emptyObj.size}px`    
+        emptyObj.container.style.left = `${emptyObj.left*emptyObj.size}px`  
+        this.buttons.forEach(el => {
+           let {left, top, ind, bgPosY, bgPosX} = el
+           this.currentTemplate.push({left, top, ind, bgPosY, bgPosX})
+        })
+        this.checkTemplate()  
+    }
+    overButton(e){
+        e.preventDefault()
+    }
     checkTemplate(){
         for(let i = 0; i < this.buttons.length - 1; i++){
             const ind = i+1
@@ -233,6 +257,12 @@ export default class GameField{
         const children = [...this.container.children]
         children.forEach(el => {
             if(el !== this.overlay){
+                if(el.textContent){
+                    el.removeEventListener('dragstart' , this.getButton.bind(this))
+                } else {
+                    el.removeEventListener('dragover' , this.overButton.bind(this))
+                    el.removeEventListener('drop' , this.putButton.bind(this))
+                }
                 el.removeEventListener('click' , this.moveButton.bind(this))
                 this.container.removeChild(el)
                 }

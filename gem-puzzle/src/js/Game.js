@@ -1,10 +1,5 @@
 import create  from './utils/create'
-// import cell from './FieldCell'
-// import GameField from './GameField'
-// import main from './script'
-import {part} from './script'
 import GameField from './GameField'
-// import {images} from './layouts/images'
 
 const main  = create('div', 'game-wrapper')
 document.body.prepend(main)
