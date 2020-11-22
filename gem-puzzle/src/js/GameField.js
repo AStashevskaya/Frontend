@@ -41,9 +41,9 @@ export default class GameField{
             const left = i % this.q
             const top = (i - left)/ this.q
             const ind = i+1 
-            this.correctTemplate.push(new FieldCell(this, Object.assign( {}, {left, top, ind})))
+            this.correctTemplate.push(new FieldCell(this, {left, top, ind}))
         }
-        this.correctTemplate.push(new FieldCell(this, Object.assign( {}, {left: this.q-1 , top: this.q - 1, ind: ''})))
+        this.correctTemplate.push(new FieldCell(this, {left: this.q-1 , top: this.q - 1, ind: ''}))
         this.correctTemplate.forEach(el => el.getPos())
     }
     loadGame(options){
@@ -84,13 +84,12 @@ export default class GameField{
             const top = (i - left)/ this.q
             const ind = numbers[i]
             const correctBtn = this.correctTemplate.find(el => el.ind === ind)
-            const field = new FieldCell(this,Object.assign({},{left, top, ind}))
-            const obj = Object.create(field)
-            obj.bgPosX = correctBtn.bgPosX
-            obj.bgPosY = correctBtn.bgPosY
-            this.buttons.push(obj)
+            const field = new FieldCell(this,{left, top, ind})
+            field.bgPosX = correctBtn.bgPosX
+            field.bgPosY = correctBtn.bgPosY
+            this.buttons.push(field)
         }
-        empty = new FieldCell(this, Object.assign({},{left: this.q-1 , top: this.q - 1, ind: ''}))
+        empty = new FieldCell(this, {left: this.q-1 , top: this.q - 1, ind: ''})
         empty.getPos()
         this.buttons.push(empty)
         this.render(this.buttons)
@@ -203,6 +202,7 @@ export default class GameField{
         if(sum !== 1) return
         this.moves++
         document.querySelector('.move').innerHTML = `Moves: ${this.moves}`
+        this.settings.playSound()
         Object.assign(emptyObj, {left, top})
         this.clickedObj.left = emptyLeft
         this.clickedObj.top = emptyTop
@@ -232,7 +232,10 @@ export default class GameField{
     ifWin(){
         const emptyObj = this.buttons.find(el => el.ind === '')
         emptyObj.container.style.opacity = '1'
-        document.querySelectorAll('.fieldcell').forEach(el => el.innerText = '')
+        document.querySelectorAll('.fieldcell').forEach(el =>{
+            el.innerText = ''
+            el.style.borderRadius = '0'
+        } )
         const game = {}
         game.moves = this.moves
         game.size = this.q
