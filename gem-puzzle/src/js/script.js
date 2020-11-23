@@ -1,8 +1,5 @@
-import create from './utils/create'
-import Game  from './Game'
-//  const main  = create('div', 'game-wrapper')
-// document.body.prepend(main)
+import Game from './Game';
 
-const part = new Game()
-export {part}
+const part = new Game();
+export default { part };
 // export default {main}

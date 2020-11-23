@@ -1,5 +1,2 @@
-
-import './css/style.css'
-import './js/script'
-
-
+import './css/style.css';
+import './js/script';

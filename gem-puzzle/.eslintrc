@@ -1,0 +1,16 @@
+{
+    "parser": "babel-eslint",
+    "extends": ["airbnb/base"],
+    "rules": {
+        //in 'for' is allowed to use ++, but here is a mistake
+        "no-plusplus":"off",
+        // dont define window/document/localStorage
+        "no-undef":"off",
+        // CRLF instead LF, and cant fix this problem
+        "linebreak-style":"off",
+        //some methods are not required to use this. is it fine?
+        "class-methods-use-this":"off",
+        //cant understand why i cant reasign objects, and what should i do to avoid this
+        "no-param-reassign":"off"
+    }
+  }
