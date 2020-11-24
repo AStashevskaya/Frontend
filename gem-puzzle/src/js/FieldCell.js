@@ -1,5 +1,9 @@
 import create from './utils/create';
 
+const SMALL_FONT_SIZE = 16;
+const BIG_FONT_SIZE = 36;
+const NULL = '0';
+const CHANGING_FS = 5;
 export default class FieldCell {
   constructor(puzzle, el) {
     const { left, top, ind } = el;
@@ -9,13 +13,13 @@ export default class FieldCell {
     this.top = top;
     this.ind = typeof (ind) === 'number' ? ind : '';
     this.image = puzzle.image;
-    this.q = puzzle.q;
-    this.size = this.width / this.q;
+    this.fieldSize = puzzle.fieldSize;
+    this.size = this.width / this.fieldSize;
     this.bgPosX = el.bgPosX;
     this.bgPosY = el.bgPosY;
   }
 
-  getPos() {
+  getBackgroundPosition() {
     this.bgPosX = `${-this.left * this.size}px`;
     this.bgPosY = `${-this.top * this.size}px`;
   }
@@ -30,13 +34,13 @@ export default class FieldCell {
     this.container.style.left = `${this.left * this.size}px`;
     this.container.style.backgroundPositionX = this.bgPosX;
     this.container.style.backgroundPositionY = this.bgPosY;
-    if (this.q > 5) {
-      this.container.style.fontSize = '16px';
+    if (this.fieldSize > CHANGING_FS) {
+      this.container.style.fontSize = `${SMALL_FONT_SIZE}px`;
     } else {
-      this.container.style.fontSize = '36px';
+      this.container.style.fontSize = `${BIG_FONT_SIZE}px`;
     }
     if (this.ind === '') {
-      this.container.style.opacity = '0';
+      this.container.style.opacity = NULL;
     }
     return this.container;
   }

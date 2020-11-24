@@ -1,5 +1,3 @@
 import Game from './Game';
 
-const part = new Game();
-export default { part };
-// export default {main}
+export default new Game();

@@ -1,23 +1,26 @@
 /* eslint-disable class-methods-use-this */
 import create from './utils/create';
+import addZero from './utils/addZero';
 // eslint-disable-next-line import/no-cycle
 import GameField from './GameField';
+import * as constants from './utils/constants';
 
-const main = create('div', 'game-wrapper');
-document.body.prepend(main);
+// const main = create('div', 'game-wrapper');
+// const STATE_PLAYING = 'playing';
+// const STATE_PAUSE = 'pause';
+// const STATE_START = 'start';
+// const MIN_BOARD_SIZE = 300;
+// const MAX_BOARD_SIZE = 400;
+// const CHANGING_SCREEN_WIDTH = 500;
+// const SOUND_ON = 'on';
+// const SOUND_OFF = 'off';
 
 class Game {
   constructor() {
-    this.state = 'start';
+    this.state = constants.STATE_START;
     this.time = null;
-    this.sound = 'off';
+    this.sound = constants.SOUND_OFF;
     this.width = this.getWidth();
-    this.container = create('div', 'gameSettings-wrapper');
-    this.menuList = create('ul', 'menu__list');
-    this.settings = create('div', 'settings-page');
-    this.bestScore = create('div', 'best-score');
-    this.savedGames = create('div', 'saved-games');
-    this.parent = create('div', 'parent');
     this.count = 0;
     this.progressIdentifier = null;
     this.init();
@@ -25,14 +28,22 @@ class Game {
 
   getWidth() {
     const screenWidth = Number(document.documentElement.clientWidth);
-    if (screenWidth > 500) {
-      return 400;
+    if (screenWidth > constants.CHANGING_SCREEN_WIDTH) {
+      return constants.MAX_BOARD_SIZE;
     }
-    return 300;
+    return constants.MIN_BOARD_SIZE;
   }
 
-  init() {
-    main.appendChild(this.container);
+  renderInitialboard() {
+    this.main = create('div', 'game-wrapper');
+    this.container = create('div', 'gameSettings-wrapper');
+    this.menuList = create('ul', 'menu__list');
+    this.settings = create('div', 'settings-page');
+    this.bestScore = create('div', 'best-score');
+    this.savedGames = create('div', 'saved-games');
+    this.parent = create('div', 'parent');
+    document.body.prepend(this.main);
+    this.main.appendChild(this.container);
     this.game = new GameField(this);
     this.menuRender();
     this.settingsRender();
@@ -44,89 +55,106 @@ class Game {
     this.parent.appendChild(this.bestScore);
     this.parent.appendChild(this.savedGames);
     this.generateBestScores();
-    const childs = this.parent.children;
-    this.children = Array.from(childs);
+    // this.children = Array.from(this.parent.children);
+    this.children = [...this.parent.children];
     this.stateButton = create('span', 'state-btn', 'Pause');
     const time = create('div', 'time', `Time: ${this.count}`);
     const moves = create('div', 'move', `Moves: ${this.game.moves}`);
     this.container.appendChild(this.stateButton);
     this.container.appendChild(time);
     this.container.appendChild(moves);
-    document.addEventListener('click', this.handleEvent.bind(this));
   }
 
-  handleEvent(e) {
-    if (this.sound === 'on') {
-      this.playSound();
+  init() {
+    this.renderInitialboard();
+    this.addSound();
+    this.addClicks();
+  }
+
+  addClicks() {
+    document.getElementById('sound').addEventListener('click', this.soundClick.bind(this));
+    this.stateButton.addEventListener('click', this.changeStateClick.bind(this));
+    const menuLinks = [...document.querySelectorAll('.menu__link')];
+    menuLinks.forEach((el) => el.addEventListener('click', this.menuLinkClick.bind(this)));
+    document.getElementById('back').addEventListener('click', this.menuLinkClick.bind(this));
+    const modalNewGame = document.querySelector('a[data-reset = true]');
+    modalNewGame.addEventListener('click', this.resetGame.bind(this));
+    const modalCloseLinks = [...document.querySelectorAll('#close')];
+    modalCloseLinks.forEach((el) => el.addEventListener('click', this.closeModal.bind(this)));
+  }
+
+  resetGame() {
+    this.count = 0;
+    this.progressIdentifier = setInterval(this.tick.bind(this), 1000);
+    this.game.reset();
+    this.game.modal.close();
+  }
+
+  closeModal() {
+    this.game.modal.close();
+  }
+
+  soundClick(e) {
+    if (this.sound === constants.SOUND_OFF) {
+      e.target.dataset.sound = constants.SOUND_ON;
+      e.target.innerText = `Sound ${constants.SOUND_ON}`;
+      this.sound = constants.SOUND_ON;
+    } else {
+      e.target.innerText = `Sound ${constants.SOUND_OFF}`;
+      this.sound = constants.SOUND_OFF;
+      e.target.dataset.sound = constants.SOUND_OFF;
     }
-    const { target } = e;
-    if (target.innerText === 'Resume' || target.innerText === 'Pause') {
-      if (target.innerText === 'Pause' && this.state === 'start') return;
-      if (target.innerText === 'Pause' && this.state === 'playing') {
-        this.state = 'pause';
-        this.menuList.classList.remove('hidden');
-        this.game.overlay.classList.remove('hidden');
-        clearInterval(this.progressIdentifier);
-        target.innerText = 'Resume';
-      } else {
-        this.state = 'playing';
-        this.progressIdentifier = setInterval(this.tick.bind(this), 1000);
-        this.children.forEach((el) => {
-          if (el.classList.length < 2) {
-            el.classList.add('hidden');
-          }
-        });
-        // this.menuList.classList.add('hidden')
-        this.game.overlay.classList.add('hidden');
-        target.innerText = 'Pause';
-      }
-    }
-    if (target.dataset.link) {
-      if (target.dataset.link === 'newGame') {
-        this.state = 'playing';
-        if (this.stateButton.innerText === 'Resume') {
-          this.stateButton.innerText = 'Pause';
+  }
+
+  changeStateClick(e) {
+    if (e.target.innerText === constants.STATE_PAUSE
+        && this.state === constants.STATE_START) return;
+    if (e.target.innerText === constants.STATE_PAUSE && this.state === constants.STATE_PLAYING) {
+      this.state = constants.STATE_PAUSE;
+      this.menuList.classList.remove('hidden');
+      this.game.overlay.classList.remove('hidden');
+      clearInterval(this.progressIdentifier);
+      e.target.innerText = 'Resume';
+    } else {
+      this.state = constants.STATE_PLAYING;
+      this.progressIdentifier = setInterval(this.tick.bind(this), 1000);
+      this.children.forEach((el) => {
+        if (el.classList.length < 2) {
+          el.classList.add('hidden');
         }
-        this.menuList.classList.add('hidden');
-        this.game.overlay.classList.add('hidden');
-        this.progressIdentifier = setInterval(this.tick.bind(this), 1000);
-        this.game.reset();
-      } else if (target.dataset.link === 'settings') {
-        this.menuList.classList.add('hidden');
-        this.settings.classList.remove('hidden');
-      } else if (target.dataset.link === 'bestScores') {
-        this.menuList.classList.add('hidden');
-        this.bestScore.classList.remove('hidden');
-      } else if (target.dataset.link === 'back') {
-        this.children.forEach((el) => {
-          if (el.classList.length < 2) {
-            el.classList.add('hidden');
-          }
-        });
-        this.menuList.classList.remove('hidden');
-      } else if (target.dataset.link === 'loadGame') {
-        this.getGame();
-      } else if (target.dataset.link === 'saveGame') {
-        this.saveGame();
+      });
+      this.game.overlay.classList.add('hidden');
+      e.target.innerText = constants.STATE_PAUSE;
+    }
+  }
+
+  menuLinkClick(e) {
+    if (e.target.dataset.link === 'newGame') {
+      this.state = constants.STATE_PLAYING;
+      if (this.stateButton.innerText === 'Resume') {
+        this.stateButton.innerText = constants.STATE_PAUSE;
       }
-    } else if (target.dataset.sound === 'off' || target.dataset.sound === 'on') {
-      const soundCheck = document.getElementById('sound');
-      if (this.sound === 'off') {
-        target.dataset.sound = 'on';
-        soundCheck.innerText = 'Sound On';
-        this.sound = 'on';
-      } else {
-        soundCheck.innerText = 'Sound Off';
-        this.sound = 'off';
-        target.dataset.sound = 'off';
-      }
-    } else if (target.dataset.close) {
-      this.game.modal.close();
-    } else if (target.dataset.reset) {
-      this.count = 0;
+      this.menuList.classList.add('hidden');
+      this.game.overlay.classList.add('hidden');
       this.progressIdentifier = setInterval(this.tick.bind(this), 1000);
       this.game.reset();
-      this.game.modal.close();
+    } else if (e.target.dataset.link === 'settings') {
+      this.menuList.classList.add('hidden');
+      this.settings.classList.remove('hidden');
+    } else if (e.target.dataset.link === 'bestScores') {
+      this.menuList.classList.add('hidden');
+      this.bestScore.classList.remove('hidden');
+    } else if (e.target.dataset.link === 'back') {
+      this.children.forEach((el) => {
+        if (el.classList.length < 2) {
+          el.classList.add('hidden');
+        }
+      });
+      this.menuList.classList.remove('hidden');
+    } else if (e.target.dataset.link === 'loadGame') {
+      this.loadGame();
+    } else if (e.target.dataset.link === 'saveGame') {
+      this.saveGame();
     }
   }
 
@@ -141,7 +169,6 @@ class Game {
   }
 
   settingsRender() {
-    // this.formRender()
     this.settings.classList.add('hidden');
     this.settings.innerHTML = `<span class="menu-header">Settings</span>
         <span class="menu-text_big">Field Size</span>
@@ -165,7 +192,7 @@ class Game {
 <input type="radio" name="size" id="input" value="8"> 8 X 8
 </label>
     </form>
-    <span id="sound" data-sound="off" class="menu-text_big sound">Sound Off</span>
+    <span id="sound" data-sound="off" class="menu-text_big sound">Sound off</span>
     <span class="menu-text_big" id="back" data-link="back" >Go back</span>
     `;
   }
@@ -176,7 +203,6 @@ class Game {
         <ul class="best-score_list">
         <li class="best-score_link menu-text_small"><span>Moves</span><span>Time</span></li>
         </ul>
-
         <span class="menu-text_big" id="back" data-link="back" >Go back</span>
         `;
   }
@@ -190,14 +216,10 @@ class Game {
   }
 
   tick() {
-    this.count++;
+    this.count += 1;
     this.sec = this.count >= 60 ? this.count % 60 : this.count;
     this.min = Math.floor(this.count / 60);
-    document.querySelector('.time').innerHTML = `Time: ${this.addZero(this.min)}: ${this.addZero(this.sec)}`;
-  }
-
-  addZero(n) {
-    return n < 10 ? `0${n}` : `${n}`;
+    document.querySelector('.time').innerHTML = `Time: ${addZero(this.min)}: ${addZero(this.sec)}`;
   }
 
   saveGame() {
@@ -215,7 +237,7 @@ class Game {
     this.savedGames.classList.remove('hidden');
   }
 
-  getGame() {
+  loadGame() {
     let loadedGame = localStorage.getItem('game');
     if (!loadedGame) {
       const loadedGameText = document.querySelector('.load_game');
@@ -230,12 +252,11 @@ class Game {
     }
   }
 
-  playSound() {
+  addSound() {
     this.audio = create('audio');
     this.audio.setAttribute('src', './assets/sounds/english.mp3');
     this.audio.load();
-    this.audio.play();
-    this.audio = undefined;
+    // this.audio.play();
   }
 
   generateBestScores() {
@@ -248,11 +269,11 @@ class Game {
     if (bestScores.length > 10) {
       bestScores = bestScores.slice(0, 10);
     }
-    // eslint-disable-next-line no-return-assign
-    bestScores.forEach((el, ind) => html += `<li class="best-score_link menu-text_small"><span>${ind + 1}.</span><span>${el.size}x${el.size}</span><span>${el.moves}</span><span> ${this.addZero(Math.floor(el.count / 60))}: ${this.addZero(el.count % 60)}</span></li>`);
+    bestScores.forEach((el, ind) => {
+      html += `<li class="best-score_link menu-text_small"><span>${ind + 1}.</span><span>${el.size}x${el.size}</span><span>${el.moves}</span><span> ${addZero(Math.floor(el.count / 60))}: ${addZero(el.count % 60)}</span></li>`;
+    });
     bestScoresContainer.innerHTML = html;
   }
 }
 
-// const part = new Game()
 export default Game;
