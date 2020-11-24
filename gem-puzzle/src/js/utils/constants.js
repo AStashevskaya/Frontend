@@ -8,6 +8,13 @@ const SOUND_ON = 'on';
 const SOUND_OFF = 'off';
 const ANIMATION_DURATION = 300;
 const LAST_BEST_SCORE = 10;
+const NEW_GAME = 'newGame';
+const RESUME = 'Resume';
+const SETTINGS = 'settings';
+const BESTSCORES = 'bestScores';
+const BACK = 'back';
+const SAVE_GAME = 'saveGame';
+const LOAD_GAME = 'loadGame';
 
 export {
   STATE_PLAYING,
@@ -20,4 +27,11 @@ export {
   SOUND_OFF,
   ANIMATION_DURATION,
   LAST_BEST_SCORE,
+  BESTSCORES,
+  SETTINGS,
+  RESUME,
+  NEW_GAME,
+  LOAD_GAME,
+  SAVE_GAME,
+  BACK,
 };

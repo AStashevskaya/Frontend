@@ -275,13 +275,13 @@ export default class GameField {
     game.count = this.settings.count;
     this.bestScores.push(game);
     const bestJson = JSON.stringify(this.bestScores);
-    localStorage.setItem('bestScores', bestJson);
+    localStorage.setItem(constants.BESTSCORES, bestJson);
     this.settings.generateBestScores();
     this.modal.open();
   }
 
   generateBestScoreArr() {
-    let bestScores = localStorage.getItem('bestScores');
+    let bestScores = localStorage.getItem(constants.BESTSCORES);
     if (!bestScores) return [];
     bestScores = JSON.parse(bestScores);
     return bestScores;

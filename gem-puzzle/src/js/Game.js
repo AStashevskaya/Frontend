@@ -114,7 +114,7 @@ class Game {
       this.menuList.classList.remove('hidden');
       this.game.overlay.classList.remove('hidden');
       clearInterval(this.progressIdentifier);
-      e.target.innerText = 'Resume';
+      e.target.innerText = constants.RESUME;
     } else {
       this.state = constants.STATE_PLAYING;
       this.progressIdentifier = setInterval(this.tick.bind(this), 1000);
@@ -129,42 +129,42 @@ class Game {
   }
 
   menuLinkClick(e) {
-    if (e.target.dataset.link === 'newGame') {
+    if (e.target.dataset.link === constants.NEW_GAME) {
       this.state = constants.STATE_PLAYING;
-      if (this.stateButton.innerText === 'Resume') {
+      if (this.stateButton.innerText === constants.RESUME) {
         this.stateButton.innerText = constants.STATE_PAUSE;
       }
       this.menuList.classList.add('hidden');
       this.game.overlay.classList.add('hidden');
       this.progressIdentifier = setInterval(this.tick.bind(this), 1000);
       this.game.reset();
-    } else if (e.target.dataset.link === 'settings') {
+    } else if (e.target.dataset.link === constants.SETTINGS) {
       this.menuList.classList.add('hidden');
       this.settings.classList.remove('hidden');
-    } else if (e.target.dataset.link === 'bestScores') {
+    } else if (e.target.dataset.link === constants.BESTSCORES) {
       this.menuList.classList.add('hidden');
       this.bestScore.classList.remove('hidden');
-    } else if (e.target.dataset.link === 'back') {
+    } else if (e.target.dataset.link === constants.BACK) {
       this.children.forEach((el) => {
         if (el.classList.length < 2) {
           el.classList.add('hidden');
         }
       });
       this.menuList.classList.remove('hidden');
-    } else if (e.target.dataset.link === 'loadGame') {
+    } else if (e.target.dataset.link === constants.LOAD_GAME) {
       this.loadGame();
-    } else if (e.target.dataset.link === 'saveGame') {
+    } else if (e.target.dataset.link === constants.SAVE_GAME) {
       this.saveGame();
     }
   }
 
   menuRender() {
     this.menuList.innerHTML = `
-<span class="menu__link" data-link="newGame">New Game</span>
- <span class="menu__link" data-link="saveGame">Save Game</span>
- <span class="menu__link" data-link="loadGame">Load Game</span>
- <span class="menu__link" data-link="bestScores">Best Scores</span>
- <span class="menu__link" data-link="settings">Settings</span>
+<span class="menu__link" data-link=${constants.NEW_GAME}>New Game</span>
+ <span class="menu__link" data-link=${constants.SAVE_GAME}>Save Game</span>
+ <span class="menu__link" data-link=${constants.LOAD_GAME}>Load Game</span>
+ <span class="menu__link" data-link=${constants.BESTSCORES}>Best Scores</span>
+ <span class="menu__link" data-link=${constants.SETTINGS}>Settings</span>
 `;
   }
 
@@ -193,7 +193,7 @@ class Game {
 </label>
     </form>
     <span id="sound" data-sound="off" class="menu-text_big sound">Sound off</span>
-    <span class="menu-text_big" id="back" data-link="back" >Go back</span>
+    <span class="menu-text_big" id="back" data-link=${constants.BACK}>Go back</span>
     `;
   }
 
@@ -203,7 +203,7 @@ class Game {
         <ul class="best-score_list">
         <li class="best-score_link menu-text_small"><span>Moves</span><span>Time</span></li>
         </ul>
-        <span class="menu-text_big" id="back" data-link="back" >Go back</span>
+        <span class="menu-text_big" id="back" data-link=${constants.BACK} >Go back</span>
         `;
   }
 
@@ -211,7 +211,7 @@ class Game {
     this.savedGames.classList.add('hidden');
     this.savedGames.innerHTML = `
         <span class="load_game menu-text_small">You haven't got any saved games yet</span>
-        <span class="menu-text_big" id="back" data-link="back" >Go back</span>
+        <span class="menu-text_big" id="back" data-link=${constants.BACK} >Go back</span>
         `;
   }
 
