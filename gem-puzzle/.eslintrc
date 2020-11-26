@@ -3,7 +3,6 @@
     "extends": ["airbnb/base"],
     "rules": {
         "linebreak-style":"off",
-        "class-methods-use-this":"off",
         //cant understand why i cant reasign objects, and what should i do to avoid this
         "no-param-reassign": ["error", { "props": false }]
     },

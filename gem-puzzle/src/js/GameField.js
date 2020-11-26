@@ -10,7 +10,7 @@ export default class GameField {
     this.moves = 0;
     this.fieldSize = 4;
     this.buttons = [];
-    this.correctTemplate = [];
+    this.winTemplate = [];
     this.width = this.settings.width;
     this.count = 0;
     this.currentTemplate = [];
@@ -20,14 +20,14 @@ export default class GameField {
 
   init() {
     this.generateLayout();
-    this.image = this.getImage(images);
+    this.image = GameField.getImage(images);
     this.modal = new Modal(this);
-    this.makeCorrectTemplate();
-    this.render(this.correctTemplate);
+    this.generateWinTemplate();
+    this.render(this.winTemplate);
   }
 
   generateLayout() {
-    this.bestScores = this.generateBestScoreArr();
+    this.bestScores = GameField.generateBestScoreArr();
     this.container = create('div', 'gamefield');
     this.overlay = create('span', 'overlay');
     this.container.style.width = `${this.width}px`;
@@ -36,19 +36,19 @@ export default class GameField {
     this.container.appendChild(this.overlay);
   }
 
-  makeCorrectTemplate() {
-    this.correctTemplate = [];
+  generateWinTemplate() {
+    this.winTemplate = [];
     for (let i = 0; i < (this.fieldSize ** 2) - 1; i += 1) {
       const left = i % this.fieldSize;
       const top = (i - left) / this.fieldSize;
-      const ind = i + 1;
-      this.correctTemplate.push(new FieldCell(this, { left, top, ind }));
+      const idx = i + 1;
+      this.winTemplate.push(new FieldCell(this, { left, top, idx }));
     }
-    this.correctTemplate.push(new FieldCell(this, { left: this.fieldSize - 1, top: this.fieldSize - 1, ind: '' }));
-    this.correctTemplate.forEach((el) => el.getBackgroundPosition());
+    this.winTemplate.push(new FieldCell(this, { left: this.fieldSize - 1, top: this.fieldSize - 1, idx: '' }));
+    this.winTemplate.forEach((el) => el.getBackgroundPosition());
   }
 
-  loadGame(options) {
+  renderLoadGame(options) {
     if (!options) return;
     const {
       size, image, moves, template,
@@ -57,7 +57,7 @@ export default class GameField {
     this.image = image;
     this.moves = moves;
     this.currentTemplate = template;
-    this.makeCorrectTemplate();
+    this.generateWinTemplate();
     this.buttons = [];
     this.currentTemplate.forEach((el) => this.buttons.push(new FieldCell(this, el)));
     document.querySelector('.move').innerHTML = `Moves: ${this.moves}`;
@@ -70,34 +70,39 @@ export default class GameField {
       const el = obj.render();
       if (el.textContent) {
         el.draggable = true;
-        el.addEventListener('dragstart', this.getButton.bind(this));
+        el.addEventListener('dragstart', this.handleCellDragStart.bind(this));
       } else {
-        el.addEventListener('dragover', this.overButton.bind(this));
-        el.addEventListener('drop', this.putButton.bind(this));
+        el.addEventListener('dragover', GameField.handleCellMove.bind(GameField));
+        el.addEventListener('drop', this.handleCellDragEnd.bind(this));
       }
-      el.addEventListener('click', this.moveButton.bind(this));
+      el.addEventListener('click', this.handleCellClick.bind(this));
       this.container.appendChild(el);
     });
   }
 
   shuffle() {
-    const arr = [...this.correctTemplate];
-    let empty = arr.pop();
+    const arr = [...this.winTemplate];
+    let emptyCeil = arr.pop();
     this.buttons = [];
-    const numbers = this.sortArray();
+    const numbers = this.makeshuffledNumbersArray();
+
     for (let i = 0; i < (this.fieldSize ** 2) - 1; i += 1) {
       const left = i % this.fieldSize;
       const top = (i - left) / this.fieldSize;
-      const ind = numbers[i];
-      const correctBtn = this.correctTemplate.find((el) => el.ind === ind);
-      const field = new FieldCell(this, { left, top, ind });
+      const idx = numbers[i];
+      const correctBtn = this.winTemplate.find((el) => el.idx === idx);
+      const field = new FieldCell(this, { left, top, idx });
+
       field.bgPosX = correctBtn.bgPosX;
       field.bgPosY = correctBtn.bgPosY;
+
       this.buttons.push(field);
     }
-    empty = new FieldCell(this, { left: this.fieldSize - 1, top: this.fieldSize - 1, ind: '' });
-    empty.getBackgroundPosition();
-    this.buttons.push(empty);
+
+    emptyCeil = new FieldCell(this, { left: this.fieldSize - 1, top: this.fieldSize - 1, idx: '' });
+    emptyCeil.getBackgroundPosition();
+
+    this.buttons.push(emptyCeil);
     this.render(this.buttons);
   }
 
@@ -110,88 +115,108 @@ export default class GameField {
         }
       }
     }
+
     if (count % 2 === 0) return true;
     return false;
   }
 
-  sortArray() {
+  makeshuffledNumbersArray() {
     let numbers = [];
     numbers = [...Array((this.fieldSize ** 2) - 1).keys()]
       .sort(() => Math.random() - 0.5)
       .map((el) => el + 1);
     if (!this.checkSolving(numbers)) {
-      this.sortArray();
+      this.makeshuffledNumbersArray();
     }
     return numbers;
   }
 
-  getImage(arr) {
-    const ind = Math.floor(Math.random() * arr.length);
-    return arr[ind];
+  static getImage(arr) {
+    const idx = Math.floor(Math.random() * arr.length);
+    return arr[idx];
   }
 
   reset() {
-    this.image = this.getImage(images);
+    this.image = GameField.getImage(images);
     this.prevFieldSize = this.fieldSize;
-    this.fieldSize = this.checkSize();
-    if (this.fieldSize !== this.prevFieldSize) this.makeCorrectTemplate();
+    this.fieldSize = GameField.checkSize();
+
+    if (this.fieldSize !== this.prevFieldSize) this.generateWinTemplate();
+
     this.deleteCells();
-    setTimeout(() => {
-      this.shuffle();
-    }, 0);
+    this.shuffle();
     this.moves = 0;
     document.querySelector('.move').innerHTML = `Moves: ${this.moves}`;
     this.settings.count = 0;
   }
 
-  moveButton(e) {
+  handleCellClick(e) {
     if (this.settings.state === constants.STATE_PAUSE) return;
+
     this.currentTemplate = [];
     const number = Number(e.target.innerHTML);
-    const clickedObj = this.buttons.find((el) => el.ind === number);
-    const emptyObj = this.buttons.find((el) => el.ind === '');
-    if (!clickedObj || !emptyObj) return;
-    const { left, top } = clickedObj;
-    const emptyLeft = emptyObj.left;
-    const emptyTop = emptyObj.top;
+    const clickedCeil = this.buttons.find((el) => el.idx === number);
+    const emptyCeil = this.buttons.find((el) => el.idx === '');
+    const nothingClicked = !clickedCeil || !emptyCeil;
+
+    if (nothingClicked) return;
+
+    this.swapCeilPositions(clickedCeil, emptyCeil);
+    this.saveCurrentTemplate();
+    this.findIfWinTemplate();
+  }
+
+  swapCeilPositions(clicked, empty) {
+    const clickedCeil = clicked;
+    const emptyCeil = empty;
+    const { left, top } = clickedCeil;
+    const emptyLeft = emptyCeil.left;
+    const emptyTop = emptyCeil.top;
+
     const sum = Math.abs(left - emptyLeft) + Math.abs(top - emptyTop);
     if (sum !== 1) return;
+
     this.moves += 1;
     document.querySelector('.move').innerHTML = `Moves: ${this.moves}`;
     if (this.settings.sound === constants.SOUND_ON) {
       this.settings.audio.play();
     }
-    Object.assign(emptyObj, { left, top });
+    Object.assign(emptyCeil, { left, top });
+
     if (left !== emptyLeft) {
-      this.animate('left', clickedObj, left, emptyLeft);
-      clickedObj.container.style.top = `${clickedObj.top * clickedObj.size}px`;
-    } else {
-      this.animate('top', clickedObj, top, emptyTop);
-      clickedObj.container.style.left = `${clickedObj.left * clickedObj.size}px`;
+      GameField.animate('left', clickedCeil, left, emptyLeft);
+      clickedCeil.container.style.top = `${clickedCeil.top * clickedCeil.size}px`;
     }
-    clickedObj.left = emptyLeft;
-    clickedObj.top = emptyTop;
-    emptyObj.container.style.top = `${emptyObj.top * emptyObj.size}px`;
-    emptyObj.container.style.left = `${emptyObj.left * emptyObj.size}px`;
-    this.buttons.forEach((el) => {
-      const {
-        // eslint-disable-next-line no-shadow
-        left, top, ind, bgPosY, bgPosX,
-      } = el;
-      this.currentTemplate.push({
-        left, top, ind, bgPosY, bgPosX,
-      });
-    });
-    this.checkTemplate();
+    if (top !== emptyTop) {
+      GameField.animate('top', clickedCeil, top, emptyTop);
+      clickedCeil.container.style.left = `${clickedCeil.left * clickedCeil.size}px`;
+    }
+
+    clickedCeil.left = emptyLeft;
+    clickedCeil.top = emptyTop;
+    emptyCeil.container.style.top = `${emptyCeil.top * emptyCeil.size}px`;
+    emptyCeil.container.style.left = `${emptyCeil.left * emptyCeil.size}px`;
   }
 
-  animate(position, obj, currPos, destination) {
+  saveCurrentTemplate() {
+    this.buttons.forEach((el) => {
+      const {
+        left, top, idx, bgPosY, bgPosX,
+      } = el;
+      this.currentTemplate.push({
+        left, top, idx, bgPosY, bgPosX,
+      });
+    });
+  }
+
+  static animate(position, obj, currPos, destination) {
     const FRAME_RATE = 10;
     const objNextPosition = destination;
     const changingPosition = position;
     let objCurrentPosition = currPos;
     const step = (FRAME_RATE * Math.abs((objNextPosition - objCurrentPosition)))
                   / constants.ANIMATION_DURATION;
+
     const id = setInterval(() => {
       if (objCurrentPosition < objNextPosition) {
         objCurrentPosition = Math.min(objNextPosition, objCurrentPosition + step);
@@ -208,86 +233,91 @@ export default class GameField {
     }, FRAME_RATE);
   }
 
-  getButton(e) {
+  handleCellDragStart(e) {
     if (this.settings.state === constants.STATE_PAUSE) return;
+
     const number = Number(e.target.innerHTML);
-    this.clickedObj = this.buttons.find((el) => el.ind === number);
+    this.clickedCeil = this.buttons.find((el) => el.idx === number);
   }
 
-  putButton() {
+  handleCellDragEnd() {
     this.currentTemplate = [];
-    const emptyObj = this.buttons.find((el) => el.ind === '');
-    if (!this.clickedObj || !emptyObj) return;
-    const { left, top } = this.clickedObj;
-    const emptyLeft = emptyObj.left;
-    const emptyTop = emptyObj.top;
+    const emptyCeil = this.buttons.find((el) => el.idx === '');
+    const nothingClicked = !this.clickedCeil || !emptyCeil;
+
+    if (nothingClicked) return;
+    const { left, top } = this.clickedCeil;
+    const emptyLeft = emptyCeil.left;
+    const emptyTop = emptyCeil.top;
+
     const sum = Math.abs(left - emptyLeft) + Math.abs(top - emptyTop);
     if (sum !== 1) return;
+
     this.moves += 1;
     document.querySelector('.move').innerHTML = `Moves: ${this.moves}`;
     if (this.settings.sound === constants.SOUND_ON) {
       this.settings.audio.play();
     }
-    Object.assign(emptyObj, { left, top });
-    this.clickedObj.left = emptyLeft;
-    this.clickedObj.top = emptyTop;
-    this.clickedObj.container.style.top = `${this.clickedObj.top * this.clickedObj.size}px`;
-    this.clickedObj.container.style.left = `${this.clickedObj.left * this.clickedObj.size}px`;
-    emptyObj.container.style.top = `${emptyObj.top * emptyObj.size}px`;
-    emptyObj.container.style.left = `${emptyObj.left * emptyObj.size}px`;
-    this.buttons.forEach((el) => {
-      const {
-        // eslint-disable-next-line no-shadow
-        left, top, ind, bgPosY, bgPosX,
-      } = el;
-      this.currentTemplate.push({
-        left, top, ind, bgPosY, bgPosX,
-      });
-    });
-    this.checkTemplate();
+    Object.assign(emptyCeil, { left, top });
+
+    this.clickedCeil.left = emptyLeft;
+    this.clickedCeil.top = emptyTop;
+    this.clickedCeil.container.style.top = `${this.clickedCeil.top * this.clickedCeil.size}px`;
+    this.clickedCeil.container.style.left = `${this.clickedCeil.left * this.clickedCeil.size}px`;
+    emptyCeil.container.style.top = `${emptyCeil.top * emptyCeil.size}px`;
+    emptyCeil.container.style.left = `${emptyCeil.left * emptyCeil.size}px`;
+
+    this.saveCurrentTemplate();
+    this.findIfWinTemplate();
   }
 
-  overButton(e) {
+  static handleCellMove(e) {
     e.preventDefault();
   }
 
-  checkTemplate() {
+  findIfWinTemplate() {
     for (let i = 0; i < this.buttons.length - 1; i += 1) {
-      const ind = i + 1;
-      const correctObj = this.correctTemplate.find((el) => el.ind === ind);
-      const currentObj = this.buttons.find((el) => el.ind === ind);
+      const idx = i + 1;
+      const correctObj = this.winTemplate.find((el) => el.idx === idx);
+      const currentObj = this.buttons.find((el) => el.idx === idx);
+
       if (correctObj.left !== currentObj.left) return;
       if (correctObj.top !== currentObj.top) return;
     }
-    this.ifWin();
+
+    this.isWin();
   }
 
-  ifWin() {
-    const emptyObj = this.buttons.find((el) => el.ind === '');
-    emptyObj.container.style.opacity = '1';
+  isWin() {
+    const emptyCeil = this.buttons.find((el) => el.idx === '');
+    emptyCeil.container.style.opacity = '1';
     document.querySelectorAll('.fieldcell').forEach((el) => {
       el.innerText = '';
       el.style.borderRadius = '0';
     });
+
     const game = {};
     game.moves = this.moves;
     game.size = this.fieldSize;
     game.count = this.settings.count;
+
     this.bestScores.push(game);
+
     const bestJson = JSON.stringify(this.bestScores);
     localStorage.setItem(constants.BESTSCORES, bestJson);
+
     this.settings.generateBestScores();
     this.modal.open();
   }
 
-  generateBestScoreArr() {
+  static generateBestScoreArr() {
     let bestScores = localStorage.getItem(constants.BESTSCORES);
     if (!bestScores) return [];
     bestScores = JSON.parse(bestScores);
     return bestScores;
   }
 
-  checkSize() {
+  static checkSize() {
     return Number(document.querySelector('input[name=size]:checked').value);
   }
 
@@ -296,12 +326,12 @@ export default class GameField {
     children.forEach((el) => {
       if (el !== this.overlay) {
         if (el.textContent) {
-          el.removeEventListener('dragstart', this.getButton.bind(this));
+          el.removeEventListener('dragstart', this.handleCellDragStart.bind(this));
         } else {
-          el.removeEventListener('dragover', this.overButton.bind(this));
-          el.removeEventListener('drop', this.putButton.bind(this));
+          el.removeEventListener('dragover', GameField.handleCellMove.bind(GameField));
+          el.removeEventListener('drop', this.handleCellDragEnd.bind(this));
         }
-        el.removeEventListener('click', this.moveButton.bind(this));
+        el.removeEventListener('click', this.handleCellClick.bind(this));
         this.container.removeChild(el);
       }
     });
