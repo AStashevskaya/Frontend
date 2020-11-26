@@ -6,6 +6,7 @@
   "scripts": {
     "eslint": "eslint",
     "eslint:fix": "eslint --fix",
+    "start": "webpack serve",
     "build": "webpack",
     "dev": "webpack --mode development --watch",
     "prod": "webpack --mode production"
@@ -36,9 +37,7 @@
     "sass-loader": "^10.1.0",
     "style-loader": "^2.0.0",
     "webpack": "^5.6.0",
-    "webpack-cli": "^4.2.0"
-  },
-  "dependencies": {
-    "bootswatch": "^4.5.3"
+    "webpack-cli": "^4.2.0",
+    "webpack-dev-server": "^3.11.0"
   }
 }

@@ -1,0 +1,15 @@
+@mixin colomnFlex($j-c: center, $dir: column){
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $j-c;
+  }
+  @mixin centerFlex(){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @mixin fontA {
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+  }

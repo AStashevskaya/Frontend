@@ -1,4 +1,4 @@
-// const webpack = require('webpack')
+const webpack = require('webpack');
 const path = require('path');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -14,6 +14,14 @@ module.exports = (env, options) => {
     output: {
       path: path.resolve(__dirname, './dist'),
       filename: '[name].bundle.js',
+    },
+    devServer: {
+      historyApiFallback: true,
+      contentBase: path.resolve(__dirname, './dist'),
+      open: true,
+      compress: true,
+      hot: true,
+      port: 8080,
     },
     optimization: {
       splitChunks: {
@@ -51,6 +59,7 @@ module.exports = (env, options) => {
       ],
     },
     plugins: [
+      new webpack.HotModuleReplacementPlugin(),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
         title: 'Gem-puzzle',
