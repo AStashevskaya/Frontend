@@ -42,7 +42,21 @@ module.exports = (env, options) => {
         // CSS, PostCSS, Sass
         {
           test: /\.(scss|css)$/,
-          use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+          // use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+          use: [
+            {
+              loader: MiniCssExtractPlugin.loader,
+              options: {
+                publicPath: (resourcePath, context) => `${path.relative(path.dirname(resourcePath), context)}/`,
+              },
+            },
+            {
+              loader: 'css-loader',
+            },
+            {
+              loader: 'sass-loader',
+            },
+          ],
         },
         {
           test: /\.(png|svg|jpe?g|gif)$/i,

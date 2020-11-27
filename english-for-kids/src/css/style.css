@@ -245,6 +245,16 @@ input:checked + .switcher__identificator:before {
           align-items: baseline;
 }
 
+.content-container {
+  padding-top: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
 .header__nav {
   position: relative;
   display: -webkit-box;
@@ -295,6 +305,159 @@ input:checked + .switcher__identificator:before {
   left: 0;
   overflow: hidden;
   overflow-y: auto;
+}
+
+.category-card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: flex;
+  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 250px;
+  height: 250px;
+  margin: 30px 10px;
+  border: 2px solid red;
+  cursor: pointer;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: all .4s ease-in;
+  transition: all .4s ease-in;
+  -webkit-box-shadow: 0px 2px 9px 8px rgba(13, 13, 13, 0.1);
+          box-shadow: 0px 2px 9px 8px rgba(13, 13, 13, 0.1);
+}
+
+.category-card:hover {
+  -webkit-box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.1);
+          box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.1);
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-transition: all .4s ease-in;
+  transition: all .4s ease-in;
+}
+
+.category-card__wrap {
+  height: 100%;
+  width: 100%;
+  display: block;
+  text-decoration: none;
+}
+
+.category-card__image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.category-card__title {
+  font-size: 25px;
+  font-style: bold;
+}
+
+.wrap {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: #BBDEFB;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.card {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  display: flex;
+  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 30px 10px;
+  border: 2px solid red;
+  cursor: pointer;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: all .4s ease-in;
+  transition: all .4s ease-in;
+  -webkit-box-shadow: 0px 2px 9px 8px rgba(13, 13, 13, 0.1);
+          box-shadow: 0px 2px 9px 8px rgba(13, 13, 13, 0.1);
+}
+
+.card:hover {
+  -webkit-box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.1);
+          box-shadow: 0px 2px 35px 14px rgba(13, 13, 13, 0.1);
+  -webkit-transform: scale(1.05);
+          transform: scale(1.05);
+  -webkit-transition: all .4s ease-in;
+  transition: all .4s ease-in;
+}
+
+.card__image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.card__front, .card__back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-transition: 1s;
+  transition: 1s;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  border-radius: 10px;
+}
+
+.card__front {
+  background-color: aqua;
+}
+
+.card__back {
+  background-color: blue;
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
 }
 
 body {
