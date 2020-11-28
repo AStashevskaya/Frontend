@@ -74,7 +74,7 @@ module.exports = (env, options) => {
       new webpack.HotModuleReplacementPlugin(),
       new CleanWebpackPlugin(),
       new HtmlWebpackPlugin({
-        title: 'Gem-puzzle',
+        title: 'English-for-kids',
         template: path.resolve(__dirname, './src/index.html'),
         filename: 'index.html',
       }),
