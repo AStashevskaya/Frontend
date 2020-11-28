@@ -2,6 +2,7 @@ import create from './utils/create';
 import FieldCell from './FieldCell';
 import Modal from './Popup';
 import images from './layouts/images';
+// import Game from './Game';
 import * as constants from './utils/constants';
 
 export default class GameField {
@@ -20,47 +21,59 @@ export default class GameField {
 
   init() {
     this.generateLayout();
+
     this.image = GameField.getImage(images);
     this.modal = new Modal(this);
+
     this.generateWinTemplate();
     this.render(this.winTemplate);
   }
 
   generateLayout() {
     this.bestScores = GameField.generateBestScoreArr();
+
     this.container = create('div', 'gamefield');
     this.overlay = create('span', 'overlay');
+
     this.container.style.width = `${this.width}px`;
     this.container.style.height = `${this.width}px`;
+
     document.querySelector('.game-wrapper').appendChild(this.container);
     this.container.appendChild(this.overlay);
   }
 
   generateWinTemplate() {
     this.winTemplate = [];
+
     for (let i = 0; i < (this.fieldSize ** 2) - 1; i += 1) {
       const left = i % this.fieldSize;
       const top = (i - left) / this.fieldSize;
       const idx = i + 1;
       this.winTemplate.push(new FieldCell(this, { left, top, idx }));
     }
+
     this.winTemplate.push(new FieldCell(this, { left: this.fieldSize - 1, top: this.fieldSize - 1, idx: '' }));
     this.winTemplate.forEach((el) => el.getBackgroundPosition());
   }
 
   renderLoadGame(options) {
     if (!options) return;
+
     const {
       size, image, moves, template,
     } = options;
+
     this.fieldSize = size;
     this.image = image;
     this.moves = moves;
     this.currentTemplate = template;
+
     this.generateWinTemplate();
     this.buttons = [];
+
     this.currentTemplate.forEach((el) => this.buttons.push(new FieldCell(this, el)));
     document.querySelector('.move').innerHTML = `Moves: ${this.moves}`;
+
     this.deleteCells();
     this.render(this.buttons);
   }
@@ -68,6 +81,7 @@ export default class GameField {
   render(arr) {
     arr.forEach((obj) => {
       const el = obj.render();
+
       if (el.textContent) {
         el.draggable = true;
         el.addEventListener('dragstart', this.handleCellDragStart.bind(this));
@@ -75,6 +89,7 @@ export default class GameField {
         el.addEventListener('dragover', GameField.handleCellMove.bind(GameField));
         el.addEventListener('drop', this.handleCellDragEnd.bind(this));
       }
+
       el.addEventListener('click', this.handleCellClick.bind(this));
       this.container.appendChild(el);
     });
@@ -108,6 +123,7 @@ export default class GameField {
 
   checkSolving(arr) {
     let count = this.fieldSize;
+
     for (let i = 0; i < arr.length; i += 1) {
       for (let j = i + 1; j < arr.length; j += 1) {
         if (arr[i] > arr[j]) {
@@ -125,6 +141,7 @@ export default class GameField {
     numbers = [...Array((this.fieldSize ** 2) - 1).keys()]
       .sort(() => Math.random() - 0.5)
       .map((el) => el + 1);
+
     if (!this.checkSolving(numbers)) {
       this.makeshuffledNumbersArray();
     }
@@ -145,6 +162,7 @@ export default class GameField {
 
     this.deleteCells();
     this.shuffle();
+
     this.moves = 0;
     document.querySelector('.move').innerHTML = `Moves: ${this.moves}`;
     this.settings.count = 0;

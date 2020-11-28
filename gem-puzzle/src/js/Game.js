@@ -1,4 +1,3 @@
-/* eslint-disable class-methods-use-this */
 import create from './utils/create';
 import addZero from './utils/addZero';
 // eslint-disable-next-line import/no-cycle
@@ -18,8 +17,9 @@ class Game {
 
   static getWidth() {
     const screenWidth = Number(document.documentElement.clientWidth);
+
     if (screenWidth > constants.CHANGING_SCREEN_WIDTH) {
-      return constants.MAX_BOARD_SIZE;
+      return constants.MIN_BOARD_SIZE;
     }
     return constants.MIN_BOARD_SIZE;
   }
@@ -259,8 +259,8 @@ class Game {
     let loadedGame = localStorage.getItem('game');
 
     if (!loadedGame) {
-      const loadedGameText = document.querySelector('.load_game');
-      loadedGameText.innerText = 'You have no saved games yet';
+      // const loadedGameText = document.querySelector('.load_game');
+      // loadedGameText.innerText = 'You have no saved games yet';
       this.menuList.classList.add('hidden');
       this.savedGames.classList.remove('hidden');
     }
@@ -279,6 +279,7 @@ class Game {
     this.audio.load();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   generateBestScores() {
     let bestScores = localStorage.getItem('bestScores');
     const bestScoresContainer = document.querySelector('.best-score_list');

@@ -1,69 +1,58 @@
-.modal-open{
+.modal-open {
 overflow: hidden;
 height: 100vh;
 }
 
-
-.modal-close{
+.modal-close {
     overflow: auto;
     height: 100%;
 }
 
-
-
-.modal__overlay, .modal__window{
+.modal__overlay, .modal__window {
   opacity: 0;
   z-index:  -1;
 }
 
-
-.modal.open   .modal__overlay{
+.modal.open .modal__overlay {
   opacity: 1;
   z-index: 1000;
 }
 
-
-.modal.open .modal__window{
+.modal.open .modal__window {
   opacity: 1;
   z-index: 1000;
-
-
 }
-.modal.open   .modal__overlay{
+
+.modal.open .modal__overlay {
   display: block  !important;
   background-color: rgba(0, 0, 0, .5);
 }
 
-
-.modal.open   .modal__window{
+.modal.open .modal__window {
   transform: translateY(80%);
 }
 
+.modal.hide .modal__overlay {
+  opacity: 1;
+  z-index: 1000;
+}
 
-.modal.hide  .modal__overlay{
+.modal.hide .modal__window {
   opacity: 1;
   z-index: 1000;
 }
 
 
-.modal.hide .modal__window{
-  opacity: 1;
-  z-index: 1000;
-}
-
-
-.modal.hide   .modal__overlay{
+.modal.hide .modal__overlay {
   background-color: rgba(0, 0, 0, 0);
   display: block !important;
 }
 
-
-.modal.hide   .modal__window{
+.modal.hide .modal__window {
   transform: translateY(-200px);
 }
 
-
-.modal__overlay{
+.modal__overlay {
   position: fixed;
   top: 0;
   left: 0;
@@ -76,8 +65,7 @@ height: 100vh;
   z-index: 1000;
 }
 
-
-.modal__window{
+.modal__window {
   margin: 0 auto;
   transform: translateY(-200px);
   transition: transform .3s ease-in;
@@ -87,15 +75,13 @@ height: 100vh;
   cursor: default;
 }
 
-
-.modal__header{
+.modal__header {
   padding: 5px 10px;
   border-radius: 5px 5px 0 0;
   background-color: rgb(245,242,51);;
   display: flex;
   justify-content: flex-end;
 }
-
 
 .close_btn {
   font-size: 23px;
@@ -104,29 +90,25 @@ height: 100vh;
   color: white;
 }
 
-
-.modal__content{
+.modal__content {
   padding: 10px 30px 20px;
   display: flex;
   flex-direction: column;
   text-align: center;
 }
 
-
-.congrats{
+.congrats {
   font-size: 21px;
   margin-bottom: 10px;
 }
 
-
-.buttons__wrapper{
+.buttons__wrapper {
   margin-top: 15px;
   display: flex;
   justify-content: space-evenly;
 }
 
-
-.modal__btn{
+.modal__btn {
   display: flex;
   width: 50px;
   height: 25px;

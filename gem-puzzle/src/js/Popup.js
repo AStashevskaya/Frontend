@@ -34,12 +34,15 @@ export default class Modal {
 
   open() {
     if (this.closing) return;
+
     this.modal.classList.add('open');
     document.getElementById('solve-with').innerText = `You solve puzzle in ${addZero(this.gamefield.settings.min)}:${addZero(this.gamefield.settings.sec)} with ${this.gamefield.moves} moves`;
     clearInterval(this.gamefield.settings.progressIdentifier);
+
     if (document.body.classList.contains('modal-close')) {
       document.body.classList.remove('modal-close');
     }
+
     document.body.classList.add('modal-open');
   }
 
@@ -47,6 +50,7 @@ export default class Modal {
     this.closing = true;
     this.modal.classList.remove('open');
     this.modal.classList.add('hide');
+
     setTimeout(() => {
       this.modal.classList.remove('hide');
       this.closing = false;
