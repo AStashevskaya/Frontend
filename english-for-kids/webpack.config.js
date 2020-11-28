@@ -13,6 +13,7 @@ module.exports = (env, options) => {
     entry: ['./src/index.js'],
     output: {
       path: path.resolve(__dirname, './dist'),
+      publicPath: '',
       filename: '[name].bundle.js',
     },
     devServer: {
@@ -46,9 +47,6 @@ module.exports = (env, options) => {
           use: [
             {
               loader: MiniCssExtractPlugin.loader,
-              options: {
-                publicPath: (resourcePath, context) => `${path.relative(path.dirname(resourcePath), context)}/`,
-              },
             },
             {
               loader: 'css-loader',
