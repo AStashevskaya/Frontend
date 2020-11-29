@@ -5,7 +5,7 @@ import * as constants from './utils/constants';
 
 class Game {
   constructor() {
-    this.state = constants.STATE_PAUSE;
+    this.state = constants.STATE_START;
     this.sound = constants.SOUND_OFF;
     this.width = constants.MIN_BOARD_SIZE;
 
@@ -98,8 +98,8 @@ class Game {
   }
 
   changeStateClick(e) {
-    // if (e.target.innerText === constants.STATE_PAUSE
-    //     && this.state === constants.STATE_START) return;
+    if (e.target.innerText === constants.STATE_PAUSE
+        && this.state === constants.STATE_START) return;
 
     if (e.target.innerText === constants.STATE_PAUSE && this.state === constants.STATE_PLAYING) {
       this.state = constants.STATE_PAUSE;
@@ -167,7 +167,15 @@ class Game {
     }
 
     if (e.target.dataset.link === constants.SAVE_GAME) {
-      this.saveGame();
+      if (this.state === constants.STATE_START) {
+        const loadedGameText = document.querySelector('.load_game');
+        loadedGameText.innerText = 'You have not start the game!';
+
+        this.menuList.classList.add('hidden');
+        this.savedGames.classList.remove('hidden');
+      } else {
+        this.saveGame();
+      }
     }
   }
 
@@ -214,7 +222,7 @@ class Game {
     this.bestScore.classList.add('hidden');
     this.bestScore.innerHTML = `<span class="menu-header">Best Score</span>
         <ul class="best-score_list">
-        <li class="best-score_link menu-text_small"><span>Moves</span><span>Time</span></li>
+        <li class="best-score_link menu-text_small"><span>№</span><span>Size</span><span>Moves</span><span>Time</span></li>
         </ul>
         <span class="menu-text_big" id="back" data-link=${constants.BACK}>Go back</span>
         `;

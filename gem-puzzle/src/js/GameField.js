@@ -77,7 +77,7 @@ export default class GameField {
     this.buttons = [];
 
     document.querySelector('.move').innerHTML = `Moves: ${this.moves}`;
-    this.currentTemplate.forEach((el) => this.buttons.push(new FieldCell(this, el)));
+    // this.currentTemplate.forEach((el) => this.buttons.push(new FieldCell(this, el)));
 
     if (this.currentTemplate.length !== 0) {
       this.currentTemplate.forEach((el) => this.buttons.push(new FieldCell(this, el)));
