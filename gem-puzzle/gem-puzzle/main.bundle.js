@@ -1,1 +1,1317 @@
-(()=>{"use strict";var e,t,n,i,r,s,a,o={838:(e,t,n)=>{function i(e,t,n){var i=null;return e&&(i=window.document.createElement(e)),t&&i.classList.add(t),n&&(i.innerHTML=n),i}function r(e){return e<10?"0".concat(e):"".concat(e)}function s(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}n(193);var a=function(){function e(t,n){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e);var i=n.left,r=n.top,s=n.idx;this.puzzle=t,this.width=t.width,this.left=i,this.top=r,this.idx="number"==typeof s?s:"",this.image=t.image,this.fieldSize=t.fieldSize,this.size=this.width/this.fieldSize,this.bgPosX=n.bgPosX,this.bgPosY=n.bgPosY}var t,n;return t=e,(n=[{key:"getBackgroundPosition",value:function(){this.bgPosX="".concat(-this.left*this.size,"px"),this.bgPosY="".concat(-this.top*this.size,"px")}},{key:"render",value:function(){return this.container=i("div","fieldcell","".concat(this.idx)),this.container.style.backgroundImage="url(./assets/images/".concat(this.image,")"),this.container.style.backgroundSize="".concat(this.width,"px"),this.container.style.width="".concat(this.size,"px"),this.container.style.height="".concat(this.size,"px"),this.container.style.top="".concat(this.top*this.size,"px"),this.container.style.left="".concat(this.left*this.size,"px"),this.container.style.backgroundPositionX=this.bgPosX,this.container.style.backgroundPositionY=this.bgPosY,this.fieldSize>5?this.container.style.fontSize="".concat(16,"px"):this.container.style.fontSize="".concat(36,"px"),""===this.idx&&(this.container.style.opacity="0"),this.container}}])&&s(t.prototype,n),e}(),o="playing",c="Pause",l="start",d="on",u="off",h="newGame",f="Resume",p="settings",m="bestScores",v="back",g="saveGame",y="loadGame";function b(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}var k=function(){function e(t){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),this.gamefield=t,this.closing=!1,this.init()}var t,n;return t=e,(n=[{key:"init",value:function(){this.renderModal()}},{key:"renderModal",value:function(){this.modal=i("div","modal"),this.layout=i("div","modal__overlay"),this.modalWrapper=i("div","modal__window"),document.body.appendChild(this.modal),this.modal.appendChild(this.layout),this.layout.setAttribute("id","close"),this.modalWrapper.innerHTML='  <div class="modal__header"><span  class="close_btn" id="close" data-close=\'true\'>&times</span></div>\n        <div class="modal__content"><span class="congrats">Congratulations!</span>\n            <span class="congrats" id=\'solve-with\'></span>\n            <span class=" congrats question">Would you like to play one more game?</span>\n            <div class="buttons__wrapper">\n            <a href="#" class="modal__btn " data-reset=\'true\'>Yes</a>\n            <a href="#" class="modal__btn" id="close"  data-close=\'true\'>No</a>\n            </div>\n        </div>',this.layout.appendChild(this.modalWrapper)}},{key:"open",value:function(){this.closing||(this.modal.classList.add("open"),document.getElementById("solve-with").innerText="You solve puzzle in ".concat(r(this.gamefield.settings.min),":").concat(r(this.gamefield.settings.sec)," with ").concat(this.gamefield.moves," moves"),clearInterval(this.gamefield.settings.progressIdentifier),document.body.classList.contains("modal-close")&&document.body.classList.remove("modal-close"),document.body.classList.add("modal-open"))}},{key:"close",value:function(){var e=this;this.closing=!0,this.modal.classList.remove("open"),this.modal.classList.add("hide"),setTimeout((function(){e.modal.classList.remove("hide"),e.closing=!1,document.body.classList.contains("modal-open")&&document.body.classList.remove("modal-open"),document.body.classList.add("modal-close")}),300)}}])&&b(t.prototype,n),e}();function S(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,i=new Array(t);n<t;n++)i[n]=e[n];return i}const w=(x=Array(148).keys(),function(e){if(Array.isArray(e))return S(e)}(x)||function(e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(e))return Array.from(e)}(x)||function(e,t){if(e){if("string"==typeof e)return S(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);return"Object"===n&&e.constructor&&(n=e.constructor.name),"Map"===n||"Set"===n?Array.from(e):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?S(e,t):void 0}}(x)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()).map((function(e){return"".concat(e+1,".jpg")}));var x;function C(e){return(C="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e})(e)}function L(e){return function(e){if(Array.isArray(e))return E(e)}(e)||function(e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(e))return Array.from(e)}(e)||function(e,t){if(e){if("string"==typeof e)return E(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);return"Object"===n&&e.constructor&&(n=e.constructor.name),"Map"===n||"Set"===n?Array.from(e):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?E(e,t):void 0}}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function E(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,i=new Array(t);n<t;n++)i[n]=e[n];return i}function _(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}var z=function(){function e(t){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),this.settings=t,this.moves=0,this.fieldSize=4,this.buttons=[],this.winTemplate=[],this.width=this.settings.width,this.count=0,this.currentTemplate=[],this.prevFieldSize=null,this.init()}var t,n,r;return t=e,r=[{key:"getImage",value:function(e){return e[Math.floor(Math.random()*e.length)]}},{key:"animate",value:function(e,t,n,i){var r=i,s=e,a=n,o=10*Math.abs(r-a)/300,c=setInterval((function(){a<r?(a=Math.min(r,a+o))>=r&&clearInterval(c):a>r&&(a=Math.max(r,a-o))<=r&&clearInterval(c),t.container.style[s]="".concat(a*t.size,"px")}),10)}},{key:"handleCellMove",value:function(e){e.preventDefault()}},{key:"generateBestScoreArr",value:function(){var e=localStorage.getItem(m);return e?e=JSON.parse(e):[]}},{key:"checkSize",value:function(){return Number(document.querySelector("input[name=size]:checked").value)}}],(n=[{key:"init",value:function(){this.generateLayout(),this.image=e.getImage(w),this.modal=new k(this),this.generateWinTemplate(),this.render(this.winTemplate)}},{key:"generateLayout",value:function(){this.bestScores=e.generateBestScoreArr(),this.container=i("div","gamefield"),this.overlay=i("span","overlay"),this.container.style.width="".concat(this.width,"px"),this.container.style.height="".concat(this.width,"px"),document.querySelector(".game-wrapper").appendChild(this.container),this.container.appendChild(this.overlay)}},{key:"generateWinTemplate",value:function(){this.winTemplate=[];for(var e=0;e<Math.pow(this.fieldSize,2)-1;e+=1){var t=e%this.fieldSize,n=(e-t)/this.fieldSize,i=e+1;this.winTemplate.push(new a(this,{left:t,top:n,idx:i}))}this.winTemplate.push(new a(this,{left:this.fieldSize-1,top:this.fieldSize-1,idx:""})),this.winTemplate.forEach((function(e){return e.getBackgroundPosition()}))}},{key:"renderLoadGame",value:function(e){var t=this;if(e){var n=e.size,i=e.image,r=e.moves,s=e.template;this.fieldSize=n,this.image=i,this.moves=r,this.currentTemplate=s,this.generateWinTemplate(),this.buttons=[],this.currentTemplate.forEach((function(e){return t.buttons.push(new a(t,e))})),document.querySelector(".move").innerHTML="Moves: ".concat(this.moves),this.deleteCells(),this.render(this.buttons)}}},{key:"render",value:function(t){var n=this;t.forEach((function(t){var i=t.render();i.textContent?(i.draggable=!0,i.addEventListener("dragstart",n.handleCellDragStart.bind(n))):(i.addEventListener("dragover",e.handleCellMove.bind(e)),i.addEventListener("drop",n.handleCellDragEnd.bind(n))),i.addEventListener("click",n.handleCellClick.bind(n)),n.container.appendChild(i)}))}},{key:"shuffle",value:function(){var e=this,t=L(this.winTemplate).pop();this.buttons=[];for(var n=this.makeshuffledNumbersArray(),i=function(t){var i=t%e.fieldSize,r=(t-i)/e.fieldSize,s=n[t],o=e.winTemplate.find((function(e){return e.idx===s})),c=new a(e,{left:i,top:r,idx:s});c.bgPosX=o.bgPosX,c.bgPosY=o.bgPosY,e.buttons.push(c)},r=0;r<Math.pow(this.fieldSize,2)-1;r+=1)i(r);(t=new a(this,{left:this.fieldSize-1,top:this.fieldSize-1,idx:""})).getBackgroundPosition(),this.buttons.push(t),this.render(this.buttons)}},{key:"checkSolving",value:function(e){for(var t=this.fieldSize,n=0;n<e.length;n+=1)for(var i=n+1;i<e.length;i+=1)e[n]>e[i]&&(t+=1);return t%2==0}},{key:"makeshuffledNumbersArray",value:function(){var e;return e=L(Array(Math.pow(this.fieldSize,2)-1).keys()).sort((function(){return Math.random()-.5})).map((function(e){return e+1})),this.checkSolving(e)||this.makeshuffledNumbersArray(),e}},{key:"reset",value:function(){this.image=e.getImage(w),this.prevFieldSize=this.fieldSize,this.fieldSize=e.checkSize(),this.fieldSize!==this.prevFieldSize&&this.generateWinTemplate(),this.deleteCells(),this.shuffle(),this.moves=0,document.querySelector(".move").innerHTML="Moves: ".concat(this.moves),this.settings.count=0}},{key:"handleCellClick",value:function(e){if(this.settings.state!==c){this.currentTemplate=[];var t=Number(e.target.innerHTML),n=this.buttons.find((function(e){return e.idx===t})),i=this.buttons.find((function(e){return""===e.idx}));!n||!i||(this.swapCeilPositions(n,i),this.saveCurrentTemplate(),this.findIfWinTemplate())}}},{key:"swapCeilPositions",value:function(t,n){var i=t,r=n,s=i.left,a=i.top,o=r.left,c=r.top;1===Math.abs(s-o)+Math.abs(a-c)&&(this.moves+=1,document.querySelector(".move").innerHTML="Moves: ".concat(this.moves),this.settings.sound===d&&this.settings.audio.play(),Object.assign(r,{left:s,top:a}),s!==o&&(e.animate("left",i,s,o),i.container.style.top="".concat(i.top*i.size,"px")),a!==c&&(e.animate("top",i,a,c),i.container.style.left="".concat(i.left*i.size,"px")),i.left=o,i.top=c,r.container.style.top="".concat(r.top*r.size,"px"),r.container.style.left="".concat(r.left*r.size,"px"))}},{key:"saveCurrentTemplate",value:function(){var e=this;this.buttons.forEach((function(t){var n=t.left,i=t.top,r=t.idx,s=t.bgPosY,a=t.bgPosX;e.currentTemplate.push({left:n,top:i,idx:r,bgPosY:s,bgPosX:a})}))}},{key:"handleCellDragStart",value:function(e){if(this.settings.state!==c){var t=Number(e.target.innerHTML);this.clickedCeil=this.buttons.find((function(e){return e.idx===t}))}}},{key:"handleCellDragEnd",value:function(){this.currentTemplate=[];var e=this.buttons.find((function(e){return""===e.idx}));if(this.clickedCeil&&e){var t=this.clickedCeil,n=t.left,i=t.top,r=e.left,s=e.top;1===Math.abs(n-r)+Math.abs(i-s)&&(this.moves+=1,document.querySelector(".move").innerHTML="Moves: ".concat(this.moves),this.settings.sound===d&&this.settings.audio.play(),Object.assign(e,{left:n,top:i}),this.clickedCeil.left=r,this.clickedCeil.top=s,this.clickedCeil.container.style.top="".concat(this.clickedCeil.top*this.clickedCeil.size,"px"),this.clickedCeil.container.style.left="".concat(this.clickedCeil.left*this.clickedCeil.size,"px"),e.container.style.top="".concat(e.top*e.size,"px"),e.container.style.left="".concat(e.left*e.size,"px"),this.saveCurrentTemplate(),this.findIfWinTemplate())}}},{key:"findIfWinTemplate",value:function(){for(var e=this,t=function(t){var n=t+1,i=e.winTemplate.find((function(e){return e.idx===n})),r=e.buttons.find((function(e){return e.idx===n}));return i.left!==r.left||i.top!==r.top?{v:void 0}:void 0},n=0;n<this.buttons.length-1;n+=1){var i=t(n);if("object"===C(i))return i.v}this.isWin()}},{key:"isWin",value:function(){this.buttons.find((function(e){return""===e.idx})).container.style.opacity="1",document.querySelectorAll(".fieldcell").forEach((function(e){e.innerText="",e.style.borderRadius="0"}));var e={};e.moves=this.moves,e.size=this.fieldSize,e.count=this.settings.count,this.bestScores.push(e);var t=JSON.stringify(this.bestScores);localStorage.setItem(m,t),this.settings.generateBestScores(),this.modal.open()}},{key:"deleteCells",value:function(){var t=this;L(this.container.children).forEach((function(n){n!==t.overlay&&(n.textContent?n.removeEventListener("dragstart",t.handleCellDragStart.bind(t)):(n.removeEventListener("dragover",e.handleCellMove.bind(e)),n.removeEventListener("drop",t.handleCellDragEnd.bind(t))),n.removeEventListener("click",t.handleCellClick.bind(t)),t.container.removeChild(n))}))}}])&&_(t.prototype,n),r&&_(t,r),e}();function T(e){return function(e){if(Array.isArray(e))return I(e)}(e)||function(e){if("undefined"!=typeof Symbol&&Symbol.iterator in Object(e))return Array.from(e)}(e)||function(e,t){if(e){if("string"==typeof e)return I(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);return"Object"===n&&e.constructor&&(n=e.constructor.name),"Map"===n||"Set"===n?Array.from(e):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?I(e,t):void 0}}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function I(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,i=new Array(t);n<t;n++)i[n]=e[n];return i}function A(e,t){for(var n=0;n<t.length;n++){var i=t[n];i.enumerable=i.enumerable||!1,i.configurable=!0,"value"in i&&(i.writable=!0),Object.defineProperty(e,i.key,i)}}new(function(){function e(){!function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,e),this.state=l,this.time=null,this.sound=u,this.width=e.getWidth(),this.count=0,this.progressIdentifier=null,this.init()}var t,n,s;return t=e,s=[{key:"getWidth",value:function(){return Number(document.documentElement.clientWidth),300}}],(n=[{key:"renderInitialboard",value:function(){this.main=i("div","game-wrapper"),this.container=i("div","gameSettings-wrapper"),this.menuList=i("ul","menu__list"),this.settings=i("div","settings-page"),this.bestScore=i("div","best-score"),this.savedGames=i("div","saved-games"),this.parent=i("div","parent"),document.body.prepend(this.main),this.main.appendChild(this.container),this.game=new z(this),this.stateButton=i("span","state-btn","Pause");var e=i("div","time","Time: ".concat(this.count)),t=i("div","move","Moves: ".concat(this.game.moves));this.menuRender(),this.settingsRender(),this.bestScoreRender(),this.savedGamesRender(),this.game.overlay.appendChild(this.parent),this.parent.appendChild(this.menuList),this.parent.appendChild(this.settings),this.parent.appendChild(this.bestScore),this.parent.appendChild(this.savedGames),this.generateBestScores(),this.container.appendChild(this.stateButton),this.container.appendChild(e),this.container.appendChild(t)}},{key:"init",value:function(){this.renderInitialboard(),this.addSound(),this.initializeClickhandlers()}},{key:"initializeClickhandlers",value:function(){var e=this;this.children=T(this.parent.children),document.getElementById("sound").addEventListener("click",this.soundClick.bind(this)),this.stateButton.addEventListener("click",this.changeStateClick.bind(this)),T(document.querySelectorAll(".menu__link")).forEach((function(t){return t.addEventListener("click",e.menuLinkClick.bind(e))})),T(document.querySelectorAll("#back")).forEach((function(t){return t.addEventListener("click",e.menuLinkClick.bind(e))})),document.querySelector("a[data-reset = true]").addEventListener("click",this.resetGame.bind(this)),T(document.querySelectorAll("#close")).forEach((function(t){return t.addEventListener("click",e.closeModal.bind(e))}))}},{key:"resetGame",value:function(){this.count=0,this.progressIdentifier=setInterval(this.tick.bind(this),1e3),this.game.reset(),this.game.modal.close()}},{key:"closeModal",value:function(){this.game.modal.close()}},{key:"soundClick",value:function(e){this.sound===u?(e.target.dataset.sound=d,e.target.innerText="Sound ".concat(d),this.sound=d):(e.target.innerText="Sound ".concat(u),this.sound=u,e.target.dataset.sound=u)}},{key:"changeStateClick",value:function(e){if(e.target.innerText!==c||this.state!==l)return e.target.innerText===c&&this.state===o?(this.state=c,this.menuList.classList.remove("hidden"),this.game.overlay.classList.remove("hidden"),clearInterval(this.progressIdentifier),void(e.target.innerText=f)):void(e.target.innerText===f&&this.state===c&&(this.state=o,this.progressIdentifier=setInterval(this.tick.bind(this),1e3),this.children.forEach((function(e){e.classList.length<2&&e.classList.add("hidden")})),this.game.overlay.classList.add("hidden"),e.target.innerText=c))}},{key:"menuLinkClick",value:function(e){return e.target.dataset.link===h?(this.state=o,this.stateButton.innerText===f&&(this.stateButton.innerText=c),this.menuList.classList.add("hidden"),this.game.overlay.classList.add("hidden"),this.progressIdentifier=setInterval(this.tick.bind(this),1e3),void this.game.reset()):e.target.dataset.link===p?(this.menuList.classList.add("hidden"),void this.settings.classList.remove("hidden")):e.target.dataset.link===m?(this.menuList.classList.add("hidden"),void this.bestScore.classList.remove("hidden")):e.target.dataset.link===v?(this.children.forEach((function(e){e.classList.length<2&&e.classList.add("hidden")})),void this.menuList.classList.remove("hidden")):void(e.target.dataset.link!==y?e.target.dataset.link===g&&this.saveGame():this.loadGame())}},{key:"menuRender",value:function(){this.menuList.innerHTML='\n<span class="menu__link" data-link='.concat(h,'>New Game</span>\n <span class="menu__link" data-link=').concat(g,'>Save Game</span>\n <span class="menu__link" data-link=').concat(y,'>Load Game</span>\n <span class="menu__link" data-link=').concat(m,'>Best Scores</span>\n <span class="menu__link" data-link=').concat(p,">Settings</span>\n")}},{key:"settingsRender",value:function(){this.settings.classList.add("hidden"),this.settings.innerHTML='<span class="menu-header">Settings</span>\n        <span class="menu-text_big">Field Size</span>\n        <form class=\'form\'>\n    <label for="size" class="menu-text_small">\n           <input type="radio" name="size" id="input" value="3"> 3 X 3\n       </label>\n       <label for="size" class="menu-text_small">\n           <input type="radio" name="size" id="input" value="4" checked> 4 X 4\n       </label>\n       <label for="size" class="menu-text_small">\n       <input type="radio" name="size" id="input" value="5"> 5 X 5\n</label>\n       <label for="size" class="menu-text_small">\n           <input type="radio" name="size" id="input" value="6"> 6 X 6\n   </label>\n   <label for="size" class="menu-text_small">\n   <input type="radio" name="size" id="input" value="7"> 7 X 7\n</label>\n<label for="size" class="menu-text_small">\n<input type="radio" name="size" id="input" value="8"> 8 X 8\n</label>\n    </form>\n    <span id="sound" data-sound="off" class="menu-text_big sound">Sound off</span>\n    <span class="menu-text_big" id="back" data-link='.concat(v,">Go back</span>\n    ")}},{key:"bestScoreRender",value:function(){this.bestScore.classList.add("hidden"),this.bestScore.innerHTML='<span class="menu-header">Best Score</span>\n        <ul class="best-score_list">\n        <li class="best-score_link menu-text_small"><span>Moves</span><span>Time</span></li>\n        </ul>\n        <span class="menu-text_big" id="back" data-link='.concat(v,">Go back</span>\n        ")}},{key:"savedGamesRender",value:function(){this.savedGames.classList.add("hidden"),this.savedGames.innerHTML='\n        <span class="load_game menu-text_small">You haven\'t got any saved games yet</span>\n        <span class="menu-text_big" id="back" data-link='.concat(v," >Go back</span>\n        ")}},{key:"tick",value:function(){this.count+=1,this.sec=this.count>=60?this.count%60:this.count,this.min=Math.floor(this.count/60),document.querySelector(".time").innerHTML="Time: ".concat(r(this.min),": ").concat(r(this.sec))}},{key:"saveGame",value:function(){var e={};e.count=this.count,e.moves=this.game.moves,e.template=this.game.currentTemplate,e.image=this.game.image,e.size=this.game.fieldSize;var t=JSON.stringify(e);localStorage.setItem("game",t),document.querySelector(".load_game").innerText="Your game is saved!",this.menuList.classList.add("hidden"),this.savedGames.classList.remove("hidden")}},{key:"loadGame",value:function(){var e=localStorage.getItem("game");e||(this.menuList.classList.add("hidden"),this.savedGames.classList.remove("hidden")),e&&(e=JSON.parse(e),this.game.renderLoadGame(e),this.count=e.count,this.tick())}},{key:"addSound",value:function(){this.audio=i("audio"),this.audio.setAttribute("src","./assets/sounds/english.mp3"),this.audio.load()}},{key:"generateBestScores",value:function(){var e=localStorage.getItem("bestScores"),t=document.querySelector(".best-score_list");if(e){e=(e=JSON.parse(e)).sort((function(e,t){return e.moves-t.moves}));var n='<li class="best-score_link menu-text_small"><span>№</span><span>Size</span><span>Moves</span><span>Time</span></li>';e.length>10&&(e=e.slice(0,10)),e.forEach((function(e,t){n+='<li class="best-score_link menu-text_small"><span>'.concat(t+1,".</span><span>").concat(e.size,"x").concat(e.size,"</span><span>").concat(e.moves,"</span><span> ").concat(r(Math.floor(e.count/60)),": ").concat(r(e.count%60),"</span></li>")})),t.innerHTML=n}}}])&&A(t.prototype,n),s&&A(t,s),e}())},783:(e,t,n)=>{var i=n(618),r=Object.create(null),s="undefined"==typeof document,a=Array.prototype.forEach;function o(){}function c(e,t){if(!t){if(!e.href)return;t=e.href.split("?")[0]}if(d(t)&&!1!==e.isLoaded&&t&&t.indexOf(".css")>-1){e.visited=!0;var n=e.cloneNode();n.isLoaded=!1,n.addEventListener("load",(function(){n.isLoaded=!0,e.parentNode.removeChild(e)})),n.addEventListener("error",(function(){n.isLoaded=!0,e.parentNode.removeChild(e)})),n.href="".concat(t,"?").concat(Date.now()),e.nextSibling?e.parentNode.insertBefore(n,e.nextSibling):e.parentNode.appendChild(n)}}function l(){var e=document.querySelectorAll("link");a.call(e,(function(e){!0!==e.visited&&c(e)}))}function d(e){return!!/^https?:/i.test(e)}e.exports=function(e,t){if(s)return console.log("no window.document found, will not HMR CSS"),o;var n,u,h=function(e){var t=r[e];if(!t){if(document.currentScript)t=document.currentScript.src;else{var n=document.getElementsByTagName("script"),s=n[n.length-1];s&&(t=s.src)}r[e]=t}return function(e){if(!t)return null;var n=t.split(/([^\\/]+)\.js$/),r=n&&n[1];return r&&e?e.split(",").map((function(e){var n=new RegExp("".concat(r,"\\.js$"),"g");return i(t.replace(n,"".concat(e.replace(/{fileName}/g,r),".css")))})):[t.replace(".js",".css")]}}(e);return n=function(){var e=h(t.filename),n=function(e){if(!e)return!1;var t=document.querySelectorAll("link"),n=!1;return a.call(t,(function(t){if(t.href){var r=function(e,t){var n;return e=i(e,{stripWWW:!1}),t.some((function(i){e.indexOf(t)>-1&&(n=i)})),n}(t.href,e);d(r)&&!0!==t.visited&&r&&(c(t,r),n=!0)}})),n}(e);if(t.locals)return console.log("[HMR] Detected local css modules. Reload all css"),void l();n?console.log("[HMR] css reload %s",e.join(" ")):(console.log("[HMR] Reload all css"),l())},50,u=0,function(){var e=this,t=arguments,i=function(){return n.apply(e,t)};clearTimeout(u),u=setTimeout(i,50)}}},618:e=>{e.exports=function(e){if(e=e.trim(),/^data:/i.test(e))return e;var t=-1!==e.indexOf("//")?e.split("//")[0]+"//":"",n=e.replace(new RegExp(t,"i"),"").split("/"),i=n[0].toLowerCase().replace(/\.$/,"");return n[0]="",t+i+n.reduce((function(e,t){switch(t){case"..":e.pop();break;case".":break;default:e.push(t)}return e}),[]).join("/")}},193:(e,t,n)=>{var i=n(783)(e.id,{locals:!1});e.hot.dispose(i),e.hot.accept(void 0,i)}},c={};function l(e){if(c[e])return c[e].exports;var t=c[e]={id:e,exports:{}},n={id:e,module:t,factory:o[e],require:l};return l.i.forEach((function(e){e(n)})),t=n.module,n.factory.call(t.exports,t,t.exports,n.require),t.exports}l.m=o,l.c=c,l.i=[],l.hu=e=>e+"."+l.h()+".hot-update.js",l.miniCssF=e=>"main.undefined.css",l.hmrF=()=>l.h()+".hot-update.json",l.h=()=>"207195fb2507151e83ea",l.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(e){if("object"==typeof window)return window}}(),l.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t),e={},t="gem-puzzle:",l.l=(n,i,r)=>{if(e[n])e[n].push(i);else{var s,a;if(void 0!==r)for(var o=document.getElementsByTagName("script"),c=0;c<o.length;c++){var d=o[c];if(d.getAttribute("src")==n||d.getAttribute("data-webpack")==t+r){s=d;break}}s||(a=!0,(s=document.createElement("script")).charset="utf-8",s.timeout=120,l.nc&&s.setAttribute("nonce",l.nc),s.setAttribute("data-webpack",t+r),s.src=n),e[n]=[i];var u=(t,i)=>{s.onerror=s.onload=null,clearTimeout(h);var r=e[n];if(delete e[n],s.parentNode&&s.parentNode.removeChild(s),r&&r.forEach((e=>e(i))),t)return t(i)},h=setTimeout(u.bind(null,void 0,{type:"timeout",target:s}),12e4);s.onerror=u.bind(null,s.onerror),s.onload=u.bind(null,s.onload),a&&document.head.appendChild(s)}},(()=>{var e,t,n,i,r={},s=l.c,a=[],o=[],c="idle";function d(e){c=e;for(var t=0;t<o.length;t++)o[t].call(null,e)}function u(e){if(0===t.length)return e();var n=t;return t=[],Promise.all(n).then((function(){return u(e)}))}function h(e){if("idle"!==c)throw new Error("check() is only allowed in idle status");return d("check"),l.hmrM().then((function(i){if(!i)return d(m()?"ready":"idle"),null;d("prepare");var r=[];return t=[],n=[],Promise.all(Object.keys(l.hmrC).reduce((function(e,t){return l.hmrC[t](i.c,i.r,i.m,e,n,r),e}),[])).then((function(){return u((function(){return e?p(e):(d("ready"),r)}))}))}))}function f(e){return"ready"!==c?Promise.resolve().then((function(){throw new Error("apply() is only allowed in ready status")})):p(e)}function p(e){e=e||{},m();var t=n.map((function(t){return t(e)}));n=void 0;var r,s=t.map((function(e){return e.error})).filter(Boolean);if(s.length>0)return d("abort"),Promise.resolve().then((function(){throw s[0]}));d("dispose"),t.forEach((function(e){e.dispose&&e.dispose()})),d("apply");var a=function(e){r||(r=e)},o=[];return t.forEach((function(e){if(e.apply){var t=e.apply(a);if(t)for(var n=0;n<t.length;n++)o.push(t[n])}})),r?(d("fail"),Promise.resolve().then((function(){throw r}))):i?p(e).then((function(e){return o.forEach((function(t){e.indexOf(t)<0&&e.push(t)})),e})):(d("idle"),Promise.resolve(o))}function m(){if(i)return n||(n=[]),Object.keys(l.hmrI).forEach((function(e){i.forEach((function(t){l.hmrI[e](t,n)}))})),i=void 0,!0}l.hmrD=r,l.i.push((function(p){var m,v,g,y=p.module,b=function(n,i){var r=s[i];if(!r)return n;var o=function(t){if(r.hot.active){if(s[t]){var o=s[t].parents;-1===o.indexOf(i)&&o.push(i)}else a=[i],e=t;-1===r.children.indexOf(t)&&r.children.push(t)}else console.warn("[HMR] unexpected require("+t+") from disposed module "+i),a=[];return n(t)},l=function(e){return{configurable:!0,enumerable:!0,get:function(){return n[e]},set:function(t){n[e]=t}}};for(var h in n)Object.prototype.hasOwnProperty.call(n,h)&&"e"!==h&&Object.defineProperty(o,h,l(h));return o.e=function(e){return function(e){switch(c){case"ready":return d("prepare"),t.push(e),u((function(){d("ready")})),e;case"prepare":return t.push(e),e;default:return e}}(n.e(e))},o}(p.require,p.id);y.hot=(m=p.id,v=y,g={_acceptedDependencies:{},_declinedDependencies:{},_selfAccepted:!1,_selfDeclined:!1,_selfInvalidated:!1,_disposeHandlers:[],_main:e!==m,_requireSelf:function(){a=v.parents.slice(),e=m,l(m)},active:!0,accept:function(e,t){if(void 0===e)g._selfAccepted=!0;else if("function"==typeof e)g._selfAccepted=e;else if("object"==typeof e&&null!==e)for(var n=0;n<e.length;n++)g._acceptedDependencies[e[n]]=t||function(){};else g._acceptedDependencies[e]=t||function(){}},decline:function(e){if(void 0===e)g._selfDeclined=!0;else if("object"==typeof e&&null!==e)for(var t=0;t<e.length;t++)g._declinedDependencies[e[t]]=!0;else g._declinedDependencies[e]=!0},dispose:function(e){g._disposeHandlers.push(e)},addDisposeHandler:function(e){g._disposeHandlers.push(e)},removeDisposeHandler:function(e){var t=g._disposeHandlers.indexOf(e);t>=0&&g._disposeHandlers.splice(t,1)},invalidate:function(){switch(this._selfInvalidated=!0,c){case"idle":n=[],Object.keys(l.hmrI).forEach((function(e){l.hmrI[e](m,n)})),d("ready");break;case"ready":Object.keys(l.hmrI).forEach((function(e){l.hmrI[e](m,n)}));break;case"prepare":case"check":case"dispose":case"apply":(i=i||[]).push(m)}},check:h,apply:f,status:function(e){if(!e)return c;o.push(e)},addStatusHandler:function(e){o.push(e)},removeStatusHandler:function(e){var t=o.indexOf(e);t>=0&&o.splice(t,1)},data:r[m]},e=void 0,g),y.parents=a,y.children=[],a=[],p.require=b})),l.hmrC={},l.hmrI={}})(),(()=>{var e;l.g.importScripts&&(e=l.g.location+"");var t=l.g.document;if(!e&&t&&(t.currentScript&&(e=t.currentScript.src),!e)){var n=t.getElementsByTagName("script");n.length&&(e=n[n.length-1].src)}if(!e)throw new Error("Automatic publicPath is not supported in this browser");e=e.replace(/#.*$/,"").replace(/\?.*$/,"").replace(/\/[^\/]+$/,"/"),l.p=e})(),n=(e,t,n,i)=>{var r=document.createElement("link");return r.rel="stylesheet",r.type="text/css",r.onerror=r.onload=s=>{if(r.onerror=r.onload=null,"load"===s.type)n();else{var a=s&&("load"===s.type?"missing":s.type),o=s&&s.target&&s.target.href||t,c=new Error("Loading CSS chunk "+e+" failed.\n("+o+")");c.code="CSS_CHUNK_LOAD_FAILED",c.type=a,c.request=o,r.parentNode.removeChild(r),i(c)}},r.href=t,document.head.appendChild(r),r},i=(e,t)=>{for(var n=document.getElementsByTagName("link"),i=0;i<n.length;i++){var r=(a=n[i]).getAttribute("data-href")||a.getAttribute("href");if("stylesheet"===a.rel&&(r===e||r===t))return a}var s=document.getElementsByTagName("style");for(i=0;i<s.length;i++){var a;if((r=(a=s[i]).getAttribute("data-href"))===e||r===t)return a}},r=[],s=[],a=e=>({dispose:()=>{for(var e=0;e<r.length;e++){var t=r[e];t.parentNode&&t.parentNode.removeChild(t)}r.length=0},apply:()=>{for(var e=0;e<s.length;e++)s[e].rel="stylesheet";s.length=0}}),l.hmrC.miniCss=(e,t,o,c,d,u)=>{d.push(a),e.forEach((e=>{var t=l.miniCssF(e),a=l.p+t;const o=i(t,a);o&&c.push(new Promise(((t,i)=>{var c=n(e,a,(()=>{c.as="style",c.rel="preload",t()}),i);r.push(o),s.push(c)})))}))},(()=>{var e,t,n,i,r={179:0},s={};function a(e){return new Promise(((t,n)=>{s[e]=t;var i=l.p+l.hu(e),r=new Error;l.l(i,(t=>{if(s[e]){s[e]=void 0;var i=t&&("load"===t.type?"missing":t.type),a=t&&t.target&&t.target.src;r.message="Loading hot update chunk "+e+" failed.\n("+i+": "+a+")",r.name="ChunkLoadError",r.type=i,r.request=a,n(r)}}))}))}function o(s){function a(e){for(var t=[e],n={},i=t.map((function(e){return{chain:[e],id:e}}));i.length>0;){var r=i.pop(),s=r.id,a=r.chain,c=l.c[s];if(c&&(!c.hot._selfAccepted||c.hot._selfInvalidated)){if(c.hot._selfDeclined)return{type:"self-declined",chain:a,moduleId:s};if(c.hot._main)return{type:"unaccepted",chain:a,moduleId:s};for(var d=0;d<c.parents.length;d++){var u=c.parents[d],h=l.c[u];if(h){if(h.hot._declinedDependencies[s])return{type:"declined",chain:a.concat([u]),moduleId:s,parentId:u};-1===t.indexOf(u)&&(h.hot._acceptedDependencies[s]?(n[u]||(n[u]=[]),o(n[u],[s])):(delete n[u],t.push(u),i.push({chain:a.concat([u]),id:u})))}}}}return{type:"accepted",moduleId:e,outdatedModules:t,outdatedDependencies:n}}function o(e,t){for(var n=0;n<t.length;n++){var i=t[n];-1===e.indexOf(i)&&e.push(i)}}l.f&&delete l.f.jsonpHmr,e=void 0;var c={},d=[],u={},h=function(e){console.warn("[HMR] unexpected require("+e.id+") to disposed module")};for(var f in t)if(l.o(t,f)){var p,m=t[f],v=!1,g=!1,y=!1,b="";switch((p=m?a(f):{type:"disposed",moduleId:f}).chain&&(b="\nUpdate propagation: "+p.chain.join(" -> ")),p.type){case"self-declined":s.onDeclined&&s.onDeclined(p),s.ignoreDeclined||(v=new Error("Aborted because of self decline: "+p.moduleId+b));break;case"declined":s.onDeclined&&s.onDeclined(p),s.ignoreDeclined||(v=new Error("Aborted because of declined dependency: "+p.moduleId+" in "+p.parentId+b));break;case"unaccepted":s.onUnaccepted&&s.onUnaccepted(p),s.ignoreUnaccepted||(v=new Error("Aborted because "+f+" is not accepted"+b));break;case"accepted":s.onAccepted&&s.onAccepted(p),g=!0;break;case"disposed":s.onDisposed&&s.onDisposed(p),y=!0;break;default:throw new Error("Unexception type "+p.type)}if(v)return{error:v};if(g)for(f in u[f]=m,o(d,p.outdatedModules),p.outdatedDependencies)l.o(p.outdatedDependencies,f)&&(c[f]||(c[f]=[]),o(c[f],p.outdatedDependencies[f]));y&&(o(d,[p.moduleId]),u[f]=h)}t=void 0;for(var k,S=[],w=0;w<d.length;w++){var x=d[w];l.c[x]&&l.c[x].hot._selfAccepted&&u[x]!==h&&!l.c[x].hot._selfInvalidated&&S.push({module:x,require:l.c[x].hot._requireSelf,errorHandler:l.c[x].hot._selfAccepted})}return{dispose:function(){var e;n.forEach((function(e){delete r[e]})),n=void 0;for(var t,i=d.slice();i.length>0;){var s=i.pop(),a=l.c[s];if(a){var o={},u=a.hot._disposeHandlers;for(w=0;w<u.length;w++)u[w].call(null,o);for(l.hmrD[s]=o,a.hot.active=!1,delete l.c[s],delete c[s],w=0;w<a.children.length;w++){var h=l.c[a.children[w]];h&&(e=h.parents.indexOf(s))>=0&&h.parents.splice(e,1)}}}for(var f in c)if(l.o(c,f)&&(a=l.c[f]))for(k=c[f],w=0;w<k.length;w++)t=k[w],(e=a.children.indexOf(t))>=0&&a.children.splice(e,1)},apply:function(e){for(var t in u)l.o(u,t)&&(l.m[t]=u[t]);for(var n=0;n<i.length;n++)i[n](l);for(var r in c)if(l.o(c,r)){var a=l.c[r];if(a){k=c[r];for(var o=[],h=[],f=0;f<k.length;f++){var p=k[f],m=a.hot._acceptedDependencies[p];if(m){if(-1!==o.indexOf(m))continue;o.push(m),h.push(p)}}for(var v=0;v<o.length;v++)try{o[v].call(null,k)}catch(t){s.onErrored&&s.onErrored({type:"accept-errored",moduleId:r,dependencyId:h[v],error:t}),s.ignoreErrored||e(t)}}}for(var g=0;g<S.length;g++){var y=S[g],b=y.module;try{y.require(b)}catch(t){if("function"==typeof y.errorHandler)try{y.errorHandler(t)}catch(n){s.onErrored&&s.onErrored({type:"self-accept-error-handler-errored",moduleId:b,error:n,originalError:t}),s.ignoreErrored||e(n),e(t)}else s.onErrored&&s.onErrored({type:"self-accept-errored",moduleId:b,error:t}),s.ignoreErrored||e(t)}}return d}}}self.webpackHotUpdategem_puzzle=(e,n,r)=>{for(var a in n)l.o(n,a)&&(t[a]=n[a]);r&&i.push(r),s[e]&&(s[e](),s[e]=void 0)},l.hmrI.jsonp=function(e,r){t||(t={},i=[],n=[],r.push(o)),l.o(t,e)||(t[e]=l.m[e])},l.hmrC.jsonp=function(s,c,d,u,h,f){h.push(o),e={},n=c,t=d.reduce((function(e,t){return e[t]=!1,e}),{}),i=[],s.forEach((function(t){l.o(r,t)&&void 0!==r[t]&&(u.push(a(t)),e[t]=!0)})),l.f&&(l.f.jsonpHmr=function(t,n){e&&!l.o(e,t)&&l.o(r,t)&&void 0!==r[t]&&(n.push(a(t)),e[t]=!0)})},l.hmrM=()=>{if("undefined"==typeof fetch)throw new Error("No browser support: need fetch API");return fetch(l.p+l.hmrF()).then((e=>{if(404!==e.status){if(!e.ok)throw new Error("Failed to fetch update manifest "+e.statusText);return e.json()}}))}})(),l(838)})();
+/*
+ * ATTENTION: The "eval" devtool has been used (maybe by default in mode: "development").
+ * This devtool is not neither made for production nor for readable output files.
+ * It uses "eval()" calls to create a separate source file in the browser devtools.
+ * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
+ * or disable the default devtool with "devtool: false".
+ * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
+ */
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/index.js":
+/*!**********************!*\
+  !*** ./src/index.js ***!
+  \**********************/
+/*! namespace exports */
+/*! exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./css/style.css */ \"./src/css/style.css\");\n/* harmony import */ var _js_index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./js/index */ \"./src/js/index.js\");\n;\n\n\n//# sourceURL=webpack://gem-puzzle/./src/index.js?");
+
+/***/ }),
+
+/***/ "./src/js/FieldCell.js":
+/*!*****************************!*\
+  !*** ./src/js/FieldCell.js ***!
+  \*****************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => /* binding */ FieldCell\n/* harmony export */ });\n/* harmony import */ var _utils_create__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/create */ \"./src/js/utils/create.js\");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\nvar SMALL_FONT_SIZE = 16;\nvar BIG_FONT_SIZE = 36;\nvar CHANGING_FS = 5;\n\nvar FieldCell = /*#__PURE__*/function () {\n  function FieldCell(puzzle, el) {\n    _classCallCheck(this, FieldCell);\n\n    var left = el.left,\n        top = el.top,\n        idx = el.idx;\n    this.puzzle = puzzle;\n    this.width = puzzle.width;\n    this.left = left;\n    this.top = top;\n    this.idx = typeof idx === 'number' ? idx : '';\n    this.image = puzzle.image;\n    this.fieldSize = puzzle.fieldSize;\n    this.size = this.width / this.fieldSize;\n    this.bgPosX = el.bgPosX;\n    this.bgPosY = el.bgPosY;\n  }\n\n  _createClass(FieldCell, [{\n    key: \"getBackgroundPosition\",\n    value: function getBackgroundPosition() {\n      this.bgPosX = \"\".concat(-this.left * this.size, \"px\");\n      this.bgPosY = \"\".concat(-this.top * this.size, \"px\");\n    }\n  }, {\n    key: \"render\",\n    value: function render() {\n      this.container = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'fieldcell', \"\".concat(this.idx));\n      this.container.style.backgroundImage = \"url(./assets/images/\".concat(this.image, \")\");\n      this.container.style.backgroundSize = \"\".concat(this.width, \"px\");\n      this.container.style.width = \"\".concat(this.size, \"px\");\n      this.container.style.height = \"\".concat(this.size, \"px\");\n      this.container.style.top = \"\".concat(this.top * this.size, \"px\");\n      this.container.style.left = \"\".concat(this.left * this.size, \"px\");\n      this.container.style.backgroundPositionX = this.bgPosX;\n      this.container.style.backgroundPositionY = this.bgPosY;\n\n      if (this.fieldSize > CHANGING_FS) {\n        this.container.style.fontSize = \"\".concat(SMALL_FONT_SIZE, \"px\");\n      } else {\n        this.container.style.fontSize = \"\".concat(BIG_FONT_SIZE, \"px\");\n      }\n\n      if (this.idx === '') {\n        this.container.style.opacity = '0';\n      }\n\n      return this.container;\n    }\n  }]);\n\n  return FieldCell;\n}();\n\n\n\n//# sourceURL=webpack://gem-puzzle/./src/js/FieldCell.js?");
+
+/***/ }),
+
+/***/ "./src/js/Game.js":
+/*!************************!*\
+  !*** ./src/js/Game.js ***!
+  \************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony import */ var _utils_create__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/create */ \"./src/js/utils/create.js\");\n/* harmony import */ var _utils_addZero__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/addZero */ \"./src/js/utils/addZero.js\");\n/* harmony import */ var _GameField__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./GameField */ \"./src/js/GameField.js\");\n/* harmony import */ var _utils_constants__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./utils/constants */ \"./src/js/utils/constants.js\");\nfunction _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }\n\nfunction _nonIterableSpread() { throw new TypeError(\"Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\n\nfunction _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === \"string\") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === \"Object\" && o.constructor) n = o.constructor.name; if (n === \"Map\" || n === \"Set\") return Array.from(o); if (n === \"Arguments\" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }\n\nfunction _iterableToArray(iter) { if (typeof Symbol !== \"undefined\" && Symbol.iterator in Object(iter)) return Array.from(iter); }\n\nfunction _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }\n\nfunction _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n // eslint-disable-next-line import/no-cycle\n\n\n\n\nvar Game = /*#__PURE__*/function () {\n  function Game() {\n    _classCallCheck(this, Game);\n\n    this.state = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.STATE_START;\n    this.time = null;\n    this.sound = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.SOUND_OFF;\n    this.width = Game.getWidth();\n    this.count = 0;\n    this.progressIdentifier = null;\n    this.init();\n  }\n\n  _createClass(Game, [{\n    key: \"renderInitialboard\",\n    value: function renderInitialboard() {\n      this.main = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'game-wrapper');\n      this.container = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'gameSettings-wrapper');\n      this.menuList = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('ul', 'menu__list');\n      this.settings = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'settings-page');\n      this.bestScore = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'best-score');\n      this.savedGames = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'saved-games');\n      this.parent = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'parent');\n      document.body.prepend(this.main);\n      this.main.appendChild(this.container);\n      this.game = new _GameField__WEBPACK_IMPORTED_MODULE_2__.default(this);\n      this.stateButton = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('span', 'state-btn', 'Pause');\n      var time = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'time', \"Time: \".concat(this.count));\n      var moves = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'move', \"Moves: \".concat(this.game.moves));\n      this.menuRender();\n      this.settingsRender();\n      this.bestScoreRender();\n      this.savedGamesRender();\n      this.game.overlay.appendChild(this.parent);\n      this.parent.appendChild(this.menuList);\n      this.parent.appendChild(this.settings);\n      this.parent.appendChild(this.bestScore);\n      this.parent.appendChild(this.savedGames);\n      Game.generateBestScores();\n      this.container.appendChild(this.stateButton);\n      this.container.appendChild(time);\n      this.container.appendChild(moves);\n    }\n  }, {\n    key: \"init\",\n    value: function init() {\n      this.renderInitialboard();\n      this.addSound();\n      this.initializeClickhandlers();\n    }\n  }, {\n    key: \"initializeClickhandlers\",\n    value: function initializeClickhandlers() {\n      var _this = this;\n\n      this.children = _toConsumableArray(this.parent.children);\n      document.getElementById('sound').addEventListener('click', this.soundClick.bind(this));\n      this.stateButton.addEventListener('click', this.changeStateClick.bind(this));\n\n      var menuLinks = _toConsumableArray(document.querySelectorAll('.menu__link'));\n\n      menuLinks.forEach(function (el) {\n        return el.addEventListener('click', _this.menuLinkClick.bind(_this));\n      });\n\n      var backLinks = _toConsumableArray(document.querySelectorAll('#back'));\n\n      backLinks.forEach(function (el) {\n        return el.addEventListener('click', _this.menuLinkClick.bind(_this));\n      });\n      var modalNewGame = document.querySelector('a[data-reset = true]');\n      modalNewGame.addEventListener('click', this.resetGame.bind(this));\n\n      var modalCloseLinks = _toConsumableArray(document.querySelectorAll('#close'));\n\n      modalCloseLinks.forEach(function (el) {\n        return el.addEventListener('click', _this.closeModal.bind(_this));\n      });\n    }\n  }, {\n    key: \"resetGame\",\n    value: function resetGame() {\n      this.count = 0;\n      this.progressIdentifier = setInterval(this.tick.bind(this), 1000);\n      this.game.reset();\n      this.game.modal.close();\n    }\n  }, {\n    key: \"closeModal\",\n    value: function closeModal() {\n      this.game.modal.close();\n    }\n  }, {\n    key: \"soundClick\",\n    value: function soundClick(e) {\n      if (this.sound === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.SOUND_OFF) {\n        e.target.dataset.sound = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.SOUND_ON;\n        e.target.innerText = \"Sound \".concat(_utils_constants__WEBPACK_IMPORTED_MODULE_3__.SOUND_ON);\n        this.sound = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.SOUND_ON;\n      } else {\n        e.target.innerText = \"Sound \".concat(_utils_constants__WEBPACK_IMPORTED_MODULE_3__.SOUND_OFF);\n        this.sound = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.SOUND_OFF;\n        e.target.dataset.sound = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.SOUND_OFF;\n      }\n    }\n  }, {\n    key: \"changeStateClick\",\n    value: function changeStateClick(e) {\n      if (e.target.innerText === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.STATE_PAUSE && this.state === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.STATE_START) return;\n\n      if (e.target.innerText === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.STATE_PAUSE && this.state === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.STATE_PLAYING) {\n        this.state = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.STATE_PAUSE;\n        this.menuList.classList.remove('hidden');\n        this.game.overlay.classList.remove('hidden');\n        clearInterval(this.progressIdentifier);\n        e.target.innerText = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.RESUME;\n        return;\n      }\n\n      if (e.target.innerText === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.RESUME && this.state === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.STATE_PAUSE) {\n        this.state = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.STATE_PLAYING;\n        this.progressIdentifier = setInterval(this.tick.bind(this), 1000);\n        this.children.forEach(function (el) {\n          if (el.classList.length < 2) {\n            el.classList.add('hidden');\n          }\n        });\n        this.game.overlay.classList.add('hidden');\n        e.target.innerText = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.STATE_PAUSE;\n      }\n    }\n  }, {\n    key: \"menuLinkClick\",\n    value: function menuLinkClick(e) {\n      if (e.target.dataset.link === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.NEW_GAME) {\n        this.state = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.STATE_PLAYING;\n\n        if (this.stateButton.innerText === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.RESUME) {\n          this.stateButton.innerText = _utils_constants__WEBPACK_IMPORTED_MODULE_3__.STATE_PAUSE;\n        }\n\n        this.menuList.classList.add('hidden');\n        this.game.overlay.classList.add('hidden');\n        this.progressIdentifier = setInterval(this.tick.bind(this), 1000);\n        this.game.reset();\n        return;\n      }\n\n      if (e.target.dataset.link === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.SETTINGS) {\n        this.menuList.classList.add('hidden');\n        this.settings.classList.remove('hidden');\n        return;\n      }\n\n      if (e.target.dataset.link === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.BESTSCORES) {\n        this.menuList.classList.add('hidden');\n        this.bestScore.classList.remove('hidden');\n        return;\n      }\n\n      if (e.target.dataset.link === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.BACK) {\n        this.children.forEach(function (el) {\n          if (el.classList.length < 2) {\n            el.classList.add('hidden');\n          }\n        });\n        this.menuList.classList.remove('hidden');\n        return;\n      }\n\n      if (e.target.dataset.link === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.LOAD_GAME) {\n        this.loadGame();\n        return;\n      }\n\n      if (e.target.dataset.link === _utils_constants__WEBPACK_IMPORTED_MODULE_3__.SAVE_GAME) {\n        this.saveGame();\n      }\n    }\n  }, {\n    key: \"menuRender\",\n    value: function menuRender() {\n      this.menuList.innerHTML = \"\\n<span class=\\\"menu__link\\\" data-link=\".concat(_utils_constants__WEBPACK_IMPORTED_MODULE_3__.NEW_GAME, \">New Game</span>\\n <span class=\\\"menu__link\\\" data-link=\").concat(_utils_constants__WEBPACK_IMPORTED_MODULE_3__.SAVE_GAME, \">Save Game</span>\\n <span class=\\\"menu__link\\\" data-link=\").concat(_utils_constants__WEBPACK_IMPORTED_MODULE_3__.LOAD_GAME, \">Load Game</span>\\n <span class=\\\"menu__link\\\" data-link=\").concat(_utils_constants__WEBPACK_IMPORTED_MODULE_3__.BESTSCORES, \">Best Scores</span>\\n <span class=\\\"menu__link\\\" data-link=\").concat(_utils_constants__WEBPACK_IMPORTED_MODULE_3__.SETTINGS, \">Settings</span>\\n\");\n    }\n  }, {\n    key: \"settingsRender\",\n    value: function settingsRender() {\n      this.settings.classList.add('hidden');\n      this.settings.innerHTML = \"<span class=\\\"menu-header\\\">Settings</span>\\n        <span class=\\\"menu-text_big\\\">Field Size</span>\\n        <form class='form'>\\n    <label for=\\\"size\\\" class=\\\"menu-text_small\\\">\\n           <input type=\\\"radio\\\" name=\\\"size\\\" id=\\\"input\\\" value=\\\"3\\\"> 3 X 3\\n       </label>\\n       <label for=\\\"size\\\" class=\\\"menu-text_small\\\">\\n           <input type=\\\"radio\\\" name=\\\"size\\\" id=\\\"input\\\" value=\\\"4\\\" checked> 4 X 4\\n       </label>\\n       <label for=\\\"size\\\" class=\\\"menu-text_small\\\">\\n       <input type=\\\"radio\\\" name=\\\"size\\\" id=\\\"input\\\" value=\\\"5\\\"> 5 X 5\\n</label>\\n       <label for=\\\"size\\\" class=\\\"menu-text_small\\\">\\n           <input type=\\\"radio\\\" name=\\\"size\\\" id=\\\"input\\\" value=\\\"6\\\"> 6 X 6\\n   </label>\\n   <label for=\\\"size\\\" class=\\\"menu-text_small\\\">\\n   <input type=\\\"radio\\\" name=\\\"size\\\" id=\\\"input\\\" value=\\\"7\\\"> 7 X 7\\n</label>\\n<label for=\\\"size\\\" class=\\\"menu-text_small\\\">\\n<input type=\\\"radio\\\" name=\\\"size\\\" id=\\\"input\\\" value=\\\"8\\\"> 8 X 8\\n</label>\\n    </form>\\n    <span id=\\\"sound\\\" data-sound=\\\"off\\\" class=\\\"menu-text_big sound\\\">Sound off</span>\\n    <span class=\\\"menu-text_big\\\" id=\\\"back\\\" data-link=\".concat(_utils_constants__WEBPACK_IMPORTED_MODULE_3__.BACK, \">Go back</span>\\n    \");\n    }\n  }, {\n    key: \"bestScoreRender\",\n    value: function bestScoreRender() {\n      this.bestScore.classList.add('hidden');\n      this.bestScore.innerHTML = \"<span class=\\\"menu-header\\\">Best Score</span>\\n        <ul class=\\\"best-score_list\\\">\\n        <li class=\\\"best-score_link menu-text_small\\\"><span>Moves</span><span>Time</span></li>\\n        </ul>\\n        <span class=\\\"menu-text_big\\\" id=\\\"back\\\" data-link=\".concat(_utils_constants__WEBPACK_IMPORTED_MODULE_3__.BACK, \">Go back</span>\\n        \");\n    }\n  }, {\n    key: \"savedGamesRender\",\n    value: function savedGamesRender() {\n      this.savedGames.classList.add('hidden');\n      this.savedGames.innerHTML = \"\\n        <span class=\\\"load_game menu-text_small\\\">You haven't got any saved games yet</span>\\n        <span class=\\\"menu-text_big\\\" id=\\\"back\\\" data-link=\".concat(_utils_constants__WEBPACK_IMPORTED_MODULE_3__.BACK, \" >Go back</span>\\n        \");\n    }\n  }, {\n    key: \"tick\",\n    value: function tick() {\n      this.count += 1;\n      this.sec = this.count >= 60 ? this.count % 60 : this.count;\n      this.min = Math.floor(this.count / 60);\n      document.querySelector('.time').innerHTML = \"Time: \".concat((0,_utils_addZero__WEBPACK_IMPORTED_MODULE_1__.default)(this.min), \": \").concat((0,_utils_addZero__WEBPACK_IMPORTED_MODULE_1__.default)(this.sec));\n    }\n  }, {\n    key: \"saveGame\",\n    value: function saveGame() {\n      var session = {};\n      session.count = this.count;\n      session.moves = this.game.moves;\n      session.template = this.game.currentTemplate;\n      session.image = this.game.image;\n      session.size = this.game.fieldSize;\n      var jsonObj = JSON.stringify(session);\n      localStorage.setItem('games', jsonObj);\n      var loadedGameText = document.querySelector('.load_game');\n      loadedGameText.innerText = 'Your game is saved!';\n      this.menuList.classList.add('hidden');\n      this.savedGames.classList.remove('hidden');\n    }\n  }, {\n    key: \"loadGame\",\n    value: function loadGame() {\n      var loadedGame = localStorage.getItem('games');\n\n      if (!loadedGame) {\n        var loadedGameText = document.querySelector('.load_game');\n        loadedGameText.innerText = 'You have not any saved games yet!';\n        this.menuList.classList.add('hidden');\n        this.savedGames.classList.remove('hidden');\n      }\n\n      if (loadedGame) {\n        loadedGame = JSON.parse(loadedGame);\n        this.game.renderLoadGame(loadedGame);\n        this.count = loadedGame.count;\n        this.tick();\n      }\n    }\n  }, {\n    key: \"addSound\",\n    value: function addSound() {\n      this.audio = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('audio');\n      this.audio.setAttribute('src', './assets/sounds/english.mp3');\n      this.audio.load();\n    } // eslint-disable-next-line class-methods-use-this\n\n  }], [{\n    key: \"getWidth\",\n    value: function getWidth() {\n      var screenWidth = Number(document.documentElement.clientWidth);\n\n      if (screenWidth > _utils_constants__WEBPACK_IMPORTED_MODULE_3__.CHANGING_SCREEN_WIDTH) {\n        return _utils_constants__WEBPACK_IMPORTED_MODULE_3__.MIN_BOARD_SIZE;\n      }\n\n      return _utils_constants__WEBPACK_IMPORTED_MODULE_3__.MIN_BOARD_SIZE;\n    }\n  }, {\n    key: \"generateBestScores\",\n    value: function generateBestScores() {\n      var bestScores = localStorage.getItem('bestScores');\n      var bestScoresContainer = document.querySelector('.best-score_list');\n      if (!bestScores) return;\n      bestScores = JSON.parse(bestScores);\n      bestScores = bestScores.sort(function (a, b) {\n        return a.moves - b.moves;\n      });\n      var html = '<li class=\"best-score_link menu-text_small\"><span>№</span><span>Size</span><span>Moves</span><span>Time</span></li>';\n\n      if (bestScores.length > 10) {\n        bestScores = bestScores.slice(0, 10);\n      }\n\n      bestScores.forEach(function (el, idx) {\n        html += \"<li class=\\\"best-score_link menu-text_small\\\"><span>\".concat(idx + 1, \".</span><span>\").concat(el.size, \"x\").concat(el.size, \"</span><span>\").concat(el.moves, \"</span><span> \").concat((0,_utils_addZero__WEBPACK_IMPORTED_MODULE_1__.default)(Math.floor(el.count / 60)), \": \").concat((0,_utils_addZero__WEBPACK_IMPORTED_MODULE_1__.default)(el.count % 60), \"</span></li>\");\n      });\n      bestScoresContainer.innerHTML = html;\n    }\n  }]);\n\n  return Game;\n}();\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Game);\n\n//# sourceURL=webpack://gem-puzzle/./src/js/Game.js?");
+
+/***/ }),
+
+/***/ "./src/js/GameField.js":
+/*!*****************************!*\
+  !*** ./src/js/GameField.js ***!
+  \*****************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => /* binding */ GameField\n/* harmony export */ });\n/* harmony import */ var _utils_create__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/create */ \"./src/js/utils/create.js\");\n/* harmony import */ var _FieldCell__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./FieldCell */ \"./src/js/FieldCell.js\");\n/* harmony import */ var _Popup__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Popup */ \"./src/js/Popup.js\");\n/* harmony import */ var _layouts_images__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./layouts/images */ \"./src/js/layouts/images.js\");\n/* harmony import */ var _utils_constants__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./utils/constants */ \"./src/js/utils/constants.js\");\nfunction _typeof(obj) { \"@babel/helpers - typeof\"; if (typeof Symbol === \"function\" && typeof Symbol.iterator === \"symbol\") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === \"function\" && obj.constructor === Symbol && obj !== Symbol.prototype ? \"symbol\" : typeof obj; }; } return _typeof(obj); }\n\nfunction _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }\n\nfunction _nonIterableSpread() { throw new TypeError(\"Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\n\nfunction _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === \"string\") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === \"Object\" && o.constructor) n = o.constructor.name; if (n === \"Map\" || n === \"Set\") return Array.from(o); if (n === \"Arguments\" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }\n\nfunction _iterableToArray(iter) { if (typeof Symbol !== \"undefined\" && Symbol.iterator in Object(iter)) return Array.from(iter); }\n\nfunction _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }\n\nfunction _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\n\n // import Game from './Game';\n\n\n\nvar GameField = /*#__PURE__*/function () {\n  function GameField(settings) {\n    _classCallCheck(this, GameField);\n\n    this.settings = settings;\n    this.moves = 0;\n    this.fieldSize = 4;\n    this.buttons = [];\n    this.winTemplate = [];\n    this.width = this.settings.width;\n    this.count = 0;\n    this.currentTemplate = [];\n    this.prevFieldSize = null;\n    this.init();\n  }\n\n  _createClass(GameField, [{\n    key: \"init\",\n    value: function init() {\n      this.generateLayout();\n      this.image = GameField.getImage(_layouts_images__WEBPACK_IMPORTED_MODULE_3__.default);\n      this.modal = new _Popup__WEBPACK_IMPORTED_MODULE_2__.default(this);\n      this.generateWinTemplate();\n      this.render(this.winTemplate);\n    }\n  }, {\n    key: \"generateLayout\",\n    value: function generateLayout() {\n      this.bestScores = GameField.generateBestScoreArr();\n      this.container = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'gamefield');\n      this.overlay = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('span', 'overlay');\n      this.container.style.width = \"\".concat(this.width, \"px\");\n      this.container.style.height = \"\".concat(this.width, \"px\");\n      document.querySelector('.game-wrapper').appendChild(this.container);\n      this.container.appendChild(this.overlay);\n    }\n  }, {\n    key: \"generateWinTemplate\",\n    value: function generateWinTemplate() {\n      this.winTemplate = [];\n\n      for (var i = 0; i < Math.pow(this.fieldSize, 2) - 1; i += 1) {\n        var left = i % this.fieldSize;\n        var top = (i - left) / this.fieldSize;\n        var idx = i + 1;\n        this.winTemplate.push(new _FieldCell__WEBPACK_IMPORTED_MODULE_1__.default(this, {\n          left: left,\n          top: top,\n          idx: idx\n        }));\n      }\n\n      this.winTemplate.push(new _FieldCell__WEBPACK_IMPORTED_MODULE_1__.default(this, {\n        left: this.fieldSize - 1,\n        top: this.fieldSize - 1,\n        idx: ''\n      }));\n      this.winTemplate.forEach(function (el) {\n        return el.getBackgroundPosition();\n      });\n    }\n  }, {\n    key: \"renderLoadGame\",\n    value: function renderLoadGame(options) {\n      var _this = this;\n\n      if (!options) return;\n      var size = options.size,\n          image = options.image,\n          moves = options.moves,\n          template = options.template;\n      this.fieldSize = size;\n      this.image = image;\n      this.moves = moves;\n      this.currentTemplate = template;\n      this.generateWinTemplate();\n      this.buttons = []; // if(this.currentTemplate.length === 0){\n      // }\n\n      this.currentTemplate.forEach(function (el) {\n        return _this.buttons.push(new _FieldCell__WEBPACK_IMPORTED_MODULE_1__.default(_this, el));\n      });\n      document.querySelector('.move').innerHTML = \"Moves: \".concat(this.moves);\n      this.deleteCells();\n      this.render(this.buttons);\n    }\n  }, {\n    key: \"render\",\n    value: function render(arr) {\n      var _this2 = this;\n\n      arr.forEach(function (obj) {\n        var el = obj.render();\n\n        if (el.textContent) {\n          el.draggable = true;\n          el.addEventListener('dragstart', _this2.handleCellDragStart.bind(_this2));\n        } else {\n          el.addEventListener('dragover', GameField.handleCellMove.bind(GameField));\n          el.addEventListener('drop', _this2.handleCellDragEnd.bind(_this2));\n        }\n\n        el.addEventListener('click', _this2.handleCellClick.bind(_this2));\n\n        _this2.container.appendChild(el);\n      });\n    }\n  }, {\n    key: \"shuffle\",\n    value: function shuffle() {\n      var _this3 = this;\n\n      var arr = _toConsumableArray(this.winTemplate);\n\n      var emptyCeil = arr.pop();\n      this.buttons = [];\n      var numbers = this.makeShuffledNumbersArray();\n\n      var _loop = function _loop(i) {\n        var left = i % _this3.fieldSize;\n        var top = (i - left) / _this3.fieldSize;\n        var idx = numbers[i];\n\n        var correctBtn = _this3.winTemplate.find(function (el) {\n          return el.idx === idx;\n        });\n\n        var field = new _FieldCell__WEBPACK_IMPORTED_MODULE_1__.default(_this3, {\n          left: left,\n          top: top,\n          idx: idx\n        });\n        field.bgPosX = correctBtn.bgPosX;\n        field.bgPosY = correctBtn.bgPosY;\n\n        _this3.buttons.push(field);\n      };\n\n      for (var i = 0; i < Math.pow(this.fieldSize, 2) - 1; i += 1) {\n        _loop(i);\n      }\n\n      emptyCeil = new _FieldCell__WEBPACK_IMPORTED_MODULE_1__.default(this, {\n        left: this.fieldSize - 1,\n        top: this.fieldSize - 1,\n        idx: ''\n      });\n      emptyCeil.getBackgroundPosition();\n      this.buttons.push(emptyCeil);\n      this.render(this.buttons);\n      this.saveCurrentTemplate();\n    }\n  }, {\n    key: \"checkSolving\",\n    value: function checkSolving(arr) {\n      var count = this.fieldSize;\n\n      for (var i = 0; i < arr.length; i += 1) {\n        for (var j = i + 1; j < arr.length; j += 1) {\n          if (arr[i] > arr[j]) {\n            count += 1;\n          }\n        }\n      }\n\n      if (count % 2 === 0) return true;\n      return false;\n    }\n  }, {\n    key: \"makeShuffledNumbersArray\",\n    value: function makeShuffledNumbersArray() {\n      var numbers = [];\n      numbers = _toConsumableArray(Array(Math.pow(this.fieldSize, 2) - 1).keys()).sort(function () {\n        return Math.random() - 0.5;\n      }).map(function (el) {\n        return el + 1;\n      });\n\n      if (!this.checkSolving(numbers)) {\n        this.makeShuffledNumbersArray();\n      }\n\n      return numbers;\n    }\n  }, {\n    key: \"reset\",\n    value: function reset() {\n      this.image = GameField.getImage(_layouts_images__WEBPACK_IMPORTED_MODULE_3__.default);\n      this.prevFieldSize = this.fieldSize;\n      this.fieldSize = GameField.checkSize();\n      if (this.fieldSize !== this.prevFieldSize) this.generateWinTemplate();\n      this.deleteCells();\n      this.shuffle();\n      this.moves = 0;\n      document.querySelector('.move').innerHTML = \"Moves: \".concat(this.moves);\n      this.settings.count = 0;\n    }\n  }, {\n    key: \"handleCellClick\",\n    value: function handleCellClick(e) {\n      if (this.settings.state === _utils_constants__WEBPACK_IMPORTED_MODULE_4__.STATE_PAUSE) return;\n      this.currentTemplate = [];\n      var number = Number(e.target.innerHTML);\n      var clickedCeil = this.buttons.find(function (el) {\n        return el.idx === number;\n      });\n      var emptyCeil = this.buttons.find(function (el) {\n        return el.idx === '';\n      });\n      var nothingClicked = !clickedCeil || !emptyCeil;\n      if (nothingClicked) return;\n      this.swapCeilPositions(clickedCeil, emptyCeil);\n      this.saveCurrentTemplate();\n      this.findIfWinTemplate();\n    }\n  }, {\n    key: \"swapCeilPositions\",\n    value: function swapCeilPositions(clicked, empty) {\n      var clickedCeil = clicked;\n      var emptyCeil = empty;\n      var left = clickedCeil.left,\n          top = clickedCeil.top;\n      var emptyLeft = emptyCeil.left;\n      var emptyTop = emptyCeil.top;\n      var sum = Math.abs(left - emptyLeft) + Math.abs(top - emptyTop);\n      if (sum !== 1) return;\n      this.moves += 1;\n      document.querySelector('.move').innerHTML = \"Moves: \".concat(this.moves);\n\n      if (this.settings.sound === _utils_constants__WEBPACK_IMPORTED_MODULE_4__.SOUND_ON) {\n        this.settings.audio.play();\n      }\n\n      Object.assign(emptyCeil, {\n        left: left,\n        top: top\n      });\n\n      if (left !== emptyLeft) {\n        GameField.animate('left', clickedCeil, left, emptyLeft);\n        clickedCeil.container.style.top = \"\".concat(clickedCeil.top * clickedCeil.size, \"px\");\n      }\n\n      if (top !== emptyTop) {\n        GameField.animate('top', clickedCeil, top, emptyTop);\n        clickedCeil.container.style.left = \"\".concat(clickedCeil.left * clickedCeil.size, \"px\");\n      }\n\n      clickedCeil.left = emptyLeft;\n      clickedCeil.top = emptyTop;\n      emptyCeil.container.style.top = \"\".concat(emptyCeil.top * emptyCeil.size, \"px\");\n      emptyCeil.container.style.left = \"\".concat(emptyCeil.left * emptyCeil.size, \"px\");\n    }\n  }, {\n    key: \"saveCurrentTemplate\",\n    value: function saveCurrentTemplate() {\n      var _this4 = this;\n\n      this.buttons.forEach(function (el) {\n        var left = el.left,\n            top = el.top,\n            idx = el.idx,\n            bgPosY = el.bgPosY,\n            bgPosX = el.bgPosX;\n\n        _this4.currentTemplate.push({\n          left: left,\n          top: top,\n          idx: idx,\n          bgPosY: bgPosY,\n          bgPosX: bgPosX\n        });\n      });\n    }\n  }, {\n    key: \"handleCellDragStart\",\n    value: function handleCellDragStart(e) {\n      if (this.settings.state === _utils_constants__WEBPACK_IMPORTED_MODULE_4__.STATE_PAUSE) return;\n      var number = Number(e.target.innerHTML);\n      this.clickedCeil = this.buttons.find(function (el) {\n        return el.idx === number;\n      });\n    }\n  }, {\n    key: \"handleCellDragEnd\",\n    value: function handleCellDragEnd() {\n      this.currentTemplate = [];\n      var emptyCeil = this.buttons.find(function (el) {\n        return el.idx === '';\n      });\n      var nothingClicked = !this.clickedCeil || !emptyCeil;\n      if (nothingClicked) return;\n      var _this$clickedCeil = this.clickedCeil,\n          left = _this$clickedCeil.left,\n          top = _this$clickedCeil.top;\n      var emptyLeft = emptyCeil.left;\n      var emptyTop = emptyCeil.top;\n      var sum = Math.abs(left - emptyLeft) + Math.abs(top - emptyTop);\n      if (sum !== 1) return;\n      this.moves += 1;\n      document.querySelector('.move').innerHTML = \"Moves: \".concat(this.moves);\n\n      if (this.settings.sound === _utils_constants__WEBPACK_IMPORTED_MODULE_4__.SOUND_ON) {\n        this.settings.audio.play();\n      }\n\n      Object.assign(emptyCeil, {\n        left: left,\n        top: top\n      });\n      this.clickedCeil.left = emptyLeft;\n      this.clickedCeil.top = emptyTop;\n      this.clickedCeil.container.style.top = \"\".concat(this.clickedCeil.top * this.clickedCeil.size, \"px\");\n      this.clickedCeil.container.style.left = \"\".concat(this.clickedCeil.left * this.clickedCeil.size, \"px\");\n      emptyCeil.container.style.top = \"\".concat(emptyCeil.top * emptyCeil.size, \"px\");\n      emptyCeil.container.style.left = \"\".concat(emptyCeil.left * emptyCeil.size, \"px\");\n      this.saveCurrentTemplate();\n      this.findIfWinTemplate();\n    }\n  }, {\n    key: \"findIfWinTemplate\",\n    value: function findIfWinTemplate() {\n      var _this5 = this;\n\n      var _loop2 = function _loop2(i) {\n        var idx = i + 1;\n\n        var correctObj = _this5.winTemplate.find(function (el) {\n          return el.idx === idx;\n        });\n\n        var currentObj = _this5.buttons.find(function (el) {\n          return el.idx === idx;\n        });\n\n        if (correctObj.left !== currentObj.left) return {\n          v: void 0\n        };\n        if (correctObj.top !== currentObj.top) return {\n          v: void 0\n        };\n      };\n\n      for (var i = 0; i < this.buttons.length - 1; i += 1) {\n        var _ret = _loop2(i);\n\n        if (_typeof(_ret) === \"object\") return _ret.v;\n      }\n\n      this.isWin();\n    }\n  }, {\n    key: \"isWin\",\n    value: function isWin() {\n      var emptyCeil = this.buttons.find(function (el) {\n        return el.idx === '';\n      });\n      emptyCeil.container.style.opacity = '1';\n      document.querySelectorAll('.fieldcell').forEach(function (el) {\n        el.innerText = '';\n        el.style.borderRadius = '0';\n      });\n      var game = {};\n      game.moves = this.moves;\n      game.size = this.fieldSize;\n      game.count = this.settings.count;\n      this.bestScores.push(game); // eslint-disable-next-line no-console\n\n      console.log(this.bestScores);\n      var bestJson = JSON.stringify(this.bestScores);\n      localStorage.setItem(_utils_constants__WEBPACK_IMPORTED_MODULE_4__.BESTSCORES, bestJson);\n      this.settings.constructor.generateBestScores();\n      this.modal.open();\n    }\n  }, {\n    key: \"deleteCells\",\n    value: function deleteCells() {\n      var _this6 = this;\n\n      var children = _toConsumableArray(this.container.children);\n\n      children.forEach(function (el) {\n        if (el !== _this6.overlay) {\n          if (el.textContent) {\n            el.removeEventListener('dragstart', _this6.handleCellDragStart.bind(_this6));\n          } else {\n            el.removeEventListener('dragover', GameField.handleCellMove.bind(GameField));\n            el.removeEventListener('drop', _this6.handleCellDragEnd.bind(_this6));\n          }\n\n          el.removeEventListener('click', _this6.handleCellClick.bind(_this6));\n\n          _this6.container.removeChild(el);\n        }\n      });\n    }\n  }], [{\n    key: \"getImage\",\n    value: function getImage(arr) {\n      var idx = Math.floor(Math.random() * arr.length);\n      return arr[idx];\n    }\n  }, {\n    key: \"animate\",\n    value: function animate(position, obj, currPos, destination) {\n      var FRAME_RATE = 10;\n      var objNextPosition = destination;\n      var changingPosition = position;\n      var objCurrentPosition = currPos;\n      var step = FRAME_RATE * Math.abs(objNextPosition - objCurrentPosition) / _utils_constants__WEBPACK_IMPORTED_MODULE_4__.ANIMATION_DURATION;\n      var id = setInterval(function () {\n        if (objCurrentPosition < objNextPosition) {\n          objCurrentPosition = Math.min(objNextPosition, objCurrentPosition + step);\n\n          if (objCurrentPosition >= objNextPosition) {\n            clearInterval(id);\n          }\n        } else if (objCurrentPosition > objNextPosition) {\n          objCurrentPosition = Math.max(objNextPosition, objCurrentPosition - step);\n\n          if (objCurrentPosition <= objNextPosition) {\n            clearInterval(id);\n          }\n        }\n\n        obj.container.style[changingPosition] = \"\".concat(objCurrentPosition * obj.size, \"px\");\n      }, FRAME_RATE);\n    }\n  }, {\n    key: \"handleCellMove\",\n    value: function handleCellMove(e) {\n      e.preventDefault();\n    }\n  }, {\n    key: \"generateBestScoreArr\",\n    value: function generateBestScoreArr() {\n      var bestScores = localStorage.getItem(_utils_constants__WEBPACK_IMPORTED_MODULE_4__.BESTSCORES);\n      if (!bestScores) return [];\n      bestScores = JSON.parse(bestScores);\n      return bestScores;\n    }\n  }, {\n    key: \"checkSize\",\n    value: function checkSize() {\n      return Number(document.querySelector('input[name=size]:checked').value);\n    }\n  }]);\n\n  return GameField;\n}();\n\n\n\n//# sourceURL=webpack://gem-puzzle/./src/js/GameField.js?");
+
+/***/ }),
+
+/***/ "./src/js/Popup.js":
+/*!*************************!*\
+  !*** ./src/js/Popup.js ***!
+  \*************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => /* binding */ Modal\n/* harmony export */ });\n/* harmony import */ var _utils_create__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils/create */ \"./src/js/utils/create.js\");\n/* harmony import */ var _utils_addZero__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./utils/addZero */ \"./src/js/utils/addZero.js\");\n/* harmony import */ var _utils_constants__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./utils/constants */ \"./src/js/utils/constants.js\");\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }\n\nfunction _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }\n\n\n\n\n\nvar Modal = /*#__PURE__*/function () {\n  function Modal(gamefield) {\n    _classCallCheck(this, Modal);\n\n    this.gamefield = gamefield;\n    this.closing = false;\n    this.init();\n  }\n\n  _createClass(Modal, [{\n    key: \"init\",\n    value: function init() {\n      this.renderModal();\n    }\n  }, {\n    key: \"renderModal\",\n    value: function renderModal() {\n      this.modal = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'modal');\n      this.layout = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'modal__overlay');\n      this.modalWrapper = (0,_utils_create__WEBPACK_IMPORTED_MODULE_0__.default)('div', 'modal__window');\n      document.body.appendChild(this.modal);\n      this.modal.appendChild(this.layout);\n      this.layout.setAttribute('id', 'close');\n      this.modalWrapper.innerHTML = \"  <div class=\\\"modal__header\\\"><span  class=\\\"close_btn\\\" id=\\\"close\\\" data-close='true'>&times</span></div>\\n        <div class=\\\"modal__content\\\"><span class=\\\"congrats\\\">Congratulations!</span>\\n            <span class=\\\"congrats\\\" id='solve-with'></span>\\n            <span class=\\\" congrats question\\\">Would you like to play one more game?</span>\\n            <div class=\\\"buttons__wrapper\\\">\\n            <a href=\\\"#\\\" class=\\\"modal__btn \\\" data-reset='true'>Yes</a>\\n            <a href=\\\"#\\\" class=\\\"modal__btn\\\" id=\\\"close\\\"  data-close='true'>No</a>\\n            </div>\\n        </div>\";\n      this.layout.appendChild(this.modalWrapper);\n    }\n  }, {\n    key: \"open\",\n    value: function open() {\n      if (this.closing) return;\n      this.modal.classList.add('open');\n      document.getElementById('solve-with').innerText = \"You solve puzzle in \".concat((0,_utils_addZero__WEBPACK_IMPORTED_MODULE_1__.default)(this.gamefield.settings.min), \":\").concat((0,_utils_addZero__WEBPACK_IMPORTED_MODULE_1__.default)(this.gamefield.settings.sec), \" with \").concat(this.gamefield.moves, \" moves\");\n      clearInterval(this.gamefield.settings.progressIdentifier);\n\n      if (document.body.classList.contains('modal-close')) {\n        document.body.classList.remove('modal-close');\n      }\n\n      document.body.classList.add('modal-open');\n    }\n  }, {\n    key: \"close\",\n    value: function close() {\n      var _this = this;\n\n      this.closing = true;\n      this.modal.classList.remove('open');\n      this.modal.classList.add('hide');\n      setTimeout(function () {\n        _this.modal.classList.remove('hide');\n\n        _this.closing = false;\n\n        if (document.body.classList.contains('modal-open')) {\n          document.body.classList.remove('modal-open');\n        }\n\n        document.body.classList.add('modal-close');\n      }, _utils_constants__WEBPACK_IMPORTED_MODULE_2__.ANIMATION_DURATION);\n    }\n  }]);\n\n  return Modal;\n}();\n\n\n\n//# sourceURL=webpack://gem-puzzle/./src/js/Popup.js?");
+
+/***/ }),
+
+/***/ "./src/js/index.js":
+/*!*************************!*\
+  !*** ./src/js/index.js ***!
+  \*************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__, __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\n/* harmony import */ var _Game__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Game */ \"./src/js/Game.js\");\n;\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (new _Game__WEBPACK_IMPORTED_MODULE_0__.default());\n\n//# sourceURL=webpack://gem-puzzle/./src/js/index.js?");
+
+/***/ }),
+
+/***/ "./src/js/layouts/images.js":
+/*!**********************************!*\
+  !*** ./src/js/layouts/images.js ***!
+  \**********************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_exports__, __webpack_require__.r, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => __WEBPACK_DEFAULT_EXPORT__\n/* harmony export */ });\nfunction _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }\n\nfunction _nonIterableSpread() { throw new TypeError(\"Invalid attempt to spread non-iterable instance.\\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.\"); }\n\nfunction _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === \"string\") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === \"Object\" && o.constructor) n = o.constructor.name; if (n === \"Map\" || n === \"Set\") return Array.from(o); if (n === \"Arguments\" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }\n\nfunction _iterableToArray(iter) { if (typeof Symbol !== \"undefined\" && Symbol.iterator in Object(iter)) return Array.from(iter); }\n\nfunction _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }\n\nfunction _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }\n\nvar arr = _toConsumableArray(Array(148).keys());\n\nvar images = arr.map(function (el) {\n  return \"\".concat(el + 1, \".jpg\");\n});\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (images);\n\n//# sourceURL=webpack://gem-puzzle/./src/js/layouts/images.js?");
+
+/***/ }),
+
+/***/ "./src/js/utils/addZero.js":
+/*!*********************************!*\
+  !*** ./src/js/utils/addZero.js ***!
+  \*********************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => /* binding */ addZero\n/* harmony export */ });\nfunction addZero(n) {\n  return n < 10 ? \"0\".concat(n) : \"\".concat(n);\n}\n\n//# sourceURL=webpack://gem-puzzle/./src/js/utils/addZero.js?");
+
+/***/ }),
+
+/***/ "./src/js/utils/constants.js":
+/*!***********************************!*\
+  !*** ./src/js/utils/constants.js ***!
+  \***********************************/
+/*! namespace exports */
+/*! export ANIMATION_DURATION [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export BACK [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export BESTSCORES [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export CHANGING_SCREEN_WIDTH [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export LAST_BEST_SCORE [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export LOAD_GAME [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export MAX_BOARD_SIZE [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export MIN_BOARD_SIZE [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export NEW_GAME [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export RESUME [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export SAVE_GAME [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export SETTINGS [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export SOUND_OFF [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export SOUND_ON [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export STATE_PAUSE [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export STATE_PLAYING [provided] [no usage info] [missing usage info prevents renaming] */
+/*! export STATE_START [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"STATE_PLAYING\": () => /* binding */ STATE_PLAYING,\n/* harmony export */   \"STATE_PAUSE\": () => /* binding */ STATE_PAUSE,\n/* harmony export */   \"STATE_START\": () => /* binding */ STATE_START,\n/* harmony export */   \"MIN_BOARD_SIZE\": () => /* binding */ MIN_BOARD_SIZE,\n/* harmony export */   \"MAX_BOARD_SIZE\": () => /* binding */ MAX_BOARD_SIZE,\n/* harmony export */   \"CHANGING_SCREEN_WIDTH\": () => /* binding */ CHANGING_SCREEN_WIDTH,\n/* harmony export */   \"SOUND_ON\": () => /* binding */ SOUND_ON,\n/* harmony export */   \"SOUND_OFF\": () => /* binding */ SOUND_OFF,\n/* harmony export */   \"ANIMATION_DURATION\": () => /* binding */ ANIMATION_DURATION,\n/* harmony export */   \"LAST_BEST_SCORE\": () => /* binding */ LAST_BEST_SCORE,\n/* harmony export */   \"BESTSCORES\": () => /* binding */ BESTSCORES,\n/* harmony export */   \"SETTINGS\": () => /* binding */ SETTINGS,\n/* harmony export */   \"RESUME\": () => /* binding */ RESUME,\n/* harmony export */   \"NEW_GAME\": () => /* binding */ NEW_GAME,\n/* harmony export */   \"LOAD_GAME\": () => /* binding */ LOAD_GAME,\n/* harmony export */   \"SAVE_GAME\": () => /* binding */ SAVE_GAME,\n/* harmony export */   \"BACK\": () => /* binding */ BACK\n/* harmony export */ });\nvar STATE_PLAYING = 'playing';\nvar STATE_PAUSE = 'Pause';\nvar STATE_START = 'start';\nvar MIN_BOARD_SIZE = 300;\nvar MAX_BOARD_SIZE = 400;\nvar CHANGING_SCREEN_WIDTH = 500;\nvar SOUND_ON = 'on';\nvar SOUND_OFF = 'off';\nvar ANIMATION_DURATION = 300;\nvar LAST_BEST_SCORE = 10;\nvar NEW_GAME = 'newGame';\nvar RESUME = 'Resume';\nvar SETTINGS = 'settings';\nvar BESTSCORES = 'bestScoreses';\nvar BACK = 'back';\nvar SAVE_GAME = 'saveGame';\nvar LOAD_GAME = 'loadGame';\n\n\n//# sourceURL=webpack://gem-puzzle/./src/js/utils/constants.js?");
+
+/***/ }),
+
+/***/ "./src/js/utils/create.js":
+/*!********************************!*\
+  !*** ./src/js/utils/create.js ***!
+  \********************************/
+/*! namespace exports */
+/*! export default [provided] [no usage info] [missing usage info prevents renaming] */
+/*! other exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__.d, __webpack_require__.* */
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => /* binding */ create\n/* harmony export */ });\nfunction create(el, className, children) {\n  var element = null;\n\n  if (el) {\n    element = window.document.createElement(el); //    element = document.createElement(el)\n  }\n\n  if (className) {\n    element.classList.add(className);\n  }\n\n  if (children) {\n    element.innerHTML = children;\n  }\n\n  return element;\n}\n\n//# sourceURL=webpack://gem-puzzle/./src/js/utils/create.js?");
+
+/***/ }),
+
+/***/ "./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js":
+/*!*******************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js ***!
+  \*******************************************************************************/
+/*! unknown exports (runtime-defined) */
+/*! runtime requirements: module, __webpack_require__ */
+/*! CommonJS bailout: module.exports is used directly at 186:0-14 */
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+eval("\n\n/* eslint-env browser */\n\n/*\n  eslint-disable\n  no-console,\n  func-names\n*/\nvar normalizeUrl = __webpack_require__(/*! ./normalize-url */ \"./node_modules/mini-css-extract-plugin/dist/hmr/normalize-url.js\");\n\nvar srcByModuleId = Object.create(null);\nvar noDocument = typeof document === 'undefined';\nvar forEach = Array.prototype.forEach;\n\nfunction debounce(fn, time) {\n  var timeout = 0;\n  return function () {\n    var self = this; // eslint-disable-next-line prefer-rest-params\n\n    var args = arguments;\n\n    var functionCall = function functionCall() {\n      return fn.apply(self, args);\n    };\n\n    clearTimeout(timeout);\n    timeout = setTimeout(functionCall, time);\n  };\n}\n\nfunction noop() {}\n\nfunction getCurrentScriptUrl(moduleId) {\n  var src = srcByModuleId[moduleId];\n\n  if (!src) {\n    if (document.currentScript) {\n      src = document.currentScript.src;\n    } else {\n      var scripts = document.getElementsByTagName('script');\n      var lastScriptTag = scripts[scripts.length - 1];\n\n      if (lastScriptTag) {\n        src = lastScriptTag.src;\n      }\n    }\n\n    srcByModuleId[moduleId] = src;\n  }\n\n  return function (fileMap) {\n    if (!src) {\n      return null;\n    }\n\n    var splitResult = src.split(/([^\\\\/]+)\\.js$/);\n    var filename = splitResult && splitResult[1];\n\n    if (!filename) {\n      return [src.replace('.js', '.css')];\n    }\n\n    if (!fileMap) {\n      return [src.replace('.js', '.css')];\n    }\n\n    return fileMap.split(',').map(function (mapRule) {\n      var reg = new RegExp(\"\".concat(filename, \"\\\\.js$\"), 'g');\n      return normalizeUrl(src.replace(reg, \"\".concat(mapRule.replace(/{fileName}/g, filename), \".css\")));\n    });\n  };\n}\n\nfunction updateCss(el, url) {\n  if (!url) {\n    if (!el.href) {\n      return;\n    } // eslint-disable-next-line\n\n\n    url = el.href.split('?')[0];\n  }\n\n  if (!isUrlRequest(url)) {\n    return;\n  }\n\n  if (el.isLoaded === false) {\n    // We seem to be about to replace a css link that hasn't loaded yet.\n    // We're probably changing the same file more than once.\n    return;\n  }\n\n  if (!url || !(url.indexOf('.css') > -1)) {\n    return;\n  } // eslint-disable-next-line no-param-reassign\n\n\n  el.visited = true;\n  var newEl = el.cloneNode();\n  newEl.isLoaded = false;\n  newEl.addEventListener('load', function () {\n    newEl.isLoaded = true;\n    el.parentNode.removeChild(el);\n  });\n  newEl.addEventListener('error', function () {\n    newEl.isLoaded = true;\n    el.parentNode.removeChild(el);\n  });\n  newEl.href = \"\".concat(url, \"?\").concat(Date.now());\n\n  if (el.nextSibling) {\n    el.parentNode.insertBefore(newEl, el.nextSibling);\n  } else {\n    el.parentNode.appendChild(newEl);\n  }\n}\n\nfunction getReloadUrl(href, src) {\n  var ret; // eslint-disable-next-line no-param-reassign\n\n  href = normalizeUrl(href, {\n    stripWWW: false\n  }); // eslint-disable-next-line array-callback-return\n\n  src.some(function (url) {\n    if (href.indexOf(src) > -1) {\n      ret = url;\n    }\n  });\n  return ret;\n}\n\nfunction reloadStyle(src) {\n  if (!src) {\n    return false;\n  }\n\n  var elements = document.querySelectorAll('link');\n  var loaded = false;\n  forEach.call(elements, function (el) {\n    if (!el.href) {\n      return;\n    }\n\n    var url = getReloadUrl(el.href, src);\n\n    if (!isUrlRequest(url)) {\n      return;\n    }\n\n    if (el.visited === true) {\n      return;\n    }\n\n    if (url) {\n      updateCss(el, url);\n      loaded = true;\n    }\n  });\n  return loaded;\n}\n\nfunction reloadAll() {\n  var elements = document.querySelectorAll('link');\n  forEach.call(elements, function (el) {\n    if (el.visited === true) {\n      return;\n    }\n\n    updateCss(el);\n  });\n}\n\nfunction isUrlRequest(url) {\n  // An URL is not an request if\n  // It is not http or https\n  if (!/^https?:/i.test(url)) {\n    return false;\n  }\n\n  return true;\n}\n\nmodule.exports = function (moduleId, options) {\n  if (noDocument) {\n    console.log('no window.document found, will not HMR CSS');\n    return noop;\n  }\n\n  var getScriptSrc = getCurrentScriptUrl(moduleId);\n\n  function update() {\n    var src = getScriptSrc(options.filename);\n    var reloaded = reloadStyle(src);\n\n    if (options.locals) {\n      console.log('[HMR] Detected local css modules. Reload all css');\n      reloadAll();\n      return;\n    }\n\n    if (reloaded) {\n      console.log('[HMR] css reload %s', src.join(' '));\n    } else {\n      console.log('[HMR] Reload all css');\n      reloadAll();\n    }\n  }\n\n  return debounce(update, 50);\n};\n\n//# sourceURL=webpack://gem-puzzle/./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js?");
+
+/***/ }),
+
+/***/ "./node_modules/mini-css-extract-plugin/dist/hmr/normalize-url.js":
+/*!************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/hmr/normalize-url.js ***!
+  \************************************************************************/
+/*! unknown exports (runtime-defined) */
+/*! runtime requirements: module */
+/*! CommonJS bailout: module.exports is used directly at 22:0-14 */
+/***/ ((module) => {
+
+eval("\n\n/* eslint-disable */\nfunction normalizeUrl(pathComponents) {\n  return pathComponents.reduce(function (accumulator, item) {\n    switch (item) {\n      case '..':\n        accumulator.pop();\n        break;\n\n      case '.':\n        break;\n\n      default:\n        accumulator.push(item);\n    }\n\n    return accumulator;\n  }, []).join('/');\n}\n\nmodule.exports = function (urlString) {\n  urlString = urlString.trim();\n\n  if (/^data:/i.test(urlString)) {\n    return urlString;\n  }\n\n  var protocol = urlString.indexOf('//') !== -1 ? urlString.split('//')[0] + '//' : '';\n  var components = urlString.replace(new RegExp(protocol, 'i'), '').split('/');\n  var host = components[0].toLowerCase().replace(/\\.$/, '');\n  components[0] = '';\n  var path = normalizeUrl(components);\n  return protocol + host + path;\n};\n\n//# sourceURL=webpack://gem-puzzle/./node_modules/mini-css-extract-plugin/dist/hmr/normalize-url.js?");
+
+/***/ }),
+
+/***/ "./src/css/style.css":
+/*!***************************!*\
+  !*** ./src/css/style.css ***!
+  \***************************/
+/*! namespace exports */
+/*! exports [not provided] [no usage info] */
+/*! runtime requirements: __webpack_require__.r, __webpack_exports__, __webpack_require__, module.id, module, __webpack_require__.* */
+/***/ ((module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n// extracted by mini-css-extract-plugin\n\n    if(true) {\n      // 1606609708485\n      var cssReload = __webpack_require__(/*! ./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js */ \"./node_modules/mini-css-extract-plugin/dist/hmr/hotModuleReplacement.js\")(module.id, {\"locals\":false});\n      module.hot.dispose(cssReload);\n      module.hot.accept(undefined, cssReload);\n    }\n  \n\n//# sourceURL=webpack://gem-puzzle/./src/css/style.css?");
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		if(__webpack_module_cache__[moduleId]) {
+/******/ 			return __webpack_module_cache__[moduleId].exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			id: moduleId,
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		var execOptions = { id: moduleId, module: module, factory: __webpack_modules__[moduleId], require: __webpack_require__ };
+/******/ 		__webpack_require__.i.forEach(function(handler) { handler(execOptions); });
+/******/ 		module = execOptions.module;
+/******/ 		execOptions.factory.call(module.exports, module, module.exports, execOptions.require);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/******/ 	// expose the module cache
+/******/ 	__webpack_require__.c = __webpack_module_cache__;
+/******/ 	
+/******/ 	// expose the module execution interceptor
+/******/ 	__webpack_require__.i = [];
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get javascript update chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference all chunks
+/******/ 		__webpack_require__.hu = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return "" + chunkId + "." + __webpack_require__.h() + ".hot-update.js";
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get mini-css chunk filename */
+/******/ 	(() => {
+/******/ 		// This function allow to reference all chunks
+/******/ 		__webpack_require__.miniCssF = (chunkId) => {
+/******/ 			// return url for filenames based on template
+/******/ 			return "" + chunkId + ".css";
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/get update manifest filename */
+/******/ 	(() => {
+/******/ 		__webpack_require__.hmrF = () => "" + __webpack_require__.h() + ".hot-update.json";
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/getFullHash */
+/******/ 	(() => {
+/******/ 		__webpack_require__.h = () => "c26e6d9d30a0428da9de"
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/global */
+/******/ 	(() => {
+/******/ 		__webpack_require__.g = (function() {
+/******/ 			if (typeof globalThis === 'object') return globalThis;
+/******/ 			try {
+/******/ 				return this || new Function('return this')();
+/******/ 			} catch (e) {
+/******/ 				if (typeof window === 'object') return window;
+/******/ 			}
+/******/ 		})();
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => Object.prototype.hasOwnProperty.call(obj, prop)
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/load script */
+/******/ 	(() => {
+/******/ 		var inProgress = {};
+/******/ 		var dataWebpackPrefix = "gem-puzzle:";
+/******/ 		// loadScript function to load a script via script tag
+/******/ 		__webpack_require__.l = (url, done, key) => {
+/******/ 			if(inProgress[url]) { inProgress[url].push(done); return; }
+/******/ 			var script, needAttach;
+/******/ 			if(key !== undefined) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				for(var i = 0; i < scripts.length; i++) {
+/******/ 					var s = scripts[i];
+/******/ 					if(s.getAttribute("src") == url || s.getAttribute("data-webpack") == dataWebpackPrefix + key) { script = s; break; }
+/******/ 				}
+/******/ 			}
+/******/ 			if(!script) {
+/******/ 				needAttach = true;
+/******/ 				script = document.createElement('script');
+/******/ 		
+/******/ 				script.charset = 'utf-8';
+/******/ 				script.timeout = 120;
+/******/ 				if (__webpack_require__.nc) {
+/******/ 					script.setAttribute("nonce", __webpack_require__.nc);
+/******/ 				}
+/******/ 				script.setAttribute("data-webpack", dataWebpackPrefix + key);
+/******/ 				script.src = url;
+/******/ 			}
+/******/ 			inProgress[url] = [done];
+/******/ 			var onScriptComplete = (prev, event) => {
+/******/ 				// avoid mem leaks in IE.
+/******/ 				script.onerror = script.onload = null;
+/******/ 				clearTimeout(timeout);
+/******/ 				var doneFns = inProgress[url];
+/******/ 				delete inProgress[url];
+/******/ 				script.parentNode && script.parentNode.removeChild(script);
+/******/ 				doneFns && doneFns.forEach((fn) => fn(event));
+/******/ 				if(prev) return prev(event);
+/******/ 			}
+/******/ 			;
+/******/ 			var timeout = setTimeout(onScriptComplete.bind(null, undefined, { type: 'timeout', target: script }), 120000);
+/******/ 			script.onerror = onScriptComplete.bind(null, script.onerror);
+/******/ 			script.onload = onScriptComplete.bind(null, script.onload);
+/******/ 			needAttach && document.head.appendChild(script);
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hot module replacement */
+/******/ 	(() => {
+/******/ 		var currentModuleData = {};
+/******/ 		var installedModules = __webpack_require__.c;
+/******/ 		
+/******/ 		// module and require creation
+/******/ 		var currentChildModule;
+/******/ 		var currentParents = [];
+/******/ 		
+/******/ 		// status
+/******/ 		var registeredStatusHandlers = [];
+/******/ 		var currentStatus = "idle";
+/******/ 		
+/******/ 		// while downloading
+/******/ 		var blockingPromises;
+/******/ 		
+/******/ 		// The update info
+/******/ 		var currentUpdateApplyHandlers;
+/******/ 		var queuedInvalidatedModules;
+/******/ 		
+/******/ 		__webpack_require__.hmrD = currentModuleData;
+/******/ 		
+/******/ 		__webpack_require__.i.push(function (options) {
+/******/ 			var module = options.module;
+/******/ 			var require = createRequire(options.require, options.id);
+/******/ 			module.hot = createModuleHotObject(options.id, module);
+/******/ 			module.parents = currentParents;
+/******/ 			module.children = [];
+/******/ 			currentParents = [];
+/******/ 			options.require = require;
+/******/ 		});
+/******/ 		
+/******/ 		__webpack_require__.hmrC = {};
+/******/ 		__webpack_require__.hmrI = {};
+/******/ 		
+/******/ 		function createRequire(require, moduleId) {
+/******/ 			var me = installedModules[moduleId];
+/******/ 			if (!me) return require;
+/******/ 			var fn = function (request) {
+/******/ 				if (me.hot.active) {
+/******/ 					if (installedModules[request]) {
+/******/ 						var parents = installedModules[request].parents;
+/******/ 						if (parents.indexOf(moduleId) === -1) {
+/******/ 							parents.push(moduleId);
+/******/ 						}
+/******/ 					} else {
+/******/ 						currentParents = [moduleId];
+/******/ 						currentChildModule = request;
+/******/ 					}
+/******/ 					if (me.children.indexOf(request) === -1) {
+/******/ 						me.children.push(request);
+/******/ 					}
+/******/ 				} else {
+/******/ 					console.warn(
+/******/ 						"[HMR] unexpected require(" +
+/******/ 							request +
+/******/ 							") from disposed module " +
+/******/ 							moduleId
+/******/ 					);
+/******/ 					currentParents = [];
+/******/ 				}
+/******/ 				return require(request);
+/******/ 			};
+/******/ 			var createPropertyDescriptor = function (name) {
+/******/ 				return {
+/******/ 					configurable: true,
+/******/ 					enumerable: true,
+/******/ 					get: function () {
+/******/ 						return require[name];
+/******/ 					},
+/******/ 					set: function (value) {
+/******/ 						require[name] = value;
+/******/ 					}
+/******/ 				};
+/******/ 			};
+/******/ 			for (var name in require) {
+/******/ 				if (Object.prototype.hasOwnProperty.call(require, name) && name !== "e") {
+/******/ 					Object.defineProperty(fn, name, createPropertyDescriptor(name));
+/******/ 				}
+/******/ 			}
+/******/ 			fn.e = function (chunkId) {
+/******/ 				return trackBlockingPromise(require.e(chunkId));
+/******/ 			};
+/******/ 			return fn;
+/******/ 		}
+/******/ 		
+/******/ 		function createModuleHotObject(moduleId, me) {
+/******/ 			var hot = {
+/******/ 				// private stuff
+/******/ 				_acceptedDependencies: {},
+/******/ 				_declinedDependencies: {},
+/******/ 				_selfAccepted: false,
+/******/ 				_selfDeclined: false,
+/******/ 				_selfInvalidated: false,
+/******/ 				_disposeHandlers: [],
+/******/ 				_main: currentChildModule !== moduleId,
+/******/ 				_requireSelf: function () {
+/******/ 					currentParents = me.parents.slice();
+/******/ 					currentChildModule = moduleId;
+/******/ 					__webpack_require__(moduleId);
+/******/ 				},
+/******/ 		
+/******/ 				// Module API
+/******/ 				active: true,
+/******/ 				accept: function (dep, callback) {
+/******/ 					if (dep === undefined) hot._selfAccepted = true;
+/******/ 					else if (typeof dep === "function") hot._selfAccepted = dep;
+/******/ 					else if (typeof dep === "object" && dep !== null)
+/******/ 						for (var i = 0; i < dep.length; i++)
+/******/ 							hot._acceptedDependencies[dep[i]] = callback || function () {};
+/******/ 					else hot._acceptedDependencies[dep] = callback || function () {};
+/******/ 				},
+/******/ 				decline: function (dep) {
+/******/ 					if (dep === undefined) hot._selfDeclined = true;
+/******/ 					else if (typeof dep === "object" && dep !== null)
+/******/ 						for (var i = 0; i < dep.length; i++)
+/******/ 							hot._declinedDependencies[dep[i]] = true;
+/******/ 					else hot._declinedDependencies[dep] = true;
+/******/ 				},
+/******/ 				dispose: function (callback) {
+/******/ 					hot._disposeHandlers.push(callback);
+/******/ 				},
+/******/ 				addDisposeHandler: function (callback) {
+/******/ 					hot._disposeHandlers.push(callback);
+/******/ 				},
+/******/ 				removeDisposeHandler: function (callback) {
+/******/ 					var idx = hot._disposeHandlers.indexOf(callback);
+/******/ 					if (idx >= 0) hot._disposeHandlers.splice(idx, 1);
+/******/ 				},
+/******/ 				invalidate: function () {
+/******/ 					this._selfInvalidated = true;
+/******/ 					switch (currentStatus) {
+/******/ 						case "idle":
+/******/ 							currentUpdateApplyHandlers = [];
+/******/ 							Object.keys(__webpack_require__.hmrI).forEach(function (key) {
+/******/ 								__webpack_require__.hmrI[key](
+/******/ 									moduleId,
+/******/ 									currentUpdateApplyHandlers
+/******/ 								);
+/******/ 							});
+/******/ 							setStatus("ready");
+/******/ 							break;
+/******/ 						case "ready":
+/******/ 							Object.keys(__webpack_require__.hmrI).forEach(function (key) {
+/******/ 								__webpack_require__.hmrI[key](
+/******/ 									moduleId,
+/******/ 									currentUpdateApplyHandlers
+/******/ 								);
+/******/ 							});
+/******/ 							break;
+/******/ 						case "prepare":
+/******/ 						case "check":
+/******/ 						case "dispose":
+/******/ 						case "apply":
+/******/ 							(queuedInvalidatedModules = queuedInvalidatedModules || []).push(
+/******/ 								moduleId
+/******/ 							);
+/******/ 							break;
+/******/ 						default:
+/******/ 							// ignore requests in error states
+/******/ 							break;
+/******/ 					}
+/******/ 				},
+/******/ 		
+/******/ 				// Management API
+/******/ 				check: hotCheck,
+/******/ 				apply: hotApply,
+/******/ 				status: function (l) {
+/******/ 					if (!l) return currentStatus;
+/******/ 					registeredStatusHandlers.push(l);
+/******/ 				},
+/******/ 				addStatusHandler: function (l) {
+/******/ 					registeredStatusHandlers.push(l);
+/******/ 				},
+/******/ 				removeStatusHandler: function (l) {
+/******/ 					var idx = registeredStatusHandlers.indexOf(l);
+/******/ 					if (idx >= 0) registeredStatusHandlers.splice(idx, 1);
+/******/ 				},
+/******/ 		
+/******/ 				//inherit from previous dispose call
+/******/ 				data: currentModuleData[moduleId]
+/******/ 			};
+/******/ 			currentChildModule = undefined;
+/******/ 			return hot;
+/******/ 		}
+/******/ 		
+/******/ 		function setStatus(newStatus) {
+/******/ 			currentStatus = newStatus;
+/******/ 			for (var i = 0; i < registeredStatusHandlers.length; i++)
+/******/ 				registeredStatusHandlers[i].call(null, newStatus);
+/******/ 		}
+/******/ 		
+/******/ 		function trackBlockingPromise(promise) {
+/******/ 			switch (currentStatus) {
+/******/ 				case "ready":
+/******/ 					setStatus("prepare");
+/******/ 					blockingPromises.push(promise);
+/******/ 					waitForBlockingPromises(function () {
+/******/ 						setStatus("ready");
+/******/ 					});
+/******/ 					return promise;
+/******/ 				case "prepare":
+/******/ 					blockingPromises.push(promise);
+/******/ 					return promise;
+/******/ 				default:
+/******/ 					return promise;
+/******/ 			}
+/******/ 		}
+/******/ 		
+/******/ 		function waitForBlockingPromises(fn) {
+/******/ 			if (blockingPromises.length === 0) return fn();
+/******/ 			var blocker = blockingPromises;
+/******/ 			blockingPromises = [];
+/******/ 			return Promise.all(blocker).then(function () {
+/******/ 				return waitForBlockingPromises(fn);
+/******/ 			});
+/******/ 		}
+/******/ 		
+/******/ 		function hotCheck(applyOnUpdate) {
+/******/ 			if (currentStatus !== "idle") {
+/******/ 				throw new Error("check() is only allowed in idle status");
+/******/ 			}
+/******/ 			setStatus("check");
+/******/ 			return __webpack_require__.hmrM().then(function (update) {
+/******/ 				if (!update) {
+/******/ 					setStatus(applyInvalidatedModules() ? "ready" : "idle");
+/******/ 					return null;
+/******/ 				}
+/******/ 		
+/******/ 				setStatus("prepare");
+/******/ 		
+/******/ 				var updatedModules = [];
+/******/ 				blockingPromises = [];
+/******/ 				currentUpdateApplyHandlers = [];
+/******/ 		
+/******/ 				return Promise.all(
+/******/ 					Object.keys(__webpack_require__.hmrC).reduce(function (
+/******/ 						promises,
+/******/ 						key
+/******/ 					) {
+/******/ 						__webpack_require__.hmrC[key](
+/******/ 							update.c,
+/******/ 							update.r,
+/******/ 							update.m,
+/******/ 							promises,
+/******/ 							currentUpdateApplyHandlers,
+/******/ 							updatedModules
+/******/ 						);
+/******/ 						return promises;
+/******/ 					},
+/******/ 					[])
+/******/ 				).then(function () {
+/******/ 					return waitForBlockingPromises(function () {
+/******/ 						if (applyOnUpdate) {
+/******/ 							return internalApply(applyOnUpdate);
+/******/ 						} else {
+/******/ 							setStatus("ready");
+/******/ 		
+/******/ 							return updatedModules;
+/******/ 						}
+/******/ 					});
+/******/ 				});
+/******/ 			});
+/******/ 		}
+/******/ 		
+/******/ 		function hotApply(options) {
+/******/ 			if (currentStatus !== "ready") {
+/******/ 				return Promise.resolve().then(function () {
+/******/ 					throw new Error("apply() is only allowed in ready status");
+/******/ 				});
+/******/ 			}
+/******/ 			return internalApply(options);
+/******/ 		}
+/******/ 		
+/******/ 		function internalApply(options) {
+/******/ 			options = options || {};
+/******/ 		
+/******/ 			applyInvalidatedModules();
+/******/ 		
+/******/ 			var results = currentUpdateApplyHandlers.map(function (handler) {
+/******/ 				return handler(options);
+/******/ 			});
+/******/ 			currentUpdateApplyHandlers = undefined;
+/******/ 		
+/******/ 			var errors = results
+/******/ 				.map(function (r) {
+/******/ 					return r.error;
+/******/ 				})
+/******/ 				.filter(Boolean);
+/******/ 		
+/******/ 			if (errors.length > 0) {
+/******/ 				setStatus("abort");
+/******/ 				return Promise.resolve().then(function () {
+/******/ 					throw errors[0];
+/******/ 				});
+/******/ 			}
+/******/ 		
+/******/ 			// Now in "dispose" phase
+/******/ 			setStatus("dispose");
+/******/ 		
+/******/ 			results.forEach(function (result) {
+/******/ 				if (result.dispose) result.dispose();
+/******/ 			});
+/******/ 		
+/******/ 			// Now in "apply" phase
+/******/ 			setStatus("apply");
+/******/ 		
+/******/ 			var error;
+/******/ 			var reportError = function (err) {
+/******/ 				if (!error) error = err;
+/******/ 			};
+/******/ 		
+/******/ 			var outdatedModules = [];
+/******/ 			results.forEach(function (result) {
+/******/ 				if (result.apply) {
+/******/ 					var modules = result.apply(reportError);
+/******/ 					if (modules) {
+/******/ 						for (var i = 0; i < modules.length; i++) {
+/******/ 							outdatedModules.push(modules[i]);
+/******/ 						}
+/******/ 					}
+/******/ 				}
+/******/ 			});
+/******/ 		
+/******/ 			// handle errors in accept handlers and self accepted module load
+/******/ 			if (error) {
+/******/ 				setStatus("fail");
+/******/ 				return Promise.resolve().then(function () {
+/******/ 					throw error;
+/******/ 				});
+/******/ 			}
+/******/ 		
+/******/ 			if (queuedInvalidatedModules) {
+/******/ 				return internalApply(options).then(function (list) {
+/******/ 					outdatedModules.forEach(function (moduleId) {
+/******/ 						if (list.indexOf(moduleId) < 0) list.push(moduleId);
+/******/ 					});
+/******/ 					return list;
+/******/ 				});
+/******/ 			}
+/******/ 		
+/******/ 			setStatus("idle");
+/******/ 			return Promise.resolve(outdatedModules);
+/******/ 		}
+/******/ 		
+/******/ 		function applyInvalidatedModules() {
+/******/ 			if (queuedInvalidatedModules) {
+/******/ 				if (!currentUpdateApplyHandlers) currentUpdateApplyHandlers = [];
+/******/ 				Object.keys(__webpack_require__.hmrI).forEach(function (key) {
+/******/ 					queuedInvalidatedModules.forEach(function (moduleId) {
+/******/ 						__webpack_require__.hmrI[key](
+/******/ 							moduleId,
+/******/ 							currentUpdateApplyHandlers
+/******/ 						);
+/******/ 					});
+/******/ 				});
+/******/ 				queuedInvalidatedModules = undefined;
+/******/ 				return true;
+/******/ 			}
+/******/ 		}
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/publicPath */
+/******/ 	(() => {
+/******/ 		var scriptUrl;
+/******/ 		if (__webpack_require__.g.importScripts) scriptUrl = __webpack_require__.g.location + "";
+/******/ 		var document = __webpack_require__.g.document;
+/******/ 		if (!scriptUrl && document) {
+/******/ 			if (document.currentScript)
+/******/ 				scriptUrl = document.currentScript.src
+/******/ 			if (!scriptUrl) {
+/******/ 				var scripts = document.getElementsByTagName("script");
+/******/ 				if(scripts.length) scriptUrl = scripts[scripts.length - 1].src
+/******/ 			}
+/******/ 		}
+/******/ 		// When supporting browsers where an automatic publicPath is not supported you must specify an output.publicPath manually via configuration
+/******/ 		// or pass an empty string ("") and set the __webpack_public_path__ variable from your code to use your own logic.
+/******/ 		if (!scriptUrl) throw new Error("Automatic publicPath is not supported in this browser");
+/******/ 		scriptUrl = scriptUrl.replace(/#.*$/, "").replace(/\?.*$/, "").replace(/\/[^\/]+$/, "/");
+/******/ 		__webpack_require__.p = scriptUrl;
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/css loading */
+/******/ 	(() => {
+/******/ 		var createStylesheet = (chunkId, fullhref, resolve, reject) => {
+/******/ 			var linkTag = document.createElement("link");
+/******/ 		
+/******/ 			linkTag.rel = "stylesheet";
+/******/ 			linkTag.type = "text/css";
+/******/ 			var onLinkComplete = (event) => {
+/******/ 				// avoid mem leaks.
+/******/ 				linkTag.onerror = linkTag.onload = null;
+/******/ 				if (event.type === 'load') {
+/******/ 					resolve();
+/******/ 				} else {
+/******/ 					var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 					var realHref = event && event.target && event.target.href || fullhref;
+/******/ 					var err = new Error("Loading CSS chunk " + chunkId + " failed.\n(" + realHref + ")");
+/******/ 					err.code = "CSS_CHUNK_LOAD_FAILED";
+/******/ 					err.type = errorType;
+/******/ 					err.request = realHref;
+/******/ 					linkTag.parentNode.removeChild(linkTag)
+/******/ 					reject(err);
+/******/ 				}
+/******/ 			}
+/******/ 			linkTag.onerror = linkTag.onload = onLinkComplete;
+/******/ 			linkTag.href = fullhref;
+/******/ 		
+/******/ 			document.head.appendChild(linkTag);
+/******/ 			return linkTag;
+/******/ 		};
+/******/ 		var findStylesheet = (href, fullhref) => {
+/******/ 			var existingLinkTags = document.getElementsByTagName("link");
+/******/ 			for(var i = 0; i < existingLinkTags.length; i++) {
+/******/ 				var tag = existingLinkTags[i];
+/******/ 				var dataHref = tag.getAttribute("data-href") || tag.getAttribute("href");
+/******/ 				if(tag.rel === "stylesheet" && (dataHref === href || dataHref === fullhref)) return tag;
+/******/ 			}
+/******/ 			var existingStyleTags = document.getElementsByTagName("style");
+/******/ 			for(var i = 0; i < existingStyleTags.length; i++) {
+/******/ 				var tag = existingStyleTags[i];
+/******/ 				var dataHref = tag.getAttribute("data-href");
+/******/ 				if(dataHref === href || dataHref === fullhref) return tag;
+/******/ 			}
+/******/ 		};
+/******/ 		var loadStylesheet = (chunkId) => {
+/******/ 			return new Promise((resolve, reject) => {
+/******/ 				var href = __webpack_require__.miniCssF(chunkId);
+/******/ 				var fullhref = __webpack_require__.p + href;
+/******/ 				if(findStylesheet(href, fullhref)) return resolve();
+/******/ 				createStylesheet(chunkId, fullhref, resolve, reject);
+/******/ 			});
+/******/ 		}
+/******/ 		// no chunk loading
+/******/ 		
+/******/ 		var oldTags = [];
+/******/ 		var newTags = [];
+/******/ 		var applyHandler = (options) => {
+/******/ 			return { dispose: () => {
+/******/ 				for(var i = 0; i < oldTags.length; i++) {
+/******/ 					var oldTag = oldTags[i];
+/******/ 					if(oldTag.parentNode) oldTag.parentNode.removeChild(oldTag);
+/******/ 				}
+/******/ 				oldTags.length = 0;
+/******/ 			}, apply: () => {
+/******/ 				for(var i = 0; i < newTags.length; i++) newTags[i].rel = "stylesheet";
+/******/ 				newTags.length = 0;
+/******/ 			} };
+/******/ 		}
+/******/ 		__webpack_require__.hmrC.miniCss = (chunkIds, removedChunks, removedModules, promises, applyHandlers, updatedModulesList) => {
+/******/ 			applyHandlers.push(applyHandler);
+/******/ 			chunkIds.forEach((chunkId) => {
+/******/ 				var href = __webpack_require__.miniCssF(chunkId);
+/******/ 				var fullhref = __webpack_require__.p + href;
+/******/ 				const oldTag = findStylesheet(href, fullhref);
+/******/ 				if(!oldTag) return;
+/******/ 				promises.push(new Promise((resolve, reject) => {
+/******/ 					var tag = createStylesheet(chunkId, fullhref, () => {
+/******/ 						tag.as = "style";
+/******/ 						tag.rel = "preload";
+/******/ 						resolve();
+/******/ 					}, reject);
+/******/ 					oldTags.push(oldTag);
+/******/ 					newTags.push(tag);
+/******/ 				}));
+/******/ 			});
+/******/ 		}
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// Promise = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"main": 0
+/******/ 		};
+/******/ 		
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		var currentUpdatedModulesList;
+/******/ 		var waitingUpdateResolves = {};
+/******/ 		function loadUpdateChunk(chunkId) {
+/******/ 			return new Promise((resolve, reject) => {
+/******/ 				waitingUpdateResolves[chunkId] = resolve;
+/******/ 				// start update chunk loading
+/******/ 				var url = __webpack_require__.p + __webpack_require__.hu(chunkId);
+/******/ 				// create error before stack unwound to get useful stacktrace later
+/******/ 				var error = new Error();
+/******/ 				var loadingEnded = (event) => {
+/******/ 					if(waitingUpdateResolves[chunkId]) {
+/******/ 						waitingUpdateResolves[chunkId] = undefined
+/******/ 						var errorType = event && (event.type === 'load' ? 'missing' : event.type);
+/******/ 						var realSrc = event && event.target && event.target.src;
+/******/ 						error.message = 'Loading hot update chunk ' + chunkId + ' failed.\n(' + errorType + ': ' + realSrc + ')';
+/******/ 						error.name = 'ChunkLoadError';
+/******/ 						error.type = errorType;
+/******/ 						error.request = realSrc;
+/******/ 						reject(error);
+/******/ 					}
+/******/ 				};
+/******/ 				__webpack_require__.l(url, loadingEnded);
+/******/ 			});
+/******/ 		}
+/******/ 		
+/******/ 		self["webpackHotUpdategem_puzzle"] = (chunkId, moreModules, runtime) => {
+/******/ 			for(var moduleId in moreModules) {
+/******/ 				if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 					currentUpdate[moduleId] = moreModules[moduleId];
+/******/ 					if(currentUpdatedModulesList) currentUpdatedModulesList.push(moduleId);
+/******/ 				}
+/******/ 			}
+/******/ 			if(runtime) currentUpdateRuntime.push(runtime);
+/******/ 			if(waitingUpdateResolves[chunkId]) {
+/******/ 				waitingUpdateResolves[chunkId]();
+/******/ 				waitingUpdateResolves[chunkId] = undefined;
+/******/ 			}
+/******/ 		};
+/******/ 		
+/******/ 		var currentUpdateChunks;
+/******/ 		var currentUpdate;
+/******/ 		var currentUpdateRemovedChunks;
+/******/ 		var currentUpdateRuntime;
+/******/ 		function applyHandler(options) {
+/******/ 			if (__webpack_require__.f) delete __webpack_require__.f.jsonpHmr;
+/******/ 			currentUpdateChunks = undefined;
+/******/ 			function getAffectedModuleEffects(updateModuleId) {
+/******/ 				var outdatedModules = [updateModuleId];
+/******/ 				var outdatedDependencies = {};
+/******/ 		
+/******/ 				var queue = outdatedModules.map(function (id) {
+/******/ 					return {
+/******/ 						chain: [id],
+/******/ 						id: id
+/******/ 					};
+/******/ 				});
+/******/ 				while (queue.length > 0) {
+/******/ 					var queueItem = queue.pop();
+/******/ 					var moduleId = queueItem.id;
+/******/ 					var chain = queueItem.chain;
+/******/ 					var module = __webpack_require__.c[moduleId];
+/******/ 					if (
+/******/ 						!module ||
+/******/ 						(module.hot._selfAccepted && !module.hot._selfInvalidated)
+/******/ 					)
+/******/ 						continue;
+/******/ 					if (module.hot._selfDeclined) {
+/******/ 						return {
+/******/ 							type: "self-declined",
+/******/ 							chain: chain,
+/******/ 							moduleId: moduleId
+/******/ 						};
+/******/ 					}
+/******/ 					if (module.hot._main) {
+/******/ 						return {
+/******/ 							type: "unaccepted",
+/******/ 							chain: chain,
+/******/ 							moduleId: moduleId
+/******/ 						};
+/******/ 					}
+/******/ 					for (var i = 0; i < module.parents.length; i++) {
+/******/ 						var parentId = module.parents[i];
+/******/ 						var parent = __webpack_require__.c[parentId];
+/******/ 						if (!parent) continue;
+/******/ 						if (parent.hot._declinedDependencies[moduleId]) {
+/******/ 							return {
+/******/ 								type: "declined",
+/******/ 								chain: chain.concat([parentId]),
+/******/ 								moduleId: moduleId,
+/******/ 								parentId: parentId
+/******/ 							};
+/******/ 						}
+/******/ 						if (outdatedModules.indexOf(parentId) !== -1) continue;
+/******/ 						if (parent.hot._acceptedDependencies[moduleId]) {
+/******/ 							if (!outdatedDependencies[parentId])
+/******/ 								outdatedDependencies[parentId] = [];
+/******/ 							addAllToSet(outdatedDependencies[parentId], [moduleId]);
+/******/ 							continue;
+/******/ 						}
+/******/ 						delete outdatedDependencies[parentId];
+/******/ 						outdatedModules.push(parentId);
+/******/ 						queue.push({
+/******/ 							chain: chain.concat([parentId]),
+/******/ 							id: parentId
+/******/ 						});
+/******/ 					}
+/******/ 				}
+/******/ 		
+/******/ 				return {
+/******/ 					type: "accepted",
+/******/ 					moduleId: updateModuleId,
+/******/ 					outdatedModules: outdatedModules,
+/******/ 					outdatedDependencies: outdatedDependencies
+/******/ 				};
+/******/ 			}
+/******/ 		
+/******/ 			function addAllToSet(a, b) {
+/******/ 				for (var i = 0; i < b.length; i++) {
+/******/ 					var item = b[i];
+/******/ 					if (a.indexOf(item) === -1) a.push(item);
+/******/ 				}
+/******/ 			}
+/******/ 		
+/******/ 			// at begin all updates modules are outdated
+/******/ 			// the "outdated" status can propagate to parents if they don't accept the children
+/******/ 			var outdatedDependencies = {};
+/******/ 			var outdatedModules = [];
+/******/ 			var appliedUpdate = {};
+/******/ 		
+/******/ 			var warnUnexpectedRequire = function warnUnexpectedRequire(module) {
+/******/ 				console.warn(
+/******/ 					"[HMR] unexpected require(" + module.id + ") to disposed module"
+/******/ 				);
+/******/ 			};
+/******/ 		
+/******/ 			for (var moduleId in currentUpdate) {
+/******/ 				if (__webpack_require__.o(currentUpdate, moduleId)) {
+/******/ 					var newModuleFactory = currentUpdate[moduleId];
+/******/ 					/** @type {TODO} */
+/******/ 					var result;
+/******/ 					if (newModuleFactory) {
+/******/ 						result = getAffectedModuleEffects(moduleId);
+/******/ 					} else {
+/******/ 						result = {
+/******/ 							type: "disposed",
+/******/ 							moduleId: moduleId
+/******/ 						};
+/******/ 					}
+/******/ 					/** @type {Error|false} */
+/******/ 					var abortError = false;
+/******/ 					var doApply = false;
+/******/ 					var doDispose = false;
+/******/ 					var chainInfo = "";
+/******/ 					if (result.chain) {
+/******/ 						chainInfo = "\nUpdate propagation: " + result.chain.join(" -> ");
+/******/ 					}
+/******/ 					switch (result.type) {
+/******/ 						case "self-declined":
+/******/ 							if (options.onDeclined) options.onDeclined(result);
+/******/ 							if (!options.ignoreDeclined)
+/******/ 								abortError = new Error(
+/******/ 									"Aborted because of self decline: " +
+/******/ 										result.moduleId +
+/******/ 										chainInfo
+/******/ 								);
+/******/ 							break;
+/******/ 						case "declined":
+/******/ 							if (options.onDeclined) options.onDeclined(result);
+/******/ 							if (!options.ignoreDeclined)
+/******/ 								abortError = new Error(
+/******/ 									"Aborted because of declined dependency: " +
+/******/ 										result.moduleId +
+/******/ 										" in " +
+/******/ 										result.parentId +
+/******/ 										chainInfo
+/******/ 								);
+/******/ 							break;
+/******/ 						case "unaccepted":
+/******/ 							if (options.onUnaccepted) options.onUnaccepted(result);
+/******/ 							if (!options.ignoreUnaccepted)
+/******/ 								abortError = new Error(
+/******/ 									"Aborted because " + moduleId + " is not accepted" + chainInfo
+/******/ 								);
+/******/ 							break;
+/******/ 						case "accepted":
+/******/ 							if (options.onAccepted) options.onAccepted(result);
+/******/ 							doApply = true;
+/******/ 							break;
+/******/ 						case "disposed":
+/******/ 							if (options.onDisposed) options.onDisposed(result);
+/******/ 							doDispose = true;
+/******/ 							break;
+/******/ 						default:
+/******/ 							throw new Error("Unexception type " + result.type);
+/******/ 					}
+/******/ 					if (abortError) {
+/******/ 						return {
+/******/ 							error: abortError
+/******/ 						};
+/******/ 					}
+/******/ 					if (doApply) {
+/******/ 						appliedUpdate[moduleId] = newModuleFactory;
+/******/ 						addAllToSet(outdatedModules, result.outdatedModules);
+/******/ 						for (moduleId in result.outdatedDependencies) {
+/******/ 							if (__webpack_require__.o(result.outdatedDependencies, moduleId)) {
+/******/ 								if (!outdatedDependencies[moduleId])
+/******/ 									outdatedDependencies[moduleId] = [];
+/******/ 								addAllToSet(
+/******/ 									outdatedDependencies[moduleId],
+/******/ 									result.outdatedDependencies[moduleId]
+/******/ 								);
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 					if (doDispose) {
+/******/ 						addAllToSet(outdatedModules, [result.moduleId]);
+/******/ 						appliedUpdate[moduleId] = warnUnexpectedRequire;
+/******/ 					}
+/******/ 				}
+/******/ 			}
+/******/ 			currentUpdate = undefined;
+/******/ 		
+/******/ 			// Store self accepted outdated modules to require them later by the module system
+/******/ 			var outdatedSelfAcceptedModules = [];
+/******/ 			for (var j = 0; j < outdatedModules.length; j++) {
+/******/ 				var outdatedModuleId = outdatedModules[j];
+/******/ 				if (
+/******/ 					__webpack_require__.c[outdatedModuleId] &&
+/******/ 					__webpack_require__.c[outdatedModuleId].hot._selfAccepted &&
+/******/ 					// removed self-accepted modules should not be required
+/******/ 					appliedUpdate[outdatedModuleId] !== warnUnexpectedRequire &&
+/******/ 					// when called invalidate self-accepting is not possible
+/******/ 					!__webpack_require__.c[outdatedModuleId].hot._selfInvalidated
+/******/ 				) {
+/******/ 					outdatedSelfAcceptedModules.push({
+/******/ 						module: outdatedModuleId,
+/******/ 						require: __webpack_require__.c[outdatedModuleId].hot._requireSelf,
+/******/ 						errorHandler: __webpack_require__.c[outdatedModuleId].hot._selfAccepted
+/******/ 					});
+/******/ 				}
+/******/ 			}
+/******/ 		
+/******/ 			var moduleOutdatedDependencies;
+/******/ 		
+/******/ 			return {
+/******/ 				dispose: function () {
+/******/ 					currentUpdateRemovedChunks.forEach(function (chunkId) {
+/******/ 						delete installedChunks[chunkId];
+/******/ 					});
+/******/ 					currentUpdateRemovedChunks = undefined;
+/******/ 		
+/******/ 					var idx;
+/******/ 					var queue = outdatedModules.slice();
+/******/ 					while (queue.length > 0) {
+/******/ 						var moduleId = queue.pop();
+/******/ 						var module = __webpack_require__.c[moduleId];
+/******/ 						if (!module) continue;
+/******/ 		
+/******/ 						var data = {};
+/******/ 		
+/******/ 						// Call dispose handlers
+/******/ 						var disposeHandlers = module.hot._disposeHandlers;
+/******/ 						for (j = 0; j < disposeHandlers.length; j++) {
+/******/ 							disposeHandlers[j].call(null, data);
+/******/ 						}
+/******/ 						__webpack_require__.hmrD[moduleId] = data;
+/******/ 		
+/******/ 						// disable module (this disables requires from this module)
+/******/ 						module.hot.active = false;
+/******/ 		
+/******/ 						// remove module from cache
+/******/ 						delete __webpack_require__.c[moduleId];
+/******/ 		
+/******/ 						// when disposing there is no need to call dispose handler
+/******/ 						delete outdatedDependencies[moduleId];
+/******/ 		
+/******/ 						// remove "parents" references from all children
+/******/ 						for (j = 0; j < module.children.length; j++) {
+/******/ 							var child = __webpack_require__.c[module.children[j]];
+/******/ 							if (!child) continue;
+/******/ 							idx = child.parents.indexOf(moduleId);
+/******/ 							if (idx >= 0) {
+/******/ 								child.parents.splice(idx, 1);
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 		
+/******/ 					// remove outdated dependency from module children
+/******/ 					var dependency;
+/******/ 					for (var outdatedModuleId in outdatedDependencies) {
+/******/ 						if (__webpack_require__.o(outdatedDependencies, outdatedModuleId)) {
+/******/ 							module = __webpack_require__.c[outdatedModuleId];
+/******/ 							if (module) {
+/******/ 								moduleOutdatedDependencies =
+/******/ 									outdatedDependencies[outdatedModuleId];
+/******/ 								for (j = 0; j < moduleOutdatedDependencies.length; j++) {
+/******/ 									dependency = moduleOutdatedDependencies[j];
+/******/ 									idx = module.children.indexOf(dependency);
+/******/ 									if (idx >= 0) module.children.splice(idx, 1);
+/******/ 								}
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 				},
+/******/ 				apply: function (reportError) {
+/******/ 					// insert new code
+/******/ 					for (var updateModuleId in appliedUpdate) {
+/******/ 						if (__webpack_require__.o(appliedUpdate, updateModuleId)) {
+/******/ 							__webpack_require__.m[updateModuleId] = appliedUpdate[updateModuleId];
+/******/ 						}
+/******/ 					}
+/******/ 		
+/******/ 					// run new runtime modules
+/******/ 					for (var i = 0; i < currentUpdateRuntime.length; i++) {
+/******/ 						currentUpdateRuntime[i](__webpack_require__);
+/******/ 					}
+/******/ 		
+/******/ 					// call accept handlers
+/******/ 					for (var outdatedModuleId in outdatedDependencies) {
+/******/ 						if (__webpack_require__.o(outdatedDependencies, outdatedModuleId)) {
+/******/ 							var module = __webpack_require__.c[outdatedModuleId];
+/******/ 							if (module) {
+/******/ 								moduleOutdatedDependencies =
+/******/ 									outdatedDependencies[outdatedModuleId];
+/******/ 								var callbacks = [];
+/******/ 								var dependenciesForCallbacks = [];
+/******/ 								for (var j = 0; j < moduleOutdatedDependencies.length; j++) {
+/******/ 									var dependency = moduleOutdatedDependencies[j];
+/******/ 									var acceptCallback =
+/******/ 										module.hot._acceptedDependencies[dependency];
+/******/ 									if (acceptCallback) {
+/******/ 										if (callbacks.indexOf(acceptCallback) !== -1) continue;
+/******/ 										callbacks.push(acceptCallback);
+/******/ 										dependenciesForCallbacks.push(dependency);
+/******/ 									}
+/******/ 								}
+/******/ 								for (var k = 0; k < callbacks.length; k++) {
+/******/ 									try {
+/******/ 										callbacks[k].call(null, moduleOutdatedDependencies);
+/******/ 									} catch (err) {
+/******/ 										if (options.onErrored) {
+/******/ 											options.onErrored({
+/******/ 												type: "accept-errored",
+/******/ 												moduleId: outdatedModuleId,
+/******/ 												dependencyId: dependenciesForCallbacks[k],
+/******/ 												error: err
+/******/ 											});
+/******/ 										}
+/******/ 										if (!options.ignoreErrored) {
+/******/ 											reportError(err);
+/******/ 										}
+/******/ 									}
+/******/ 								}
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 		
+/******/ 					// Load self accepted modules
+/******/ 					for (var o = 0; o < outdatedSelfAcceptedModules.length; o++) {
+/******/ 						var item = outdatedSelfAcceptedModules[o];
+/******/ 						var moduleId = item.module;
+/******/ 						try {
+/******/ 							item.require(moduleId);
+/******/ 						} catch (err) {
+/******/ 							if (typeof item.errorHandler === "function") {
+/******/ 								try {
+/******/ 									item.errorHandler(err);
+/******/ 								} catch (err2) {
+/******/ 									if (options.onErrored) {
+/******/ 										options.onErrored({
+/******/ 											type: "self-accept-error-handler-errored",
+/******/ 											moduleId: moduleId,
+/******/ 											error: err2,
+/******/ 											originalError: err
+/******/ 										});
+/******/ 									}
+/******/ 									if (!options.ignoreErrored) {
+/******/ 										reportError(err2);
+/******/ 									}
+/******/ 									reportError(err);
+/******/ 								}
+/******/ 							} else {
+/******/ 								if (options.onErrored) {
+/******/ 									options.onErrored({
+/******/ 										type: "self-accept-errored",
+/******/ 										moduleId: moduleId,
+/******/ 										error: err
+/******/ 									});
+/******/ 								}
+/******/ 								if (!options.ignoreErrored) {
+/******/ 									reportError(err);
+/******/ 								}
+/******/ 							}
+/******/ 						}
+/******/ 					}
+/******/ 		
+/******/ 					return outdatedModules;
+/******/ 				}
+/******/ 			};
+/******/ 		}
+/******/ 		__webpack_require__.hmrI.jsonp = function (moduleId, applyHandlers) {
+/******/ 			if (!currentUpdate) {
+/******/ 				currentUpdate = {};
+/******/ 				currentUpdateRuntime = [];
+/******/ 				currentUpdateRemovedChunks = [];
+/******/ 				applyHandlers.push(applyHandler);
+/******/ 			}
+/******/ 			if (!__webpack_require__.o(currentUpdate, moduleId)) {
+/******/ 				currentUpdate[moduleId] = __webpack_require__.m[moduleId];
+/******/ 			}
+/******/ 		};
+/******/ 		__webpack_require__.hmrC.jsonp = function (
+/******/ 			chunkIds,
+/******/ 			removedChunks,
+/******/ 			removedModules,
+/******/ 			promises,
+/******/ 			applyHandlers,
+/******/ 			updatedModulesList
+/******/ 		) {
+/******/ 			applyHandlers.push(applyHandler);
+/******/ 			currentUpdateChunks = {};
+/******/ 			currentUpdateRemovedChunks = removedChunks;
+/******/ 			currentUpdate = removedModules.reduce(function (obj, key) {
+/******/ 				obj[key] = false;
+/******/ 				return obj;
+/******/ 			}, {});
+/******/ 			currentUpdateRuntime = [];
+/******/ 			chunkIds.forEach(function (chunkId) {
+/******/ 				if (
+/******/ 					__webpack_require__.o(installedChunks, chunkId) &&
+/******/ 					installedChunks[chunkId] !== undefined
+/******/ 				) {
+/******/ 					promises.push(loadUpdateChunk(chunkId, updatedModulesList));
+/******/ 					currentUpdateChunks[chunkId] = true;
+/******/ 				}
+/******/ 			});
+/******/ 			if (__webpack_require__.f) {
+/******/ 				__webpack_require__.f.jsonpHmr = function (chunkId, promises) {
+/******/ 					if (
+/******/ 						currentUpdateChunks &&
+/******/ 						!__webpack_require__.o(currentUpdateChunks, chunkId) &&
+/******/ 						__webpack_require__.o(installedChunks, chunkId) &&
+/******/ 						installedChunks[chunkId] !== undefined
+/******/ 					) {
+/******/ 						promises.push(loadUpdateChunk(chunkId));
+/******/ 						currentUpdateChunks[chunkId] = true;
+/******/ 					}
+/******/ 				};
+/******/ 			}
+/******/ 		};
+/******/ 		
+/******/ 		__webpack_require__.hmrM = () => {
+/******/ 			if (typeof fetch === "undefined") throw new Error("No browser support: need fetch API");
+/******/ 			return fetch(__webpack_require__.p + __webpack_require__.hmrF()).then((response) => {
+/******/ 				if(response.status === 404) return; // no update available
+/******/ 				if(!response.ok) throw new Error("Failed to fetch update manifest " + response.statusText);
+/******/ 				return response.json();
+/******/ 			});
+/******/ 		};
+/******/ 		
+/******/ 		// no deferred startup
+/******/ 		
+/******/ 		// no jsonp function
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	// module cache are used so entry inlining is disabled
+/******/ 	// startup
+/******/ 	// Load entry module
+/******/ 	__webpack_require__("./src/index.js");
+/******/ })()
+;
