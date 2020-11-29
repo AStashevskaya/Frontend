@@ -51,7 +51,7 @@ class Game {
     this.parent.appendChild(this.settings);
     this.parent.appendChild(this.bestScore);
     this.parent.appendChild(this.savedGames);
-    this.generateBestScores();
+    Game.generateBestScores();
     this.container.appendChild(this.stateButton);
     this.container.appendChild(time);
     this.container.appendChild(moves);
@@ -248,7 +248,7 @@ class Game {
     session.image = this.game.image;
     session.size = this.game.fieldSize;
     const jsonObj = JSON.stringify(session);
-    localStorage.setItem('game', jsonObj);
+    localStorage.setItem('games', jsonObj);
     const loadedGameText = document.querySelector('.load_game');
     loadedGameText.innerText = 'Your game is saved!';
     this.menuList.classList.add('hidden');
@@ -256,11 +256,11 @@ class Game {
   }
 
   loadGame() {
-    let loadedGame = localStorage.getItem('game');
+    let loadedGame = localStorage.getItem('games');
 
     if (!loadedGame) {
-      // const loadedGameText = document.querySelector('.load_game');
-      // loadedGameText.innerText = 'You have no saved games yet';
+      const loadedGameText = document.querySelector('.load_game');
+      loadedGameText.innerText = 'You have not any saved games yet!';
       this.menuList.classList.add('hidden');
       this.savedGames.classList.remove('hidden');
     }
@@ -280,7 +280,7 @@ class Game {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  generateBestScores() {
+  static generateBestScores() {
     let bestScores = localStorage.getItem('bestScores');
     const bestScoresContainer = document.querySelector('.best-score_list');
 

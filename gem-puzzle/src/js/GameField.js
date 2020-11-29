@@ -71,6 +71,10 @@ export default class GameField {
     this.generateWinTemplate();
     this.buttons = [];
 
+    // if(this.currentTemplate.length === 0){
+
+    // }
+
     this.currentTemplate.forEach((el) => this.buttons.push(new FieldCell(this, el)));
     document.querySelector('.move').innerHTML = `Moves: ${this.moves}`;
 
@@ -99,7 +103,7 @@ export default class GameField {
     const arr = [...this.winTemplate];
     let emptyCeil = arr.pop();
     this.buttons = [];
-    const numbers = this.makeshuffledNumbersArray();
+    const numbers = this.makeShuffledNumbersArray();
 
     for (let i = 0; i < (this.fieldSize ** 2) - 1; i += 1) {
       const left = i % this.fieldSize;
@@ -119,6 +123,7 @@ export default class GameField {
 
     this.buttons.push(emptyCeil);
     this.render(this.buttons);
+    this.saveCurrentTemplate();
   }
 
   checkSolving(arr) {
@@ -136,14 +141,14 @@ export default class GameField {
     return false;
   }
 
-  makeshuffledNumbersArray() {
+  makeShuffledNumbersArray() {
     let numbers = [];
     numbers = [...Array((this.fieldSize ** 2) - 1).keys()]
       .sort(() => Math.random() - 0.5)
       .map((el) => el + 1);
 
     if (!this.checkSolving(numbers)) {
-      this.makeshuffledNumbersArray();
+      this.makeShuffledNumbersArray();
     }
     return numbers;
   }
@@ -320,11 +325,13 @@ export default class GameField {
     game.count = this.settings.count;
 
     this.bestScores.push(game);
+    // eslint-disable-next-line no-console
+    console.log(this.bestScores);
 
     const bestJson = JSON.stringify(this.bestScores);
     localStorage.setItem(constants.BESTSCORES, bestJson);
 
-    this.settings.generateBestScores();
+    this.settings.constructor.generateBestScores();
     this.modal.open();
   }
 
