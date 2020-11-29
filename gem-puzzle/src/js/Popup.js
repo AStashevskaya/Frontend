@@ -48,15 +48,18 @@ export default class Modal {
 
   close() {
     this.closing = true;
+
     this.modal.classList.remove('open');
     this.modal.classList.add('hide');
 
     setTimeout(() => {
       this.modal.classList.remove('hide');
       this.closing = false;
+
       if (document.body.classList.contains('modal-open')) {
         document.body.classList.remove('modal-open');
       }
+
       document.body.classList.add('modal-close');
     }, ANIMATION_DURATION);
   }

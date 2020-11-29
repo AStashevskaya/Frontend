@@ -1,27 +1,19 @@
 import create from './utils/create';
 import addZero from './utils/addZero';
-// eslint-disable-next-line import/no-cycle
 import GameField from './GameField';
 import * as constants from './utils/constants';
 
 class Game {
   constructor() {
-    this.state = constants.STATE_START;
-    this.time = null;
+    this.state = constants.STATE_PAUSE;
     this.sound = constants.SOUND_OFF;
-    this.width = Game.getWidth();
+    this.width = constants.MIN_BOARD_SIZE;
+
+    this.time = null;
     this.count = 0;
     this.progressIdentifier = null;
+
     this.init();
-  }
-
-  static getWidth() {
-    const screenWidth = Number(document.documentElement.clientWidth);
-
-    if (screenWidth > constants.CHANGING_SCREEN_WIDTH) {
-      return constants.MIN_BOARD_SIZE;
-    }
-    return constants.MIN_BOARD_SIZE;
   }
 
   renderInitialboard() {
@@ -106,8 +98,8 @@ class Game {
   }
 
   changeStateClick(e) {
-    if (e.target.innerText === constants.STATE_PAUSE
-        && this.state === constants.STATE_START) return;
+    // if (e.target.innerText === constants.STATE_PAUSE
+    //     && this.state === constants.STATE_START) return;
 
     if (e.target.innerText === constants.STATE_PAUSE && this.state === constants.STATE_PLAYING) {
       this.state = constants.STATE_PAUSE;
@@ -134,11 +126,14 @@ class Game {
   menuLinkClick(e) {
     if (e.target.dataset.link === constants.NEW_GAME) {
       this.state = constants.STATE_PLAYING;
+
       if (this.stateButton.innerText === constants.RESUME) {
         this.stateButton.innerText = constants.STATE_PAUSE;
       }
+
       this.menuList.classList.add('hidden');
       this.game.overlay.classList.add('hidden');
+
       this.progressIdentifier = setInterval(this.tick.bind(this), 1000);
       this.game.reset();
       return;
@@ -237,6 +232,7 @@ class Game {
     this.count += 1;
     this.sec = this.count >= 60 ? this.count % 60 : this.count;
     this.min = Math.floor(this.count / 60);
+
     document.querySelector('.time').innerHTML = `Time: ${addZero(this.min)}: ${addZero(this.sec)}`;
   }
 
@@ -247,26 +243,31 @@ class Game {
     session.template = this.game.currentTemplate;
     session.image = this.game.image;
     session.size = this.game.fieldSize;
+
     const jsonObj = JSON.stringify(session);
-    localStorage.setItem('games', jsonObj);
+    localStorage.setItem('game', jsonObj);
+
     const loadedGameText = document.querySelector('.load_game');
     loadedGameText.innerText = 'Your game is saved!';
+
     this.menuList.classList.add('hidden');
     this.savedGames.classList.remove('hidden');
   }
 
   loadGame() {
-    let loadedGame = localStorage.getItem('games');
+    let loadedGame = localStorage.getItem('game');
 
     if (!loadedGame) {
       const loadedGameText = document.querySelector('.load_game');
       loadedGameText.innerText = 'You have not any saved games yet!';
+
       this.menuList.classList.add('hidden');
       this.savedGames.classList.remove('hidden');
     }
 
     if (loadedGame) {
       loadedGame = JSON.parse(loadedGame);
+
       this.game.renderLoadGame(loadedGame);
       this.count = loadedGame.count;
       this.tick();

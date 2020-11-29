@@ -8,7 +8,7 @@
     "eslint:fix": "eslint --fix",
     "start": "webpack serve",
     "build": "webpack",
-    "dev": "webpack --mode development --watch",
+    "dev": "webpack --mode development ",
     "prod": "webpack --mode production"
   },
   "author": "Nastya Stashevskaya",

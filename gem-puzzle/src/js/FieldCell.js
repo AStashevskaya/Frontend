@@ -7,14 +7,18 @@ const CHANGING_FS = 5;
 export default class FieldCell {
   constructor(puzzle, el) {
     const { left, top, idx } = el;
+
     this.puzzle = puzzle;
     this.width = puzzle.width;
+    this.image = puzzle.image;
+
+    this.fieldSize = puzzle.fieldSize;
+    this.size = this.width / this.fieldSize;
+
     this.left = left;
     this.top = top;
     this.idx = typeof (idx) === 'number' ? idx : '';
-    this.image = puzzle.image;
-    this.fieldSize = puzzle.fieldSize;
-    this.size = this.width / this.fieldSize;
+
     this.bgPosX = el.bgPosX;
     this.bgPosY = el.bgPosY;
   }
@@ -26,12 +30,16 @@ export default class FieldCell {
 
   render() {
     this.container = create('div', 'fieldcell', `${this.idx}`);
+
     this.container.style.backgroundImage = `url(./assets/images/${this.image})`;
     this.container.style.backgroundSize = `${this.width}px`;
+
     this.container.style.width = `${this.size}px`;
     this.container.style.height = `${this.size}px`;
+
     this.container.style.top = `${this.top * this.size}px`;
     this.container.style.left = `${this.left * this.size}px`;
+
     this.container.style.backgroundPositionX = this.bgPosX;
     this.container.style.backgroundPositionY = this.bgPosY;
 

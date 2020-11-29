@@ -8,14 +8,17 @@ import * as constants from './utils/constants';
 export default class GameField {
   constructor(settings) {
     this.settings = settings;
+    this.width = this.settings.width;
+
     this.moves = 0;
     this.fieldSize = 4;
+    this.count = 0;
+    this.prevFieldSize = null;
+
     this.buttons = [];
     this.winTemplate = [];
-    this.width = this.settings.width;
-    this.count = 0;
     this.currentTemplate = [];
-    this.prevFieldSize = null;
+
     this.init();
   }
 
@@ -57,6 +60,8 @@ export default class GameField {
   }
 
   renderLoadGame(options) {
+    this.currentTemplate = [];
+
     if (!options) return;
 
     const {
@@ -71,12 +76,14 @@ export default class GameField {
     this.generateWinTemplate();
     this.buttons = [];
 
-    // if(this.currentTemplate.length === 0){
-
-    // }
-
-    this.currentTemplate.forEach((el) => this.buttons.push(new FieldCell(this, el)));
     document.querySelector('.move').innerHTML = `Moves: ${this.moves}`;
+    this.currentTemplate.forEach((el) => this.buttons.push(new FieldCell(this, el)));
+
+    if (this.currentTemplate.length !== 0) {
+      this.currentTemplate.forEach((el) => this.buttons.push(new FieldCell(this, el)));
+    } else {
+      this.buttons = [...this.winTemplate];
+    }
 
     this.deleteCells();
     this.render(this.buttons);
@@ -123,7 +130,7 @@ export default class GameField {
 
     this.buttons.push(emptyCeil);
     this.render(this.buttons);
-    this.saveCurrentTemplate();
+    this.saveCurrentTemplate(this.buttons);
   }
 
   checkSolving(arr) {
@@ -138,11 +145,13 @@ export default class GameField {
     }
 
     if (count % 2 === 0) return true;
+
     return false;
   }
 
   makeShuffledNumbersArray() {
     let numbers = [];
+
     numbers = [...Array((this.fieldSize ** 2) - 1).keys()]
       .sort(() => Math.random() - 0.5)
       .map((el) => el + 1);
@@ -150,6 +159,7 @@ export default class GameField {
     if (!this.checkSolving(numbers)) {
       this.makeShuffledNumbersArray();
     }
+
     return numbers;
   }
 
@@ -185,7 +195,7 @@ export default class GameField {
     if (nothingClicked) return;
 
     this.swapCeilPositions(clickedCeil, emptyCeil);
-    this.saveCurrentTemplate();
+    this.saveCurrentTemplate(this.buttons);
     this.findIfWinTemplate();
   }
 
@@ -197,19 +207,23 @@ export default class GameField {
     const emptyTop = emptyCeil.top;
 
     const sum = Math.abs(left - emptyLeft) + Math.abs(top - emptyTop);
+
     if (sum !== 1) return;
 
     this.moves += 1;
     document.querySelector('.move').innerHTML = `Moves: ${this.moves}`;
+
     if (this.settings.sound === constants.SOUND_ON) {
       this.settings.audio.play();
     }
+
     Object.assign(emptyCeil, { left, top });
 
     if (left !== emptyLeft) {
       GameField.animate('left', clickedCeil, left, emptyLeft);
       clickedCeil.container.style.top = `${clickedCeil.top * clickedCeil.size}px`;
     }
+
     if (top !== emptyTop) {
       GameField.animate('top', clickedCeil, top, emptyTop);
       clickedCeil.container.style.left = `${clickedCeil.left * clickedCeil.size}px`;
@@ -221,8 +235,9 @@ export default class GameField {
     emptyCeil.container.style.left = `${emptyCeil.left * emptyCeil.size}px`;
   }
 
-  saveCurrentTemplate() {
-    this.buttons.forEach((el) => {
+  saveCurrentTemplate(arr) {
+    const buttonsArray = [...arr];
+    buttonsArray.forEach((el) => {
       const {
         left, top, idx, bgPosY, bgPosX,
       } = el;
@@ -243,15 +258,18 @@ export default class GameField {
     const id = setInterval(() => {
       if (objCurrentPosition < objNextPosition) {
         objCurrentPosition = Math.min(objNextPosition, objCurrentPosition + step);
+
         if (objCurrentPosition >= objNextPosition) {
           clearInterval(id);
         }
       } else if (objCurrentPosition > objNextPosition) {
         objCurrentPosition = Math.max(objNextPosition, objCurrentPosition - step);
+
         if (objCurrentPosition <= objNextPosition) {
           clearInterval(id);
         }
       }
+
       obj.container.style[changingPosition] = `${objCurrentPosition * obj.size}px`;
     }, FRAME_RATE);
   }
@@ -269,18 +287,22 @@ export default class GameField {
     const nothingClicked = !this.clickedCeil || !emptyCeil;
 
     if (nothingClicked) return;
+
     const { left, top } = this.clickedCeil;
     const emptyLeft = emptyCeil.left;
     const emptyTop = emptyCeil.top;
 
     const sum = Math.abs(left - emptyLeft) + Math.abs(top - emptyTop);
+
     if (sum !== 1) return;
 
     this.moves += 1;
     document.querySelector('.move').innerHTML = `Moves: ${this.moves}`;
+
     if (this.settings.sound === constants.SOUND_ON) {
       this.settings.audio.play();
     }
+
     Object.assign(emptyCeil, { left, top });
 
     this.clickedCeil.left = emptyLeft;
@@ -290,7 +312,7 @@ export default class GameField {
     emptyCeil.container.style.top = `${emptyCeil.top * emptyCeil.size}px`;
     emptyCeil.container.style.left = `${emptyCeil.left * emptyCeil.size}px`;
 
-    this.saveCurrentTemplate();
+    this.saveCurrentTemplate(this.buttons);
     this.findIfWinTemplate();
   }
 
@@ -305,6 +327,7 @@ export default class GameField {
       const currentObj = this.buttons.find((el) => el.idx === idx);
 
       if (correctObj.left !== currentObj.left) return;
+
       if (correctObj.top !== currentObj.top) return;
     }
 
@@ -325,8 +348,6 @@ export default class GameField {
     game.count = this.settings.count;
 
     this.bestScores.push(game);
-    // eslint-disable-next-line no-console
-    console.log(this.bestScores);
 
     const bestJson = JSON.stringify(this.bestScores);
     localStorage.setItem(constants.BESTSCORES, bestJson);
@@ -337,7 +358,9 @@ export default class GameField {
 
   static generateBestScoreArr() {
     let bestScores = localStorage.getItem(constants.BESTSCORES);
+
     if (!bestScores) return [];
+
     bestScores = JSON.parse(bestScores);
     return bestScores;
   }
@@ -348,6 +371,7 @@ export default class GameField {
 
   deleteCells() {
     const children = [...this.container.children];
+
     children.forEach((el) => {
       if (el !== this.overlay) {
         if (el.textContent) {
