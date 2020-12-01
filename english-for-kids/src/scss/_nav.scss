@@ -1,0 +1,28 @@
+.header__nav{
+    position: relative;
+    @include colomnFlex(start);    
+    .menu-list{
+        height: 100vh;
+        z-index: 5;
+        position: fixed;
+        left: -300px;
+        top: 0;
+        bottom: 0;
+        width: 300px;
+        @include colomnFlex(start);
+        padding: 110px 60px 0;
+        transition: all .5s ease-in-out;
+        &__link{
+            font-size: 20px;
+            padding: 10px;
+            display: flex;
+        }
+
+    }
+}
+.burger-menu.open + .menu-list{
+    background-color: blue;
+    left: 0;
+    overflow: hidden;
+    overflow-y: auto;
+}
