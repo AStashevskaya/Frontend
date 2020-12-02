@@ -1,5 +1,6 @@
 /* eslint-disable no-debugger */
 import create from './utils/create';
+import * as constants from './utils/constants';
 
 export default class CardComponent {
   constructor(category, options) {
@@ -30,7 +31,7 @@ export default class CardComponent {
   }
 
   render() {
-    return ` <div class="card" data-card="${this.english}" data-train="true">
+    return ` <div class="card" data-word="${this.english}" data-train="${this.category.layout.state === constants.STATE_TRAIN ? 'true' : 'false'}" ${this.category.layout.state === constants.STATE_TRAIN ? '' : 'data-checked = "false"'}>
         <div class="card__front">
             <div class="card__image"><img src="assets/images/${this.image}" alt="${this.english}"></div>
             <div class="card__content"><span class="card__text">${this.english}</span><span class="turn" data-turn="true"><img src="assets/images/rotate.svg" alt="turn"></span></div>

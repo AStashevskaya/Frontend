@@ -6,8 +6,8 @@ import create from './utils/create';
 // import create from './utils/create'
 
 export default class Layout {
-  constructor(categories) {
-    this.state = constants.STATE_TRAIN;
+  constructor(mode, categories) {
+    this.state = mode;
     this.categories = categories;
 
     this.init();
@@ -89,8 +89,7 @@ export default class Layout {
     const { target } = e;
     const card = target.closest('[data-category]');
     const clickedCategory = card.dataset.category;
-    // eslint-disable-next-line no-debugger
-    debugger;
+
     if (this.currentPage === constants.MAIN) {
       this.deleteCategories();
     } else {
@@ -102,16 +101,9 @@ export default class Layout {
     choosenCategory.init();
   }
 
-  // deleteCards(handler, method) {
-  //   const cards = [...this.contentContainer.children];
-  //   cards.forEach((el) => {
-  //     el.removeEventListener('click', handler.method.bind(this));
-  //     this.contentContainer.removeChild(el);
-  //   });
-  // }
-
   deleteCategories() {
     const categories = [...this.contentContainer.children];
+
     categories.forEach((el) => {
       el.removeEventListener('click', this.handleClickCategory.bind(this));
       this.contentContainer.removeChild(el);
@@ -123,7 +115,7 @@ export default class Layout {
 
     this.categories.forEach((el) => {
       html += `
-      <div class="category-card" data-category="${el.title}" data-tain="true">
+      <div class="category-card" data-category="${el.title}" data-train="${this.state === constants.STATE_TRAIN ? 'true' : 'false'}">
       <a href="#" class="category-card__wrap">
       <div class="category-card__image"><img src="./assets/images/${el.image}" alt="${el.title}"></div>
       <div class="category-card__title">${el.title}</div>
@@ -132,6 +124,35 @@ export default class Layout {
     });
     return html;
   }
-}
 
-// const onclick="onNavigate('/${el.title}'); return false"
+  changeLayout(mode) {
+    this.state = mode;
+    const cards = [...this.contentContainer.children];
+
+    if (this.state === constants.STATE_TRAIN) {
+      this.contentContainer.classList.remove('playing');
+
+      if (this.currentPage !== constants.MAIN) {
+        cards.forEach((el) => {
+          el.dataset.train = true;
+          el.removeAttribute('data-checked');
+          this.currentPage.removePlayEvents(el);
+          this.currentPage.addTrainEvents(el);
+        });
+      }
+    }
+
+    if (this.state === constants.STATE_PLAY) {
+      this.contentContainer.classList.add('playing');
+
+      if (this.currentPage !== constants.MAIN) {
+        cards.forEach((el) => {
+          el.dataset.train = false;
+          el.dataset.checked = false;
+          this.currentPage.removeTrainEvents(el);
+          this.currentPage.addPlayEvents(el);
+        });
+      }
+    }
+  }
+}

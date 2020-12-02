@@ -1,8 +1,6 @@
 import './burger';
-import Layout from './Layout';
-import categories from './data/categories';
-// import onNavigate from './utils/onNavigate';
-// const app = new Layout(categories);
-export default new Layout(categories);
+import Mode from './Mode';
 
-// export default app;
+// import onNavigate from './utils/onNavigate';
+
+export default new Mode();

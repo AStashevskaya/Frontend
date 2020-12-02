@@ -8,17 +8,15 @@ export default class CategoryComponent {
     this.image = options.image;
     this.title = options.title;
     this.cards = options.cards;
+    this.cardsComponents = [];
   }
 
   init() {
-    const isCardComponent = this.cards[0] instanceof CardComponent;
-
-    if (!isCardComponent) {
-      this.cards = this.cards.map((el) => new CardComponent(this, el));
-    }
+    this.cardsComponents = [...this.cards].map((el) => new CardComponent(this, el));
 
     this.layout.contentContainer.innerHTML = this.render();
     this.initializeCardEvents();
+    this.generateAudioArray();
     // this.content = this.render()
     // this.generateLayout()
     // this.render()
@@ -26,9 +24,15 @@ export default class CategoryComponent {
 
   initializeCardEvents() {
     const cards = [...document.querySelectorAll('.card')];
+
     cards.forEach((el) => {
-      el.addEventListener('click', this.handleClickEvent.bind(this));
-      el.addEventListener('mouseleave', CategoryComponent.handleMouseLeaveEvent.bind(CategoryComponent));
+      if (this.layout.state === constants.STATE_TRAIN) {
+        this.addTrainEvents(el);
+      }
+
+      if (this.layout.state === constants.STATE_PLAY) {
+        this.addPlayEvents(el);
+      }
     });
 
     const turnButtons = [...document.querySelectorAll('.turn')];
@@ -65,7 +69,7 @@ export default class CategoryComponent {
     cardBack.classList.add(constants.BACK_ROTATE);
   }
 
-  handleClickEvent(e) {
+  handleClickTrainEvent(e) {
     const { target } = e;
 
     const turn = target.closest('[alt="turn"]');
@@ -74,7 +78,7 @@ export default class CategoryComponent {
 
     const card = target.closest('[data-card]');
     const cardName = card.dataset.card;
-    const cardObj = this.cards.find((el) => el.english === cardName);
+    const cardObj = this.cardsComponents.find((el) => el.english === cardName);
 
     if (this.layout.state === constants.STATE_TRAIN) {
       cardObj.audio.play();
@@ -84,7 +88,7 @@ export default class CategoryComponent {
   render() {
     let html = '';
 
-    this.cards.forEach((el) => {
+    this.cardsComponents.forEach((el) => {
       html += el.render();
     });
 
@@ -99,9 +103,45 @@ export default class CategoryComponent {
 
     const cards = [...this.layout.contentContainer.children];
     cards.forEach((el) => {
-      el.removeEventListener('click', this.handleClickEvent.bind(this));
-      el.removeEventListener('mouseleave', CategoryComponent.handleMouseLeaveEvent.bind(CategoryComponent));
+      if (this.layout.state === constants.STATE_TRAIN) {
+        this.removeTrainEvents(el);
+      }
+
       this.layout.contentContainer.removeChild(el);
     });
+  }
+
+  generateAudioArray() {
+    this.audiosArr = [...this.cards].map((el) => el.sound);
+  }
+
+  addTrainEvents(el) {
+    el.addEventListener('click', this.handleClickTrainEvent.bind(this));
+    el.addEventListener('mouseleave', CategoryComponent.handleMouseLeaveEvent.bind(CategoryComponent));
+  }
+
+  removeTrainEvents(el) {
+    el.removeEventListener('click', this.handleClickTrainEvent.bind(this));
+    el.removeEventListener('mouseleave', CategoryComponent.handleMouseLeaveEvent.bind(CategoryComponent));
+  }
+
+  addPlayEvents(el) {
+    el.addEventListener('click', this.checkIfCorrect.bind(this));
+  }
+
+  removePlayEvents(el) {
+    el.removeEventListener('click', this.checkIfCorrect.bind(this));
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  checkIfCorrect(e) {
+    const { target } = e;
+    const card = target.closest('.card');
+    const { word } = card.dataset;
+    const cardObj = this.cards.find((el) => el.english === word);
+    const clickedCardAudio = cardObj.audioSRC;
+
+    // eslint-disable-next-line no-console
+    console.log(clickedCardAudio);
   }
 }
