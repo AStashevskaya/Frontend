@@ -53,7 +53,7 @@ img {
   vertical-align: top;
 }
 
-.burger-menu {
+.app-container .burger-menu {
   position: absolute;
   z-index: 1000;
   height: 50px;
@@ -70,7 +70,7 @@ img {
   cursor: pointer;
 }
 
-.burger-menu__btn {
+.app-container .burger-menu__btn {
   position: relative;
   width: 50px;
   height: 6px;
@@ -81,7 +81,7 @@ img {
   transition: all .5s ease-in-out;
 }
 
-.burger-menu__btn:before, .burger-menu__btn:after {
+.app-container .burger-menu__btn:before, .app-container .burger-menu__btn:after {
   content: '';
   position: absolute;
   width: 50px;
@@ -93,12 +93,12 @@ img {
   transition: all .5s ease-in-out;
 }
 
-.burger-menu__btn::before {
+.app-container .burger-menu__btn::before {
   -webkit-transform: translateY(-16px);
           transform: translateY(-16px);
 }
 
-.burger-menu__btn::after {
+.app-container .burger-menu__btn::after {
   -webkit-transform: translateY(16px);
           transform: translateY(16px);
 }
@@ -228,6 +228,22 @@ input:checked + .switcher__identificator:before {
   width: 100%;
   min-height: 100vh;
   height: 100%;
+  position: relative;
+  background-color: #D1D090;
+}
+
+.app-container.playing {
+  background-color: #C2D7D0;
+}
+
+.footer__container {
+  max-width: 1400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .header-container {
@@ -243,6 +259,17 @@ input:checked + .switcher__identificator:before {
   -webkit-box-align: baseline;
       -ms-flex-align: baseline;
           align-items: baseline;
+}
+
+.title-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 .content-container {
@@ -263,6 +290,35 @@ input:checked + .switcher__identificator:before {
   .content-container {
     padding-top: 40px;
   }
+}
+
+.app-container.playing .answer-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.app-container .answer-container {
+  display: none;
+}
+
+.title-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  padding: 10px;
+  font-size: 20px;
+}
+
+.app-container.playing .title-container {
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 .header__nav {
@@ -308,13 +364,22 @@ input:checked + .switcher__identificator:before {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  color: #D1D090;
 }
 
 .burger-menu.open + .menu-list {
-  background-color: blue;
+  background-color: #86964A;
   left: 0;
   overflow: hidden;
   overflow-y: auto;
+}
+
+.app-container.playing .burger-menu.open + .menu-list {
+  background-color: #5F9595;
+}
+
+.app-container.playing .burger-menu.open + .menu-list__link {
+  color: #C2D7D0;
 }
 
 .category-card {
@@ -368,13 +433,6 @@ input:checked + .switcher__identificator:before {
   height: 100%;
   -o-object-fit: contain;
      object-fit: contain;
-}
-
-.category-card__wrap {
-  height: 100%;
-  width: 100%;
-  display: block;
-  text-decoration: none;
 }
 
 .category-card__image {
@@ -515,11 +573,11 @@ input:checked + .switcher__identificator:before {
 }
 
 .card__front {
-  background-color: aqua;
+  background-color: #F09B79;
 }
 
 .card__back {
-  background-color: blue;
+  background-color: #FFB284;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
 }
@@ -642,8 +700,59 @@ input:checked + .switcher__identificator:before {
           transform: rotateY(180deg);
 }
 
+div[data-checked="true"] {
+  opacity: .3;
+}
+
+.app-container.playing .card__front {
+  background-color: #F4CABB;
+}
+
+.button__play {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 20px;
+  background-color: cadetblue;
+}
+
+.divider {
+  width: 100%;
+  height: 2px;
+  background-color: crimson;
+}
+
 body {
   font-family: Arial, sans-serif;
   font-style: normal;
   font-weight: normal;
+}
+
+header {
+  height: 115px;
+  width: 100%;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: white;
+}
+
+main {
+  position: relative;
+  margin-top: 115px;
+  height: 100%;
+  margin-bottom: 20px;
+}
+
+footer {
+  height: 20px;
+  width: 100%;
+  background-color: white;
+  z-index: 10;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }

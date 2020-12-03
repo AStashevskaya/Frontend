@@ -1,5 +1,6 @@
 import CardComponent from './CardComponent';
 import * as constants from './utils/constants';
+import create from './utils/create';
 // import create from './utils/create';
 
 export default class CategoryComponent {
@@ -14,12 +15,61 @@ export default class CategoryComponent {
   init() {
     this.cardsComponents = [...this.cards].map((el) => new CardComponent(this, el));
 
+    if (this.layout.state === constants.STATE_PLAY) {
+      if (this.layout.playButton) {
+        this.layout.removePlayButton();
+      }
+      this.layout.createPlayButton();
+    }
+
     this.layout.contentContainer.innerHTML = this.render();
     this.initializeCardEvents();
     this.generateAudioArray();
-    // this.content = this.render()
-    // this.generateLayout()
-    // this.render()
+    this.createAudiosforPlaying();
+  }
+
+  createAudiosforPlaying() {
+    this.currentAudio = create('audio');
+    this.currentAudioIdx = 0;
+
+    this.correctAudio = create('audio');
+    this.correctAudio.setAttribute('src', './assets/sounds/correct.mp3');
+    this.correctAudio.load();
+
+    this.winAudio = create('audio');
+    this.winAudio.setAttribute('src', './assets/sounds/success.mp3');
+    this.winAudio.load();
+
+    this.errorAudio = create('audio');
+    this.errorAudio.setAttribute('src', './assets/sounds/error.mp3');
+    this.errorAudio.load();
+  }
+
+  playGame() {
+    this.currentAudioSrc = this.audiosArr[this.currentAudioIdx];
+    this.currentAudio.setAttribute('src', `./assets/sounds/${this.currentAudioSrc}`);
+
+    this.currentAudio.load();
+    this.currentAudio.play();
+  }
+
+  checkIfCorrect() {
+    if (this.currentAudioSrc === this.clickedCardAudio) {
+      if (this.currentAudioIdx < this.audiosArr.length - 1) {
+        this.clickedCard.dataset.checked = 'true';
+        this.currentAudioIdx += 1;
+
+        this.correctAudio.play();
+        this.playGame();
+      } else if (this.currentAudioIdx === this.audiosArr.length - 1) {
+        this.clickedCard.dataset.checked = 'true';
+
+        this.currentAudioIdx += 1;
+        this.winAudio.play();
+      }
+    } else {
+      this.errorAudio.play();
+    }
   }
 
   initializeCardEvents() {
@@ -76,8 +126,8 @@ export default class CategoryComponent {
 
     if (target === turn) return;
 
-    const card = target.closest('[data-card]');
-    const cardName = card.dataset.card;
+    const card = target.closest('[data-word]');
+    const cardName = card.dataset.word;
     const cardObj = this.cardsComponents.find((el) => el.english === cardName);
 
     if (this.layout.state === constants.STATE_TRAIN) {
@@ -105,6 +155,8 @@ export default class CategoryComponent {
     cards.forEach((el) => {
       if (this.layout.state === constants.STATE_TRAIN) {
         this.removeTrainEvents(el);
+      } else {
+        this.removePlayEvents(el);
       }
 
       this.layout.contentContainer.removeChild(el);
@@ -113,6 +165,7 @@ export default class CategoryComponent {
 
   generateAudioArray() {
     this.audiosArr = [...this.cards].map((el) => el.sound);
+    this.audiosArr = this.audiosArr.sort(() => Math.random() - 0.5);
   }
 
   addTrainEvents(el) {
@@ -126,22 +179,28 @@ export default class CategoryComponent {
   }
 
   addPlayEvents(el) {
-    el.addEventListener('click', this.checkIfCorrect.bind(this));
+    el.addEventListener('click', this.getClickedCardAudio.bind(this));
   }
 
   removePlayEvents(el) {
-    el.removeEventListener('click', this.checkIfCorrect.bind(this));
+    el.removeEventListener('click', this.getClickedCardAudio.bind(this));
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  checkIfCorrect(e) {
-    const { target } = e;
-    const card = target.closest('.card');
-    const { word } = card.dataset;
-    const cardObj = this.cards.find((el) => el.english === word);
-    const clickedCardAudio = cardObj.audioSRC;
+  getClickedCardAudio(e) {
+    if (this.layout.state === constants.STATE_TRAIN) return;
+    if (this.layout.playButton.dataset.btn === 'play') return;
 
-    // eslint-disable-next-line no-console
-    console.log(clickedCardAudio);
+    const { target } = e;
+
+    this.clickedCard = target.closest('.card');
+    const { word } = this.clickedCard.dataset;
+    const cardObj = this.cards.find((el) => el.english === word);
+    this.clickedCardAudio = cardObj.sound;
+
+    this.checkIfCorrect();
+  }
+
+  repeatAudio() {
+    this.currentAudio.play();
   }
 }

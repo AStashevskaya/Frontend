@@ -29,12 +29,12 @@
         }
     } 
 
-    &__wrap {
-      height: 100%;
-      width: 100%;
-      display: block;
-      text-decoration: none;
-    }
+    // &__wrap {
+    //   height: 100%;
+    //   width: 100%;
+    //   display: block;
+    //   text-decoration: none;
+    // }
     
 
     &__image {
@@ -131,11 +131,11 @@
     }
 
     &__front {
-      background-color: aqua;
+      background-color: #F09B79;
     }
 
     &__back {
-      background-color: blue;
+      background-color: #FFB284;
       transform: rotateY(180deg);
     }
 
@@ -217,4 +217,13 @@
     transform: rotateY(180deg);
   }
 
+}
+div[data-checked="true"] {
+opacity: .3;
+}
+
+.app-container.playing .card{
+  &__front{
+    background-color: #F4CABB;
+  }
 }

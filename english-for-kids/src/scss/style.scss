@@ -5,10 +5,38 @@
 @import '_containers';
 @import '_nav';
 @import '_category-card';
+@import '_buttons';
 
 
 body{
     font-family: Arial, sans-serif;
     font-style: normal;
     font-weight: normal;
+}
+
+header {
+    height: 70px;
+    width: 100%;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    right: 0;  
+    background-color: white;
+}
+main {
+    position: relative;
+    margin-top: 70px;
+    height: 100%;
+    margin-bottom: 20px;
+}
+footer {
+    height: 20px;
+    width: 100%;
+    background-color: white;
+    z-index: 10;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
 }

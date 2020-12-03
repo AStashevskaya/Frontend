@@ -1,9 +1,6 @@
 import * as constants from './utils/constants';
 import CategoryComponent from './CategoryComponent';
 import create from './utils/create';
-// import onNavigate from './utils/onNavigate';
-// import onNavigate from './utils/onNavigate';
-// import create from './utils/create'
 
 export default class Layout {
   constructor(mode, categories) {
@@ -21,19 +18,20 @@ export default class Layout {
     this.initializeMenuClick();
   }
 
+  generateLayout() {
+    this.generateMenu();
+    this.generateMainPage();
+  }
+
   generateMainPage() {
     this.contentContainer = document.querySelector('.content-container');
     this.contentContainer.innerHTML = this.content;
+    this.title = document.querySelector('#title');
+    this.title.innerHTML = 'English for kids';
     this.currentPage = constants.MAIN;
 
     const categories = [...document.querySelectorAll('.category-card')];
     categories.forEach((el) => el.addEventListener('click', this.handleClickCategory.bind(this)));
-  }
-
-  generateLayout() {
-    this.generateMenu();
-    this.generateMainPage();
-    // this.contentContainer.innerHTML = routes[window.location.pathname ]
   }
 
   generateMenu() {
@@ -54,14 +52,6 @@ export default class Layout {
     this.menu.prepend(linkTOmain);
     this.menu.appendChild(linkTOstaticticks);
   }
-
-  // generateRoutingMap() {
-  //   constants.routes['/'] = this.content;
-  //   this.categories.forEach((el) => {
-  //     constants.routes[`/${el.title}`] = el.content;
-  //   });
-  //   // console.log(routes)
-  // }
 
   initializeMenuClick() {
     const menuLinks = [...document.querySelectorAll('.menu-list__link')];
@@ -98,6 +88,7 @@ export default class Layout {
 
     const choosenCategory = this.categories.find((el) => el.title === clickedCategory);
     this.currentPage = choosenCategory;
+    this.title.innerHTML = this.currentPage.title;
     choosenCategory.init();
   }
 
@@ -116,10 +107,8 @@ export default class Layout {
     this.categories.forEach((el) => {
       html += `
       <div class="category-card" data-category="${el.title}" data-train="${this.state === constants.STATE_TRAIN ? 'true' : 'false'}">
-      <a href="#" class="category-card__wrap">
       <div class="category-card__image"><img src="./assets/images/${el.image}" alt="${el.title}"></div>
       <div class="category-card__title">${el.title}</div>
-      </a>
       </div>`;
     });
     return html;
@@ -128,9 +117,15 @@ export default class Layout {
   changeLayout(mode) {
     this.state = mode;
     const cards = [...this.contentContainer.children];
+    const main = document.querySelector('.app-container');
 
     if (this.state === constants.STATE_TRAIN) {
       this.contentContainer.classList.remove('playing');
+      main.classList.remove('playing');
+
+      if (this.playButton) {
+        this.removePlayButton();
+      }
 
       if (this.currentPage !== constants.MAIN) {
         cards.forEach((el) => {
@@ -144,15 +139,57 @@ export default class Layout {
 
     if (this.state === constants.STATE_PLAY) {
       this.contentContainer.classList.add('playing');
+      main.classList.add('playing');
 
       if (this.currentPage !== constants.MAIN) {
+        this.currentPage.currentAudioIdx = 0;
         cards.forEach((el) => {
           el.dataset.train = false;
           el.dataset.checked = false;
           this.currentPage.removeTrainEvents(el);
           this.currentPage.addPlayEvents(el);
         });
+
+        if (!this.playButton) {
+          this.createPlayButton();
+        } else {
+          this.removePlayButton();
+          this.createPlayButton();
+        }
       }
     }
+  }
+
+  createPlayButton() {
+    this.playButton = create('div', 'button__play', 'play');
+    this.playButton.dataset.btn = 'play';
+
+    this.playButton.addEventListener('click', this.createRepeatButtton.bind(this));
+
+    const container = document.querySelector('.title-container');
+    container.appendChild(this.playButton);
+  }
+
+  createRepeatButtton() {
+    this.playButton.dataset.btn = 'repeat';
+    this.playButton.innerHTML = 'repeat';
+
+    this.playButton.removeEventListener('click', this.currentPage.repeatAudio.bind(this.currentPage));
+    this.playButton.addEventListener('click', this.currentPage.repeatAudio.bind(this.currentPage));
+
+    this.currentPage.playGame();
+  }
+
+  removePlayButton() {
+    const container = document.querySelector('.title-container');
+
+    if (this.playButton.dataset.btn === 'play') {
+      this.playButton.removeEventListener('click', this.createRepeatButtton.bind(this));
+    } else {
+      this.playButton.removeEventListener('click', this.currentPage.repeatAudio.bind(this.currentPage));
+    }
+
+    container.removeChild(this.playButton);
+    this.playButton = null;
   }
 }

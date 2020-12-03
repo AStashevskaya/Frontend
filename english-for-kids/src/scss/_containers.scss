@@ -2,14 +2,30 @@
     width: 100%;
     min-height: 100vh;
     height: 100%;
+    position: relative;
+    background-color: #D1D090;
+}
+.app-container.playing {
+    background-color: #C2D7D0;
+}
+.footer__container {
+    max-width: 1400px;
+    display: flex;
+    justify-content: center;
 }
 .header-container{
     max-width: 1400px;
-    padding: 35px 30px;
+    padding: 12px 30px;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: baseline;
+}
+.title-container{
+    max-width: 1400px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: flex-end;
 }
 .content-container{
     padding-top: 80px;
@@ -22,5 +38,23 @@
     @media (max-width: 768px){
         padding-top: 40px;
     }
+}
 
+.app-container.playing .answer-container{
+    display: flex;
+    justify-content: flex-end;
+    }
+
+.app-container .answer-container{
+        display: none;
+        }
+.title-container{
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+    font-size: 20px;
+}
+
+.app-container.playing .title-container{
+    justify-content: space-around;
 }

@@ -1,4 +1,4 @@
-.burger-menu{
+.app-container .burger-menu{
     position: absolute;
     z-index: 1000;
     height: 50px;
@@ -9,7 +9,7 @@
    &__btn{
        position: relative;
        width: 50px;
-       height: 6px;
+       height: 5px;
        border-radius: 5px;
        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
        transition: all .5s ease-in-out;
@@ -18,16 +18,16 @@
        content: '';
        position: absolute;
        width: 50px;
-       height: 6px;
+       height: 5px;
        border-radius: 5px;
        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
        transition: all .5s ease-in-out;
    }
    &__btn::before{
-       transform: translateY(-16px);
+       transform: translateY(-13px);
    }
    &__btn::after{
-        transform: translateY(16px);
+        transform: translateY(13px);
    }
 }
 .burger-menu.open .burger-menu{
@@ -42,3 +42,4 @@
         transform: rotate(-45deg) translate(35px, 35px);
     }
 }
+

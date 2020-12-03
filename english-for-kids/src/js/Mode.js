@@ -13,13 +13,13 @@ export default class Mode {
 
   initClickEvents() {
     const switcher = document.querySelector('.switch');
-    switcher.addEventListener('click', this.checkMode.bind(this));
+    switcher.addEventListener('mousedown', this.checkMode.bind(this));
   }
 
   checkMode() {
     // eslint-disable-next-line no-console
     console.log(this.indicator);
-    if (!this.indicator.checked) {
+    if (this.indicator.checked) {
       this.mode = constants.STATE_TRAIN;
       this.layout.changeLayout(this.mode);
       // eslint-disable-next-line no-console
