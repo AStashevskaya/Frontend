@@ -13,3 +13,11 @@
     font-style: normal;
     font-weight: normal;
   }
+
+@mixin fixed ($pos){
+  position: $pos;
+  left: 0;
+  right: 0;
+}
+
+$maxWidth : 1400px;

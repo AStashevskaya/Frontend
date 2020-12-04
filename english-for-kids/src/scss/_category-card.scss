@@ -15,11 +15,6 @@
         transition: all .4s ease-in;
        }
 
-    a {
-      @include colomnFlex();
-      @include centerFlex();
-    }
-
     &__image {
       width: 82%;
         img{
@@ -28,14 +23,6 @@
         object-fit: contain;   
         }
     } 
-
-    // &__wrap {
-    //   height: 100%;
-    //   width: 100%;
-    //   display: block;
-    //   text-decoration: none;
-    // }
-    
 
     &__image {
       width: 82%;
@@ -67,20 +54,19 @@
   }
 
   .card {
-    @include colomnFlex();
-    @include centerFlex();
     overflow: hidden;
     position: relative;
     width: 270px;
     height: 270px;
     margin: 30px 10px;
+    border-radius: 10px;
     cursor: pointer;
     transform: scale(1);
-    transition: all .4s ease-in;
+    transition: all .7s ease-in;
     box-shadow:0px 2px 9px 8px rgba(13, 13, 13, 0.1);
 
     &:hover {
-        box-shadow: 0px 2px 35px 14px  rgba(13, 13, 13, 0.1);
+      box-shadow: none;
         transform: scale(1.05);
         transition: all .4s ease-in;
        }
@@ -97,6 +83,10 @@
 
     &__image {
       width: 82%;
+      overflow: hidden;
+      padding-top: 15px;
+      transition: all .4s ease-in;
+
         img{
         width: 100%;
         height: 100%;
@@ -105,9 +95,9 @@
     } 
 
     &__content{
-      visibility: visible;
+      opacity: 1;
       height: fit-content;
-      // transition: all .4s ease-in;
+      transition: all .4s ease-in;
       padding: 10px;
       font-size: 30px;
       display: flex;
@@ -115,22 +105,19 @@
 
     &__front,
     &__back {
-      position: absolute;
       @include colomnFlex();
       @include centerFlex();
+      @include fixed(absolute);
       width: 100%;
       height: 100%;
-      left: 0;
       top: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
       transition: 1s;
       backface-visibility: hidden;
       border-radius: 10px;
     }
 
     &__front {
+      transition: all .4s ease-in;
       background-color: #F09B79;
     }
 
@@ -144,37 +131,36 @@
 .front-rotate {transform: rotateY(180deg);}
 .back-rotate {transform: rotateY(360deg)}
 
-.content-container.playing .card{
-  @include colomnFlex();
-  @include centerFlex();
-  overflow: hidden;
-  position: relative;
-  width: 270px;
-  height: 270px;
-  margin: 30px 10px;
-  cursor: pointer;
-  transform: scale(1);
-  transition: all .4s ease-in;
-  box-shadow:0px 2px 9px 8px rgba(13, 13, 13, 0.1);
+.content-container.playing .card[data-checked="true"] {
+opacity: .3;
+box-shadow: none;
+transform: none;
+transition: none;
+cursor: default;
 
   &:hover {
-      box-shadow: 0px 2px 35px 14px  rgba(13, 13, 13, 0.1);
-      transform: scale(1.05);
-      transition: all .4s ease-in;
-     }
-  
-  .turn {
-    width: 40px;
-    height: 40px;
+    box-shadow: none;
+    transform: none;
+    transition: none;
+    cursor: default;
+   }
+}
 
-    img {
-      width: 100%;
-      height: 100%;
-    }
+.app-container.playing .card{
+  &__front{
+    transition: all .4s ease-in;
+    background-color: #F4CABB;
   }
 
+  &__back {
+    display: none;
+     }
+
   &__image {
-    width: 82%;
+    width: 100%;
+    overflow: hidden;
+    transition: all .4s ease-in;
+
       img{
       width: 100%;
       height: 100%;
@@ -184,46 +170,7 @@
 
   &__content{
     height: 0;
-    visibility: hidden;
+    opacity: 0;
     transition: all .4s ease-in;
-    // padding: 10px;
-    // font-size: 30px;
-    // display: flex;
-  }
-
-  &__front,
-  &__back {
-    position: absolute;
-    @include colomnFlex();
-    @include centerFlex();
-    width: 100%;
-    height: 100%;
-    left: 0;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: 1s;
-    backface-visibility: hidden;
-    border-radius: 10px;
-  }
-
-  &__front {
-    background-color: aqua;
-  }
-
-  &__back {
-    background-color: blue;
-    transform: rotateY(180deg);
-  }
-
-}
-div[data-checked="true"] {
-opacity: .3;
-}
-
-.app-container.playing .card{
-  &__front{
-    background-color: #F4CABB;
   }
 }

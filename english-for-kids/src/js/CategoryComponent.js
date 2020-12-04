@@ -58,17 +58,20 @@ export default class CategoryComponent {
       if (this.currentAudioIdx < this.audiosArr.length - 1) {
         this.clickedCard.dataset.checked = 'true';
         this.currentAudioIdx += 1;
-
+        this.removePlayEvents(this.clickedCard);
+        CategoryComponent.addStars(true);
         this.correctAudio.play();
         this.playGame();
       } else if (this.currentAudioIdx === this.audiosArr.length - 1) {
         this.clickedCard.dataset.checked = 'true';
-
+        this.removePlayEvents(this.clickedCard);
+        CategoryComponent.addStars(true);
         this.currentAudioIdx += 1;
         this.winAudio.play();
       }
     } else {
       this.errorAudio.play();
+      CategoryComponent.addStars(false);
     }
   }
 
@@ -91,7 +94,7 @@ export default class CategoryComponent {
     });
   }
 
-  static handleMouseLeaveEvent(e) {
+  static handleMouseLeaveEvent = (e) => {
     const card = e.target;
 
     const cardChildren = [...card.children];
@@ -119,7 +122,7 @@ export default class CategoryComponent {
     cardBack.classList.add(constants.BACK_ROTATE);
   }
 
-  handleClickTrainEvent(e) {
+  handleClickTrainEvent = (e) => {
     const { target } = e;
 
     const turn = target.closest('[alt="turn"]');
@@ -169,24 +172,24 @@ export default class CategoryComponent {
   }
 
   addTrainEvents(el) {
-    el.addEventListener('click', this.handleClickTrainEvent.bind(this));
-    el.addEventListener('mouseleave', CategoryComponent.handleMouseLeaveEvent.bind(CategoryComponent));
+    el.addEventListener('click', this.handleClickTrainEvent);
+    el.addEventListener('mouseleave', CategoryComponent.handleMouseLeaveEvent);
   }
 
   removeTrainEvents(el) {
-    el.removeEventListener('click', this.handleClickTrainEvent.bind(this));
-    el.removeEventListener('mouseleave', CategoryComponent.handleMouseLeaveEvent.bind(CategoryComponent));
+    el.removeEventListener('click', this.handleClickTrainEvent);
+    el.removeEventListener('mouseleave', CategoryComponent.handleMouseLeaveEvent);
   }
 
   addPlayEvents(el) {
-    el.addEventListener('click', this.getClickedCardAudio.bind(this));
+    el.addEventListener('click', this.getClickedCardAudio);
   }
 
   removePlayEvents(el) {
-    el.removeEventListener('click', this.getClickedCardAudio.bind(this));
+    el.removeEventListener('click', this.getClickedCardAudio);
   }
 
-  getClickedCardAudio(e) {
+  getClickedCardAudio = (e) => {
     if (this.layout.state === constants.STATE_TRAIN) return;
     if (this.layout.playButton.dataset.btn === 'play') return;
 
@@ -202,5 +205,21 @@ export default class CategoryComponent {
 
   repeatAudio() {
     this.currentAudio.play();
+  }
+
+  static addStars(correct) {
+    const starsContainer = document.querySelector('.answer-container');
+
+    const correctStar = create('img', 'star');
+    correctStar.setAttribute('src', 'assets/images/star-win.svg');
+
+    const incorrectStar = create('img', 'star');
+    incorrectStar.setAttribute('src', 'assets/images/star.svg');
+
+    if (correct) {
+      starsContainer.appendChild(correctStar);
+    } else {
+      starsContainer.appendChild(incorrectStar);
+    }
   }
 }
