@@ -6,6 +6,8 @@ const BACK_ROTATE = 'back-rotate';
 const FRONT_ROTATE = 'front-rotate';
 const BACK_CLASS = 'card__back';
 const FRONT_CLASS = 'card__front';
+const PLAY = 'play';
+const REPEAT = 'repeat';
 const routes = {};
 
 export {
@@ -18,4 +20,6 @@ export {
   BACK_ROTATE,
   BACK_CLASS,
   FRONT_CLASS,
+  PLAY,
+  REPEAT,
 };

@@ -3,6 +3,7 @@
     min-height: 100vh;
     height: 100%;
     position: relative;
+    // background-image: url(../assets/images/bg.png);
 
     .footer__container {
         max-width: $maxWidth;
@@ -83,10 +84,3 @@ footer {
     }
 
 } 
-
-
-
-// .app-container.playing footer,
-// .app-container.playing header {
-//     background-color: #C2D7D0;
-// }

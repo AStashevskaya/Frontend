@@ -12,11 +12,46 @@
         @include colomnFlex(start);
         padding: 110px 60px 0;
         transition: all .5s ease-in-out;
+
         &__link{
             font-size: 20px;
             padding: 10px;
             display: flex;
             color: #D1D090;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                transition: all .5s ease;
+                left: 0;
+                bottom: 0;
+                width: 65%;
+                height: 2px;
+                background:  #D1D090;
+                opacity: 0;
+                transform:  translateX(-200%);
+            }
+
+            &:hover::before {
+                opacity: 1;
+                transform:  translateX(0);
+            }
+        }
+
+        &__link_active {
+            &::before {
+                content: '';
+                position: absolute;
+                transition: all .5s ease;
+                left: 0;
+                bottom: 0;
+                width: 65%;
+                height: 2px;
+                background:  #D1D090;
+                opacity: 1;
+                transform:  translateX(0);
+            }
         }
 
     }

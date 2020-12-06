@@ -1,0 +1,17 @@
+.button__play{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 20px;
+    background-color: cadetblue;
+    }
+
+.app-container .divider {
+    width: 100%;
+    height: 2px;
+    background-color: #FFB284;
+}
+
+.app-container.playing .divider{
+    background-color: #D1D090;
+}

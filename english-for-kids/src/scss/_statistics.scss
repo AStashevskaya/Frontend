@@ -1,0 +1,20 @@
+.statistics{
+    &__table {
+    width: 100%;
+    padding: 10px 20px;
+    }
+
+    // &__cards-container{
+
+    // }
+    &__card-wrapper {
+        display: flex;
+        justify-content: space-evenly;
+        border: 1px gray solid;
+    }
+}
+
+td {
+    border: gray 1px solid;
+}
+

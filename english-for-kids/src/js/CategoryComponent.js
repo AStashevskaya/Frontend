@@ -69,10 +69,24 @@ export default class CategoryComponent {
         this.currentAudioIdx += 1;
         this.winAudio.play();
       }
+      this.saveclickToStorage('correctClick');
     } else {
       this.errorAudio.play();
       CategoryComponent.addStars(false);
+      this.saveclickToStorage('wrongClick');
     }
+  }
+
+  saveclickToStorage(key) {
+    const { word } = this.clickedCard.dataset;
+
+    const wordsArrayJson = localStorage.getItem(constants.STATISTICS);
+    const wordsArray = JSON.parse(wordsArrayJson);
+    const wordObj = wordsArray.find((el) => el.english === word);
+
+    wordObj[key] += 1;
+
+    localStorage.setItem(constants.STATISTICS, JSON.stringify(wordsArray));
   }
 
   initializeCardEvents() {
@@ -129,13 +143,16 @@ export default class CategoryComponent {
 
     if (target === turn) return;
 
-    const card = target.closest('[data-word]');
-    const cardName = card.dataset.word;
+    this.clickedCard = target.closest('[data-word]');
+    const cardName = this.clickedCard.dataset.word;
     const cardObj = this.cardsComponents.find((el) => el.english === cardName);
 
-    if (this.layout.state === constants.STATE_TRAIN) {
-      cardObj.audio.play();
-    }
+    cardObj.audio.play();
+    this.saveclickToStorage('trainClick');
+
+    // if (this.layout.state === constants.STATE_TRAIN) {
+    //   cardObj.audio.play();
+    // }
   }
 
   render() {
@@ -191,7 +208,7 @@ export default class CategoryComponent {
 
   getClickedCardAudio = (e) => {
     if (this.layout.state === constants.STATE_TRAIN) return;
-    if (this.layout.playButton.dataset.btn === 'play') return;
+    if (this.layout.playButton.dataset.btn === constants.PLAY) return;
 
     const { target } = e;
 

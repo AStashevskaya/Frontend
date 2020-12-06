@@ -1,6 +1,7 @@
 /* eslint-disable no-debugger */
 import create from './utils/create';
 import * as constants from './utils/constants';
+// import WordStatistic from './WordStatisticComponent';
 
 export default class CardComponent {
   constructor(category, options) {
@@ -15,6 +16,9 @@ export default class CardComponent {
     this.image = image;
     this.audioSRC = sound;
 
+    this.statistics = null;
+    this.audio = null;
+
     this.init();
   }
 
@@ -25,7 +29,6 @@ export default class CardComponent {
   generateAudio() {
     debugger;
     this.audio = create('audio');
-    // this.audio = new Audio(`./assets/sounds/${this.audioSRC}`);
     this.audio.setAttribute('src', `./assets/sounds/${this.audioSRC}`);
     this.audio.load();
   }
@@ -44,11 +47,21 @@ export default class CardComponent {
 
   handleClickEvent(e) {
     e.stopPropagation();
-    // const { target } = e.target;
-    // const card = target.closest('.card');
 
     if (this.category.state === 'train') {
       this.audio.play();
     }
   }
+
+  // saveWord(){
+  //   word = this.getWord();
+
+  //   if(word){
+
+  //   }
+  // }
+
+  // getWord(word, arr) {
+  //  const obj = arr.
+  // }
 }

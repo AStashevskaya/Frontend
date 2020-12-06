@@ -19,13 +19,11 @@
   
 
   .switcher__identificator {
-    position: absolute;
+    @include fixed(absolute);
     cursor: pointer;
     top: 0;
-    left: 0;
-    right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background-color: $componentsTrain;
     border-radius: 50px;
     user-select: none;
     -webkit-transition: .4s;
@@ -45,13 +43,12 @@
     transition: .4s;
 
     @media (max-width: 768px) {
-        height: 25px;
-        width: 25px;
+      @include equalSides (25px)
      }
   }
   
   input:checked + .switcher__identificator {
-    background-color: #2196F3;
+    background-color: $componentsPlay;
   }
   
   input:focus + .switcher__identificator {
