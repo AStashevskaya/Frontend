@@ -6,56 +6,51 @@
     <title>English for kids</title>
 <link href="main.css" rel="stylesheet"></head>
 <body>
-    <div id="root">
         <div class="app-container">
-            <div class="header-container">
-             <nav class="header__nav">
-                 <div class="burger-menu">
-                     <div class="burger-menu__btn"></div>
-                 </div>
-                 <ul class="menu-list">
-                     <!-- <li><a href="#" class="menu-list__link">Main page</a></li>
-                     <li><a href="#" class="menu-list__link">Actions (Set A)</a></li>
-                     <li><a href="#" class="menu-list__link">Actions (Set B)</a></li>
-                     <li><a href="#" class="menu-list__link">Actions (Set C)</a></li>
-                     <li><a href="#" class="menu-list__link">Adjectives</a></li>
-                     <li><a href="#" class="menu-list__link">Animals (Set A)</a></li>
-                     <li><a href="#" class="menu-list__link">Animals (Set B)</a></li>
-                     <li><a href="#" class="menu-list__link">Clothes</a></li>
-                     <li><a href="#" class="menu-list__link">Emotions</a></li>
-                     <li><a href="#" class="menu-list__link">Statistics</a></li> -->
-                 </ul>
-             </nav>
-             <h1>English for kids</h1>
-             <div class="switcher-container">
-                 <span id="train" class="switcher__mode">Train</span>
-                  <label class="switch">
-                    <input type="checkbox">
-                    <span class="switcher__identificator"></span>
-                  </label>
-                  <span id="play" class="switcher__mode">Play</span>
-
-             </div>
-            </div>
-            <div class="content-container">
-                <!-- <div class="category-card">
-                    <div class="category-card__image"><img src="./assets/images/angry.jpg" alt=""></div>
-                    <div class="category-card__title"></div>
+            <header>
+                <div class="header-container">
+                    <nav class="header__nav">
+                        <div class="burger-menu">
+                            <div class="burger-menu__btn"></div>
+                        </div>
+                        <ul class="menu-list">
+                        </ul>
+                    </nav>
+                    <div class="switcher-container">
+                        <span id="train" class="switcher__mode">Train</span>
+                         <label class="switch">
+                           <input type="checkbox" name="mode" role="switch">
+                           <span class="switcher__identificator"></span>
+                         </label>
+                         <span id="play" class="switcher__mode">Play</span>
+       
+                    </div>
+                   </div>  
+                   <div class="divider divider_top"></div>
+            </header>
+           
+            <main>
+                <div class="title-container"><h1 id="title">English for kids</h1></div>
+                <div class="answer-container"></div>
+                <div class="content-container">
                 </div>
-                <div class="category-card">
-                    <div class="category-card__image"><img src="./assets/images/angry.jpg" alt=""></div>
-                    <div class="category-card__title"></div>
+               
+            </main>
+            <footer>
+                <div class="divider divider_bottom"></div>
+                <div class="footer__container">
+2020EnglishForKids
                 </div>
-                <div class="category-card">
-                    <div class="category-card__image"><img src="./assets/images/angry.jpg" alt=""></div>
-                    <div class="category-card__title"></div>
-                </div>
-                <div class="category-card">
-                    <div class="category-card__image"><img src="./assets/images/angry.jpg" alt=""></div>
-                    <div class="category-card__title"></div>
-                </div> -->
-            </div>
+            </footer>
+        
+       <!-- <img src="./assets/images/up-arrow.svg" alt=""> -->
+       <!-- <div class="statistics__card-wrapper">
+           <div class="card-wrapper__english" data-english=''></div>
+           <div class="card-wrapper__russian" data-russian=''></div>
+           <div class="card-wrapper__train" data-train=''></div>
+           <div class="card-wrapper__correct" data-correct=''></div>
+           <div class="card-wrapper__incorrect" data-incorrect=''></div>  
+       </div> -->
         </div>
-    </div>
 <script src="main.bundle.js"></script></body>
 </html>
