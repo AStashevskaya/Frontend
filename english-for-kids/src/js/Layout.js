@@ -57,6 +57,7 @@ export default class Layout {
 
       this.statisticTable = this.statistic.render();
       this.contentContainer.appendChild(this.statisticTable);
+      this.statistic.initializeClicks();
     } else {
       this.handleClickCategory(e);
     }

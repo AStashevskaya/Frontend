@@ -227,7 +227,7 @@ const categories = [
       },
       {
         russian: 'майка',
-        english: 'T-shirt',
+        english: 't-shirt',
         image: 't-shirt.jpg',
         sound: 't-shirt.mp3',
       },

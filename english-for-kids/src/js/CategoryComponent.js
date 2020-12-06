@@ -69,11 +69,11 @@ export default class CategoryComponent {
         this.currentAudioIdx += 1;
         this.winAudio.play();
       }
-      this.saveclickToStorage('correctClick');
+      this.saveclickToStorage('correct');
     } else {
       this.errorAudio.play();
       CategoryComponent.addStars(false);
-      this.saveclickToStorage('wrongClick');
+      this.saveclickToStorage('wrong');
     }
   }
 
@@ -82,7 +82,7 @@ export default class CategoryComponent {
 
     const wordsArrayJson = localStorage.getItem(constants.STATISTICS);
     const wordsArray = JSON.parse(wordsArrayJson);
-    const wordObj = wordsArray.find((el) => el.english === word);
+    const wordObj = wordsArray.find((el) => el.word === word);
 
     wordObj[key] += 1;
 
@@ -148,7 +148,7 @@ export default class CategoryComponent {
     const cardObj = this.cardsComponents.find((el) => el.english === cardName);
 
     cardObj.audio.play();
-    this.saveclickToStorage('trainClick');
+    this.saveclickToStorage('train');
 
     // if (this.layout.state === constants.STATE_TRAIN) {
     //   cardObj.audio.play();

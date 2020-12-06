@@ -2,15 +2,40 @@
     &__table {
     width: 100%;
     padding: 10px 20px;
+    overflow:scroll;
     }
 
     // &__cards-container{
 
     // }
+    &__cell-wrapper {  
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .title{
+        font-size: 22px;
+    }
+    }
+
     &__card-wrapper {
         display: flex;
         justify-content: space-evenly;
         border: 1px gray solid;
+    }
+
+    &__buttons-wrapper{
+        @include colomnFlex(space-evenly);
+        
+        .up, .down {
+            width: 22px;
+            cursor: pointer;
+
+            img{
+                width: 100%
+            }
+        }
+
     }
 }
 

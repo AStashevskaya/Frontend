@@ -689,6 +689,23 @@ input:checked + .switcher__identificator:before {
 .statistics__table {
   width: 100%;
   padding: 10px 20px;
+  overflow: scroll;
+}
+
+.statistics__cell-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.statistics__cell-wrapper .title {
+  font-size: 22px;
 }
 
 .statistics__card-wrapper {
@@ -699,6 +716,28 @@ input:checked + .switcher__identificator:before {
       -ms-flex-pack: space-evenly;
           justify-content: space-evenly;
   border: 1px gray solid;
+}
+
+.statistics__buttons-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.statistics__buttons-wrapper .up, .statistics__buttons-wrapper .down {
+  width: 22px;
+  cursor: pointer;
+}
+
+.statistics__buttons-wrapper .up img, .statistics__buttons-wrapper .down img {
+  width: 100%;
 }
 
 td {

@@ -8,6 +8,7 @@ const BACK_CLASS = 'card__back';
 const FRONT_CLASS = 'card__front';
 const PLAY = 'play';
 const REPEAT = 'repeat';
+const CLICK = 'Click';
 const routes = {};
 
 export {
@@ -22,4 +23,5 @@ export {
   FRONT_CLASS,
   PLAY,
   REPEAT,
+  CLICK,
 };
