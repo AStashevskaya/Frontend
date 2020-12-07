@@ -10,6 +10,9 @@ export default class CategoryComponent {
     this.title = options.title;
     this.cards = options.cards;
     this.cardsComponents = [];
+
+    this.mistakes = 0;
+    this.audio = null;
   }
 
   init() {
@@ -23,8 +26,8 @@ export default class CategoryComponent {
     }
 
     this.layout.contentContainer.innerHTML = this.render();
-    this.initializeCardEvents();
     this.generateAudioArray();
+    this.initializeCardEvents();
     this.createAudiosforPlaying();
   }
 
@@ -59,20 +62,24 @@ export default class CategoryComponent {
         this.clickedCard.dataset.checked = 'true';
         this.currentAudioIdx += 1;
         this.removePlayEvents(this.clickedCard);
-        CategoryComponent.addStars(true);
+        this.addStars(true);
         this.correctAudio.play();
         this.playGame();
       } else if (this.currentAudioIdx === this.audiosArr.length - 1) {
         this.clickedCard.dataset.checked = 'true';
         this.removePlayEvents(this.clickedCard);
-        CategoryComponent.addStars(true);
+        this.addStars(true);
         this.currentAudioIdx += 1;
         this.winAudio.play();
+        this.ifWin();
       }
       this.saveclickToStorage('correct');
     } else {
       this.errorAudio.play();
-      CategoryComponent.addStars(false);
+      // eslint-disable-next-line no-debugger
+      debugger;
+      this.mistakes += 1;
+      this.addStars(false);
       this.saveclickToStorage('wrong');
     }
   }
@@ -184,6 +191,7 @@ export default class CategoryComponent {
   }
 
   generateAudioArray() {
+    this.audiosArr = [];
     this.audiosArr = [...this.cards].map((el) => el.sound);
     this.audiosArr = this.audiosArr.sort(() => Math.random() - 0.5);
   }
@@ -224,9 +232,7 @@ export default class CategoryComponent {
     this.currentAudio.play();
   }
 
-  static addStars(correct) {
-    const starsContainer = document.querySelector('.answer-container');
-
+  addStars(correct) {
     const correctStar = create('img', 'star');
     correctStar.setAttribute('src', 'assets/images/star-win.svg');
 
@@ -234,9 +240,54 @@ export default class CategoryComponent {
     incorrectStar.setAttribute('src', 'assets/images/star.svg');
 
     if (correct) {
-      starsContainer.appendChild(correctStar);
+      this.layout.answerContainer.appendChild(correctStar);
     } else {
-      starsContainer.appendChild(incorrectStar);
+      this.layout.answerContainer.appendChild(incorrectStar);
     }
+  }
+
+  ifWin() {
+    this.deleteCards();
+    this.openCongrats();
+    this.layout.answerContainer.innerHTML = '';
+    setTimeout(() => {
+      this.closeCongrats();
+    }, 5000);
+  }
+
+  openCongrats() {
+    // eslint-disable-next-line no-debugger
+    debugger;
+    const appContainer = document.querySelector('.app-container');
+    const overlay = create('div', 'overlay');
+    const overlayBox = create('div', 'overlay__box');
+    const answer = create('span', 'answer', `You've made ${this.mistakes} mistakes`);
+
+    const successImage = create('img');
+    successImage.setAttribute('src', './assets/images/success.jpg');
+
+    const failImage = create('img');
+    failImage.setAttribute('src', './assets/images/failure.jpg');
+
+    if (this.mistakes === 0) {
+      overlayBox.classList.add('success');
+      overlayBox.appendChild(successImage);
+    } else {
+      overlayBox.classList.add('fail');
+      overlayBox.appendChild(failImage);
+    }
+
+    overlayBox.appendChild(answer);
+    overlay.appendChild(overlayBox);
+    appContainer.appendChild(overlay);
+  }
+
+  closeCongrats() {
+    const appContainer = document.querySelector('.app-container');
+    const overlay = document.querySelector('.overlay');
+    appContainer.removeChild(overlay);
+    this.mistakes = 0;
+    this.layout.removePlayButton();
+    this.layout.generateMainPage();
   }
 }

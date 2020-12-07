@@ -57,6 +57,10 @@
   
   input:checked + .switcher__identificator:before {
     transform: translateX(54px);
+    
+    @media (max-width: 768px) {
+      transform: translateX(34px);
+     }
   }
   
   .switcher__mode{

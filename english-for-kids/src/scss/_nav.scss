@@ -5,13 +5,18 @@
         height: 100vh;
         z-index: 5;
         position: fixed;
-        left: -300px;
+        left: -320px;
         top: 0;
         bottom: 0;
-        width: 300px;
+        width: 320px;
         @include colomnFlex(start);
         padding: 110px 60px 0;
         transition: all .5s ease-in-out;
+
+        @media (max-width: 768px) {
+            padding: 70px 45px 0;
+        align-items: center;
+           }
 
         &__link{
             font-size: 20px;
@@ -19,6 +24,10 @@
             display: flex;
             color: #D1D090;
             position: relative;
+
+            @media (max-width: 768px) {
+            padding: 12px;
+               }
 
             &::before {
                 content: '';
@@ -32,6 +41,12 @@
                 opacity: 0;
                 transform:  translateX(-200%);
             }
+
+            @media (max-width: 768px) {
+                &::before{
+                    width: 100%;
+                }
+               }
 
             &:hover::before {
                 opacity: 1;
@@ -52,6 +67,13 @@
                 opacity: 1;
                 transform:  translateX(0);
             }
+
+            @media (max-width: 768px) {
+                &::before{
+                    width: 100%;
+                }
+               }
+
         }
 
     }

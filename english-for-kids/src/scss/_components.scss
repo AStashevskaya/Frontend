@@ -1,10 +1,14 @@
-.button__play{
+.button__play {
     width: 60px;
     height: 60px;
     border-radius: 50%;
     font-size: 20px;
     background-color: cadetblue;
     }
+.star {
+    @include equalSides(50px);
+}
+
 
 .app-container .divider {
     width: 100%;
@@ -14,4 +18,43 @@
 
 .app-container.playing .divider{
     background-color: #D1D090;
+}
+
+.overlay {
+    @include fixed (fixed);
+    @include centerFlex;
+    top: 0;
+    bottom: 0;
+    z-index: 2000;
+    background-color: rgba($color: #212121, $alpha: .5);
+    
+    &__box {
+        background-color: #fff;;
+        border-radius: 10px;
+        @include equalSides(300px);
+        @include centerFlex;
+        flex-direction: column;
+
+        img {
+            @include equalSides(75%);    
+        }
+    }
+
+    .answer{
+        font-size: 20px;
+        margin-top: 15px;
+    }
+    
+
+    .success {
+        border: 4px solid green;
+        box-shadow: 5px 6px 25px black;
+        text-shadow: 2px 1px 6px green;
+    }
+
+    .fail {
+        border: 2px solid red;
+        box-shadow: 5px 6px 25px black;
+        text-shadow: 2px 1px 6px red;
+    }
 }

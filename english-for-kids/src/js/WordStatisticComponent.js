@@ -6,5 +6,6 @@ export default class WordStatistic {
     this.train = 0;
     this.correct = 0;
     this.wrong = 0;
+    this.percent = 0;
   }
 }

@@ -1,6 +1,7 @@
 import './burger';
-import Mode from './Mode';
+import Layout from './Layout';
+import categories from './data/categories';
 
 // import onNavigate from './utils/onNavigate';
 
-export default new Mode();
+export default new Layout(categories);

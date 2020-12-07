@@ -4,13 +4,15 @@ import CategoryComponent from './CategoryComponent';
 import create from './utils/create';
 import Menu from './Menu';
 import Statistic from './Statistics';
+import Switcher from './Switcher';
 
 export default class Layout {
-  constructor(mode, categories) {
-    this.state = mode;
+  constructor(categories) {
+    this.state = constants.STATE_TRAIN;
     this.categories = categories;
     this.contentContainer = document.querySelector('.content-container');
     this.title = document.querySelector('#title');
+    this.answerContainer = document.querySelector('.answer-container');
 
     this.init();
   }
@@ -25,6 +27,7 @@ export default class Layout {
   generateLayout() {
     this.menu = new Menu(this);
     this.statistic = new Statistic(this);
+    this.switcher = new Switcher(this);
     this.generateMainPage();
   }
 
@@ -141,6 +144,7 @@ export default class Layout {
         cards.forEach((el) => {
           el.dataset.train = false;
           el.dataset.checked = false;
+          this.currentPage.generateAudioArray();
           this.currentPage.removeTrainEvents(el);
           this.currentPage.addPlayEvents(el);
         });
