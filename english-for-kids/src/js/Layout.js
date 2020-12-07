@@ -55,6 +55,10 @@ export default class Layout {
         this.currentPage.deleteCards();
       }
 
+      if (this.playButton) {
+        this.removePlayButton();
+      }
+
       this.currentPage = constants.STATISTICS;
       this.title.innerHTML = constants.STATISTICS;
 
@@ -139,7 +143,7 @@ export default class Layout {
       const answerContainer = document.querySelector('.answer-container');
       answerContainer.innerHTML = '';
 
-      if (this.currentPage !== constants.MAIN) {
+      if (this.currentPage !== constants.MAIN && this.currentPage !== constants.STATISTICS) {
         this.currentPage.currentAudioIdx = 0;
         cards.forEach((el) => {
           el.dataset.train = false;
@@ -160,7 +164,7 @@ export default class Layout {
   }
 
   createPlayButton() {
-    this.playButton = create('div', 'button__play', constants.PLAY);
+    this.playButton = create('div', 'button__play', '<img src="./assets/images/play-btn.svg" alt="play">');
     this.playButton.dataset.btn = constants.PLAY;
 
     this.playButton.addEventListener('click', this.createRepeatButton);
@@ -171,7 +175,7 @@ export default class Layout {
 
   createRepeatButton = () => {
     this.playButton.dataset.btn = constants.REPEAT;
-    this.playButton.innerHTML = constants.REPEAT;
+    this.playButton.innerHTML = '<img src="./assets/images/repeat.svg" alt="repeat">';
 
     this.playButton.removeEventListener('click', this.currentPage.repeatAudio.bind(this.currentPage));
     this.playButton.addEventListener('click', this.currentPage.repeatAudio.bind(this.currentPage));
@@ -185,7 +189,7 @@ export default class Layout {
     if (this.playButton.dataset.btn === constants.PLAY) {
       this.playButton.removeEventListener('click', this.createRepeatButtton);
     } else {
-      this.playButton.removeEventListener('click', this.currentPage.repeatAudio.bind(this.currentPage));
+      this.playButton.removeEventListener('click', this.currentPage.repeatAudio);
     }
 
     container.removeChild(this.playButton);

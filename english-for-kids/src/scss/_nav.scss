@@ -14,7 +14,7 @@
         transition: all .5s ease-in-out;
 
         @media (max-width: 768px) {
-            padding: 70px 45px 0;
+        padding: 70px 45px 0;
         align-items: center;
            }
 
@@ -22,6 +22,7 @@
             font-size: 20px;
             padding: 10px;
             display: flex;
+            text-shadow: 2px 1px 12px rgb(58, 44, 55);
             color: #D1D090;
             position: relative;
 
@@ -55,6 +56,8 @@
         }
 
         &__link_active {
+            font-size: 25px;
+            
             &::before {
                 content: '';
                 position: absolute;
@@ -79,7 +82,7 @@
     }
 }
 .burger-menu.open + .menu-list{
-    background-color: #86964A;
+    background-color: $backgroundTrain;
     left: 0;
     overflow: hidden;
     overflow-y: auto;
@@ -88,6 +91,7 @@
 .app-container.playing .burger-menu.open + .menu-list{
     background-color: #5F9595;
     &__link{
+        text-shadow: 2px 1px 12px rgba(244, 156, 227, 1);
         color: #C2D7D0;
     }
 }

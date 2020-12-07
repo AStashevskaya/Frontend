@@ -90,11 +90,13 @@
 
     &__front {
       transition: all .4s ease-in;
-      background-color: #F09B79;
+      background: rgb(240,155,121);
+      background: linear-gradient(180deg, rgba(240,155,121,1) 23%, rgba(240,155,121,1) 41%, rgba(255,255,255,1) 100%);
     }
 
     &__back {
-      background-color: #FFB284;
+      background: rgb(255,178,132);
+      background: linear-gradient(180deg, rgba(255,178,132,1) 22%, rgba(255,236,225,1) 67%, rgba(255,255,255,1) 100%);
       transform: rotateY(180deg);
     }
 
@@ -121,7 +123,7 @@ cursor: default;
 .app-container.playing .card{
   &__front{
     transition: all .4s ease-in;
-    background-color: #F4CABB;
+    background: #F4CABB;
   }
 
   &__back {

@@ -57,6 +57,12 @@ module.exports = (env, options) => {
           ],
         },
         {
+          test: /\.(woff|woff2|ttf)$/,
+          use: {
+            loader: 'url-loader',
+          },
+        },
+        {
           test: /\.(png|svg|jpe?g|gif)$/i,
           use: [
             {

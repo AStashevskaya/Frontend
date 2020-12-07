@@ -6,12 +6,19 @@
     @media (max-width: 768px) {
         padding: 0 10px;
         }
-    // background-image: url(../assets/images/back.png);
 
     .footer__container {
         max-width: $maxWidth;
+        @include equalSides(100%);
+        justify-content: space-evenly;
+        align-items: center;
         display: flex;
-        justify-content: center;
+        padding: 0 10%;
+        flex-wrap: wrap;
+
+        @media (max-width: 768px) {
+            padding: 0 10px;
+            }
     }
     .header-container {
         max-width: $maxWidth;
@@ -49,13 +56,15 @@
     padding: 20px;
     font-size: 20px;
 }
-header {
-    height: 70px;
+header,footer {
     width: 100%;
     @include fixed(fixed);
+    background-color: #ECD5E3;
     z-index: 10;
+}
+header {
+    height: 70px;
     top: 0; 
-    background-color: #D1D090;
 
     @media (max-width: 768px) {
     height: 60px;
@@ -66,20 +75,16 @@ main {
     margin-top: 70px;
     height: 100%;
  
-
     @media (max-width: 768px) {
     height: 60px;
     }
 }
 footer {
     height: 50px;
-    width: 100%;
-    background-color: #D1D090;
-    @include fixed(fixed);
     bottom: 0;
+    z-index: 5;
 }
 } 
-
 
 .app-container.playing {
 
@@ -96,7 +101,7 @@ footer {
     }
 
     footer,header {
-        background-color: #C2D7D0;
+        background-color: #C2D7D0;        
     }
 
 } 
