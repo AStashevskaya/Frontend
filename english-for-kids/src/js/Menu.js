@@ -66,7 +66,7 @@ export default class Menu {
   menuToggle = (e) => {
     e.stopPropagation();
     this.buttonContainer.classList.toggle('open');
-    document.body.classList.toggle('antiscroll');
+    // document.body.classList.toggle('antiscroll');
   }
 
   static changeActiveMenuLink(currentPage) {
