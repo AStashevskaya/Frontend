@@ -10,11 +10,15 @@
     .footer__container {
         max-width: $maxWidth;
         @include equalSides(100%);
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: center;
         display: flex;
         padding: 0 10%;
         flex-wrap: wrap;
+        span {
+            margin: 0 20px;
+        }
+    
 
         @media (max-width: 768px) {
             padding: 0 10px;
@@ -40,13 +44,11 @@
         justify-content: space-evenly;
         flex-wrap: wrap;
         margin-bottom: 50px;
-    
-        @media (max-width: 768px){
-            padding-top: 40px;
-        }
     }
 
     .answer-container {
+        height: 0;
+        transition: all .4s ease-in;
         display: none;
     }
 
@@ -94,6 +96,7 @@ footer {
 
   .answer-container {
     max-width: $maxWidth;
+    height: fit-content;
     margin: 0 auto;
     overflow: hidden;
     display: flex;

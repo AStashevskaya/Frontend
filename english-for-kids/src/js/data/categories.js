@@ -1,6 +1,7 @@
 const categories = [
   {
     title: 'Weather',
+    icon: 'weather.svg',
     image: 'weather.jpg',
     cards: [
       {
@@ -55,6 +56,7 @@ const categories = [
   },
   {
     title: 'Animals',
+    icon: 'animals.svg',
     image: 'animals.jpg',
     cards: [
       {
@@ -109,6 +111,7 @@ const categories = [
   },
   {
     title: 'Fruits',
+    icon: 'fruits.svg',
     image: 'fruits.jpg',
     cards: [
       {
@@ -163,6 +166,7 @@ const categories = [
   },
   {
     title: 'Furniture',
+    icon: 'furniture.svg',
     image: 'furniture.jpg',
     cards: [
       {
@@ -217,6 +221,7 @@ const categories = [
   },
   {
     title: 'Clothes',
+    icon: 'clothes.svg',
     image: 'clothes.jpg',
     cards: [
       {
@@ -272,7 +277,8 @@ const categories = [
   },
   {
     title: 'Vegetables',
-    image: 'fruits.jpg',
+    icon: 'vegetables.svg',
+    image: 'vegetables.jpg',
     cards: [
       {
         russian: 'помидор',
@@ -326,6 +332,7 @@ const categories = [
   },
   {
     title: 'Transport',
+    icon: 'transport.svg',
     image: 'scooter.jpg',
     cards: [
       {
@@ -380,6 +387,7 @@ const categories = [
   },
   {
     title: 'Dishware',
+    icon: 'dishware.svg',
     image: 'dishware.jpg',
     cards: [
       {

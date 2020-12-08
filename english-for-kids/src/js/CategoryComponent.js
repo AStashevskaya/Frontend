@@ -43,6 +43,10 @@ export default class CategoryComponent {
     this.winAudio.setAttribute('src', './assets/sounds/success.mp3');
     this.winAudio.load();
 
+    this.failAudio = create('audio');
+    this.failAudio.setAttribute('src', './assets/sounds/failgame.mp3');
+    this.failAudio.load();
+
     this.errorAudio = create('audio');
     this.errorAudio.setAttribute('src', './assets/sounds/error.mp3');
     this.errorAudio.load();
@@ -70,8 +74,7 @@ export default class CategoryComponent {
         this.removePlayEvents(this.clickedCard);
         this.addStars(true);
         this.currentAudioIdx += 1;
-        this.winAudio.play();
-        this.ifWin();
+        this.isWin();
       }
       this.saveclickToStorage('correct');
     } else {
@@ -147,8 +150,10 @@ export default class CategoryComponent {
     const { target } = e;
 
     const turn = target.closest('[alt="turn"]');
+    const back = target.closest('.card__back');
 
     if (target === turn) return;
+    if (back) return;
 
     this.clickedCard = target.closest('[data-word]');
     const cardName = this.clickedCard.dataset.word;
@@ -156,10 +161,6 @@ export default class CategoryComponent {
 
     cardObj.audio.play();
     this.saveclickToStorage('train');
-
-    // if (this.layout.state === constants.STATE_TRAIN) {
-    //   cardObj.audio.play();
-    // }
   }
 
   render() {
@@ -246,13 +247,13 @@ export default class CategoryComponent {
     }
   }
 
-  ifWin() {
+  isWin() {
     this.deleteCards();
     this.openCongrats();
     this.layout.answerContainer.innerHTML = '';
     setTimeout(() => {
       this.closeCongrats();
-    }, 5000);
+    }, 4000);
   }
 
   openCongrats() {
@@ -272,9 +273,13 @@ export default class CategoryComponent {
     if (this.mistakes === 0) {
       overlayBox.classList.add('success');
       overlayBox.appendChild(successImage);
+
+      this.winAudio.play();
     } else {
       overlayBox.classList.add('fail');
       overlayBox.appendChild(failImage);
+
+      this.failAudio.play();
     }
 
     overlayBox.appendChild(answer);

@@ -4,8 +4,12 @@ menu.addEventListener('click', (e) => {
   menu.classList.toggle('open');
 });
 
-document.addEventListener('click', () => {
+document.addEventListener('click', (e) => {
+  const menuList = document.querySelector('.menu-list');
+
   if (menu.classList.contains('open')) {
+    if (e.target === menuList) return;
+
     menu.classList.remove('open');
   }
 });

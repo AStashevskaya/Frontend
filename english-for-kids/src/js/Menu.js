@@ -17,14 +17,14 @@ export default class Menu {
   render() {
     let html = '';
     this.layout.categories.forEach((el) => {
-      html += ` <li><a href="#" class="menu-list__link" data-category="${el.title}">${el.title}</a></li>`;
+      html += ` <li><a href="#" class="menu-list__link" data-category="${el.title}"><img src="./assets/images/${el.icon}" class="icon" alt="${el.title}">${el.title}</a></li>`;
     });
 
     const linkTOmain = create('li');
-    linkTOmain.innerHTML = `<a href="#" class="menu-list__link menu-list__link_active" data-category="${constants.MAIN}">Main page</a>`;
+    linkTOmain.innerHTML = `<a href="#" class="menu-list__link menu-list__link_active" data-category="${constants.MAIN}"><img src="./assets/images/${constants.MAIN}.svg" class="icon" alt="${constants.MAIN}-page">Main page</a>`;
 
     const linkTOstaticticks = create('li');
-    linkTOstaticticks.innerHTML = `<a href="#" class="menu-list__link" data-category="${constants.STATISTICS}">Statistics</a>`;
+    linkTOstaticticks.innerHTML = `<a href="#" class="menu-list__link" data-category="${constants.STATISTICS}"><img src="./assets/images/${constants.STATISTICS}.svg" class="icon" alt="${constants.STATISTICS}-page">Statistics</a>`;
 
     this.container.innerHTML = html;
     this.container.prepend(linkTOmain);

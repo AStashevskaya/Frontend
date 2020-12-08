@@ -37,7 +37,7 @@ export default class CardComponent {
     return ` <div class="card" data-word="${this.english}" data-train="${this.category.layout.state === constants.STATE_TRAIN ? 'true' : 'false'}" ${this.category.layout.state === constants.STATE_TRAIN ? '' : 'data-checked = "false"'}>
         <div class="card__front">
             <div class="card__image"><img src="assets/images/${this.image}" alt="${this.english}"></div>
-            <div class="card__content"><span class="card__text">${this.english}</span><span class="turn" data-turn="true"><img src="assets/images/rotate.svg" alt="turn"></span></div>
+            <div class="card__content"><span class="card__text">${this.english}</span><span class="turn" data-turn="true"><img src="assets/images/turn.svg" alt="turn"></span></div>
         </div>
         <div class="card__back">  <div class="card__image"><img src="assets/images/${this.image}" alt="${this.russian}"></div>
         <div class="card__content"><span class="card__text">${this.russian}</span> </div>

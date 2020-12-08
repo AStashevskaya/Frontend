@@ -120,7 +120,6 @@ export default class Layout {
     const main = document.querySelector('.app-container');
 
     if (this.state === constants.STATE_TRAIN) {
-      // this.contentContainer.classList.remove('playing');
       main.classList.remove('playing');
 
       if (this.playButton) {
@@ -138,7 +137,6 @@ export default class Layout {
     }
 
     if (this.state === constants.STATE_PLAY) {
-      // this.contentContainer.classList.add('playing');
       main.classList.add('playing');
       const answerContainer = document.querySelector('.answer-container');
       answerContainer.innerHTML = '';

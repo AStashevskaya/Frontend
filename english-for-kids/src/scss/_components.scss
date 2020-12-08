@@ -4,7 +4,27 @@
     border-radius: 50%;
     font-size: 20px;
     background-color: cadetblue;
+    transition: all .5s ease-in;
+  
     cursor: pointer;
+
+    
+    &[data-btn='play'] {
+        transform: scale(1.0);
+    }
+
+    &[data-btn='play']:hover {
+        transform: scale(1.1);
+    }
+
+    &[data-btn='repeat'] {
+        transform: rotate(0);
+    }
+
+    &[data-btn='repeat']:hover {
+        transform: rotate(180deg);
+    }
+
     img{
         @include equalSides(100%)
     }
