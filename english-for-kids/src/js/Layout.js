@@ -44,6 +44,7 @@ export default class Layout {
     e.stopPropagation();
     const { target } = e;
     const menu = document.querySelector('.burger-menu');
+    this.answerContainer.innerHTML = '';
 
     if (target.dataset.category === constants.MAIN) {
       this.deleteCategories();

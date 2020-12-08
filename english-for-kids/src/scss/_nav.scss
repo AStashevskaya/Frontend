@@ -1,7 +1,8 @@
 .header__nav{
     position: relative;
     @include colomnFlex(start);    
-    .menu-list{
+
+    .menu-list {
         height: 100vh;
         z-index: 5;
         position: fixed;
@@ -23,7 +24,11 @@
         align-items: center;
            }
 
-        &__link{
+        li {
+            list-style: none;
+        }   
+
+        &__link {
             font-size: 20px;
             padding: 10px;
             display: flex;
@@ -105,14 +110,14 @@
 
     }
 }
-.burger-menu.open + .menu-list{
+.burger-menu.open + .menu-list {
     background-color: $backgroundTrain;
     left: 0;
     overflow: hidden;
     overflow-y: auto;
 }
 
-.app-container.playing .burger-menu.open + .menu-list{
+.app-container.playing .burger-menu.open + .menu-list {
     background-color: #5F9595;
     &__link{
         text-shadow: 2px 5px 5px #3a2c37;

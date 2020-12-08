@@ -4,17 +4,32 @@ import * as constants from './utils/constants';
 export default class Menu {
   constructor(layout) {
     this.layout = layout;
-    this.container = document.querySelector('.menu-list');
+    this.container = document.querySelector('.header__nav');
+    this.buttonContainer = create('div', 'burger-menu');
+    this.listContainer = create('div', 'menu-list');
 
     this.init();
   }
 
   init() {
+    this.renderButton();
+    this.renderList();
     this.render();
     this.initializeMenuClick();
   }
 
   render() {
+    this.container.appendChild(this.buttonContainer);
+    this.container.appendChild(this.listContainer);
+  }
+
+  renderButton() {
+    const btn = create('div', 'burger-menu__btn');
+
+    this.buttonContainer.appendChild(btn);
+  }
+
+  renderList() {
     let html = '';
     this.layout.categories.forEach((el) => {
       html += ` <li><a href="#" class="menu-list__link" data-category="${el.title}"><img src="./assets/images/${el.icon}" class="icon" alt="${el.title}">${el.title}</a></li>`;
@@ -26,14 +41,31 @@ export default class Menu {
     const linkTOstaticticks = create('li');
     linkTOstaticticks.innerHTML = `<a href="#" class="menu-list__link" data-category="${constants.STATISTICS}"><img src="./assets/images/${constants.STATISTICS}.svg" class="icon" alt="${constants.STATISTICS}-page">Statistics</a>`;
 
-    this.container.innerHTML = html;
-    this.container.prepend(linkTOmain);
-    this.container.appendChild(linkTOstaticticks);
+    this.listContainer.innerHTML = html;
+    this.listContainer.prepend(linkTOmain);
+    this.listContainer.appendChild(linkTOstaticticks);
   }
 
   initializeMenuClick() {
     const menuLinks = [...document.querySelectorAll('.menu-list__link')];
     menuLinks.forEach((el) => el.addEventListener('click', this.layout.handleClickLink));
+
+    this.buttonContainer.addEventListener('click', this.menuToggle);
+
+    document.addEventListener('click', (e) => {
+      // const menuList = document.querySelector('.menu-list');
+
+      if (this.buttonContainer.classList.contains('open')) {
+        if (e.target === this.listContainer) return;
+
+        this.buttonContainer.classList.remove('open');
+      }
+    });
+  }
+
+  menuToggle = (e) => {
+    e.stopPropagation();
+    this.buttonContainer.classList.toggle('open');
   }
 
   static changeActiveMenuLink(currentPage) {

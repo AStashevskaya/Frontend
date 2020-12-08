@@ -451,6 +451,10 @@ input:checked + .switcher__identificator:before {
   }
 }
 
+.header__nav .menu-list li {
+  list-style: none;
+}
+
 .header__nav .menu-list__link {
   font-size: 20px;
   padding: 10px;
