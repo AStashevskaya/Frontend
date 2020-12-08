@@ -1,6 +1,5 @@
-// import CategoryComponent from './CategoryComponent';
+import * as constants from './utils/constants';
 
-/* eslint-disable no-console */
 export default class MainPage {
   constructor(layout, words) {
     this.layout = layout;
@@ -9,20 +8,39 @@ export default class MainPage {
     this.cards = [];
   }
 
-  initDifficultWordsPage() {
-    if (this.words.length === 0) {
-      console.log('no words');
-    } else {
-      this.cards = this.words.map((el) => {
-        const cardCategory = this.categories.find((category) => category.title === el.category);
-        const card = cardCategory.cards.find((cardObj) => cardObj.english === el.word);
-        return card;
-      });
-    }
+  render() {
+    let html = '';
 
-    const options = {};
-    options.title = this.difficultWords;
-    options.cards = this.cards;
-    // new CategoryComponent(this.layout, options);
+    this.categories.forEach((el) => {
+      html += `
+        <div class="category-card" data-category="${el.title}" data-train="${this.state === constants.STATE_TRAIN ? 'true' : 'false'}">
+        <div class="category-card__image"><img src="./assets/images/${el.image}" alt="${el.title}"></div>
+        <div class="category-card__title">${el.title}</div>
+        </div>`;
+    });
+    return html;
+  }
+
+  handleClickCategory = (e) => {
+    const { target } = e;
+    const card = target.closest('[data-category]');
+    const clickedCategory = card.dataset.category;
+
+    this.deleteCategories();
+
+    const newCategory = this.layout.categoriesComponents.find((el) => el.title === clickedCategory);
+    this.layout.currentPage = newCategory;
+    this.layout.title.innerHTML = this.layout.currentPage.title;
+
+    newCategory.init();
+  }
+
+  deleteCategories() {
+    const categories = [...document.querySelectorAll('.category-card')];
+
+    categories.forEach((el) => {
+      el.removeEventListener('click', this.handleClickCategory);
+      this.layout.contentContainer.removeChild(el);
+    });
   }
 }

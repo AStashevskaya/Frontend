@@ -1,7 +1,6 @@
 import CardComponent from './CardComponent';
 import * as constants from './utils/constants';
 import create from './utils/create';
-// import create from './utils/create';
 
 export default class CategoryComponent {
   constructor(layout, options) {
@@ -65,23 +64,26 @@ export default class CategoryComponent {
       if (this.currentAudioIdx < this.audiosArr.length - 1) {
         this.clickedCard.dataset.checked = 'true';
         this.currentAudioIdx += 1;
+        this.correctAudio.play();
+
         this.removePlayEvents(this.clickedCard);
         this.addStars(true);
-        this.correctAudio.play();
+
         this.playGame();
       } else if (this.currentAudioIdx === this.audiosArr.length - 1) {
         this.clickedCard.dataset.checked = 'true';
+        this.currentAudioIdx += 1;
+
         this.removePlayEvents(this.clickedCard);
         this.addStars(true);
-        this.currentAudioIdx += 1;
+
         this.isWin();
       }
       this.saveclickToStorage('correct');
     } else {
       this.errorAudio.play();
-      // eslint-disable-next-line no-debugger
-      debugger;
       this.mistakes += 1;
+
       this.addStars(false);
       this.saveclickToStorage('wrong');
     }
@@ -229,7 +231,7 @@ export default class CategoryComponent {
     this.checkIfCorrect();
   }
 
-  repeatAudio() {
+  repeatAudio = () => {
     this.currentAudio.play();
   }
 
@@ -253,12 +255,10 @@ export default class CategoryComponent {
     this.layout.answerContainer.innerHTML = '';
     setTimeout(() => {
       this.closeCongrats();
-    }, 4000);
+    }, constants.ANIMATION_LENGTH);
   }
 
   openCongrats() {
-    // eslint-disable-next-line no-debugger
-    debugger;
     const appContainer = document.querySelector('.app-container');
     const overlay = create('div', 'overlay');
     const overlayBox = create('div', 'overlay__box');

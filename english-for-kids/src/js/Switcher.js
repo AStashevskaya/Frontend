@@ -38,13 +38,9 @@ export default class Switcher {
     if (this.indicator.checked) {
       this.mode = constants.STATE_TRAIN;
       this.layout.changeLayout(this.mode);
-      // eslint-disable-next-line no-console
-      console.log('to train');
     } else {
       this.mode = constants.STATE_PLAY;
       this.layout.changeLayout(this.mode);
-      // eslint-disable-next-line no-console
-      console.log('to play');
     }
   }
 }

@@ -25,15 +25,20 @@
     &__button {
      @include centerFlex;
      box-shadow: 2px 5px 5px #3a2c37;
+     color:  #3A3E4A;
+     text-shadow: 2px 5px 5px #3a2c37;
      background-color: $fontMenuColor;
-     opacity: .8;
+     opacity: 1;
+     transform: scale(1.0);
+     transition: all .4s ease-in;
      margin-left: 30px;
      margin-bottom: 15px;
      width: 120px;
      height: 40px;
 
      &:hover {
-         opacity: 1;
+         opacity: .9;
+         transform: scale(1.1);
      }
     }
 

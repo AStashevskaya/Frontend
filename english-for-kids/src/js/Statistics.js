@@ -1,9 +1,7 @@
-/* eslint-disable no-console */
 import create from './utils/create';
 import uppercase from './utils/uppercase';
 import WordStatistic from './WordStatisticComponent';
 import * as constants from './utils/constants';
-// import * as constants from './utils/constants';
 
 export default class Statistic {
   constructor(layout) {
@@ -20,11 +18,9 @@ export default class Statistic {
   }
 
   init() {
-    // this.categories = [...this.layout.categories];
     this.getfromStorage();
     this.renderHeading();
     this.renderButtons();
-    // this.render();
   }
 
   renderButtons() {
@@ -39,8 +35,6 @@ export default class Statistic {
     const wordObj = words[0];
 
     const wordsKeys = Object.keys(wordObj);
-
-    console.log(wordsKeys);
 
     wordsKeys.forEach((key) => {
       const word = key;
@@ -68,14 +62,13 @@ export default class Statistic {
     resetBtn.addEventListener('click', this.clearStatistics);
 
     const repeatBtn = document.querySelector('#repeatDiffWord');
-    repeatBtn.addEventListener('click', this.layout.openDifficultWords);
+    repeatBtn.addEventListener('click', this.takeDifficultWords);
   }
 
   render() {
     this.getfromStorage();
 
     this.renderCells(this.wordsArray);
-    this.takeDifficultWords();
 
     this.table.appendChild(this.cardsContainer);
     this.container.appendChild(this.table);
@@ -108,7 +101,6 @@ export default class Statistic {
     const { target } = e;
     const clickedBtn = target.closest('[data-id]');
     const sortAttribute = clickedBtn.dataset.id;
-    console.log(sortAttribute);
 
     const newArrWords = [...this.wordsArray];
 
@@ -121,7 +113,6 @@ export default class Statistic {
 
     this.deleteCells();
     this.renderCells(newArrWords);
-    console.log(newArrWords);
   }
 
   sortWordsUp = (e) => {
@@ -140,7 +131,6 @@ export default class Statistic {
 
     this.deleteCells();
     this.renderCells(newArrWords);
-    console.log(newArrWords);
   }
 
   renderCells(arr) {
@@ -177,7 +167,7 @@ export default class Statistic {
     });
   }
 
-  takeDifficultWords() {
+  takeDifficultWords = () => {
     const words = [...this.wordsArray];
 
     const percentsArray = words.map((el) => {
@@ -198,10 +188,11 @@ export default class Statistic {
       return 1;
     });
 
-    this.difficultWords = percentsFilteredArray.length > 10 ? percentsFilteredArray.slice(0, 10)
+    this.difficultWords = percentsFilteredArray.length > constants.MAXLENGTH
+      ? percentsFilteredArray.slice(0, constants.MAXLENGTH)
       : [...percentsFilteredArray];
 
-    console.log(this.difficultWords);
+    this.layout.generateDifficultWords(this.difficultWords);
   }
 
   clearStatistics = () => {

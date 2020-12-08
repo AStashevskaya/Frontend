@@ -1,10 +1,11 @@
-/* eslint-disable max-len */
 import * as constants from './utils/constants';
 import CategoryComponent from './CategoryComponent';
 import create from './utils/create';
 import Menu from './Menu';
 import Statistic from './Statistics';
 import Switcher from './Switcher';
+import MainPage from './MainPage';
+import DifficultWords from './DifficultWords';
 
 export default class Layout {
   constructor(categories) {
@@ -19,7 +20,6 @@ export default class Layout {
 
   init() {
     this.categoriesComponents = [...this.categories].map((el) => new CategoryComponent(this, el));
-    this.content = this.render();
 
     this.generateLayout();
   }
@@ -28,106 +28,137 @@ export default class Layout {
     this.menu = new Menu(this);
     this.statistic = new Statistic(this);
     this.switcher = new Switcher(this);
+    this.mainPage = new MainPage(this);
+
     this.generateMainPage();
   }
 
   generateMainPage() {
-    this.contentContainer.innerHTML = this.content;
-    this.title.innerHTML = 'English for kids';
+    this.contentContainer.innerHTML = this.mainPage.render();
+    this.title.innerHTML = constants.TITLE;
     this.currentPage = constants.MAIN;
 
     const categories = [...document.querySelectorAll('.category-card')];
-    categories.forEach((el) => el.addEventListener('click', this.handleClickCategory));
+    categories.forEach((el) => el.addEventListener('click', this.mainPage.handleClickCategory));
+  }
+
+  generateDifficultWords(words) {
+    const difficult = {
+      title: constants.DIFFICULT,
+      image: null,
+      cards: words,
+    };
+
+    this.hardWords = new DifficultWords(this, difficult);
+
+    const wordsLength = this.hardWords.cards.length;
+
+    if (wordsLength === 0) {
+      this.contentContainer.innerHTML = ` <div class="no-words__wrapper">
+                                           <img src="./assets/images/no-words.svg" alt="no-words">
+                                          <h2>You haven't made any mistakes yet</h2>
+                                          </div>`;
+    } else {
+      this.hardWords.init();
+    }
+
+    this.title.innerHTML = constants.DIFFICULT;
+    this.currentPage = this.hardWords;
   }
 
   handleClickLink = (e) => {
     e.stopPropagation();
+    // eslint-disable-next-line no-debugger
+    debugger;
     const { target } = e;
     const menu = document.querySelector('.burger-menu');
     this.answerContainer.innerHTML = '';
 
-    if (target.dataset.category === constants.MAIN) {
-      this.deleteCategories();
-      this.generateMainPage();
-    } else if (target.dataset.category === constants.STATISTICS) {
-      if (this.currentPage === constants.MAIN) {
-        this.deleteCategories();
-      } else {
-        this.currentPage.deleteCards();
-      }
-
-      if (this.playButton) {
-        this.removePlayButton();
-      }
-
-      this.currentPage = constants.STATISTICS;
-      this.title.innerHTML = constants.STATISTICS;
-
-      this.statisticTable = this.statistic.render();
-      this.contentContainer.appendChild(this.statisticTable);
-      this.statistic.initializeClicks();
-    } else {
-      this.handleClickCategory(e);
+    if (this.playButton) {
+      this.removePlayButton();
     }
+
+    if (this.currentPage === constants.MAIN) {
+      if (target.dataset.category === constants.MAIN) return;
+
+      if (target.dataset.category === constants.STATISTICS) {
+        this.mainPage.deleteCategories();
+        this.generateStatistics();
+      }
+
+      if (target.dataset.category !== constants.STATISTICS
+        && target.dataset.category !== constants.MAIN) {
+        this.mainPage.deleteCategories();
+        this.mainPage.handleClickCategory(e);
+      }
+    } else if (this.currentPage === constants.STATISTICS) {
+      if (target.dataset.category === constants.STATISTICS) return;
+
+      if (target.dataset.category === constants.MAIN) {
+        this.contentContainer.removeChild(this.statistic.container);
+        this.generateMainPage();
+      }
+
+      if (target.dataset.category !== constants.STATISTICS
+        && target.dataset.category !== constants.MAIN) {
+        this.contentContainer.removeChild(this.statistic.container);
+        this.mainPage.handleClickCategory(e);
+      }
+    } else if (this.currentPage !== constants.STATISTICS
+      && this.currentPage !== constants.MAIN) {
+      if (this.currentPage.title === target.dataset.category) return;
+
+      this.currentPage.deleteCards();
+
+      if (target.dataset.category === constants.MAIN) {
+        this.generateMainPage();
+      }
+
+      if (target.dataset.category === constants.STATISTICS) {
+        this.generateStatistics();
+      }
+
+      if (target.dataset.category !== constants.STATISTICS
+          && target.dataset.category !== constants.MAIN) {
+        this.mainPage.handleClickCategory(e);
+      }
+    }
+
     menu.classList.remove('open');
     this.menu.constructor.changeActiveMenuLink(this.currentPage);
   }
 
-  handleClickCategory = (e) => {
-    const { target } = e;
-    const card = target.closest('[data-category]');
-    const clickedCategory = card.dataset.category;
+  generateStatistics() {
+    this.currentPage = constants.STATISTICS;
+    this.title.innerHTML = constants.STATISTICS;
 
-    if (this.currentPage === constants.MAIN) {
-      this.deleteCategories();
-    } else if (this.currentPage === constants.STATISTICS) {
-      this.contentContainer.innerHTML = '';
-    } else {
-      this.currentPage.deleteCards();
-    }
-
-    const choosenCategory = this.categoriesComponents.find((el) => el.title === clickedCategory);
-    this.currentPage = choosenCategory;
-    this.title.innerHTML = this.currentPage.title;
-
-    choosenCategory.init();
-  }
-
-  deleteCategories() {
-    const categories = [...this.contentContainer.children];
-
-    categories.forEach((el) => {
-      el.removeEventListener('click', this.handleClickCategory);
-      this.contentContainer.removeChild(el);
-    });
-  }
-
-  render() {
-    let html = '';
-
-    this.categoriesComponents.forEach((el) => {
-      html += `
-      <div class="category-card" data-category="${el.title}" data-train="${this.state === constants.STATE_TRAIN ? 'true' : 'false'}">
-      <div class="category-card__image"><img src="./assets/images/${el.image}" alt="${el.title}"></div>
-      <div class="category-card__title">${el.title}</div>
-      </div>`;
-    });
-    return html;
+    this.statisticTable = this.statistic.render();
+    this.contentContainer.appendChild(this.statisticTable);
+    this.statistic.initializeClicks();
   }
 
   changeLayout(mode) {
     this.state = mode;
+
     const cards = [...this.contentContainer.children];
     const main = document.querySelector('.app-container');
 
+    this.answerContainer.innerHTML = '';
+
     if (this.state === constants.STATE_TRAIN) {
       main.classList.remove('playing');
+
+      if (this.hardWords) {
+        const hardWordsLength = this.hardWords.cards.length;
+
+        if (this.currentPage.title === constants.DIFFICULT && hardWordsLength === 0) return;
+      }
 
       if (this.playButton) {
         this.removePlayButton();
       }
 
-      if (this.currentPage !== constants.MAIN) {
+      if (this.currentPage !== constants.MAIN && this.currentPage !== constants.STATISTICS) {
         cards.forEach((el) => {
           el.dataset.train = true;
           el.removeAttribute('data-checked');
@@ -139,8 +170,12 @@ export default class Layout {
 
     if (this.state === constants.STATE_PLAY) {
       main.classList.add('playing');
-      const answerContainer = document.querySelector('.answer-container');
-      answerContainer.innerHTML = '';
+
+      if (this.hardWords) {
+        const hardWordsLength = this.hardWords.cards.length;
+
+        if (this.currentPage.title === constants.DIFFICULT && hardWordsLength === 0) return;
+      }
 
       if (this.currentPage !== constants.MAIN && this.currentPage !== constants.STATISTICS) {
         this.currentPage.currentAudioIdx = 0;
@@ -176,8 +211,8 @@ export default class Layout {
     this.playButton.dataset.btn = constants.REPEAT;
     this.playButton.innerHTML = '<img src="./assets/images/repeat.svg" alt="repeat">';
 
-    this.playButton.removeEventListener('click', this.currentPage.repeatAudio.bind(this.currentPage));
-    this.playButton.addEventListener('click', this.currentPage.repeatAudio.bind(this.currentPage));
+    this.playButton.removeEventListener('click', this.currentPage.repeatAudio);
+    this.playButton.addEventListener('click', this.currentPage.repeatAudio);
 
     this.currentPage.playGame();
   }

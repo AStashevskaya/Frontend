@@ -9,12 +9,15 @@ const FRONT_CLASS = 'card__front';
 const PLAY = 'play';
 const REPEAT = 'repeat';
 const CLICK = 'Click';
-const routes = {};
+const TITLE = 'English for kids';
+const DIFFICULT = 'Difficult words';
+const MAXLENGTH = 8;
+const ANIMATION_LENGTH = 4000;
+const ANIMATION_TO_MAIN = 3000;
 
 export {
   STATE_PLAY,
   STATE_TRAIN,
-  routes,
   MAIN,
   STATISTICS,
   FRONT_ROTATE,
@@ -24,4 +27,9 @@ export {
   PLAY,
   REPEAT,
   CLICK,
+  TITLE,
+  DIFFICULT,
+  MAXLENGTH,
+  ANIMATION_LENGTH,
+  ANIMATION_TO_MAIN,
 };

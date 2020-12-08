@@ -86,3 +86,25 @@
         text-shadow: 2px 1px 6px red;
     }
 }
+
+.no-words__wrapper {
+    width: 100%;
+    @include colomnFlex;
+    @include centerFlex;
+
+    img {
+        width: 30%;
+    }
+
+}
+
+#title {
+    @media (max-width: 768px) {
+        padding: 10px;
+    }
+}
+
+.antiscroll {
+    overflow: hidden;
+    height: 100vh;
+}
