@@ -1,4 +1,4 @@
-.statistics{
+.statistics {
     &__container {
     width: 100%;
     padding: 10px;
@@ -18,7 +18,7 @@
         width: 100%;
     }
 
-    &__heading{
+    &__heading {
         background-color: $fontMenuColor;
     }
 
@@ -47,7 +47,7 @@
     justify-content: space-between;
     align-items: center;
 
-    .title{
+    .title {
         font-size: 22px;
         @media (max-width: 768px) {
             font-size: 12px;
@@ -65,7 +65,7 @@
         border: 1px gray solid;
     }
 
-    &__buttons-wrapper{
+    &__buttons-wrapper {
         @include colomnFlex(space-evenly);
         
         .up, .down {

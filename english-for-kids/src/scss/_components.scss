@@ -40,7 +40,7 @@
     background-color: $componentsTrain;
 }
 
-.app-container.playing .divider{
+.app-container.playing .divider {
     background-color: #D1D090;
 }
 
@@ -48,7 +48,7 @@
     width: 55px;
 }
 
-.overlay{
+.overlay {
     @include fixed (fixed);
     @include centerFlex;
     top: 0;
@@ -68,7 +68,7 @@
         }
     }
 
-    .answer{
+    .answer {
         font-size: 20px;
         margin-top: 15px;
     }

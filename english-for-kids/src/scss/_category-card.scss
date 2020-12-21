@@ -10,7 +10,7 @@
     transition: all .4s ease-in;
     box-shadow:0px 2px 9px 8px rgba(13, 13, 13, 0.1);
 
-    &:hover{
+    &:hover {
         box-shadow: 0px 2px 35px 14px  rgba(13, 13, 13, 0.1);
         transform: scale(1.05);
         transition: all .4s ease-in;
@@ -18,13 +18,13 @@
 
     &__image {
       width: 82%;
-        img{
+        img {
         @include equalSides(100%);
         object-fit: contain;   
         }
     } 
        
-    &__title{
+    &__title {
         font-size: 25px;
         font-style: bold;
     }
@@ -53,7 +53,7 @@
       transform: rotate(0deg);
       transition: all .4s ease-in;
 
-      &:hover{
+      &:hover {
         transform: rotate(-180deg);
       }
 
@@ -69,13 +69,13 @@
       transition: all .4s ease-in;
       user-select: none;
 
-        img{
+        img {
         @include equalSides(100%);
         object-fit: contain;   
         }
     } 
 
-    &__content{
+    &__content {
       opacity: 1;
       height: fit-content;
       transition: all .4s ease-in;

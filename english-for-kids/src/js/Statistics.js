@@ -1,5 +1,5 @@
 import create from './utils/create';
-import uppercase from './utils/uppercase';
+import capitalize from './utils/capitalize';
 import WordStatistic from './WordStatisticComponent';
 import * as constants from './utils/constants';
 
@@ -40,7 +40,7 @@ export default class Statistic {
       const word = key;
       const cell = create('td');
       cell.innerHTML = `<span class="statistics__cell-wrapper">
-                        <span class="title">${word === 'percent' ? '%' : uppercase(word)}</span><span class="statistics__buttons-wrapper" data-id="${word}">
+                        <span class="title">${word === 'percent' ? '%' : capitalize(word)}</span><span class="statistics__buttons-wrapper" data-id="${word}">
                         <span class="up" data-up='${word}'><img src="./assets/images/up-arrow.svg" alt="up-arrow"></span>
                         <span class="down" data-down='${word}'><img src="./assets/images/down-arrow.svg" alt="down-arrow"></span>
                         </span>
@@ -135,6 +135,8 @@ export default class Statistic {
 
   renderCells(arr) {
     const sortedArr = [...arr];
+
+    this.deleteCells();
 
     sortedArr.forEach((el) => {
       const {
