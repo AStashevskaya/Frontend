@@ -1,0 +1,127 @@
+* {
+  padding: 0px;
+  margin: 0px;
+  border: 0px; }
+
+html {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+*,
+*:before,
+*:after {
+  -webkit-box-sizing: inherit;
+  -moz-box-sizing: inherit;
+  box-sizing: inherit; }
+
+:focus,
+:active {
+  outline: none; }
+
+a:focus,
+a:active {
+  outline: none; }
+
+a,
+a:visited {
+  text-decoration: none; }
+
+ul li {
+  list-style: none; }
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-size: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%; }
+
+input::-ms-clear {
+  display: none; }
+
+img {
+  vertical-align: top; }
+
+.map__wrapper {
+  width: 1000px;
+  height: 500px;
+  margin: 0 auto; }
+
+.map__selector-wrapper {
+  display: flex; }
+
+.map__selector {
+  margin: 10px;
+  width: 120px;
+  height: 34px;
+  border: 1px solid #111;
+  border-radius: 3px;
+  overflow: hidden; }
+
+#map {
+  height: 500px;
+  width: 600px; }
+
+.legend {
+  line-height: 18px;
+  background-color: #eee;
+  display: flex;
+  flex-direction: column;
+  color: #555; }
+
+.legend i {
+  width: 18px;
+  height: 18px;
+  float: left;
+  margin-right: 8px;
+  opacity: 1; }
+
+.leaflet-interactive {
+  cursor: pointer;
+  fill-opacity: 1;
+  transform: scale(1);
+  transition: all .3s ease; }
+  .leaflet-interactive:hover {
+    fill-opacity: 0.7;
+    transform: scale(1.002);
+    transition: all .3s ease; }
+
+.leaflet-popup-content p {
+  margin: 4px 0; }
+
+.search__form {
+  border: 1px #eee solid; }
+
+.country__wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px #eee solid;
+  border-radius: 2px;
+  height: 50vh;
+  overflow-y: scroll; }
+
+.country__wrap {
+  display: flex;
+  justify-content: space-between;
+  width: 250px;
+  cursor: pointer;
+  padding: 2px; }
+
+.country__flag {
+  width: 50px;
+  height: 30px; }
+
+.table__global {
+  display: flex;
+  flex-direction: column; }
+
+.table__container {
+  display: flex; }
+
+.container {
+  display: flex; }
+
