@@ -1,0 +1,17 @@
+@mixin wrap {
+    border: 2px solid #9A001E;
+    border-radius: 7px;
+    padding: 5px; 
+    margin: 10px;
+}
+
+@mixin selectorWrap {
+    display: flex;
+    background-color: #6EA4CA;
+}
+
+@mixin selector {
+   display: flex;
+   justify-content: space-evenly;
+   width: 100%;
+}

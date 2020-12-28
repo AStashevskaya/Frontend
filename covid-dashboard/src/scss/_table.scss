@@ -1,0 +1,97 @@
+.table {
+    &__global,  &__country{
+        display: flex;
+        height: 150px;
+        width: 50%;
+        flex-direction: column;
+        align-items: stretch;
+        border: 2px solid #6EA4CA;
+    }
+
+    &__global>span,  &__country>span{
+        background-color: #D1E0EB;
+        border: 1px solid #6EA4CA;
+        height: inherit;
+        color: #0C3C60;
+        font-size: 1.2rem;
+    }
+
+    &__selector-wrapper {
+        width: 90%;
+        }
+
+    &__type{
+        text-align: center;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: rgba(12, 60, 96, 1);
+    }
+
+    // &__country>span:first-child + :nth-child(2) {
+    //     text-align: center;
+    //     font-weight: bold;
+    //     color: rgba(12, 60, 96, 1);
+    // }
+
+
+    &__container {
+        display: flex;
+        width: 100%;
+        justify-content: stretch;
+        align-items: stretch;
+    }
+
+    &__selector-wrapper {
+        display: flex;
+        background-color: #6EA4CA;
+        // width: 20%;
+        // padding-right: 160px;
+        }
+      
+        &__selector {
+            margin: 10px;
+          //   width: 200px;
+            height: 34px;
+            // border: 1px solid #111;
+            border-radius: 3px;
+            overflow: hidden;
+            background-color: #6EA4CA;
+            color: #FFFFFF;
+            font-size: 0.9rem;
+            font-weight: 400;
+            text-shadow: 0 0 0.1rem #000000;
+            transition: all .3s ease;
+          }  
+      
+          &__selector:hover {
+              font-size: 1rem;
+              text-shadow: 0 0 10px #0C3C60;
+              font-weight: 600; 
+              transition: all .3s ease;
+              cursor: pointer;  
+            }
+}
+
+option {
+    background-color: #D1E0EB;
+    color: #0C3C60;
+}
+
+option:hover {
+    background-color: #6EA4CA !important;
+}
+
+
+.InfoTable {
+    max-width: 400px;
+    height: 254px;
+    grid-area: table;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center; 
+    background-color: #7DCADA;
+    @include wrap;
+    // border: 2px solid rgba(12, 60, 96, 1);
+    // border-top: none;
+}

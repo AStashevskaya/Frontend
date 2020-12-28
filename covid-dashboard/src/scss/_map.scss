@@ -1,13 +1,17 @@
 .map {
   &__wrapper {
-    width: 1000px;
-    height: 500px;  
+    // width: 1000px;
+    // height: 500px;  
+    grid-area: map;
     margin: 0 auto;
+    background-color: #7DCADA;
+    @include wrap;
   }
   
   &__selector-wrapper {
   display: flex;
-  // width: 20%;
+  background-color:#ddd;
+  width: 70%;
   }
 
   &__selector {
@@ -17,12 +21,19 @@
     border: 1px solid #111;
     border-radius: 3px;
     overflow: hidden;
-  }  
+    background-color: #D1E0EB;
+    color:  rgba(12, 60, 96, 1);
+  }
+
+  &__selector:hover {
+    cursor: pointer;
+    font-weight: 700;
+  }
 }
 
 #map {
   height: 500px;
-  width: 1000px;
+  width: 700px;
 }
 
 .legend {
@@ -41,15 +52,20 @@ opacity: 1;
 }
 .leaflet-interactive {
 cursor: pointer;
-fill-opacity: 0.9;
+fill-opacity: 1;
 transform: scale(1);
 transition: all .3s ease;
 
 &:hover {
-  fill-opacity: 1;
+  fill-opacity: 0.7;
   transform: scale(1.002);
   transition: all .3s ease;
 }
+}
+
+.leaflet-control-zoom-in, .leaflet-control-zoom-out {
+  background-color: #D1E0EB !important;
+  color:  rgba(12, 60, 96, 1);
 }
 
 .leaflet-popup-content p {

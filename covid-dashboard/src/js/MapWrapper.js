@@ -1,13 +1,16 @@
-/* eslint-disable max-len */
-/* eslint-disable no-console */
 /* eslint-disable no-undef */
+/* eslint-disable no-console */
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import create from './utils/create';
 import getCountryColor from './utils/getCountryColor';
 import getNumbersPer100 from './utils/getNumbersPer100';
+import makeTodaykey from './utils/makeTodayKey';
+import capitalize from './utils/capitalize';
 import round from './utils/roundNumber';
 import CovidApi from './CovidApi';
+import Switcher from './Switcher';
+import FullScreenBtn from './FullScreenBtn';
 import * as constants from './utils/constants';
 
 import { features } from './data/countries.json';
@@ -17,17 +20,16 @@ export default class MapWrapper {
     this.layout = layout;
     this.data = [];
     this.mapOptions = {
-      center: [20, 20],
-      zoom: 2,
+      center: [30, 30],
+      zoom: 1.5,
       fullscreenControl: true,
       fullscreenControlOptions: {
         position: 'topleft',
       },
     };
     this.coefficient = 1000;
-    this.selectedType = constants.GLOBAL_CASES;
-    this.selectedValue = constants.ABSOLUTE;
     this.container = create('div', 'map__wrapper');
+    this.headerContainer = create('div', 'component-header');
     this.mapContainer = create('div');
   }
 
@@ -46,7 +48,6 @@ export default class MapWrapper {
       return { id, geometry };
     });
     let database = [...data];
-    console.log(database);
     database = database.map((country) => {
       const id = country.countryInfo.iso3;
       const geo = polygons.find((element) => element.id === id);
@@ -63,7 +64,6 @@ export default class MapWrapper {
       type: 'FeatureCollection',
       features: database.map((country = {}) => {
         const { geometry } = country;
-        // const { lat, long: lng } = countryInfo;
         return {
           type: 'Feature',
           properties: {
@@ -75,22 +75,29 @@ export default class MapWrapper {
         };
       }),
     };
-    console.log(this.GeoJson);
   }
 
   generateLayout() {
-    this.generateSelectors();
+    this.switcher = new Switcher(this, 'map');
+    this.fullScreenBtn = new FullScreenBtn(this);
 
     this.mapContainer.setAttribute('id', 'map');
+
+    this.container.appendChild(this.headerContainer);
     this.container.appendChild(this.mapContainer);
+    this.layout.container.appendChild(this.container);
 
-    document.body.appendChild(this.container);
-    this.initializeClicks();
+    this.generateMap();
+    this.generateLegend();
 
+    this.initClicks();
+  }
+
+  generateMap() {
     this.map = L.map('map', this.mapOptions);
 
     this.layer = L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png', {
-      maxZoom: 18,
+      maxZoom: 16,
     }).addTo(this.map);
 
     this.layergeo = L.geoJSON(this.GeoJson, {
@@ -100,213 +107,129 @@ export default class MapWrapper {
       .addTo(this.map);
 
     this.popup = L.popup();
-    // this.generateFullScreenBtn();
-    this.generateLegend();
   }
 
-  generateSelectors() {
-    const selectorWrapper = create('form', 'map__selector-wrapper');
-
-    const typeSelector = create('select', 'map__selector');
-    typeSelector.setAttribute('name', 'types');
-    typeSelector.setAttribute('id', 'mapType');
-    typeSelector.innerHTML = `<option value="${constants.GLOBAL_CASES}">Total Cases</option>
-    <option value="${constants.GLOBAL_RECOVERED}" >Total Recovered</option>
-    <option value="${constants.GLOBAL_DEATHS}" >Total Deaths</option>
-    <option value="${constants.TODAY_CASES}">Today Cases</option>
-    <option value="${constants.TODAY_RECOVERED}">Today Recovered</option>
-    <option value="${constants.TODAY_DEATHS}">Today Deaths</option>`;
-
-    const valueSelector = create('select', 'map__selector');
-    valueSelector.setAttribute('name', 'values');
-    valueSelector.setAttribute('id', 'mapValue');
-    valueSelector.innerHTML = `<option value="${constants.ABSOLUTE}">${constants.ABSOLUTE}</option>
-    <option value="${constants.PER_100}"  id="${constants.PER_100}">Per 100 thousands</option>`;
-
-    selectorWrapper.appendChild(typeSelector);
-    selectorWrapper.appendChild(valueSelector);
-    this.container.appendChild(selectorWrapper);
+  initClicks() {
+    this.switcher.initializeClicks();
+    this.fullScreenBtn.initializeClicks();
   }
 
   generateLegend() {
-    this.legend = L.control({ position: 'bottomright' });
+    const legend = L.control({ position: 'bottomright' });
     // eslint-disable-next-line no-unused-vars
-    this.legend.onAdd = (map) => {
-      const div = L.DomUtil.create('div', 'info legend');
-      const grades = [0, (this.coefficient * 1), (this.coefficient * 10), (this.coefficient * 100), (this.coefficient * 500),
-        (this.coefficient * 1000), (this.coefficient * 2000), (this.coefficient * 5000)];
-      // const labels = [];
-      for (let i = 0; i < grades.length; i += 1) {
-        if (i + 1 === grades.length) {
-          div.innerHTML += `<span><i style="background:${getCountryColor(grades[i] + 1, this.coefficient)}"></i> ${grades[i]} + </span>`;
-        } else {
-          div.innerHTML
-        += `<span><i style="background:${getCountryColor(grades[i] + 1, this.coefficient)}"></i> ${grades[i]} &ndash; ${grades[i + 1]} </span>`;
-        }
-      }
-      return div;
+    legend.onAdd = (map) => {
+      this.legend = L.DomUtil.create('div', 'info legend');
+      this.renderLegendContent();
+      return this.legend;
     };
-    this.legend.addTo(this.map);
+    legend.addTo(this.map);
   }
 
-  initializeClicks() {
-    const type = document.querySelector('#mapType');
-    type.addEventListener('click', this.getSelectedMapType);
-
-    const value = document.querySelector('#mapValue');
-    value.addEventListener('click', this.getSelectedMapValue);
+  renderLegendContent() {
+    console.log(this.coefficient);
+    this.grades = [0, (this.coefficient * 1), (this.coefficient * 10), (this.coefficient * 100),
+      (this.coefficient * 500), (this.coefficient * 1000), (this.coefficient * 2000),
+      (this.coefficient * 5000)];
+    for (let i = 0; i < this.grades.length; i += 1) {
+      if (i + 1 === this.grades.length) {
+        this.legend.innerHTML += `<span><i style="background:${getCountryColor(this.grades[i] + 1, this.coefficient)}"></i> ${this.grades[i]} + </span>`;
+      } else {
+        this.legend.innerHTML
+      += `<span><i style="background:${getCountryColor(this.grades[i] + 1, this.coefficient)}"></i> ${this.grades[i]} &ndash; ${this.grades[i + 1]} </span>`;
+      }
+    }
   }
 
-  getSelectedMapType = (e) => {
-    const newValue = e.target.value;
+  update() {
+    this.updateCoeficient();
 
-    if (this.selectedType === newValue) return;
-
-    this.selectedType = newValue;
-    console.log(this.selectedType);
-    this.updateMap();
+    const legendChildren = [...this.legend.children];
+    legendChildren.forEach((el) => this.legend.removeChild(el));
+    this.renderLegendContent();
+    this.updateMapColor();
   }
 
-  getSelectedMapValue = (e) => {
-    const newValue = e.target.value;
-
-    if (this.selectedValue === newValue) return;
-
-    this.selectedValue = newValue;
-    console.log(this.selectedValue);
-    this.updateMap();
-  }
-
-  updateMap() {
-    this.layergeo.refresh();
+  updateMapColor() {
+    this.layergeo = L.geoJSON(this.GeoJson, {
+      style: this.giveCountriesStyle,
+      onEachFeature: this.onEachFeature,
+    })
+      .addTo(this.map);
   }
 
   updateCoeficient() {
-    if (this.layout.indicator === constants.GLOBAL_CASES) {
-      this.coefficient = 1000;
-    }
-
-    if (this.layout.indicator === constants.TODAY_CASES) {
+    if (this.layout.selectedValue === constants.ABSOLUTE) {
+      if (this.layout.selectedPeriod === constants.TOTAL) {
+        this.coefficient = 1000;
+        return;
+      }
+      this.coefficient = 10;
+    } else {
       this.coefficient = 1;
-    }
-
-    if (this.layout.indicator === constants.GLOBAL_PER_100) {
-      this.coefficient = 0.1;
-    }
-
-    if (this.layout.indicator === constants.TODAY_PER_100) {
-      this.coefficient = 0.01;
     }
   }
 
-      onMapHover = (e) => {
-        this.selectedCountry = e.target.feature.properties;
+  onMapHover = (e) => {
+    this.selectedCountry = e.target.feature.properties;
 
-        if (this.selectedValue === constants.ABSOLUTE) {
-          this.popupContent = this.generatePopup();
-        }
+    this.popupContent = this.generatePopup();
 
-        if (this.selectedValue === constants.PER_100) {
-          this.popupContent = this.generatePopupPer100();
-        }
+    this.popup
+      .setLatLng(e.latlng)
+      .setContent(this.popupContent)
+      .openOn(this.map);
+  }
 
-        this.popup
-          .setLatLng(e.latlng)
-          .setContent(this.popupContent)
-          .openOn(this.map);
-      }
+  generatePopup() {
+    const value = this.layout.selectedPeriod === constants.TODAY
+      ? makeTodaykey(this.layout.selectedCase) : this.layout.selectedCase;
 
-      generatePopup() {
-        return ` <div class="popup">
-        <p class="popup__line">
-        <span class='title'>${!this.selectedType.startsWith('today')
-    ? 'Total' : 'Today'}</span>
-    </p>
-        <p class="popup__line">
-            <span class="title">Country:</span>
-            <span class='country'>${this.selectedCountry.country}</span>
-        </p>
-        <p class="popup__line">
-            <span class="title">Cases:</span>
-            <span class='all'>${!this.selectedType.startsWith('today')
-    ? round(this.selectedCountry.cases) : round(this.selectedCountry.todayCases)}</span>
-        </p>
-        <p class="popup__line">
-            <span class="title">Recovered</span>
-            <span class='recovered'>${!this.selectedType.startsWith('today')
-    ? round(this.selectedCountry.recovered) : round(this.selectedCountry.todayRecovered)}</span>
-        </p>
-            <p class="popup__line">
-            <span class="title">Deaths</span>
-        <span class='deaths'>${!this.selectedType.startsWith('today')
-    ? round(this.selectedCountry.deaths) : round(this.selectedCountry.todayDeaths)}</span>
-        </p>
-        </div>`;
-      }
+    return `<div class="map__popup">
+    <p class="type">${this.layout.selectedPeriod}</p>
+    <p class="title"><i>Country</i>: ${this.selectedCountry.country}</p>
+    <p class="title"><i>${capitalize(this.layout.selectedCase)}</i>:<span class="${this.layout.selectedCase}">${this.layout.selectedValue === constants.ABSOLUTE
+  ? round(this.selectedCountry[value]) : getNumbersPer100(this.selectedCountry, value)}</span></p>
+            </div>`;
+  }
 
-      generatePopupPer100() {
-        return ` <div class="popup">
-        <p class="popup__line">
-        <span class='title'>${!this.selectedType.startsWith('today')
-    ? 'Total' : 'Today'}</span>
-    </p>
-        <p class="popup__line">
-            <span class="title">Country:</span>
-            <span class='country'>${this.selectedCountry.country}</span>
-        </p>
-        <p class="popup__line">
-            <span class="title">Cases:</span>
-            <span class='all'>${!this.selectedType.startsWith('today')
-    ? getNumbersPer100(this.selectedCountry, constants.GLOBAL_CASES)
-    : getNumbersPer100(this.selectedCountry, constants.TODAY_CASES)}</span>
-        </p>
-        <p class="popup__line">
-            <span class="title">Recovered</span>
-            <span class='recovered'>${!this.selectedType.startsWith('today')
-    ? getNumbersPer100(this.selectedCountry, constants.GLOBAL_RECOVERED)
-    : getNumbersPer100(this.selectedCountry, constants.TODAY_RECOVERED)}</span>
-        </p>
-            <p class="popup__line">
-            <span class="title">Deaths</span>
-        <span class='deaths'>${!this.selectedType.startsWith('today')
-    ? getNumbersPer100(this.selectedCountry, constants.GLOBAL_DEATHS)
-    : getNumbersPer100(this.selectedCountry, constants.TODAY_DEATHS)}</span>
-        </p>
-        </div>`;
-      }
+  giveCountriesStyle = (feature) => {
+    const value = this.layout.selectedPeriod === constants.TODAY
+      ? makeTodaykey(this.layout.selectedCase) : this.layout.selectedCase;
 
-      giveCountriesStyle = (feature) => ({
-        fillColor: getCountryColor(feature.properties[this.selectedType], this.coefficient),
-        weight: 0.5,
-        color: 'white',
-        fillOpacyty: 1,
-      })
+    return {
+      fillColor: getCountryColor(feature.properties[value], this.coefficient),
+      weight: 0.5,
+      color: 'white',
+      fillOpacyty: 1,
+    };
+  }
 
-      onEachFeature = (feature, layer) => {
-        layer.on({
-          mouseover: this.highlightFeature,
-          mouseout: this.resetHighlight,
-          click: this.zoomToFeature,
-        });
-      }
+  onEachFeature = (feature, layer) => {
+    layer.on({
+      mouseover: this.highlightFeature,
+      mouseout: this.resetHighlight,
+      click: this.zoomToFeature,
+    });
+  }
 
-      highlightFeature = (e) => {
-        const layer = e.target;
-        layer.setStyle({
-          weight: 2,
-          color: 'yellow',
-          dashArray: '',
-          fillOpacity: 0.7,
-        });
-        this.onMapHover(e);
-      }
+  highlightFeature = (e) => {
+    const layer = e.target;
+    layer.setStyle({
+      weight: 2,
+      color: 'yellow',
+      dashArray: '',
+      fillOpacity: 0.7,
+    });
+    this.onMapHover(e);
+  }
 
-      zoomToFeature = (e) => {
-        console.log(e.target);
-        this.map.fitBounds(e.target.getBounds());
-      }
+  zoomToFeature = (e) => {
+    this.map.fitBounds(e.target.getBounds());
+    this.layout.focusedCountry = e.target.feature.properties.country;
+    this.layout.update();
+  }
 
-      resetHighlight = (e) => {
-        this.layergeo.resetStyle(e.target);
-      }
+  resetHighlight = (e) => {
+    this.layergeo.resetStyle(e.target);
+  }
 }
