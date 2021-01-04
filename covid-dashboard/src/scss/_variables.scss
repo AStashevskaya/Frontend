@@ -1,13 +1,16 @@
 @mixin wrap {
-    border: 2px solid #9A001E;
+    // border: 2px solid #9A001E;
+    background-color: #fff;
     border-radius: 7px;
-    padding: 5px; 
-    margin: 10px;
+    box-shadow: 0px 3px 8px $transparent-gray;
+    // margin: 7px;
+    height: 100%;
 }
 
 @mixin selectorWrap {
     display: flex;
-    background-color: #6EA4CA;
+    background-color: #d32f2f;
+    border-radius: 7px 7px 0 0;
 }
 
 @mixin selector {
@@ -15,3 +18,43 @@
    justify-content: space-evenly;
    width: 100%;
 }
+
+@mixin colomnFlex($j-c: center, $dir: column) {
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $j-c;
+}
+
+@mixin centerFlex() {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+@mixin fixed($pos) {
+  position: $pos;
+  left: 0;
+  right: 0;
+}
+
+$data-height : 55px;
+
+.recovered {
+    color: #188A00;
+}
+.deaths {
+    color: #FB000D;
+}
+
+.cases {
+    color: #FFB100;
+}
+
+$headerFont: #212121;
+$textFont: #263238;
+$componentHeaderHight: 35px;
+$transparent-gray: rgba(0, 0, 0, 0.3);
+$transparent-white: rgba(255, 255, 255, 0.15);
+$backgroundComponent: #cfd8dc;
+$yellow: #f4d03f;

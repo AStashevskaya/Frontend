@@ -1,5 +1,6 @@
 .keyboard {
-    transform: translateY(125%);
+    // transform: translateY(125%);
+    transform: translate(0, 125%);
     max-width: 1024px;
     width: 100%;
     z-index: 1000;
@@ -28,7 +29,8 @@
  
 
   .keyboard_active{
-transform: translateY(0);
+// transform: translateY(0);
+transform: translate(calc(50% - 1024px/3), 0);
 z-index: 1000;
 margin: 0 auto;
   }

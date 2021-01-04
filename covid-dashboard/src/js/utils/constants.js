@@ -19,6 +19,9 @@ const GLOBAL_PER_100 = 'globalPer100';
 const ABSOLUTE = 'absolute';
 const PER_100 = 'per100';
 
+const BACK_ROTATE = 'back-rotate';
+const FRONT_ROTATE = 'front-rotate';
+
 export {
   URL_COVID_BY_COUNTRIES,
   URL_COVID_GLOBAL,
@@ -36,4 +39,6 @@ export {
   ALL_RECOVERED,
   ABSOLUTE,
   PER_100,
+  FRONT_ROTATE,
+  BACK_ROTATE,
 };

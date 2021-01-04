@@ -42,6 +42,7 @@ export default class ChartWrap {
     this.fullScreenBtn = new FullScreenBtn(this);
     this.container.appendChild(this.headerContainer);
     this.container.appendChild(this.currentChart);
+    // this.layout.rightWrap.appendChild(this.container);
     this.layout.container.appendChild(this.container);
     this.generateChart();
 
@@ -103,6 +104,7 @@ export default class ChartWrap {
 
     if (this.layout.focusedCountry) {
       const country = this.countriesData.find((el) => el.country === this.layout.focusedCountry);
+      console.log(country, this.layout.focusedCountry);
 
       this.chart.data.labels = Object.keys(country.timeline[currentCase]);
       this.chart.data.datasets[0].label = `${country.country} ${capitalize(period)}-${currentCase}`;

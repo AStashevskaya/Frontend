@@ -10,6 +10,7 @@ import rowsOrder from './keyboard/rowsOrder';
 import * as constants from './utils/constants';
 
 import { features } from './data/countries.json';
+import round from './utils/roundNumber';
 
 export default class SearchTable {
   constructor(layout) {
@@ -64,6 +65,7 @@ export default class SearchTable {
     this.container.appendChild(this.form);
     this.container.appendChild(this.countriesContainer);
 
+    // this.layout.leftWrap.appendChild(this.container);
     this.layout.container.appendChild(this.container);
     this.initClicks();
   }
@@ -147,7 +149,7 @@ export default class SearchTable {
 
     return `<div class="country__wrap" data-countryId='${country.countryInfo.iso3}' data-country='${country.country}'>
     <span class="country__name"> <img class="country__flag"src="${country.countryInfo.flag}" alt="${country.countryInfo.iso3}">${country.country}</span>
-    <span class="country__number">${this.layout.selectedValue === constants.ABSOLUTE ? country[value] : getNumbersPer100(country, value)}</span>
+    <span class="country__number">${this.layout.selectedValue === constants.ABSOLUTE ? round(country[value]) : getNumbersPer100(country, value)}</span>
             </div>`;
   }
 

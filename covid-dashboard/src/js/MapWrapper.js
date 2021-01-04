@@ -6,7 +6,7 @@ import create from './utils/create';
 import getCountryColor from './utils/getCountryColor';
 import getNumbersPer100 from './utils/getNumbersPer100';
 import makeTodaykey from './utils/makeTodayKey';
-import capitalize from './utils/capitalize';
+// import capitalize from './utils/capitalize';
 import round from './utils/roundNumber';
 import CovidApi from './CovidApi';
 import Switcher from './Switcher';
@@ -44,9 +44,9 @@ export default class MapWrapper {
     const featureArr = [...features];
     const polygons = featureArr.map((el) => {
       const { geometry, id } = el;
-      // const { id } = properties;
       return { id, geometry };
     });
+
     let database = [...data];
     database = database.map((country) => {
       const id = country.countryInfo.iso3;
@@ -59,6 +59,7 @@ export default class MapWrapper {
       country.geometry = geometry;
       return country;
     });
+
     database = database.filter((el) => el !== null);
     this.GeoJson = {
       type: 'FeatureCollection',
@@ -85,6 +86,7 @@ export default class MapWrapper {
 
     this.container.appendChild(this.headerContainer);
     this.container.appendChild(this.mapContainer);
+    // this.layout.centerWrap.appendChild(this.container);
     this.layout.container.appendChild(this.container);
 
     this.generateMap();
@@ -145,6 +147,7 @@ export default class MapWrapper {
 
     const legendChildren = [...this.legend.children];
     legendChildren.forEach((el) => this.legend.removeChild(el));
+
     this.renderLegendContent();
     this.updateMapColor();
   }
@@ -187,17 +190,27 @@ export default class MapWrapper {
     return `<div class="map__popup">
     <p class="type">${this.layout.selectedPeriod}</p>
     <p class="title"><i>Country</i>: ${this.selectedCountry.country}</p>
-    <p class="title"><i>${capitalize(this.layout.selectedCase)}</i>:<span class="${this.layout.selectedCase}">${this.layout.selectedValue === constants.ABSOLUTE
+    <p class="title"><i>${this.layout.selectedCase}</i>:<span class="${this.layout.selectedCase}">${this.layout.selectedValue === constants.ABSOLUTE
   ? round(this.selectedCountry[value]) : getNumbersPer100(this.selectedCountry, value)}</span></p>
             </div>`;
   }
 
   giveCountriesStyle = (feature) => {
-    const value = this.layout.selectedPeriod === constants.TODAY
+    const key = this.layout.selectedPeriod === constants.TODAY
       ? makeTodaykey(this.layout.selectedCase) : this.layout.selectedCase;
 
+    if (this.layout.selectedValue === constants.PER_100) {
+      const value = +getNumbersPer100(feature.properties, key);
+
+      return {
+        fillColor: getCountryColor(value, this.coefficient),
+        weight: 0.5,
+        color: 'white',
+        fillOpacyty: 1,
+      };
+    }
     return {
-      fillColor: getCountryColor(feature.properties[value], this.coefficient),
+      fillColor: getCountryColor(feature.properties[key], this.coefficient),
       weight: 0.5,
       color: 'white',
       fillOpacyty: 1,

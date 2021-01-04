@@ -1,4 +1,6 @@
-export default function getCountryColor(cases, koef) {
+export default function getCountryColor(number, koef) {
+  const cases = +number;
+
   if (cases > koef * 5000) {
     return '#8F0037';
   }

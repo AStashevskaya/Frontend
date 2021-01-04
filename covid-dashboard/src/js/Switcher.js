@@ -26,7 +26,7 @@ export default class Switcher {
       </li>
       <li class="menu__item"><span class="menu__link" data-selector='${this.name}' data-type='cases' >Cases</span>
         <ul class="selector__subMenu" data-cases='menu' data-component='${this.name}' id='${this.name}Cases'>
-          <li class="subMenu__item"><span class="subMenu__link" data-cases='${constants.ALL_CASES}'>All</span></li>
+          <li class="subMenu__item"><span class="subMenu__link" data-cases='${constants.ALL_CASES}'>Confirmed</span></li>
           <li class="subMenu__item"><span class="subMenu__link" data-cases='${constants.ALL_RECOVERED}'>Recovered</span></li>
           <li class="subMenu__item"><span class="subMenu__link" data-cases='${constants.ALL_DEATHS}'>Deaths</span></li>
         </ul>
@@ -46,7 +46,10 @@ export default class Switcher {
 
   initializeClicks() {
     const links = document.querySelectorAll(`[data-selector='${this.name}']`);
-    links.forEach((el) => el.addEventListener('click', this.openSelector));
+    links.forEach((el) => el.addEventListener('mouseover', this.openSelector));
+
+    const subMenus = [...document.querySelectorAll('.selector__subMenu')];
+    subMenus.forEach((el) => el.addEventListener('mouseleave', this.closeSelector));
 
     const type = document.getElementById(`${this.name}Period`);
     type.addEventListener('click', this.getSelectedPeriod);
@@ -60,10 +63,22 @@ export default class Switcher {
 
   openSelector = (e) => {
     const linkType = e.target.dataset.type;
-    console.log(linkType);
+
+    const menues = [...document.querySelectorAll('.selector__subMenu')];
+    menues.forEach((el) => {
+      if (el.classList.contains('active')) {
+        el.classList.remove('active');
+      }
+    });
+
     const links = [...document.querySelectorAll(`[data-${linkType}='menu']`)];
     this.activeLink = links.find((el) => el.dataset.component === this.name);
-    this.activeLink.classList.toggle('active');
+    this.activeLink.classList.add('active');
+  }
+
+  closeSelector = (e) => {
+    const link = e.target.closest('.selector__subMenu');
+    link.classList.remove('active');
   }
 
   getSelectedPeriod = (e) => {

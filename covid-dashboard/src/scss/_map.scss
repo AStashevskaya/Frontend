@@ -1,16 +1,25 @@
 .map {
   &__wrapper {
-    // width: 1000px;
-    // height: 500px;  
-    grid-area: map;
+    height: 100%;
     margin: 0 auto;
-    background-color: #7DCADA;
+    background-color:$backgroundComponent;
+    grid-area: map;
     @include wrap;
+    // max-width: 700px;
+    width: 100%;
+    min-width: 500px;
+
+    @media (max-width: 900px) {
+    min-height: 500px;
+   }
+
+    @media (max-width: 768px) {
+      min-width: 100%;
+   }
   }
   
   &__selector-wrapper {
-  display: flex;
-  background-color:#ddd;
+  @include selectorWrap;
   width: 70%;
   }
 
@@ -33,7 +42,16 @@
 
 #map {
   height: 500px;
-  width: 700px;
+  width: 100%;
+ 
+  
+  @media (max-width: 1068px) {
+    height: calc(100% - 40px);
+ }
+
+  @media (max-width: 768px) {
+    max-width: 100%;
+ }
 }
 
 .legend {
@@ -70,4 +88,16 @@ transition: all .3s ease;
 
 .leaflet-popup-content p {
   margin: 4px 0;
+}
+
+.leaflet-popup-content {
+  .type {
+    text-transform: uppercase;
+    text-align: center;
+  }
+
+  .title {
+    text-transform: capitalize;
+    font-weight: 700;
+  }
 }

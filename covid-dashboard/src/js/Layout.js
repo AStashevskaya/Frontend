@@ -3,6 +3,7 @@ import * as constants from './utils/constants';
 import MapWrapper from './MapWrapper';
 import SearchTable from './SearchTable';
 import Table from './Table';
+import UpdateBoard from './UpdateBoard';
 // import SliderCharts from './SliderCharts';
 import ChartWrap from './ChartWrap';
 
@@ -11,6 +12,11 @@ export default class Layout {
     this.container = create('div', 'container');
     this.header = create('header', 'header');
     this.footer = create('footer', 'footer');
+    this.main = create('main');
+    this.leftWrap = create('div', 'container__left');
+    this.centerWrap = create('div', 'container__centered');
+    this.rightWrap = create('div', 'container__right');
+
     this.selectedPeriod = constants.TOTAL;
     this.selectedCase = constants.ALL_CASES;
     this.selectedValue = constants.ABSOLUTE;
@@ -22,10 +28,17 @@ export default class Layout {
   }
 
   init() {
+    // this.container.appendChild(this.leftWrap);
+    // this.container.appendChild(this.centerWrap);
+    // this.container.appendChild(this.rightWrap);
+
+    this.main.appendChild(this.container);
+
     document.body.appendChild(this.header);
-    document.body.appendChild(this.container);
+    document.body.appendChild(this.main);
     document.body.appendChild(this.footer);
 
+    this.board = new UpdateBoard(this);
     this.mapWrap = new MapWrapper(this);
     this.searchTable = new SearchTable(this);
     this.table = new Table(this);
@@ -34,9 +47,10 @@ export default class Layout {
   }
 
   generateLayout() {
+    this.table.init();
     this.searchTable.init();
     this.mapWrap.init();
-    this.table.init();
+    this.board.init();
     this.chart.init();
   }
 

@@ -1,22 +1,7 @@
 .table {
-    &__global,  &__country{
-        display: flex;
-        height: 150px;
-        width: 50%;
-        flex-direction: column;
-        align-items: stretch;
-        border: 2px solid #6EA4CA;
-    }
-
-    &__global>span,  &__country>span{
-        background-color: #D1E0EB;
-        border: 1px solid #6EA4CA;
-        height: inherit;
-        color: #0C3C60;
-        font-size: 1.2rem;
-    }
-
+  
     &__selector-wrapper {
+        @include selectorWrap;
         width: 90%;
         }
 
@@ -27,71 +12,113 @@
         color: rgba(12, 60, 96, 1);
     }
 
-    // &__country>span:first-child + :nth-child(2) {
-    //     text-align: center;
-    //     font-weight: bold;
-    //     color: rgba(12, 60, 96, 1);
-    // }
-
-
-    &__container {
+    &__wrapper {
         display: flex;
         width: 100%;
-        justify-content: stretch;
-        align-items: stretch;
+        height: calc(100% - 35px);
+
+        @media (max-width: 1068px){
+            flex-direction: column;
+        }
     }
 
-    &__selector-wrapper {
+    &__general-info, &__cases-info {
+        @include colomnFlex(space-evenly);
+        align-items: center;
+        height: 100%;
+        padding: 10px 13px;
+        color: $textFont;;
+        text-shadow: 2px 2px 3px hsla(0,0%,100%,.1);
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    &__general-info, &__cases-info p {
         display: flex;
-        background-color: #6EA4CA;
-        // width: 20%;
-        // padding-right: 160px;
+        flex-direction: column;
+
+        @media (max-width: 1068px){
+            flex-direction: row;
         }
-      
-        &__selector {
-            margin: 10px;
-          //   width: 200px;
-            height: 34px;
-            // border: 1px solid #111;
-            border-radius: 3px;
-            overflow: hidden;
-            background-color: #6EA4CA;
-            color: #FFFFFF;
-            font-size: 0.9rem;
-            font-weight: 400;
-            text-shadow: 0 0 0.1rem #000000;
-            transition: all .3s ease;
-          }  
-      
-          &__selector:hover {
-              font-size: 1rem;
-              text-shadow: 0 0 10px #0C3C60;
-              font-weight: 600; 
-              transition: all .3s ease;
-              cursor: pointer;  
-            }
+    }
+
+    &__general-info {
+    width: 40%;
+    padding-right: 5px;
+
+    @media (max-width: 1068px){
+        width: 100%;
+    }
+    }
+    
+    &__cases-info {
+        width: 60%;
+        padding-left: 5px;
+
+        @media (max-width: 1068px){
+            width: 100%;
+        }
+    }
+
 }
 
-option {
-    background-color: #D1E0EB;
-    color: #0C3C60;
-}
 
-option:hover {
-    background-color: #6EA4CA !important;
-}
 
 
 .InfoTable {
-    max-width: 400px;
-    height: 254px;
+    width: 100%;
+    height: 30%;
+    order: 1;
     grid-area: table;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center; 
-    background-color: #7DCADA;
+    background-color: $backgroundComponent;
     @include wrap;
-    // border: 2px solid rgba(12, 60, 96, 1);
-    // border-top: none;
+}
+
+.general-info {
+
+    &__name {
+        text-transform: capitalize;
+        font-weight: 700;
+        font-size: 1rem;
+        @media (max-width: 768px) {
+            font-size: 2rem;
+        }
+    }
+
+    &__flag {
+        width: 100px;
+        height: 65px;
+
+        @media (max-width: 768px) {
+            width: 240px;
+            height: 150px;
+        }
+
+        img {
+            width: 100%;
+            height: 100%;
+        }
+    }
+}
+
+.cases-info {
+
+    &__value {
+        font-size: 1rem; 
+        @media (max-width: 768px) {
+          font-size: 1.8rem;  
+        }  
+    }
+
+    &__cases {
+        font-size: .9rem; 
+        @media (max-width: 768px) {
+          font-size: 1.2rem;  
+        }  
+    }
 }
