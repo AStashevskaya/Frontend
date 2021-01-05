@@ -1,0 +1,80 @@
+.history__ada {
+    display: flex;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.history {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.history figcaption {
+font-size: 1.8rem;
+font-style: italic;
+}
+
+.history p{
+   width: 50%;
+}
+
+.history-image {
+width: 500px;
+margin-left: 20px;
+}
+
+.wrapper li {
+    font-size: 1.2rem;
+    padding: 10px 0;
+}
+
+.pros, .cons {
+    width: 40%;
+}
+
+#language-img {
+    margin: 20px 30px;
+}
+
+#language-img[data-name='c'] {
+    width: 228px;
+}
+
+.img-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.low-level-section ul{
+display: flex;
+width: 100%;
+justify-content: space-between;
+margin: 0;
+}
+
+.low-level-section ul > li {
+   list-style: none;
+}
+
+.high-level-section h4 {
+margin-top: 100px;
+}
+
+.high-level-section ul li{
+    font-size: 1.5rem;
+    padding: 10px 0;
+}
+
+#c-languages #language-img {
+    margin: 10px 30px;
+    width: 200px;
+}
+
+#algol {
+    margin-top: 60px;
+}
