@@ -4,18 +4,14 @@ import MapWrapper from './MapWrapper';
 import SearchTable from './SearchTable';
 import Table from './Table';
 import UpdateBoard from './UpdateBoard';
-// import SliderCharts from './SliderCharts';
 import ChartWrap from './ChartWrap';
 
 export default class Layout {
   constructor() {
     this.container = create('div', 'container');
-    this.header = create('header', 'header');
-    this.footer = create('footer', 'footer');
+    this.header = create('header');
+    this.footer = create('footer');
     this.main = create('main');
-    this.leftWrap = create('div', 'container__left');
-    this.centerWrap = create('div', 'container__centered');
-    this.rightWrap = create('div', 'container__right');
 
     this.selectedPeriod = constants.TOTAL;
     this.selectedCase = constants.ALL_CASES;
@@ -23,15 +19,11 @@ export default class Layout {
     this.focusedCountry = null;
     this.data = [];
     this.header.innerHTML = 'COVID-19 DASHBOARD';
-    this.footer.innerHTML = '<div class="devs"><ul><li><a href="https://github.com/AStashevskaya">https://github.com/AStashevskaya</a></li><li><a href="https://github.com/Khakhlova">https://github.com/Khakhlova</a></li></ul></div><div class="devYear">2020</div><div class="rs-school"><div class="logo"></div><a href="https://rs.school/js/">Курс «JavaScript/Front-end»</a></div>';
+    this.footer.innerHTML = ' <a href="https://github.com/AStashevskaya">https://github.com/AStashevskaya</a><span class="devYear">2020</span><a href="https://rs.school/js/" class="logo"><img src="./assets/rs_school_js.svg" alt="logo"></a>';
     this.init();
   }
 
   init() {
-    // this.container.appendChild(this.leftWrap);
-    // this.container.appendChild(this.centerWrap);
-    // this.container.appendChild(this.rightWrap);
-
     this.main.appendChild(this.container);
 
     document.body.appendChild(this.header);
@@ -52,12 +44,40 @@ export default class Layout {
     this.mapWrap.init();
     this.board.init();
     this.chart.init();
+    this.outlineSelectors();
+  }
+
+  outlineSelectors() {
+    const values = [...document.querySelectorAll(`[data-value='${this.selectedValue}']`)];
+    values.forEach((el) => {
+      const link = el.closest('.subMenu__item');
+      link.classList.add('activeLink');
+    });
+
+    const periods = [...document.querySelectorAll(`[data-period='${this.selectedPeriod}']`)];
+    periods.forEach((el) => {
+      const link = el.closest('.subMenu__item');
+      link.classList.add('activeLink');
+    });
+
+    const cases = [...document.querySelectorAll(`[data-cases='${this.selectedCase}']`)];
+    cases.forEach((el) => {
+      const link = el.closest('.subMenu__item');
+      link.classList.add('activeLink');
+    });
   }
 
   update() {
+    this.updateSwitchers();
     this.mapWrap.update();
     this.table.update();
     this.searchTable.update();
     this.chart.update();
+  }
+
+  updateSwitchers() {
+    const alctiveLinks = [...document.querySelectorAll('.activeLink')];
+    alctiveLinks.forEach((el) => el.classList.remove('activeLink'));
+    this.outlineSelectors();
   }
 }

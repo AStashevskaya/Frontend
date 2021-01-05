@@ -25,6 +25,16 @@
 
 canvas {
     cursor: pointer;
-    width: 100%;
-    height: 80%;
+    width: 100% !important;
+    height: 80% !important;
+}
+
+.fullscreen.chart__wrapper {
+     @include fullscreenComponent(5%)
+}
+
+.fullscreen {
+    canvas {
+    background-color: #fff;
+    }    
 }

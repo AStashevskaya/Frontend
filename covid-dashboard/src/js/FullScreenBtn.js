@@ -4,8 +4,7 @@ export default class FullScreenBtn {
   constructor(parent) {
     this.component = parent;
     this.container = create('button', 'btn__full-screen');
-    this.html = `<span class="material-icons">
-                open_in_full</span>`;
+    this.html = '<img src="./assets/fullscreen.svg" alt="fullscreen">';
 
     this.generateLayout();
   }
@@ -13,10 +12,15 @@ export default class FullScreenBtn {
   generateLayout() {
     this.container.innerHTML = this.html;
     this.component.headerContainer.appendChild(this.container);
+    this.initializeClicks();
   }
 
   initializeClicks() {
-    // eslint-disable-next-line no-console
-    console.log(this.component);
+    this.container.addEventListener('click', this.recize);
+  }
+
+  recize = () => {
+    document.body.classList.toggle('no-scroll');
+    this.component.container.classList.toggle('fullscreen');
   }
 }

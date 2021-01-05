@@ -74,15 +74,12 @@ export default class UpdateBoard {
         <span class="updateBoard__btn" id='back-btn'>GLOBAL</span>
 </div>`;
 
-    // this.layout.rightWrap.appendChild(this.container);
     this.layout.container.appendChild(this.container);
     UpdateBoard.initClicks();
   }
 
   static initClicks() {
     const buttons = [...document.querySelectorAll('.updateBoard__btn')];
-    console.log(buttons);
-    debugger;
     buttons.forEach((el) => el.addEventListener('click', UpdateBoard.rotate));
   }
 

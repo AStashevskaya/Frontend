@@ -1,6 +1,6 @@
 const webpack = require('webpack');
 const path = require('path');
-// const CopyPlugin = require('copy-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
@@ -84,18 +84,18 @@ module.exports = (env, options) => {
         template: path.resolve(__dirname, './src/index.html'),
         filename: 'index.html',
       }),
-      // new CopyPlugin({
-      //   patterns: [
-      //     {
-      //       from: './src/assets/images',
-      //       to: 'assets/images',
-      //     },
-      //     {
-      //       from: './src/assets/sounds',
-      //       to: 'assets/sounds',
-      //     },
-      //   ],
-      // }),
+      new CopyPlugin({
+        patterns: [
+          {
+            from: './src/assets',
+            to: 'assets',
+          },
+          // {
+          //   from: './src/assets/sounds',
+          //   to: 'assets/sounds',
+          // },
+        ],
+      }),
       new MiniCssExtractPlugin({
         // filename: 'main.[chunkhash].css'
         filename: isProd ? '[name].[contenthash].css' : '[name].css',

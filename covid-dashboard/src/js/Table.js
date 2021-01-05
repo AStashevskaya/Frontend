@@ -59,10 +59,6 @@ export default class Table {
 
   update() {
     this.renderTable();
-    // console.log(this.layout.focusedCountry, this.CountriesData);
-    // const country = this.CountriesData.find((el) => el.country === this.layout.focusedCountry);
-    // this.globalTable.innerHTML = this.renderGlobal();
-    // this.countryTable.innerHTML = this.renderCountry(country);
   }
 
   renderTable() {

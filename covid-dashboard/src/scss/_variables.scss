@@ -1,3 +1,11 @@
+$headerFont: #212121;
+$textFont: #263238;
+$componentHeaderHight: 35px;
+$transparent-gray: rgba(0, 0, 0, 0.3);
+$transparent-white: rgba(255, 255, 255, 0.15);
+$backgroundComponent: #cfd8dc;
+$yellow: #f4d03f;
+
 @mixin wrap {
     // border: 2px solid #9A001E;
     background-color: #fff;
@@ -11,6 +19,7 @@
     display: flex;
     background-color: #d32f2f;
     border-radius: 7px 7px 0 0;
+    width: calc(100% - 40px);
 }
 
 @mixin selector {
@@ -38,6 +47,15 @@
   right: 0;
 }
 
+@mixin fullscreenComponent ($pad) {
+background-color: rgba($color: #000000, $alpha: .3);
+padding: $pad;
+
+@media (max-width: 768px) {
+    padding: 0;
+}
+}
+
 $data-height : 55px;
 
 .recovered {
@@ -51,10 +69,16 @@ $data-height : 55px;
     color: #FFB100;
 }
 
-$headerFont: #212121;
-$textFont: #263238;
-$componentHeaderHight: 35px;
-$transparent-gray: rgba(0, 0, 0, 0.3);
-$transparent-white: rgba(255, 255, 255, 0.15);
-$backgroundComponent: #cfd8dc;
-$yellow: #f4d03f;
+.no-scroll {
+    height: 100vh;
+    overflow: hidden;
+}
+
+.fullscreen {
+    @include fixed(fixed);
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+}

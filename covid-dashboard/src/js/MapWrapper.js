@@ -86,7 +86,6 @@ export default class MapWrapper {
 
     this.container.appendChild(this.headerContainer);
     this.container.appendChild(this.mapContainer);
-    // this.layout.centerWrap.appendChild(this.container);
     this.layout.container.appendChild(this.container);
 
     this.generateMap();
@@ -128,7 +127,6 @@ export default class MapWrapper {
   }
 
   renderLegendContent() {
-    console.log(this.coefficient);
     this.grades = [0, (this.coefficient * 1), (this.coefficient * 10), (this.coefficient * 100),
       (this.coefficient * 500), (this.coefficient * 1000), (this.coefficient * 2000),
       (this.coefficient * 5000)];
@@ -189,8 +187,8 @@ export default class MapWrapper {
 
     return `<div class="map__popup">
     <p class="type">${this.layout.selectedPeriod}</p>
-    <p class="title"><i>Country</i>: ${this.selectedCountry.country}</p>
-    <p class="title"><i>${this.layout.selectedCase}</i>:<span class="${this.layout.selectedCase}">${this.layout.selectedValue === constants.ABSOLUTE
+    <p class="title">Country: ${this.selectedCountry.country}</p>
+    <p class="title">${this.layout.selectedCase}:<span class="${this.layout.selectedCase}">${this.layout.selectedValue === constants.ABSOLUTE
   ? round(this.selectedCountry[value]) : getNumbersPer100(this.selectedCountry, value)}</span></p>
             </div>`;
   }
