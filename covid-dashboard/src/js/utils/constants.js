@@ -2,6 +2,7 @@ const URL_COVID_BY_COUNTRIES = 'https://disease.sh/v3/covid-19/countries';
 const URL_COVID_GLOBAL = 'https://disease.sh/v3/covid-19/historical/all?lastdays=366';
 const URL_INCREASE_BY_COUNTRY = 'https://disease.sh/v3/covid-19/historical?lastdays=all';
 const URL_GLOBAL_UPDATE = 'https://disease.sh/v3/covid-19/all';
+// const URL_TIMELINE_BY_COUNTRY = 'https://disease.sh/v3/covid-19/historical/China?lastdays=all';
 // const ds = 'https://disease.sh/v3/covid-19/historical/all?lastdays=all'
 const TODAY_CASES = 'todayCases';
 const TODAY_RECOVERED = 'todayRecovered';
@@ -22,6 +23,10 @@ const PER_100 = 'per100';
 const BACK_ROTATE = 'back-rotate';
 const FRONT_ROTATE = 'front-rotate';
 
+const yellow = '#FFB100';
+const green = '#188A00';
+const red = '#FB000D';
+
 export {
   URL_COVID_BY_COUNTRIES,
   URL_COVID_GLOBAL,
@@ -41,4 +46,7 @@ export {
   PER_100,
   FRONT_ROTATE,
   BACK_ROTATE,
+  yellow,
+  red,
+  green,
 };

@@ -12,21 +12,24 @@ export default class ChartWrap {
     this.layout = layout;
     this.container = create('div', 'chart__wrapper');
     this.headerContainer = create('div', 'component-header');
+    this.chartContainer = create('div', 'chart__container');
     this.currentChart = create('canvas');
     this.type = 'global';
     this.colors = {
-      cases: '#FFB100',
-      deaths: '#FB000D',
-      recovered: '#188A00',
+      cases: constants.yellow,
+      deaths: constants.red,
+      recovered: constants.green,
     };
 
-    this.getCountriesData();
+    this.getData();
   }
 
-  getCountriesData() {
-    CovidApi.getHistoryByCountry().then((answer) => {
+  getData() {
+    CovidApi.getEachCountryData().then((answer) => {
       this.countriesData = answer;
-    });
+    }).then(CovidApi.getUpdatedWorldData().then((data) => {
+      this.worldData = data;
+    }));
   }
 
   init() {
@@ -41,7 +44,8 @@ export default class ChartWrap {
     this.switcher = new Switcher(this, 'chart');
     this.fullScreenBtn = new FullScreenBtn(this);
     this.container.appendChild(this.headerContainer);
-    this.container.appendChild(this.currentChart);
+    this.chartContainer.appendChild(this.currentChart);
+    this.container.appendChild(this.chartContainer);
     this.layout.container.appendChild(this.container);
     this.generateChart();
 
@@ -67,37 +71,47 @@ export default class ChartWrap {
         `${country.country} ${period}-${currentCase}`, country.timeline[currentCase]);
     } else {
       this.chart = this.createChart(this.colors[currentCase], this.currentChart, `${capitalize(period)}-${currentCase}`, this.data[currentCase]);
+      console.log(this.chart);
     }
   }
 
-  createAmmountCases = (data) => {
-    let result;
+  createAmmountCases(data) {
     const arr = Object.values(data);
     if (this.layout.selectedValue === constants.ABSOLUTE) {
-      if (this.layout.selectedPeriod === constants.TODAY) {
-        const arrDaily = arr.map((_, i) => (Math.abs(arr[i] - arr[i - 1])));
-        result = arr.slice(0, 1).concat(arrDaily.slice(1));
-
-        return result;
-      }
-
-      if (this.layout.selectedPeriod === constants.TOTAL) {
-        result = arr;
-        return result;
-      }
+      return this.createAbsCases(arr);
     }
 
-    if (this.layout.selectedValue === constants.PER_100) {
-      if (this.layout.selectedPeriod === constants.TODAY) {
-        const arr100K = arr.map((_, i) => (Math.round((arr[i] - arr[i - 1]) / 100000))).slice(1);
-        const arrFirst = arr.map((_, i) => (Math.round(arr[i] / 100000))).slice(0, 1);
-        result = arrFirst.concat(arr100K);
-      } else {
-        result = arr.map((x) => Math.round(x / 100000));
-      }
+    return this.create100kCases(arr);
+  }
+
+  createAbsCases(arr) {
+    if (this.layout.selectedPeriod === constants.TODAY) {
+      const arrDaily = arr.map((_, i) => (Math.abs(arr[i] - arr[i - 1])));
+      return arr.slice(0, 1).concat(arrDaily.slice(1));
+    }
+    return arr;
+  }
+
+  create100kCases(arr) {
+    let population;
+
+    if (this.layout.focusedCountry) {
+      const country = this.countriesData.find((el) => el.country === this.layout.focusedCountry);
+      population = country.population;
+    } else {
+      population = this.worldData.population;
     }
 
-    return result;
+    if (this.layout.selectedPeriod === constants.TODAY) {
+      const arr100K = arr.map((_, i) => (Math.abs(+(((arr[i] - arr[i - 1]) * 100000)
+       / population).toFixed(2)))).slice(1);
+      const firstAmount = +(((arr[0] * 100000) / population).toFixed(2));
+      const arrFirst = [];
+      arrFirst.push(firstAmount);
+      return arrFirst.concat(arr100K);
+    }
+    // eslint-disable-next-line no-unused-vars
+    return arr.map((x) => +((x * 100000) / population).toFixed(2));
   }
 
   update() {
@@ -106,7 +120,8 @@ export default class ChartWrap {
     this.chart.options.scales.xAxes[0].ticks.minRotation = 12;
 
     if (this.layout.focusedCountry) {
-      this.updateChartCountry();
+      // this.updateChartCountry();
+      this.getDataofCountry();
     } else {
       this.updateChartGlobal();
     }
@@ -132,14 +147,45 @@ export default class ChartWrap {
     this.chart.update();
   }
 
-  updateChartCountry() {
+  getDataofCountry() {
+    console.log(this.layout.focusedCountry);
+    CovidApi.getCountryHistory(this.layout.focusedCountry)
+      .then((answer) => {
+        this.removeResponse();
+        const chart = document.querySelector('.chart__container');
+
+        if (chart.classList.contains('hidden')) {
+          chart.classList.remove('hidden');
+        }
+        if (answer.message) {
+          chart.classList.add('hidden');
+          this.addResponse();
+        } else {
+          this.updateChartCountry(answer);
+        }
+      });
+  }
+
+  addResponse() {
+    const resposeBox = create('div', 'response-box');
+    resposeBox.innerHTML = `Unfortunatly, we have no history data for ${this.layout.focusedCountry}.`;
+    this.container.appendChild(resposeBox);
+  }
+
+  removeResponse() {
+    const resposeBox = document.querySelector('.response-box');
+    if (resposeBox) {
+      this.container.removeChild(resposeBox);
+    }
+  }
+
+  updateChartCountry(data) {
     const currentCase = this.layout.selectedCase;
     const period = this.layout.selectedPeriod;
 
-    const country = this.countriesData.find((el) => el.country === this.layout.focusedCountry);
-    this.chart.data.labels = Object.keys(country.timeline[currentCase]);
-    this.chart.data.datasets[0].label = `${country.country} ${capitalize(period)}-${currentCase}`;
-    this.chart.data.datasets[0].data = this.createAmmountCases(country.timeline[currentCase]);
+    this.chart.data.labels = Object.keys(data.timeline[currentCase]);
+    this.chart.data.datasets[0].label = `${data.country} ${capitalize(period)}-${currentCase}`;
+    this.chart.data.datasets[0].data = this.createAmmountCases(data.timeline[currentCase]);
     this.chart.data.datasets[0].backgroundColor = this.colors[currentCase];
 
     if (this.layout.selectedValue === constants.ABSOLUTE) {
@@ -147,7 +193,7 @@ export default class ChartWrap {
       === constants.TODAY ? 1000 : 100000;
     } else {
       this.chart.options.scales.yAxes[0].ticks.stepSize = period
-      === constants.TODAY ? 1 : 10;
+      === constants.TODAY ? 5 : 20;
     }
 
     this.chart.update();
@@ -169,6 +215,16 @@ export default class ChartWrap {
     },
     options: {
       scales: {
+        xAxes: [
+          {
+            ticks: {
+              // max: 12,
+              // min: 12,
+              maxRotation: 12,
+              minRotation: 12,
+            },
+          },
+        ],
         yAxes: [{
           ticks: {
             beginAtZero: true,

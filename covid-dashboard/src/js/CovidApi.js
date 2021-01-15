@@ -40,4 +40,12 @@ export default class CovidApi {
         throw new Error(`er${e}`);
       });
   }
+
+  static getCountryHistory(country) {
+    return fetch(`https://disease.sh/v3/covid-19/historical/${country}?lastdays=all`)
+      .then((answer) => answer.json())
+      .catch((e) => {
+        throw new Error(`er${e}`);
+      });
+  }
 }

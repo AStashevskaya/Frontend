@@ -96,8 +96,11 @@ export default class SearchTable {
   }
 
   handleCountryClick = (e) => {
-    this.layout.focusedCountry = e.target.dataset.country
-      ? e.target.dataset.country : e.target.parentNode.dataset.country;
+    const id = e.target.dataset.countryid
+      ? e.target.dataset.countryid : e.target.parentNode.dataset.countryid;
+
+    const country = this.countries.find((el) => el.countryInfo.iso3 === id);
+    this.layout.focusedCountry = country.country;
 
     this.layout.update();
   }

@@ -33,6 +33,13 @@
 transform: translate(calc(50% - 1024px/3), 0);
 z-index: 2000;
 margin: 0 auto;
+@media(max-width: 1024px){
+  transform: translate(calc(44% - 1024px/3), 0)  
+}
+
+@media(max-width: 768px){
+  transform: translate(calc(100% - 1024px/3), 0)  
+}
   }
   .keyboard__row {
     display: grid;
