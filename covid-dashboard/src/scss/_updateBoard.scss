@@ -1,0 +1,77 @@
+.updateBoard {
+    order: 1;
+    height: 50%;
+    position: relative;
+    grid-area: update;
+    @include wrap;
+    @media (max-width: 768px){
+        height: 300px;
+    }
+
+    &__date {
+        @include colomnFlex();
+        @include centerFlex();
+        height: $data-height;
+        padding: 5px 10px;
+        font-size: 1rem;
+        font-weight: 600
+    }
+
+    &__case {
+        @include colomnFlex();
+        @include centerFlex();
+    }
+
+    &__front, &__back {
+        @include fixed(absolute);
+        @include colomnFlex(space-evenly);
+        align-items: center;
+        height: calc(100% - 55px);
+        top: $data-height;
+        transition: 1s;
+        backface-visibility: hidden;
+    }
+
+    &__front {
+        transition: all .4s ease-in;
+      }
+  
+    &__back {
+        transform: rotateY(180deg);
+    }
+
+    &__type {
+        color: $textFont;;
+        text-shadow: 2px 2px 3px hsla(0,0%,100%,.1);
+        font-size: 1rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.5;
+        position: relative;
+    }
+
+    &__btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 90px;
+        height: 30px;
+        background-color: #FF7F00;
+        cursor: pointer;
+    }
+
+    &__number {
+        font-size: 1.1rem;
+        font-weight: 700;
+        text-shadow: 2px 2px 3px hsla(0,0%,100%,.1);
+    }
+
+    &__date-number {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: $headerFont;
+    }
+}
+
+.front-rotate {transform: rotateY(180deg);}
+.back-rotate {transform: rotateY(360deg)}

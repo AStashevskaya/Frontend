@@ -1,0 +1,71 @@
+.chart {
+    &__wrapper {
+        // max-width: 400px;
+        height: 50%;
+        order: 2;
+        background-color: $backgroundComponent;
+        grid-area: chart;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        @include wrap;
+
+    }
+
+    &__selector-wrapper {
+        @include selectorWrap;
+        cursor: pointer;
+    }
+
+    &__selector {
+        @include selector;
+        cursor: pointer;
+    }
+}
+
+.chart__container {
+    @include centerFlex;
+    width: 100%;
+    height: 100%;
+}
+
+canvas {
+    cursor: pointer;
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.fullscreen.chart__wrapper {
+     @include fullscreenComponent(5%)
+}
+
+.fullscreen{
+    .chart__container {
+        background-color: #fff;
+}
+}
+
+.fullscreen {
+    canvas {
+    background-color: #fff;
+    max-width: 1000px !important;
+    height: 70% !important;
+    @media (max-width: 768px){
+        height: 80% !important;
+    }
+    }    
+}
+
+.response-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 80%;
+    padding: 20px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: $textFont;;
+    text-shadow: 2px 2px 3px hsla(0,0%,100%,.1);
+    text-align: center;
+}
