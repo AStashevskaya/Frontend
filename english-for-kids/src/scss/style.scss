@@ -1,0 +1,29 @@
+@import '_variables';
+@import '_reset';
+@import '_burger-menu';
+@import '_switcher';
+@import '_containers';
+@import '_nav';
+@import '_category-card';
+@import '_buttons';
+@import '_components';
+@import '_statistics';
+
+@font-face {
+    font-family: 'NerkoOne';
+    font-style: regular;
+    font-weight: 400;
+    src: url(../assets/fonts/NerkoOne-Regular.ttf)
+  }
+
+body {
+    font-family: 'NerkoOne';
+    font-style: normal;
+    font-weight: normal;
+    color: #3A3E4A;
+    overflow-y: scroll;
+    height: 100%;
+}
+
+
+

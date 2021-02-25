@@ -1,0 +1,110 @@
+.button__play{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 20px;
+    background-color: cadetblue;
+    transition: all .5s ease-in;
+  
+    cursor: pointer;
+
+    
+    &[data-btn='play'] {
+        transform: scale(1.0);
+    }
+
+    &[data-btn='play']:hover {
+        transform: scale(1.1);
+    }
+
+    &[data-btn='repeat'] {
+        transform: rotate(0);
+    }
+
+    &[data-btn='repeat']:hover {
+        transform: rotate(180deg);
+    }
+
+    img{
+        @include equalSides(100%)
+    }
+    }
+.star {
+    @include equalSides(50px);
+}
+
+
+.app-container .divider {
+    width: 100%;
+    height: 2px;
+    background-color: $componentsTrain;
+}
+
+.app-container.playing .divider {
+    background-color: #D1D090;
+}
+
+.logo {
+    width: 55px;
+}
+
+.overlay {
+    @include fixed (fixed);
+    @include centerFlex;
+    top: 0;
+    bottom: 0;
+    z-index: 2000;
+    background-color: rgba($color: #212121, $alpha: .5);
+    
+    &__box {
+        background-color: #fff;;
+        border-radius: 10px;
+        @include equalSides(300px);
+        @include centerFlex;
+        flex-direction: column;
+
+        img {
+            @include equalSides(75%);    
+        }
+    }
+
+    .answer {
+        font-size: 20px;
+        margin-top: 15px;
+    }
+    
+
+    .success {
+        border: 4px solid green;
+        box-shadow: 5px 6px 25px black;
+        text-shadow: 2px 1px 6px green;
+    }
+
+    .fail {
+        border: 2px solid red;
+        box-shadow: 5px 6px 25px black;
+        text-shadow: 2px 1px 6px red;
+    }
+}
+
+.no-words__wrapper {
+    width: 100%;
+    @include colomnFlex;
+    @include centerFlex;
+
+    img {
+        width: 30%;
+    }
+
+}
+
+#title {
+    @media (max-width: 768px) {
+        padding: 10px;
+    }
+}
+
+.antiscroll {
+    overflow: hidden;
+    height: 100vh;
+}
