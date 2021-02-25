@@ -1,0 +1,15 @@
+{
+    "parser": "babel-eslint",
+    "extends": ["airbnb/base"],
+    "rules": {
+        "linebreak-style":"off",
+        //cant understand why i cant reasign objects, and what should i do to avoid this
+        "no-param-reassign": ["error", { "props": false }]
+    },
+    "globals": {
+        "localStorage": true,
+        "fetch": true,
+        "window": true,
+        "document": true
+      }
+  }
