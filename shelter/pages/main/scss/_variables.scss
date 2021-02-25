@@ -1,0 +1,132 @@
+@mixin fontA {
+    font-family: Arial, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+  }
+@mixin fontG {
+    font-family: Georgia,  serif;
+    font-style: normal;
+    font-weight: normal;
+  }
+  @mixin colomnFlex($j-c: center, $dir: column){
+    display: flex;
+    flex-direction: $dir;
+    justify-content: $j-c;
+  }
+  @mixin centerFlex(){
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  @mixin roundLink($sz: 52px){
+    width: $sz;
+    height: $sz;
+    border-radius: 50%;
+  }
+  $color-light-xl: #FFFFFF;
+  $color-light-l: #F6F6F6;
+  $color-light-s: #FAFAFA;
+  $color-dark-s: #CDCDCD;
+  $color-dark-m: #B2B2B2;
+  $color-dark-l: #545454;
+  $color-dark-xl: #4C4C4C;
+  $color-dark-2xl: #444444;
+  $color-dark-3xl: #292929;
+  $color-primary: #F1CDB3;
+  $color-primary-light: #FDDCC4;
+
+  @mixin fontHeader($size, $lh, $ls: normal){
+    font: {
+      family: Georgia, serif;
+      weight: 400;
+      style: normal;
+      size: $size;
+    }
+    line-height: $lh;
+    letter-spacing: $ls;
+  }
+  
+  @mixin fonttext($size, $lh, $ls: normal){
+    font: {
+      family: Arial, sans-serif;
+      weight: 400;
+      style: normal;
+      size: $size;
+    }
+    line-height: $lh;
+    letter-spacing: $ls;
+  }
+  @mixin activeLink {
+    border: solid 0.2rem $color-primary;
+    color: $color-dark-3xl;
+    &:hover{
+      background-color:  $color-primary-light;
+      border: solid 0.2rem $color-primary-light;
+  }
+  }
+  @mixin inactiveLink {
+    border: solid 0.2rem $color-dark-s;
+    color: $color-dark-s;
+    cursor: default;
+  }
+  @mixin hide{
+    display: none;
+  }
+  .hidden{
+    display: none;
+  }
+
+   @keyframes animateInLeft {
+    0% {  transform: translateX(-100%);}
+    100% { transform: translateX(0%);}
+  }
+  @keyframes animateInRight {
+    0% {  transform: translateX(100%);}
+    100% { transform: translateX(0%);}
+  }
+  @keyframes animateOutLeft {
+    0% {  transform: translateX(0%);}
+    100% { transform: translateX(-100%);}
+  }
+  @keyframes animateOutRight {
+    0% {  transform: translateX(0%);}
+    100% { transform: translateX(100%);}
+  }
+  .slideInLeft{
+    animation-name: animateInLeft;
+    z-index: 100;
+  }
+  .slideInRight{
+    animation-name: animateInRight;
+    z-index: 100;
+  }
+  .slideOutRight{
+    animation-name: animateOutRight;
+    transform: translateX(100%);
+   z-index: 100;
+  }
+  .slideOutLeft{
+    animation-name: animateOutLeft;
+   transform: translateX(-100%);
+    z-index: 100;
+  }
+  .putRight{
+    // animation-name: animateOutRight;
+     transform: translateX(100%);
+   //  z-index: 100;
+   }
+   .putLeft{
+    // animation-name: animateOutLeft;
+    transform: translateX(-100%);
+   //  z-index: 100;
+   }
+  .active{
+    z-index: 1000;
+  }
+
+
+  .disabled:hover{
+    opacity: .8 !important;
+    cursor: default;
+    } 
+   
